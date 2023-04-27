@@ -1,11 +1,11 @@
-import "@/styles/globals.css"
-import { Metadata } from "next"
-import { twMerge } from "tailwind-merge"
+import '@/styles/globals.css';
+import { Metadata } from 'next';
+import { twMerge } from 'tailwind-merge';
 
-import { siteConfig } from "@/config/site"
-import { fontSans } from "@/lib/fonts"
-import { TailwindIndicator } from "@/components/tailwind-indicator"
-import { ThemeProvider } from "@/components/theme-provider"
+import { siteConfig } from '@/config/site';
+import { fontSans } from '@/lib/fonts';
+import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -13,21 +13,21 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ["Jobs", "Management", "Bex Jobs", "Jobs Management"],
+  keywords: ['Jobs', 'Management', 'Bex Jobs', 'Jobs Management'],
   authors: [
     {
-      name: "GyBex",
+      name: 'GyBex',
       url: siteConfig.url,
     },
   ],
-  creator: "GyBex",
+  creator: 'GyBex',
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
   ],
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: 'website',
+    locale: 'en_US',
     url: siteConfig.url,
     title: siteConfig.name,
     description: siteConfig.description,
@@ -42,31 +42,31 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@GyBex_Enoch",
+    creator: '@GyBex_Enoch',
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
-}
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
       <body
         className={twMerge(
-          "min-h-screen bg-background font-sans antialiased",
+          'min-h-screen bg-background font-sans antialiased',
           fontSans.variable
         )}
       >
@@ -76,5 +76,5 @@ export default function RootLayout({
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }

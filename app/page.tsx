@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/components/theme-toggle"
+import { ThemeToggle } from '@/components/theme-toggle';
 
 export default function IndexPage() {
   return (
@@ -6,5 +6,5 @@ export default function IndexPage() {
       <ThemeToggle />
       <p>This is one of the top ui libs</p>
     </section>
-  )
+  );
 }
