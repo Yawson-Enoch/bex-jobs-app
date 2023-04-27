@@ -14,7 +14,7 @@
   },
   "settings": {
     "tailwindcss": {
-      "callees": ["tm"],
+      "callees": ["twMerge"],
       "config": "./tailwind.config.js"
     },
     "next": {

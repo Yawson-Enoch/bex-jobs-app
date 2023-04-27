@@ -1,18 +1,12 @@
-export type SiteConfig = typeof siteConfig
+export const APP_URL = process.env.NEXT_PUBLIC_APP_URL as string
 
 export const siteConfig = {
-  name: "Next.js",
-  description:
-    "Beautifully designed components built with Radix UI and Tailwind CSS.",
-  mainNav: [
-    {
-      title: "Home",
-      href: "/",
-    },
-  ],
+  name: "Bex Jobs",
+  description: "Site for job search management",
+  url: APP_URL,
+  ogImage: `${APP_URL}/og.png`,
   links: {
-    twitter: "https://twitter.com/shadcn",
-    github: "https://github.com/shadcn/ui",
-    docs: "https://ui.shadcn.com",
+    twitter: "https://twitter.com/GyBex_Enoch",
+    github: "https://github.com/Yawson-Enoch",
   },
 }
