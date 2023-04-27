@@ -14,7 +14,7 @@
   },
   "settings": {
     "tailwindcss": {
-      "callees": ["cn"],
+      "callees": ["tm"],
       "config": "./tailwind.config.js"
     },
     "next": {
