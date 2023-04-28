@@ -14,34 +14,34 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: 'rgb(var(--border))',
-        input: 'rgb(var(--input))',
-        ring: 'rgb(var(--ring))',
-        background: 'rgb(var(--background))',
-        foreground: 'rgb(var(--foreground))',
+        border: 'rgba(var(--border), <alpha-value>)',
+        input: 'rgba(var(--input), <alpha-value>)',
+        ring: 'rgba(var(--ring), <alpha-value>)',
+        background: 'rgba(var(--background), <alpha-value>)',
+        foreground: 'rgba(var(--foreground), <alpha-value>)',
         primary: {
-          DEFAULT: 'rgb(var(--primary))',
-          foreground: 'rgb(var(--primary-foreground))',
+          DEFAULT: 'rgba(var(--primary), <alpha-value>)',
+          foreground: 'rgba(var(--primary-foreground), <alpha-value>)',
         },
         secondary: {
-          DEFAULT: 'rgb(var(--secondary))',
-          foreground: 'rgb(var(--secondary-foreground))',
+          DEFAULT: 'rgba(var(--secondary), <alpha-value>)',
+          foreground: 'rgba(var(--secondary-foreground), <alpha-value>)',
         },
         destructive: {
-          DEFAULT: 'rgb(var(--destructive))',
-          foreground: 'rgb(var(--destructive-foreground))',
+          DEFAULT: 'rgba(var(--destructive), <alpha-value>)',
+          foreground: 'rgba(var(--destructive-foreground), <alpha-value>)',
         },
         muted: {
-          DEFAULT: 'rgb(var(--muted))',
-          foreground: 'rgb(var(--muted-foreground))',
+          DEFAULT: 'rgba(var(--muted), <alpha-value>)',
+          foreground: 'rgba(var(--muted-foreground), <alpha-value>)',
         },
         accent: {
-          DEFAULT: 'rgb(var(--accent))',
-          foreground: 'rgb(var(--accent-foreground))',
+          DEFAULT: 'rgba(var(--accent), <alpha-value>)',
+          foreground: 'rgba(var(--accent-foreground), <alpha-value>)',
         },
         popover: {
-          DEFAULT: 'rgb(var(--popover))',
-          foreground: 'rgb(var(--popover-foreground))',
+          DEFAULT: 'rgba(var(--popover), <alpha-value>)',
+          foreground: 'rgba(var(--popover-foreground), <alpha-value>)',
         },
       },
       borderRadius: {
