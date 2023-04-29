@@ -8,8 +8,8 @@ import { fontSans } from '@/lib/fonts';
 import DecorativeBlobs from '@/components/decorative-blobs';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import Providers from '@/components/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
-import { ThemeProvider } from '@/components/theme-provider';
 
 export const metadata: Metadata = {
   title: {
@@ -74,7 +74,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Providers>
           <div className="relative flex min-h-screen flex-col justify-between">
             <Header />
             {children}
@@ -82,7 +82,7 @@ export default function RootLayout({
           </div>
           <DecorativeBlobs />
           <TailwindIndicator />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );
