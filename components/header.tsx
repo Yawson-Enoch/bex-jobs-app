@@ -1,6 +1,7 @@
+import LoginBtn from './LoginBtn';
+import SignUpBtn from './SignUpBtn';
 import GradientLogo from './gradient-logo';
 import { ThemeToggle } from './theme-toggle';
-import { Button } from './ui/button';
 
 export default function Header() {
   return (
@@ -10,10 +11,8 @@ export default function Header() {
         <div className="flex items-center gap-1 md:gap-10">
           <ThemeToggle />
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              Login
-            </Button>
-            <Button size="sm">Sign Up</Button>
+            <LoginBtn>Login</LoginBtn>
+            <SignUpBtn>Sign Up</SignUpBtn>
           </div>
         </div>
       </div>

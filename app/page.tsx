@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import SignUpCTABtn from '@/components/SignUpCTABtn';
 
 export default function IndexPage() {
   return (
@@ -14,7 +14,7 @@ export default function IndexPage() {
         hassle of managing your job search with spreadsheets or sticky notes,
         and say hello to BexJobs - your ultimate job search companion.
       </p>
-      <Button>Start Managing Your Jobs</Button>
+      <SignUpCTABtn>Start Managing Your Jobs</SignUpCTABtn>
     </section>
   );
 }
