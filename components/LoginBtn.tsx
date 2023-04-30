@@ -8,7 +8,12 @@ export default function LoginBtn({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (
-    <Button variant="outline" size="sm" onClick={() => router.push('/login')}>
+    <Button
+      type="button"
+      variant="outline"
+      size="sm"
+      onClick={() => router.push('/login')}
+    >
       {children}
     </Button>
   );

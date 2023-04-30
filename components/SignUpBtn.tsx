@@ -8,7 +8,7 @@ export default function SignUpBtn({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (
-    <Button size="sm" onClick={() => router.push('/signup')}>
+    <Button type="button" size="sm" onClick={() => router.push('/signup')}>
       {children}
     </Button>
   );

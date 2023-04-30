@@ -13,6 +13,7 @@ export default function SignUpCTABtn({
 
   return (
     <Button
+      type="button"
       size="lg"
       className="text-lg"
       onClick={() => router.push('/signup')}
