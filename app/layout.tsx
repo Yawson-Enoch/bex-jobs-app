@@ -5,6 +5,7 @@ import { twMerge } from 'tailwind-merge';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
 import DecorativeBlobs from '@/components/decorative-blobs';
+import FadedStrips from '@/components/faded-strips';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
 import Providers from '@/components/providers';
@@ -80,6 +81,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <DecorativeBlobs />
+          <FadedStrips />
           <TailwindIndicator />
         </Providers>
       </body>
