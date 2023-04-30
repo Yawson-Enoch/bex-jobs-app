@@ -24,7 +24,7 @@ export function ThemeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
+        align="center"
         className="bg-popover/10 backdrop-blur-sm"
       >
         <DropdownMenuItem onClick={() => setTheme('light')}>
