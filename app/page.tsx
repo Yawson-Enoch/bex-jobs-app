@@ -1,4 +1,4 @@
-import SignUpCTABtn from '@/components/SignUpCTABtn';
+import SignUpCTABtn from '@/components/signup-CTA-btn';
 
 export default function IndexPage() {
   return (

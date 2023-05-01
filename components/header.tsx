@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import LoginBtn from './LoginBtn';
-import SignUpBtn from './SignUpBtn';
 import GradientLogo from './gradient-logo';
+import LoginBtn from './login-btn';
+import SignUpBtn from './signup-btn';
 import { ThemeToggle } from './theme-toggle';
 
 export default function Header() {
