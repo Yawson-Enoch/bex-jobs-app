@@ -1,5 +1,5 @@
 import '@/styles/globals.css';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 
 import { siteConfig } from '@/config/site';
