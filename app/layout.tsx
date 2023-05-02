@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
-  keywords: ['Jobs', 'Management', 'Bex Jobs', 'Jobs Management'],
+  keywords: ['Jobs', 'Management', 'BexJobs', 'Jobs Management'],
   authors: [
     {
       name: 'GyBex',
