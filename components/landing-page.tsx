@@ -6,6 +6,7 @@ import { Variants, motion } from 'framer-motion';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
 import { Button } from './ui/button';
+import { Separator } from './ui/separator';
 
 const MotionBtn = motion(Button);
 
@@ -24,11 +25,14 @@ export default function LandingPage() {
       className="container space-y-7 py-5 text-center"
     >
       <motion.div
-        className="flex flex-col justify-center gap-2 text-2xl font-bold lg:flex-row lg:items-center lg:gap-3 lg:text-4xl"
+        className="space-y-2 text-2xl font-bold lg:space-y-3 lg:text-4xl"
         variants={headingContainer(isMobile)}
       >
         <motion.p variants={headingTitle(isMobile)}>BexJobs</motion.p>
-        <motion.span variants={headingDash}>&ndash;</motion.span>
+        <Separator
+          orientation="horizontal"
+          className="mx-auto w-1/2 lg:w-1/4"
+        />
         <motion.p variants={headingDescription(isMobile)}>
           Effortlessly Manage Your Job Search
         </motion.p>
@@ -131,18 +135,6 @@ const headingTitle = (isMobile: boolean): Variants => {
           transition: { duration: 1.25 },
         },
       };
-};
-
-const headingDash: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0.5,
-  },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    transition: { type: 'spring', bounce: 0.25 },
-  },
 };
 
 const headingDescription = (isMobile: boolean): Variants => ({

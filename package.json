@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^3.1.0",
     "@radix-ui/react-dropdown-menu": "^2.0.4",
     "@radix-ui/react-label": "^2.0.1",
+    "@radix-ui/react-separator": "^1.0.2",
     "class-variance-authority": "^0.6.0",
     "framer-motion": "^10.12.6",
     "lucide-react": "0.192.0",
