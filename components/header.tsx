@@ -8,7 +8,7 @@ import { ThemeToggle } from './theme-toggle';
 export default function Header() {
   return (
     <header className="px-2 pt-2">
-      <div className="container flex items-center justify-between gap-3 rounded-full border bg-background px-4 py-2 dark:bg-background/10 dark:backdrop-blur-sm md:gap-5">
+      <div className="container flex items-center justify-between gap-3 rounded-full border bg-background px-4 py-2 dark:bg-background/10 dark:backdrop-blur-sm md:gap-5 lg:rounded-b-none lg:rounded-t-full lg:px-12">
         <Link href="/">
           <GradientLogo />
         </Link>
