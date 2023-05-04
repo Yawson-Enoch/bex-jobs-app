@@ -59,18 +59,9 @@ export default function LandingPage() {
 }
 
 const mainContainer: Variants = {
-  initial: {
-    opacity: 0,
-    y: -20,
-  },
   animate: {
-    opacity: 1,
-    y: 0,
     transition: {
-      when: 'beforeChildren',
-      staggerChildren: 0.75,
-      duration: 0.3,
-      ease: 'easeOut',
+      staggerChildren: 1.65,
     },
   },
 };
@@ -89,17 +80,15 @@ const mainBtn: Variants = {
 
 const headingContainer = (isMobile: boolean): Variants => ({
   initial: {
-    opacity: 0,
     scale: 0.25,
   },
   animate: {
-    opacity: 1,
     scale: 1,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.25,
+      staggerChildren: 0.65,
       staggerDirection: isMobile ? 1 : -1,
-      transition: { duration: 0.3, ease: 'easeOut' },
+      transition: { duration: 0.35, ease: 'easeOut' },
     },
   },
 });
