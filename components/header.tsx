@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import GradientLogo from './gradient-logo';
 import LoginBtn from './login-btn';
-import SignUpBtn from './signup-btn';
+import SignupBtn from './signup-btn';
 import { ThemeToggle } from './theme-toggle';
 
 export default function Header() {
@@ -15,8 +15,8 @@ export default function Header() {
         <div className="flex items-center gap-1 md:gap-10">
           <ThemeToggle />
           <div className="flex items-center gap-3">
-            <LoginBtn>Login</LoginBtn>
-            <SignUpBtn>Sign Up</SignUpBtn>
+            <LoginBtn>Log In</LoginBtn>
+            <SignupBtn>Sign Up</SignupBtn>
           </div>
         </div>
       </div>

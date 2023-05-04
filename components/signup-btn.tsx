@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { Button } from './ui/button';
 
-export default function SignUpBtn({ children }: { children: React.ReactNode }) {
+export default function SignupBtn({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   return (
