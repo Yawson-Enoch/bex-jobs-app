@@ -75,7 +75,7 @@ const mainContainer: Variants = {
   },
 };
 
-const mainBtn = {
+const mainBtn: Variants = {
   initial: {
     opacity: 0,
     y: 20,
