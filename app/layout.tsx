@@ -11,6 +11,35 @@ import Header from '@/components/header';
 import Providers from '@/components/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head />
+      <body
+        className={twMerge(
+          'min-h-screen font-sans antialiased',
+          fontSans.variable
+        )}
+      >
+        <Providers>
+          <div className="relative flex min-h-screen flex-col justify-between gap-10">
+            <Header />
+            {children}
+            <Footer />
+          </div>
+          <DecorativeBlobs />
+          <FadedStrips />
+          <TailwindIndicator />
+        </Providers>
+      </body>
+    </html>
+  );
+}
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -59,32 +88,3 @@ export const metadata: Metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
 };
-
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
-      <body
-        className={twMerge(
-          'min-h-screen font-sans antialiased',
-          fontSans.variable
-        )}
-      >
-        <Providers>
-          <div className="relative flex min-h-screen flex-col justify-between gap-10">
-            <Header />
-            {children}
-            <Footer />
-          </div>
-          <DecorativeBlobs />
-          <FadedStrips />
-          <TailwindIndicator />
-        </Providers>
-      </body>
-    </html>
-  );
-}

@@ -3,11 +3,6 @@ import Link from 'next/link';
 
 import LoginForm from '@/components/login-form';
 
-export const metadata: Metadata = {
-  title: 'Login',
-  description: 'Login to your account',
-};
-
 export default function LoginPage() {
   return (
     <section className="container py-5">
@@ -28,3 +23,8 @@ export default function LoginPage() {
     </section>
   );
 }
+
+export const metadata: Metadata = {
+  title: 'Login',
+  description: 'Login to your account',
+};
