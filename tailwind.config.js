@@ -7,7 +7,12 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: '2rem',
+      padding: {
+        DEFAULT: '0.4rem',
+        sm: '1.5rem',
+        md: '2.5rem',
+        lg: '0.5rem',
+      },
       screens: {
         lg: '1024px',
       },

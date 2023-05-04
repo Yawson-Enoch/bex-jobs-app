@@ -5,25 +5,25 @@ import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { loginSchema } from '@/lib/validations/auth';
+import { signupSchema } from '@/lib/validations/auth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 
-export default function LoginForm() {
+export default function SignupForm() {
   const {
     register,
     watch,
     handleSubmit,
-    reset,
+    // reset,
     formState: { errors, isSubmitting, isDirty, isValid },
-  } = useForm<TypeLoginSchema>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<TypeSignupSchema>({
+    resolver: zodResolver(signupSchema),
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<TypeLoginSchema> = async (
+  const onSubmit: SubmitHandler<TypeSignupSchema> = async (
     data
   ): Promise<void> => {
     // test submit delay
@@ -39,6 +39,26 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-5">
+        <div className="grid gap-1">
+          <Label className="sr-only" htmlFor="username">
+            Name
+          </Label>
+          <Input
+            type="text"
+            id="username"
+            placeholder="enter name"
+            autoComplete="name"
+            autoCapitalize="off"
+            autoCorrect="off"
+            disabled={isSubmitting}
+            {...register('username')}
+          />
+          {errors?.username && (
+            <p className="px-1 text-xs text-red-600">
+              {errors.username.message}
+            </p>
+          )}
+        </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor="email">
             Email
@@ -65,7 +85,7 @@ export default function LoginForm() {
             type="password"
             id="password"
             placeholder="enter password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             autoCapitalize="off"
             autoCorrect="off"
             disabled={isSubmitting}
@@ -77,13 +97,33 @@ export default function LoginForm() {
             </p>
           )}
         </div>
+        <div className="grid gap-1">
+          <Label className="sr-only" htmlFor="confirm-password">
+            Confirm Password
+          </Label>
+          <Input
+            type="password"
+            id="confirm-password"
+            placeholder="confirm password"
+            autoComplete="new-password"
+            autoCapitalize="off"
+            autoCorrect="off"
+            disabled={isSubmitting}
+            {...register('passwordConfirm')}
+          />
+          {errors?.passwordConfirm && (
+            <p className="px-1 text-xs text-red-600">
+              {errors.passwordConfirm.message}
+            </p>
+          )}
+        </div>
         <Button
           type="submit"
           className="w-full"
           disabled={isSubmitting || !isValid || !isDirty}
         >
           {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" />}
-          {isSubmitting ? 'Logging in' : 'Log in'}
+          {isSubmitting ? 'Signing up' : 'Sign up'}
         </Button>
       </div>
       {/* <pre className="mt-2 text-sm">{JSON.stringify(watch(), null, 2)}</pre> */}
@@ -91,4 +131,4 @@ export default function LoginForm() {
   );
 }
 
-type TypeLoginSchema = z.infer<typeof loginSchema>;
+type TypeSignupSchema = z.infer<typeof signupSchema>;

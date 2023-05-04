@@ -1,31 +1,31 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Variants, motion } from 'framer-motion';
+import { twMerge } from 'tailwind-merge';
 
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 
-import { Button } from './ui/button';
+import { buttonVariants } from './ui/button';
 import { Separator } from './ui/separator';
 
-const MotionBtn = motion(Button);
+const MotionLink = motion(Link);
 
 export default function LandingPage() {
   const { value } = useMediaQuery('(max-width: 767px)');
   /* used to get the right value on browser resize as matches initially returns false even in mobile mode in devtools */
   const isMobile = value <= 767;
 
-  const router = useRouter();
-
   return (
     <motion.section
       variants={mainContainer}
       animate="animate"
       initial="initial"
-      className="container space-y-5 py-5 text-center lg:space-y-10"
+      className="container space-y-3 py-3 text-center md:space-y-5 md:py-5"
     >
       <motion.div
-        className="space-y-2 text-2xl font-bold lg:space-y-3 lg:text-4xl"
+        className="space-y-1 text-2xl font-bold md:space-y-3 lg:text-4xl"
         variants={headingContainer(isMobile)}
       >
         <motion.p variants={headingTitle(isMobile)}>BexJobs</motion.p>
@@ -45,15 +45,13 @@ export default function LandingPage() {
         hassle of managing your job search with spreadsheets or sticky notes,
         and say hello to BexJobs - your ultimate job search companion.
       </p>
-      <MotionBtn
-        variants={mainBtn}
-        type="button"
-        size="lg"
-        className="lg:text-lg"
-        onClick={() => router.push('/signup')}
+      <MotionLink
+        href="/signup"
+        className={twMerge(buttonVariants({ size: 'lg' }), 'lg:text-lg')}
+        variants={mainLink}
       >
         Start Managing Your Jobs
-      </MotionBtn>
+      </MotionLink>
     </motion.section>
   );
 }
@@ -66,7 +64,7 @@ const mainContainer: Variants = {
   },
 };
 
-const mainBtn: Variants = {
+const mainLink: Variants = {
   initial: {
     opacity: 0,
     y: 20,
