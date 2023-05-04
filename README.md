@@ -1,6 +1,7 @@
 # JOBS MANAGEMENT APP
 
-Welcome to the home of jobs management - manage your recent jobs to get insight on how your job search.
+BexJobs is a user-friendly job search management tool designed to help
+you keep track of all your job applications in one place.
 
 ## Install project dependencies:
 
