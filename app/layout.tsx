@@ -26,7 +26,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
-          <div className="relative flex min-h-screen flex-col justify-between gap-10">
+          <div className="relative flex min-h-screen flex-col justify-between gap-5 lg:gap-10">
             <Header />
             {children}
             <Footer />
