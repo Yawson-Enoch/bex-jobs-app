@@ -11,6 +11,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 
+type TypeLoginSchema = z.infer<typeof loginSchema>;
+
 export default function LoginForm() {
   const {
     register,
@@ -48,7 +50,6 @@ export default function LoginForm() {
             id="email"
             placeholder="name@example.com"
             autoComplete="email"
-            autoCapitalize="none"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('email')}
@@ -66,7 +67,6 @@ export default function LoginForm() {
             id="password"
             placeholder="enter password"
             autoComplete="current-password"
-            autoCapitalize="off"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('password')}
@@ -90,5 +90,3 @@ export default function LoginForm() {
     </form>
   );
 }
-
-type TypeLoginSchema = z.infer<typeof loginSchema>;

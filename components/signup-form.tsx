@@ -11,6 +11,8 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 
+type TypeSignupSchema = z.infer<typeof signupSchema>;
+
 export default function SignupForm() {
   const {
     register,
@@ -48,7 +50,6 @@ export default function SignupForm() {
             id="username"
             placeholder="enter name"
             autoComplete="name"
-            autoCapitalize="off"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('username')}
@@ -68,7 +69,6 @@ export default function SignupForm() {
             id="email"
             placeholder="name@example.com"
             autoComplete="email"
-            autoCapitalize="none"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('email')}
@@ -86,7 +86,6 @@ export default function SignupForm() {
             id="password"
             placeholder="enter password"
             autoComplete="new-password"
-            autoCapitalize="off"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('password')}
@@ -106,7 +105,6 @@ export default function SignupForm() {
             id="confirm-password"
             placeholder="confirm password"
             autoComplete="new-password"
-            autoCapitalize="off"
             autoCorrect="off"
             disabled={isSubmitting}
             {...register('passwordConfirm')}
@@ -130,5 +128,3 @@ export default function SignupForm() {
     </form>
   );
 }
-
-type TypeSignupSchema = z.infer<typeof signupSchema>;
