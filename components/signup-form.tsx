@@ -120,8 +120,17 @@ export default function SignupForm() {
           className="w-full"
           disabled={isSubmitting || !isValid || !isDirty}
         >
-          {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" />}
-          {isSubmitting ? 'Signing up' : 'Sign up'}
+          {isSubmitting ? (
+            <div role="status">
+              <span className="sr-only">Signing up...</span>
+              <Loader
+                aria-hidden="true"
+                className="mr-2 h-5 w-5 animate-spin"
+              />
+            </div>
+          ) : (
+            'Sign up'
+          )}
         </Button>
       </div>
       {/* <pre className="mt-2 text-sm">{JSON.stringify(watch(), null, 2)}</pre> */}

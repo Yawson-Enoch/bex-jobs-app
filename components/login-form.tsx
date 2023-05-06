@@ -82,8 +82,17 @@ export default function LoginForm() {
           className="w-full"
           disabled={isSubmitting || !isValid || !isDirty}
         >
-          {isSubmitting && <Loader className="mr-2 h-4 w-4 animate-spin" />}
-          {isSubmitting ? 'Logging in' : 'Log in'}
+          {isSubmitting ? (
+            <div role="status">
+              <span className="sr-only">Logging in...</span>
+              <Loader
+                aria-hidden="true"
+                className="mr-2 h-5 w-5 animate-spin"
+              />
+            </div>
+          ) : (
+            'Log in'
+          )}
         </Button>
       </div>
       {/* <pre className="mt-2 text-sm">{JSON.stringify(watch(), null, 2)}</pre> */}

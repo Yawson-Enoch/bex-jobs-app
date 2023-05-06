@@ -4,20 +4,23 @@ import { Variants, motion } from 'framer-motion';
 
 export default function AnimateCharacters({ text }: { text: string }) {
   return (
-    <motion.p
-      variants={container}
-      initial="initial"
-      animate="animate"
-      className="inline-flex"
-    >
-      {Array.from(text).map((char, index) => {
-        return (
-          <motion.span key={index} variants={letter}>
-            {char}
-          </motion.span>
-        );
-      })}
-    </motion.p>
+    <div className="rounded-md">
+      <span className="sr-only">{text}</span>
+      <motion.p
+        aria-hidden="true"
+        variants={container}
+        initial="initial"
+        animate="animate"
+      >
+        {Array.from(text).map((char, index) => {
+          return (
+            <motion.span key={index} variants={letter} className="inline-block">
+              {char}
+            </motion.span>
+          );
+        })}
+      </motion.p>
+    </div>
   );
 }
 
