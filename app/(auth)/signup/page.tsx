@@ -1,8 +1,45 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
+import {
+  openGraphImages,
+  openGraphLocale,
+  openGraphName,
+  openGraphType,
+  twitterCard,
+  twitterCreator,
+  twitterImages,
+} from '@/lib/shared-metadata';
 import AnimateCharacters from '@/components/animate-characters';
 import SignupForm from '@/components/signup-form';
+
+const title = 'Create An Account';
+const description = 'Create an account to start managing your job applications';
+const url = '/signup';
+
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url,
+    ...openGraphName,
+    ...openGraphImages,
+    ...openGraphLocale,
+    ...openGraphType,
+  },
+  twitter: {
+    title,
+    description,
+    ...twitterCard,
+    ...twitterCreator,
+    ...twitterImages,
+  },
+  alternates: {
+    canonical: url,
+  },
+};
 
 export default function SignupPage() {
   return (
@@ -24,8 +61,3 @@ export default function SignupPage() {
     </section>
   );
 }
-
-export const metadata: Metadata = {
-  title: 'Create An Account',
-  description: 'Create an account to start managing your job applications',
-};

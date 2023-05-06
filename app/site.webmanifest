@@ -1,6 +1,6 @@
 {
-  "name": "GyBex: Front-end Web Developer",
-  "short_name": "GyBex",
+  "name": "BexJobs: Job search management tool",
+  "short_name": "BexJobs",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
