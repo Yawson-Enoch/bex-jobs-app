@@ -62,7 +62,9 @@ export default function LoginForm() {
             {...register('email')}
           />
           {errors?.email && (
-            <p className="px-1 text-xs text-red-600">{errors.email.message}</p>
+            <p className="px-1 text-xs text-error-form-foreground">
+              {errors.email.message}
+            </p>
           )}
         </div>
         <div className="grid gap-1">
@@ -79,7 +81,7 @@ export default function LoginForm() {
             {...register('password')}
           />
           {errors?.password && (
-            <p className="px-1 text-xs text-red-600">
+            <p className="px-1 text-xs text-error-form-foreground">
               {errors.password.message}
             </p>
           )}
@@ -107,7 +109,7 @@ export default function LoginForm() {
             )}
           </div>
           {errors?.persistLogin && (
-            <p className="px-1 text-xs text-red-600">
+            <p className="px-1 text-xs text-error-form-foreground">
               {errors.persistLogin.message}
             </p>
           )}

@@ -36,10 +36,27 @@ module.exports = {
           DEFAULT: 'rgba(var(--destructive), <alpha-value>)',
           foreground: 'rgba(var(--destructive-foreground), <alpha-value>)',
         },
+        info: {
+          DEFAULT: 'rgba(var(--info), <alpha-value>)',
+          border: 'rgba(var(--info-border), <alpha-value>)',
+          foreground: 'rgba(var(--info-foreground), <alpha-value>)',
+        },
         warning: {
           DEFAULT: 'rgba(var(--warning), <alpha-value>)',
           border: 'rgba(var(--warning-border), <alpha-value>)',
           foreground: 'rgba(var(--warning-foreground), <alpha-value>)',
+        },
+        success: {
+          DEFAULT: 'rgba(var(--success), <alpha-value>)',
+          border: 'rgba(var(--success-border), <alpha-value>)',
+          foreground: 'rgba(var(--success-foreground), <alpha-value>)',
+        },
+        error: {
+          DEFAULT: 'rgba(var(--error), <alpha-value>)',
+          border: 'rgba(var(--error-border), <alpha-value>)',
+          foreground: 'rgba(var(--error-foreground), <alpha-value>)',
+          'form-foreground':
+            'rgba(var(--error-form-foreground), <alpha-value>)',
         },
         muted: {
           DEFAULT: 'rgba(var(--muted), <alpha-value>)',

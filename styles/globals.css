@@ -28,9 +28,22 @@
     --destructive: 255, 0, 0;
     --destructive-foreground: 248, 250, 252;
 
+    --info: 239, 246, 255;
+    --info-border: 147, 197, 253;
+    --info-foreground: 30, 64, 175;
+
     --warning: 254, 252, 232;
     --warning-border: 253, 224, 71;
     --warning-foreground: 133, 77, 14;
+
+    --success: 240, 253, 244;
+    --success-border: 134, 239, 172;
+    --success-foreground: 22, 101, 52;
+
+    --error: 254, 242, 242;
+    --error-border: 252, 165, 165;
+    --error-foreground: 153, 27, 27;
+    --error-form-foreground: 239, 68, 68;
 
     --ring: 148, 163, 184;
 
@@ -42,6 +55,8 @@
   }
 
   .dark {
+    --state-bg-dark: 31, 41, 55;
+
     --background: 3, 7, 17;
     --foreground: 225, 231, 239;
 
@@ -66,9 +81,22 @@
     --destructive: 129, 29, 29;
     --destructive-foreground: 248, 250, 252;
 
-    --warning: 31, 41, 55;
+    --info: var(--state-bg-dark);
+    --info-border: 30, 64, 175;
+    --info-foreground: 96, 165, 250;
+
+    --warning: var(--state-bg-dark);
     --warning-border: 133, 77, 14;
     --warning-foreground: 253, 224, 71;
+
+    --success: var(--state-bg-dark);
+    --success-border: 22, 101, 52;
+    --success-foreground: 74, 222, 128;
+
+    --error: var(--state-bg-dark);
+    --error-border: 153, 27, 27;
+    --error-foreground: 248, 113, 113;
+    --error-form-foreground: 185, 28, 28;
 
     --ring: 29, 40, 58;
 
