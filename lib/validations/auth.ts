@@ -38,6 +38,15 @@ const signupSchema = authSchema.refine(
   }
 );
 
-const loginSchema = authSchema.omit({ username: true, passwordConfirm: true });
+const loginSchema = authSchema
+  .omit({ username: true, passwordConfirm: true })
+  .extend({
+    persistLogin: z
+      .boolean({
+        required_error: 'persistLogin is required',
+        invalid_type_error: 'persistLogin must be a boolean',
+      })
+      .default(true),
+  });
 
 export { signupSchema, loginSchema };

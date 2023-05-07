@@ -10,6 +10,7 @@ import { loginSchema } from '@/lib/validations/auth';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { Switch } from './ui/switch';
 
 type TypeLoginSchema = z.infer<typeof loginSchema>;
 
@@ -19,11 +20,17 @@ export default function LoginForm() {
     watch,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting, isDirty, isValid },
   } = useForm<TypeLoginSchema>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
+    defaultValues: {
+      persistLogin: true,
+    },
   });
+
+  const isPersistLogin = watch('persistLogin');
 
   const onSubmit: SubmitHandler<TypeLoginSchema> = async (
     data
@@ -74,6 +81,34 @@ export default function LoginForm() {
           {errors?.password && (
             <p className="px-1 text-xs text-red-600">
               {errors.password.message}
+            </p>
+          )}
+        </div>
+        <div className="grid gap-1">
+          <div className="grid gap-2">
+            <div className="flex items-center gap-2">
+              <Switch
+                id="persist-login"
+                checked={isPersistLogin}
+                onCheckedChange={() =>
+                  setValue('persistLogin', !isPersistLogin)
+                }
+                disabled={isSubmitting}
+                {...register('persistLogin')}
+              />
+              <Label htmlFor="persist-login" className="cursor-pointer text-xs">
+                Stay logged in for 30 days
+              </Label>
+            </div>
+            {!isPersistLogin && (
+              <p className="rounded-md border border-warning-border bg-warning px-3 py-2 text-xs text-warning-foreground">
+                You will be logged out after 30 minutes of inactivity.
+              </p>
+            )}
+          </div>
+          {errors?.persistLogin && (
+            <p className="px-1 text-xs text-red-600">
+              {errors.persistLogin.message}
             </p>
           )}
         </div>

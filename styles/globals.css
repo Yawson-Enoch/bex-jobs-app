@@ -28,6 +28,10 @@
     --destructive: 255, 0, 0;
     --destructive-foreground: 248, 250, 252;
 
+    --warning: 254, 252, 232;
+    --warning-border: 253, 224, 71;
+    --warning-foreground: 133, 77, 14;
+
     --ring: 148, 163, 184;
 
     --radius: 0.5rem;
@@ -61,6 +65,10 @@
 
     --destructive: 129, 29, 29;
     --destructive-foreground: 248, 250, 252;
+
+    --warning: 31, 41, 55;
+    --warning-border: 133, 77, 14;
+    --warning-foreground: 253, 224, 71;
 
     --ring: 29, 40, 58;
 

@@ -36,6 +36,11 @@ module.exports = {
           DEFAULT: 'rgba(var(--destructive), <alpha-value>)',
           foreground: 'rgba(var(--destructive-foreground), <alpha-value>)',
         },
+        warning: {
+          DEFAULT: 'rgba(var(--warning), <alpha-value>)',
+          border: 'rgba(var(--warning-border), <alpha-value>)',
+          foreground: 'rgba(var(--warning-foreground), <alpha-value>)',
+        },
         muted: {
           DEFAULT: 'rgba(var(--muted), <alpha-value>)',
           foreground: 'rgba(var(--muted-foreground), <alpha-value>)',
