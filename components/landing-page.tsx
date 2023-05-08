@@ -32,7 +32,7 @@ export default function LandingPage() {
           orientation="horizontal"
           className="mx-auto w-1/2 lg:w-1/4"
         />
-        <motion.p variants={headingDescription(isMobile)}>
+        <motion.p variants={headingDescription}>
           Effortlessly Manage Your Job Search
         </motion.p>
       </motion.div>
@@ -58,7 +58,7 @@ export default function LandingPage() {
 const mainContainer: Variants = {
   animate: {
     transition: {
-      staggerChildren: 1.5,
+      staggerChildren: 1.85,
     },
   },
 };
@@ -77,15 +77,14 @@ const mainLink: Variants = {
 
 const headingContainer = (isMobile: boolean): Variants => ({
   initial: {
-    scale: 0.25,
+    scaleX: 0.25,
   },
   animate: {
-    scale: 1,
+    scaleX: 1,
     transition: {
       when: 'beforeChildren',
       staggerChildren: 0.65,
       staggerDirection: isMobile ? 1 : -1,
-      transition: { duration: 0.35, ease: 'easeOut' },
     },
   },
 });
@@ -115,14 +114,14 @@ const headingTitle = (isMobile: boolean): Variants => {
       };
 };
 
-const headingDescription = (isMobile: boolean): Variants => ({
+const headingDescription: Variants = {
   initial: {
     opacity: 0,
-    x: isMobile ? -10 : 200,
+    y: -5,
   },
   animate: {
     opacity: 1,
-    x: 0,
-    transition: { type: 'spring', bounce: 0.25 },
+    y: 0,
+    transition: { duration: 0.7, ease: 'easeInOut' },
   },
-});
+};
