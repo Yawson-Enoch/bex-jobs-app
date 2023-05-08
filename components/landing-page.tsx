@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Variants, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
-import { useMediaQuery } from '@/hooks/useMediaQuery';
+import useMediaQuery from '@/hooks/useMediaQuery';
 
 import { buttonVariants } from './ui/button';
 import { Separator } from './ui/separator';
@@ -12,9 +12,9 @@ import { Separator } from './ui/separator';
 const MotionLink = motion(Link);
 
 export default function LandingPage() {
-  const { value } = useMediaQuery('(max-width: 767px)');
-  /* used to get the right value on browser resize as matches initially returns false even in mobile mode in devtools */
-  const isMobile = value <= 767;
+  const { matches } = useMediaQuery('(max-width: 767px)');
+
+  const isMobile = matches;
 
   return (
     <motion.section
