@@ -6,42 +6,37 @@ export default function AnimateCharacters({ text }: { text: string }) {
   return (
     <div className="rounded-md">
       <span className="sr-only">{text}</span>
-      <motion.p
-        aria-hidden="true"
-        variants={container}
-        initial="initial"
-        animate="animate"
-      >
+      <p aria-hidden="true">
         {Array.from(text).map((char, index) => {
           return (
-            <motion.span key={index} variants={letter} className="inline-block">
+            <motion.span
+              key={index}
+              variants={letter}
+              initial="initial"
+              animate="animate"
+              custom={index}
+              className="inline-block"
+            >
               {char}
             </motion.span>
           );
         })}
-      </motion.p>
+      </p>
     </div>
   );
 }
 
-const container: Variants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.07,
-    },
-  },
-};
-
 const letter: Variants = {
   initial: {
     opacity: 0,
-    y: 13,
+    y: 15,
   },
-  animate: {
+  animate: (custom: number) => ({
     opacity: 1,
     y: 0,
     transition: {
       ease: 'easeInOut',
+      delay: 0.07 * custom,
     },
-  },
+  }),
 };
