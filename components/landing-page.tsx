@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Variants, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
@@ -59,7 +58,7 @@ export default function LandingPage() {
 const mainContainer: Variants = {
   animate: {
     transition: {
-      staggerChildren: 1.65,
+      staggerChildren: 1.5,
     },
   },
 };
@@ -111,7 +110,7 @@ const headingTitle = (isMobile: boolean): Variants => {
         animate: {
           opacity: 1,
           rotateX: [0, 45, 0, -45, 0],
-          transition: { duration: 1.25 },
+          transition: { duration: 1 },
         },
       };
 };
