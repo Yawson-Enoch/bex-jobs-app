@@ -3,6 +3,8 @@
 import { useId } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -15,8 +17,12 @@ import { Label } from './ui/label';
 import { Switch } from './ui/switch';
 import { toast } from './ui/use-toast';
 
+const tokenAtom = atomWithStorage<string | null>('bexjobs-token', null);
+
 export default function LoginForm() {
   const id = useId();
+
+  const setToken = useSetAtom(tokenAtom);
 
   const {
     register,
@@ -37,6 +43,7 @@ export default function LoginForm() {
   const { mutate, isLoading } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
+      setToken(data.token);
       toast({
         description: data.msg,
       });
