@@ -1,5 +1,6 @@
 'use client';
 
+import { useId } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -12,6 +13,8 @@ import { Label } from './ui/label';
 import { Switch } from './ui/switch';
 
 export default function LoginForm() {
+  const id = useId();
+
   const {
     register,
     watch,
@@ -44,12 +47,12 @@ export default function LoginForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-5">
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="email">
+          <Label className="sr-only" htmlFor={id + '-email'}>
             Email
           </Label>
           <Input
             type="email"
-            id="email"
+            id={id + '-email'}
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
@@ -63,12 +66,12 @@ export default function LoginForm() {
           )}
         </div>
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="password">
+          <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
           <Input
             type="password"
-            id="password"
+            id={id + '-password'}
             placeholder="enter password"
             autoComplete="current-password"
             autoCorrect="off"
@@ -85,7 +88,7 @@ export default function LoginForm() {
           <div className="grid gap-2">
             <div className="flex items-center gap-2">
               <Switch
-                id="persist-login"
+                id={id + '-persist-login'}
                 checked={isPersistLogin}
                 onCheckedChange={() =>
                   setValue('persistLogin', !isPersistLogin)
@@ -93,7 +96,10 @@ export default function LoginForm() {
                 disabled={isSubmitting}
                 {...register('persistLogin')}
               />
-              <Label htmlFor="persist-login" className="cursor-pointer text-xs">
+              <Label
+                htmlFor={id + '-persist-login'}
+                className="cursor-pointer text-xs"
+              >
                 Stay logged in for 30 days
               </Label>
             </div>

@@ -1,5 +1,6 @@
 'use client';
 
+import { useId } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
@@ -14,6 +15,8 @@ import { Label } from './ui/label';
 import { toast } from './ui/use-toast';
 
 export default function SignupForm() {
+  const id = useId();
+
   const {
     register,
     formState: { errors, isDirty, isValid },
@@ -47,12 +50,12 @@ export default function SignupForm() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-5">
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="username">
+          <Label className="sr-only" htmlFor={id + '-username'}>
             Name
           </Label>
           <Input
             type="text"
-            id="username"
+            id={id + '-username'}
             placeholder="enter name"
             autoComplete="name"
             autoCorrect="off"
@@ -66,12 +69,12 @@ export default function SignupForm() {
           )}
         </div>
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="email">
+          <Label className="sr-only" htmlFor={id + '-email'}>
             Email
           </Label>
           <Input
             type="email"
-            id="email"
+            id={id + '-email'}
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
@@ -85,12 +88,12 @@ export default function SignupForm() {
           )}
         </div>
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="password">
+          <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
           <Input
             type="password"
-            id="password"
+            id={id + '-password'}
             placeholder="enter password"
             autoComplete="new-password"
             autoCorrect="off"
@@ -104,12 +107,12 @@ export default function SignupForm() {
           )}
         </div>
         <div className="grid gap-1">
-          <Label className="sr-only" htmlFor="confirm-password">
+          <Label className="sr-only" htmlFor={id + '-confirm-password'}>
             Confirm Password
           </Label>
           <Input
             type="password"
-            id="confirm-password"
+            id={id + '-confirm-password'}
             placeholder="confirm password"
             autoComplete="new-password"
             autoCorrect="off"
