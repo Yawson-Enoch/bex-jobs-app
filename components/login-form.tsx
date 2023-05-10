@@ -56,6 +56,7 @@ export default function LoginForm() {
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
+            autoFocus
             disabled={isSubmitting}
             {...register('email')}
           />

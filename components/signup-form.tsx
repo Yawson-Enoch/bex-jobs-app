@@ -1,6 +1,7 @@
 'use client';
 
 import { useId } from 'react';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
@@ -13,7 +14,6 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { toast } from './ui/use-toast';
-import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
   const id = useId();
@@ -61,6 +61,7 @@ export default function SignupForm() {
             placeholder="enter name"
             autoComplete="name"
             autoCorrect="off"
+            autoFocus
             disabled={isLoading}
             {...register('username')}
           />
