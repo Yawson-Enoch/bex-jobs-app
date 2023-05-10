@@ -37,6 +37,7 @@ const signupSchema = authSchema.refine(
     path: ['passwordConfirm'],
   }
 );
+type Signup = z.infer<typeof signupSchema>;
 
 const loginSchema = authSchema
   .omit({ username: true, passwordConfirm: true })
@@ -48,5 +49,6 @@ const loginSchema = authSchema
       })
       .default(true),
   });
+type Login = z.infer<typeof loginSchema>;
 
-export { signupSchema, loginSchema };
+export { signupSchema, loginSchema, type Signup, type Login };

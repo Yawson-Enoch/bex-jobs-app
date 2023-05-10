@@ -4,17 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { CustomAPIError, registerUser } from '@/lib/api';
-import { signupSchema } from '@/lib/validations/auth';
+import { signupSchema, type Signup } from '@/lib/validations/auth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { toast } from './ui/use-toast';
-
-type TypeSignupSchema = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
   const {
@@ -22,7 +19,7 @@ export default function SignupForm() {
     formState: { errors, isDirty, isValid },
     handleSubmit,
     reset,
-  } = useForm<TypeSignupSchema>({
+  } = useForm<Signup>({
     resolver: zodResolver(signupSchema),
     mode: 'onChange',
   });
@@ -42,7 +39,7 @@ export default function SignupForm() {
     },
   });
 
-  const onSubmit: SubmitHandler<TypeSignupSchema> = (data) => {
+  const onSubmit: SubmitHandler<Signup> = (data) => {
     mutate(data);
   };
 

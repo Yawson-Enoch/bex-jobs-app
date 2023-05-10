@@ -3,16 +3,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
 
-import { loginSchema } from '@/lib/validations/auth';
+import { loginSchema, type Login } from '@/lib/validations/auth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Switch } from './ui/switch';
-
-type TypeLoginSchema = z.infer<typeof loginSchema>;
 
 export default function LoginForm() {
   const {
@@ -22,7 +19,7 @@ export default function LoginForm() {
     reset,
     setValue,
     formState: { errors, isSubmitting, isDirty, isValid },
-  } = useForm<TypeLoginSchema>({
+  } = useForm<Login>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
     defaultValues: {
@@ -32,9 +29,7 @@ export default function LoginForm() {
 
   const isPersistLogin = watch('persistLogin');
 
-  const onSubmit: SubmitHandler<TypeLoginSchema> = async (
-    data
-  ): Promise<void> => {
+  const onSubmit: SubmitHandler<Login> = async (data): Promise<void> => {
     // test submit delay
     return new Promise((resolve, _) => {
       setTimeout(() => {
