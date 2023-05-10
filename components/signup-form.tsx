@@ -1,41 +1,49 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { CustomAPIError, registerUser } from '@/lib/api';
 import { signupSchema } from '@/lib/validations/auth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+import { toast } from './ui/use-toast';
 
 type TypeSignupSchema = z.infer<typeof signupSchema>;
 
 export default function SignupForm() {
   const {
     register,
-    watch,
+    formState: { errors, isDirty, isValid },
     handleSubmit,
-    // reset,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    reset,
   } = useForm<TypeSignupSchema>({
     resolver: zodResolver(signupSchema),
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<TypeSignupSchema> = async (
-    data
-  ): Promise<void> => {
-    // test submit delay
-    return new Promise((resolve, _) => {
-      setTimeout(() => {
-        console.log(data);
-        resolve();
-        // reset();
-      }, 3000);
-    });
+  const { mutate, isLoading } = useMutation({
+    mutationFn: registerUser,
+    onSuccess: (data) => {
+      toast({
+        description: data.msg,
+      });
+      reset();
+    },
+    onError: (error: CustomAPIError) => {
+      toast({
+        description: error.message,
+      });
+    },
+  });
+
+  const onSubmit: SubmitHandler<TypeSignupSchema> = (data) => {
+    mutate(data);
   };
 
   return (
@@ -51,7 +59,7 @@ export default function SignupForm() {
             placeholder="enter name"
             autoComplete="name"
             autoCorrect="off"
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('username')}
           />
           {errors?.username && (
@@ -70,7 +78,7 @@ export default function SignupForm() {
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('email')}
           />
           {errors?.email && (
@@ -89,7 +97,7 @@ export default function SignupForm() {
             placeholder="enter password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('password')}
           />
           {errors?.password && (
@@ -108,7 +116,7 @@ export default function SignupForm() {
             placeholder="confirm password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('passwordConfirm')}
           />
           {errors?.passwordConfirm && (
@@ -120,9 +128,9 @@ export default function SignupForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={isSubmitting || !isValid || !isDirty}
+          disabled={isLoading || !isValid || !isDirty}
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <div role="status">
               <span className="sr-only">Signing up...</span>
               <Loader
