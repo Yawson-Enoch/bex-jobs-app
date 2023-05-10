@@ -13,15 +13,17 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { toast } from './ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 export default function SignupForm() {
   const id = useId();
+
+  const router = useRouter();
 
   const {
     register,
     formState: { errors, isDirty, isValid },
     handleSubmit,
-    reset,
   } = useForm<Signup>({
     resolver: zodResolver(signupSchema),
     mode: 'onChange',
@@ -33,7 +35,7 @@ export default function SignupForm() {
       toast({
         description: data.msg,
       });
-      reset();
+      router.push('/login');
     },
     onError: (error: CustomAPIError) => {
       toast({
