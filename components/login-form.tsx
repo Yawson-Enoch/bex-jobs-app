@@ -2,15 +2,18 @@
 
 import { useId } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import { CustomAPIError, loginUser } from '@/lib/api';
 import { loginSchema, type Login } from '@/lib/validations/auth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
 import { Switch } from './ui/switch';
+import { toast } from './ui/use-toast';
 
 export default function LoginForm() {
   const id = useId();
@@ -19,9 +22,8 @@ export default function LoginForm() {
     register,
     watch,
     handleSubmit,
-    reset,
     setValue,
-    formState: { errors, isSubmitting, isDirty, isValid },
+    formState: { errors, isDirty, isValid },
   } = useForm<Login>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
@@ -32,15 +34,22 @@ export default function LoginForm() {
 
   const isPersistLogin = watch('persistLogin');
 
-  const onSubmit: SubmitHandler<Login> = async (data): Promise<void> => {
-    // test submit delay
-    return new Promise((resolve, _) => {
-      setTimeout(() => {
-        console.log(data);
-        resolve();
-        // reset();
-      }, 3000);
-    });
+  const { mutate, isLoading } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      toast({
+        description: data.msg,
+      });
+    },
+    onError: (error: CustomAPIError) => {
+      toast({
+        description: error.message,
+      });
+    },
+  });
+
+  const onSubmit: SubmitHandler<Login> = (data) => {
+    mutate({ email: data.email, password: data.password });
   };
 
   return (
@@ -57,7 +66,7 @@ export default function LoginForm() {
             autoComplete="email"
             autoCorrect="off"
             autoFocus
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('email')}
           />
           {errors?.email && (
@@ -76,7 +85,7 @@ export default function LoginForm() {
             placeholder="enter password"
             autoComplete="current-password"
             autoCorrect="off"
-            disabled={isSubmitting}
+            disabled={isLoading}
             {...register('password')}
           />
           {errors?.password && (
@@ -94,7 +103,7 @@ export default function LoginForm() {
                 onCheckedChange={() =>
                   setValue('persistLogin', !isPersistLogin)
                 }
-                disabled={isSubmitting}
+                disabled={isLoading}
                 {...register('persistLogin')}
               />
               <Label
@@ -119,9 +128,9 @@ export default function LoginForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={isSubmitting || !isValid || !isDirty}
+          disabled={isLoading || !isValid || !isDirty}
         >
-          {isSubmitting ? (
+          {isLoading ? (
             <div role="status">
               <span className="sr-only">Logging in...</span>
               <Loader

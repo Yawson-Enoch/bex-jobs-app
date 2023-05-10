@@ -21,22 +21,54 @@ type RegisterUserResponse = {
   msg: string;
 };
 
+type LoginUser = Pick<User, 'email' | 'password'>;
+
+type LoginUserResponse = {
+  msg: string;
+  token: string;
+};
+
 export const registerUser = async (
-  user: RegisterUser
+  registerData: RegisterUser
 ): Promise<RegisterUserResponse> => {
   const response = await fetch(`${BASE_URL_DEV}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(registerData),
   });
 
   const responseData: RegisterUserResponse = await response.json();
 
   if (!response.ok) {
     const error = new Error(
-      responseData.msg || 'Failed to register user'
+      responseData.msg || 'Failed to register'
+    ) as CustomAPIError;
+    error.info = responseData;
+    error.status = response.status;
+    throw error;
+  }
+
+  return responseData;
+};
+
+export const loginUser = async (
+  loginData: LoginUser
+): Promise<LoginUserResponse> => {
+  const response = await fetch(`${BASE_URL_DEV}/auth/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(loginData),
+  });
+
+  const responseData: LoginUserResponse = await response.json();
+
+  if (!response.ok) {
+    const error = new Error(
+      responseData.msg || 'Failed to login'
     ) as CustomAPIError;
     error.info = responseData;
     error.status = response.status;
