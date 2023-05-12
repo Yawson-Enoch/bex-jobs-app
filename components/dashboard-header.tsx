@@ -23,8 +23,6 @@ export default function DashboardHeader() {
           Please{' '}
           <Link
             href="/login"
-            target="_blank"
-            rel="noreferrer"
             className="font-medium underline underline-offset-4"
           >
             login

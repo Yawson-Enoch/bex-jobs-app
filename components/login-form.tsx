@@ -53,9 +53,11 @@ export default function LoginForm() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       const authInfo = parseToken(data.token);
-      const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
+      const currentTime = Date.now();
+
+      const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = currentTime + 30 * 60 * 1000; // add 30mins to current date
       const SESSION_TIMEOUT_PERSIST_LOGIN_MS =
-        authInfo.tokenExpirationDate * 1000;
+        authInfo.tokenExpirationDate * 1000; // convert date to milliseconds
 
       setAuthToken(data.token);
       setSessionTimeout(
