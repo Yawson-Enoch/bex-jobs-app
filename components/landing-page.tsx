@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Variants, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
+import useAuth from '@/hooks/useAuth';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
 import { buttonVariants } from './ui/button';
@@ -14,6 +15,7 @@ const MotionLink = motion(Link);
 export default function LandingPage() {
   const { matches } = useMediaQuery('(max-width: 767px)');
 
+  const { isLoggedIn } = useAuth();
   const isMobile = matches;
 
   return (
@@ -45,7 +47,7 @@ export default function LandingPage() {
         and say hello to BexJobs - your ultimate job search companion.
       </p>
       <MotionLink
-        href="/signup"
+        href={isLoggedIn ? '/dashboard' : '/signup'}
         className={twMerge(buttonVariants({ size: 'lg' }), 'lg:text-lg')}
         variants={mainLink}
       >

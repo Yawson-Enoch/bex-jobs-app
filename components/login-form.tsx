@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { CustomAPIError, loginUser } from '@/lib/api';
 import { parseToken } from '@/lib/jwt';
 import { loginSchema, type Login } from '@/lib/validations/auth';
-import useAuth from '@/hooks/useAuth';
+import useAuth, { SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS } from '@/hooks/useAuth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -55,15 +55,15 @@ export default function LoginForm() {
       const authInfo = parseToken(data.token);
       const currentTime = Date.now();
 
-      const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = currentTime + 30 * 60 * 1000; // add 30mins to current date
-      const SESSION_TIMEOUT_PERSIST_LOGIN_MS =
-        authInfo.tokenExpirationDate * 1000; // convert date to milliseconds
+      const sessionTimeoutNoPersistLogin =
+        currentTime + SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS;
+      const sessionTimeoutPersistLogin = authInfo.tokenExpirationDate * 1000; // convert date to milliseconds
 
       setAuthToken(data.token);
       setSessionTimeout(
         hasPersistLogin
-          ? SESSION_TIMEOUT_PERSIST_LOGIN_MS
-          : SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS
+          ? sessionTimeoutPersistLogin
+          : sessionTimeoutNoPersistLogin
       );
       login({
         userId: authInfo.userId,
