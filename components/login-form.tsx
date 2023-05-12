@@ -1,15 +1,18 @@
 'use client';
 
 import { useId } from 'react';
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { useSetAtom } from 'jotai';
+import { atom, useAtom, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { CustomAPIError, loginUser } from '@/lib/api';
+import { parseToken } from '@/lib/jwt';
 import { loginSchema, type Login } from '@/lib/validations/auth';
+import useAuth from '@/hooks/useAuth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -17,36 +20,58 @@ import { Label } from './ui/label';
 import { Switch } from './ui/switch';
 import { toast } from './ui/use-toast';
 
-const tokenAtom = atomWithStorage<string | null>('bexjobs-token', null);
+export const authTokenAtom = atomWithStorage<string | null>(
+  'bexjobs-token',
+  null
+);
+export const sessionTimeoutAtom = atomWithStorage<number | null>(
+  'bexjobs-session-timeout',
+  null
+);
+export const hasPersistLoginAtom = atom(true);
 
 export default function LoginForm() {
-  const id = useId();
+  const [hasPersistLogin, setHasPersistLogin] = useAtom(hasPersistLoginAtom);
+  const setAuthToken = useSetAtom(authTokenAtom);
+  const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
-  const setToken = useSetAtom(tokenAtom);
+  const id = useId();
+  const router = useRouter();
+
+  const { login } = useAuth();
 
   const {
     register,
-    watch,
     handleSubmit,
-    setValue,
     formState: { errors, isDirty, isValid },
   } = useForm<Login>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
-    defaultValues: {
-      persistLogin: true,
-    },
   });
-
-  const isPersistLogin = watch('persistLogin');
 
   const { mutate, isLoading } = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      setToken(data.token);
+      const authInfo = parseToken(data.token);
+      const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
+      const SESSION_TIMEOUT_PERSIST_LOGIN_MS =
+        authInfo.tokenExpirationDate * 1000;
+
+      setAuthToken(data.token);
+      setSessionTimeout(
+        hasPersistLogin
+          ? SESSION_TIMEOUT_PERSIST_LOGIN_MS
+          : SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS
+      );
+      login({
+        userId: authInfo.userId,
+        username: authInfo.username,
+        email: authInfo.email,
+      });
       toast({
         description: data.msg,
       });
+      router.push('/dashboard');
     },
     onError: (error: CustomAPIError) => {
       toast({
@@ -56,7 +81,7 @@ export default function LoginForm() {
   });
 
   const onSubmit: SubmitHandler<Login> = (data) => {
-    mutate({ email: data.email, password: data.password });
+    mutate(data);
   };
 
   return (
@@ -101,34 +126,24 @@ export default function LoginForm() {
             </p>
           )}
         </div>
-        <div className="grid gap-1">
-          <div className="grid gap-2">
-            <div className="flex items-center gap-2">
-              <Switch
-                id={id + '-persist-login'}
-                checked={isPersistLogin}
-                onCheckedChange={() =>
-                  setValue('persistLogin', !isPersistLogin)
-                }
-                disabled={isLoading}
-                {...register('persistLogin')}
-              />
-              <Label
-                htmlFor={id + '-persist-login'}
-                className="cursor-pointer text-xs"
-              >
-                Stay logged in for 30 days
-              </Label>
-            </div>
-            {!isPersistLogin && (
-              <p className="rounded-md border border-warning-border bg-warning px-3 py-2 text-xs text-warning-foreground">
-                You will be logged out after 30 minutes of inactivity.
-              </p>
-            )}
+        <div className="grid gap-2">
+          <div className="flex items-center gap-2">
+            <Switch
+              id={id + '-persist-login'}
+              checked={hasPersistLogin}
+              onCheckedChange={() => setHasPersistLogin(!hasPersistLogin)}
+              disabled={isLoading}
+            />
+            <Label
+              htmlFor={id + '-persist-login'}
+              className="cursor-pointer text-xs"
+            >
+              Stay logged in for 30 days
+            </Label>
           </div>
-          {errors?.persistLogin && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.persistLogin.message}
+          {!hasPersistLogin && (
+            <p className="rounded-md border border-warning-border bg-warning px-3 py-2 text-xs text-warning-foreground">
+              You will be logged out after 30 minutes of inactivity.
             </p>
           )}
         </div>
