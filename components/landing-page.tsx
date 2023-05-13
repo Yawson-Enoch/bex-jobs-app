@@ -47,7 +47,7 @@ export default function LandingPage() {
         and say hello to BexJobs - your ultimate job search companion.
       </p>
       <MotionLink
-        href={isLoggedIn ? '/dashboard' : '/signup'}
+        href={isLoggedIn ? '/dashboard' : '/login'}
         className={twMerge(buttonVariants({ size: 'lg' }), 'lg:text-lg')}
         variants={mainLink}
       >
