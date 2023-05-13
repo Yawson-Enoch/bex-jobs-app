@@ -1,6 +1,6 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { atom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 import { parseToken } from '@/lib/jwt';
@@ -14,12 +14,11 @@ type User = {
 
 export const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
 
-const isAuthenticatedAtom = atom<boolean>(false);
-const userInfoAtom = atom<User | null>(null);
-
 export default function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useAtom(isAuthenticatedAtom);
-  const [userInfo, setUserInfo] = useAtom(userInfoAtom);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userAuthInfo, setUserAuthInfo] = useState<User | null>(null);
+
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [sessionTimeout, setSessionTimeout] = useAtom(sessionTimeoutAtom);
 
@@ -29,25 +28,16 @@ export default function useAuth() {
 
   const logOut = useCallback(() => {
     setIsAuthenticated(false);
-    setUserInfo(null);
+    setUserAuthInfo(null);
     setAuthToken(RESET);
     setSessionTimeout(RESET);
     router.push('/login');
-  }, [
-    router,
-    setAuthToken,
-    setIsAuthenticated,
-    setSessionTimeout,
-    setUserInfo,
-  ]);
+  }, [router, setAuthToken, setSessionTimeout]);
 
-  const login = useCallback(
-    (user: User) => {
-      setIsAuthenticated(true);
-      setUserInfo(user);
-    },
-    [setIsAuthenticated, setUserInfo]
-  );
+  const login = useCallback((user: User) => {
+    setIsAuthenticated(true);
+    setUserAuthInfo(user);
+  }, []);
 
   useEffect(() => {
     if (authToken) {
@@ -58,6 +48,7 @@ export default function useAuth() {
         email: authInfo.email,
       });
     }
+    setIsCheckingAuth(false);
   }, [authToken, login]);
 
   useEffect(() => {
@@ -75,9 +66,10 @@ export default function useAuth() {
   }, [logOut, sessionTimeout]);
 
   return {
+    isCheckingAuth,
     isLoggedIn,
-    logOut,
+    userAuthInfo,
     login,
-    userInfo,
+    logOut,
   };
 }
