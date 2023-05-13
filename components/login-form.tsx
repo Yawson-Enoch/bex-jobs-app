@@ -4,7 +4,7 @@ import { useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { atom, useAtom, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -12,7 +12,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { CustomAPIError, loginUser } from '@/lib/api';
 import { parseToken } from '@/lib/jwt';
 import { loginSchema, type Login } from '@/lib/validations/auth';
-import useAuth, { SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS } from '@/hooks/useAuth';
+import useAuth from '@/hooks/useAuth';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -24,11 +24,13 @@ export const authTokenAtom = atomWithStorage<string | null>(
   'bexjobs-token',
   null
 );
+
 export const sessionTimeoutAtom = atomWithStorage<number | null>(
   'bexjobs-session-timeout',
   null
 );
-export const hasPersistLoginAtom = atom(true);
+
+export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
 
 export default function LoginForm() {
   const [hasPersistLogin, setHasPersistLogin] = useAtom(hasPersistLoginAtom);
@@ -53,18 +55,11 @@ export default function LoginForm() {
     mutationFn: loginUser,
     onSuccess: (data) => {
       const authInfo = parseToken(data.token);
-      const currentTime = Date.now();
 
-      const sessionTimeoutNoPersistLogin =
-        currentTime + SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS;
       const sessionTimeoutPersistLogin = authInfo.tokenExpirationDate * 1000; // convert date to milliseconds
 
       setAuthToken(data.token);
-      setSessionTimeout(
-        hasPersistLogin
-          ? sessionTimeoutPersistLogin
-          : sessionTimeoutNoPersistLogin
-      );
+      hasPersistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
       login({
         userId: authInfo.userId,
         username: authInfo.username,

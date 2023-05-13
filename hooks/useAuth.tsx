@@ -1,10 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 import { parseToken } from '@/lib/jwt';
-import { authTokenAtom, sessionTimeoutAtom } from '@/components/login-form';
+import {
+  authTokenAtom,
+  hasPersistLoginAtom,
+  sessionTimeoutAtom,
+} from '@/components/login-form';
 
 type User = {
   userId: string;
@@ -12,7 +16,7 @@ type User = {
   email: string;
 };
 
-export const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
+const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
 
 export default function useAuth() {
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
@@ -21,6 +25,7 @@ export default function useAuth() {
 
   const [authToken, setAuthToken] = useAtom(authTokenAtom);
   const [sessionTimeout, setSessionTimeout] = useAtom(sessionTimeoutAtom);
+  const hasPersistLogin = useAtomValue(hasPersistLoginAtom);
 
   const router = useRouter();
 
@@ -52,18 +57,51 @@ export default function useAuth() {
   }, [authToken, login]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const currentTime = Date.now();
+    let interval: NodeJS.Timeout;
+    let sessionTimeoutNoPersistLogin =
+      Date.now() + SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS;
 
-      if (sessionTimeout && currentTime >= sessionTimeout) {
-        logOut();
-      }
-    }, 1000);
+    const handleTimeReset = () => {
+      sessionTimeoutNoPersistLogin =
+        Date.now() + SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS;
+    };
+
+    const handleLogoutNoPersist = () => {
+      interval = setInterval(() => {
+        const currentTime = Date.now();
+        if (currentTime >= sessionTimeoutNoPersistLogin) {
+          logOut();
+        }
+      }, 1000);
+    };
+
+    const handleLogoutPersist = () => {
+      interval = setInterval(() => {
+        const currentTime = Date.now();
+        if (sessionTimeout && currentTime >= sessionTimeout) {
+          logOut();
+        }
+      }, 1000);
+    };
+
+    if (hasPersistLogin === false) {
+      handleLogoutNoPersist();
+      window.addEventListener('mousemove', handleTimeReset);
+      window.addEventListener('keypress', handleTimeReset);
+    } else {
+      handleLogoutPersist();
+    }
 
     return () => {
-      clearInterval(interval);
+      if (interval) {
+        clearInterval(interval);
+      }
+      if (hasPersistLogin === false) {
+        window.removeEventListener('mousemove', handleTimeReset);
+        window.removeEventListener('keypress', handleTimeReset);
+      }
     };
-  }, [logOut, sessionTimeout]);
+  }, [hasPersistLogin, logOut, sessionTimeout]);
 
   return {
     isCheckingAuth,
