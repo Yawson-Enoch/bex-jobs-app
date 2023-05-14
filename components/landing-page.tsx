@@ -19,7 +19,7 @@ export default function LandingPage() {
   const isMobile = matches;
 
   return (
-    <motion.section
+    <motion.main
       variants={mainContainer}
       animate="animate"
       initial="initial"
@@ -53,7 +53,7 @@ export default function LandingPage() {
       >
         Start Managing Your Jobs
       </MotionLink>
-    </motion.section>
+    </motion.main>
   );
 }
 

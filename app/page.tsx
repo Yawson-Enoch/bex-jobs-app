@@ -10,6 +10,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
+import Header from '@/components/header';
 import LandingPage from '@/components/landing-page';
 
 const title = siteInfo.name;
@@ -41,5 +42,10 @@ export const metadata: Metadata = {
 };
 
 export default function IndexPage() {
-  return <LandingPage />;
+  return (
+    <>
+      <Header />
+      <LandingPage />
+    </>
+  );
 }

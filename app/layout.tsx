@@ -8,7 +8,6 @@ import { Toaster } from '@/components/ui/toaster';
 import DecorativeBlobs from '@/components/decorative-blobs';
 import FadedStrips from '@/components/faded-strips';
 import Footer from '@/components/footer';
-import Header from '@/components/header';
 import Providers from '@/components/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 
@@ -62,8 +61,7 @@ export default function RootLayout({
       >
         <Providers>
           <div className="relative flex min-h-screen flex-col justify-between gap-3 md:gap-5">
-            <Header />
-            <main>{children}</main>
+            {children}
             <Footer />
           </div>
           <DecorativeBlobs />
