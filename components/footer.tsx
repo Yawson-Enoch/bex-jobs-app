@@ -5,7 +5,7 @@ import { siteInfo } from '@/config/site';
 export default function Footer() {
   return (
     <footer className="border-t bg-background/90 backdrop-blur-sm">
-      <div className="container flex items-center justify-center gap-1 py-3">
+      <div className="container flex items-center justify-center gap-1 py-4">
         <span>Built</span>
         <span>by</span>
         <Link

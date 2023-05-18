@@ -23,7 +23,7 @@ export default function LandingPage() {
       variants={mainContainer}
       animate="animate"
       initial="initial"
-      className="container space-y-3 py-3 text-center md:space-y-5 md:py-5"
+      className="container space-y-3 py-4 text-center md:space-y-5"
     >
       <motion.div
         className="space-y-1 text-2xl font-bold md:space-y-3 lg:text-4xl"
