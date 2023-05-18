@@ -1,12 +1,12 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { Loader } from 'lucide-react';
+import { Eye, EyeOff, Loader } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { CustomAPIError, loginUser } from '@/lib/api';
@@ -33,6 +33,8 @@ export const sessionTimeoutAtom = atomWithStorage<number | null>(
 export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
 
 export default function LoginForm() {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const [hasPersistLogin, setHasPersistLogin] = useAtom(hasPersistLoginAtom);
   const setAuthToken = useSetAtom(authTokenAtom);
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
@@ -108,15 +110,32 @@ export default function LoginForm() {
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
-          <Input
-            type="password"
-            id={id + '-password'}
-            placeholder="enter password"
-            autoComplete="current-password"
-            autoCorrect="off"
-            disabled={isLoading}
-            {...register('password')}
-          />
+          <div className="relative">
+            <Input
+              type={passwordVisible ? 'text' : 'password'}
+              id={id + '-password'}
+              placeholder="enter password"
+              autoComplete="current-password"
+              autoCorrect="off"
+              disabled={isLoading}
+              {...register('password')}
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="absolute inset-y-0 right-0"
+            >
+              <span className="sr-only">
+                {passwordVisible ? 'Hide password' : 'Show password'}
+              </span>
+              {passwordVisible ? (
+                <EyeOff aria-hidden="true" />
+              ) : (
+                <Eye aria-hidden="true" />
+              )}
+            </Button>
+          </div>
           {errors?.password && (
             <p className="px-1 text-xs text-error-form-foreground">
               {errors.password.message}
