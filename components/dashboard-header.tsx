@@ -1,41 +1,29 @@
 'use client';
 
-import Link from 'next/link';
 import { Loader } from 'lucide-react';
 
 import useAuth from '@/hooks/useAuth';
 
-import { Button } from './ui/button';
+import UserProfile from './user-profile';
 
 export default function DashboardHeader() {
-  const { isCheckingAuth, isLoggedIn, userAuthInfo, logOut } = useAuth();
+  const { isCheckingAuth, userAuthInfo } = useAuth();
 
   return (
-    <header>
-      {isCheckingAuth ? (
-        <div role="status">
-          <span className="sr-only">Logging in...</span>
-          <Loader aria-hidden="true" className="mr-2 h-5 w-5 animate-spin" />
-        </div>
-      ) : isLoggedIn ? (
-        <>
-          {JSON.stringify(userAuthInfo, null, 2)}
-          <Button variant="ghost" className="ml-5" onClick={() => logOut()}>
-            Log out
-          </Button>
-        </>
-      ) : (
-        <p>
-          Please{' '}
-          <Link
-            href="/login"
-            className="font-medium underline underline-offset-4"
-          >
-            login
-          </Link>{' '}
-          to access this route
-        </p>
-      )}
+    <header className="border-b bg-background/90 backdrop-blur-sm">
+      <div className="container flex items-center justify-between py-4">
+        <p className="text-3xl font-bold">Hi, {userAuthInfo?.username}</p>
+        {isCheckingAuth ? (
+          <div role="status">
+            <span className="sr-only">Logging in...</span>
+            <Loader aria-hidden="true" className="mr-2 h-5 w-5 animate-spin" />
+          </div>
+        ) : (
+          <div className="flex items-center gap-3 md:gap-5">
+            <UserProfile />
+          </div>
+        )}
+      </div>
     </header>
   );
 }

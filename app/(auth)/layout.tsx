@@ -1,4 +1,5 @@
 import AuthHeader from '@/components/auth-header';
+import Footer from '@/components/footer';
 
 export default function AuthLayout({
   children,
@@ -8,9 +9,8 @@ export default function AuthLayout({
   return (
     <>
       <AuthHeader />
-      <div className="relative flex flex-col justify-between gap-3 md:gap-5">
-        {children}
-      </div>
+      {children}
+      <Footer />
     </>
   );
 }

@@ -61,7 +61,6 @@ export default function RootLayout({
         <Providers>
           <div className="relative flex min-h-screen flex-col justify-between gap-3 md:gap-5">
             {children}
-            <Footer />
           </div>
           <DecorativeBlobs />
           <FadedStrips />

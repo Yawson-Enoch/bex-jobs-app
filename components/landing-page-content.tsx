@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Variants, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,11 +14,19 @@ import { Separator } from './ui/separator';
 
 const MotionLink = motion(Link);
 
-export default function LandingPage() {
+export default function LandingPageContent() {
   const { matches } = useMediaQuery('(max-width: 767px)');
+
+  const router = useRouter();
 
   const { isLoggedIn } = useAuth();
   const isMobile = matches;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/dashboard');
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <motion.main

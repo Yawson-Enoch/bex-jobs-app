@@ -10,8 +10,9 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
+import Footer from '@/components/footer';
 import Header from '@/components/header';
-import LandingPage from '@/components/landing-page';
+import LandingPageContent from '@/components/landing-page-content';
 
 const title = siteInfo.name;
 const description = siteInfo.description;
@@ -45,7 +46,8 @@ export default function IndexPage() {
   return (
     <>
       <Header />
-      <LandingPage />
+      <LandingPageContent />
+      <Footer />
     </>
   );
 }
