@@ -84,12 +84,12 @@ export default function useAuth() {
       }, 1000);
     };
 
-    if (hasPersistLogin === false) {
+    if (sessionTimeout && hasPersistLogin) {
+      handleLogoutPersist();
+    } else {
       handleLogoutNoPersist();
       window.addEventListener('mousemove', handleTimeReset);
       window.addEventListener('keypress', handleTimeReset);
-    } else {
-      handleLogoutPersist();
     }
 
     return () => {
