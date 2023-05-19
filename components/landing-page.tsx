@@ -25,11 +25,11 @@ export default function LandingPage() {
       initial="initial"
       className="container space-y-3 py-4 text-center md:space-y-5"
     >
-      <motion.div
-        className="space-y-1 text-2xl font-bold md:space-y-3 lg:text-4xl"
+      <motion.h1
+        className="space-y-1 text-3xl font-bold md:space-y-3 lg:text-4xl"
         variants={headingContainer(isMobile)}
       >
-        <motion.p variants={headingTitle(isMobile)}>BexJobs</motion.p>
+        <motion.span variants={headingTitle(isMobile)}>BexJobs</motion.span>
         <Separator
           orientation="horizontal"
           className="mx-auto w-1/2 lg:w-1/4"
@@ -37,7 +37,7 @@ export default function LandingPage() {
         <motion.p variants={headingDescription}>
           Effortlessly Manage Your Job Search
         </motion.p>
-      </motion.div>
+      </motion.h1>
       <p className="text-muted-foreground lg:text-lg">
         BexJobs is a user-friendly job search management tool designed to help
         you keep track of all your job applications in one place. With BexJobs,

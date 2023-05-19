@@ -1,4 +1,7 @@
-export const APP_URL = process.env.NEXT_PUBLIC_APP_URL as string;
+export const APP_URL =
+  process.env.NODE_ENV === 'production'
+    ? `https://${process.env.VERCEL_URL}`
+    : `http://localhost:${process.env.PORT || 3000}`;
 
 export const siteInfo = {
   name: 'BexJobs',

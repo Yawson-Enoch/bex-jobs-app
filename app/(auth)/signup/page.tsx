@@ -45,9 +45,9 @@ export default function SignupPage() {
   return (
     <main className="container py-4">
       <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background p-3 md:space-y-5 md:p-5">
-        <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+        <p className="text-center text-2xl font-semibold">
           <AnimateCharacters text="Signup" />
-        </h3>
+        </p>
         <SignupForm />
         <p className="text-center text-sm text-muted-foreground">
           <Link

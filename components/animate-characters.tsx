@@ -4,7 +4,7 @@ import { Variants, motion } from 'framer-motion';
 
 export default function AnimateCharacters({ text }: { text: string }) {
   return (
-    <div className="rounded-md">
+    <>
       <span className="sr-only">{text}</span>
       <p aria-hidden="true">
         {Array.from(text).map((char, index) => {
@@ -22,7 +22,7 @@ export default function AnimateCharacters({ text }: { text: string }) {
           );
         })}
       </p>
-    </div>
+    </>
   );
 }
 
