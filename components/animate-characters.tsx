@@ -6,7 +6,7 @@ export default function AnimateCharacters({ text }: { text: string }) {
   return (
     <>
       <span className="sr-only">{text}</span>
-      <p aria-hidden="true">
+      <span aria-hidden="true">
         {Array.from(text).map((char, index) => {
           return (
             <motion.span
@@ -21,7 +21,7 @@ export default function AnimateCharacters({ text }: { text: string }) {
             </motion.span>
           );
         })}
-      </p>
+      </span>
     </>
   );
 }

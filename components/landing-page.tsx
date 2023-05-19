@@ -29,7 +29,12 @@ export default function LandingPage() {
         className="space-y-1 text-3xl font-bold md:space-y-3 lg:text-4xl"
         variants={headingContainer(isMobile)}
       >
-        <motion.span variants={headingTitle(isMobile)}>BexJobs</motion.span>
+        <motion.span
+          variants={headingTitle(isMobile)}
+          className="bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-transparent"
+        >
+          BexJobs
+        </motion.span>
         <Separator
           orientation="horizontal"
           className="mx-auto w-1/2 lg:w-1/4"
