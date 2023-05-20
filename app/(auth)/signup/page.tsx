@@ -10,8 +10,8 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
-import AnimateCharacters from '@/components/animate-characters';
-import SignupForm from '@/components/signup-form';
+import SignupForm from '@/components/auth/signup-form';
+import AnimatedCharacters from '@/components/common/animated-characters';
 
 const title = 'Create An Account';
 const description = 'Create an account to start managing your job applications';
@@ -46,7 +46,7 @@ export default function SignupPage() {
     <main className="container py-4">
       <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background p-3 md:space-y-5 md:p-5">
         <p className="text-center text-2xl font-semibold">
-          <AnimateCharacters text="Signup" />
+          <AnimatedCharacters text="Signup" />
         </p>
         <SignupForm />
         <p className="text-center text-sm text-muted-foreground">

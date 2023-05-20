@@ -1,11 +1,11 @@
 'use client';
 
-import { Loader } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 
 import useAuth from '@/hooks/useAuth';
 
-import AnimatedThemeTabs from './animated-theme-tabs';
-import UserProfile from './user-profile';
+import AnimatedThemeTabs from '../common/animated-theme-tabs';
+import UserProfile from '../common/user-profile';
 
 export default function DashboardHeader() {
   const { isCheckingAuth, userAuthInfo } = useAuth();
@@ -16,7 +16,10 @@ export default function DashboardHeader() {
         {isCheckingAuth ? (
           <div role="status">
             <span className="sr-only">Logging in...</span>
-            <Loader aria-hidden="true" className="mr-2 h-5 w-5 animate-spin" />
+            <LoaderIcon
+              aria-hidden="true"
+              className="mr-2 h-5 w-5 animate-spin"
+            />
           </div>
         ) : (
           <p className="text-3xl font-bold">Hi, {userAuthInfo?.username}</p>

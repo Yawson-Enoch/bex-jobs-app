@@ -10,8 +10,8 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
-import AnimateCharacters from '@/components/animate-characters';
-import LoginForm from '@/components/login-form';
+import LoginForm from '@/components/auth/login-form';
+import AnimatedCharacters from '@/components/common/animated-characters';
 
 const title = 'Log In To Your Account';
 const description = 'Log in to your account and access your dashboard';
@@ -46,7 +46,7 @@ export default function LoginPage() {
     <main className="container py-4">
       <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background p-3 md:space-y-5 md:p-5">
         <p className="text-center text-2xl font-semibold">
-          <AnimateCharacters text="Login" />
+          <AnimatedCharacters text="Login" />
         </p>
         <LoginForm />
         <p className="text-center text-sm text-muted-foreground">

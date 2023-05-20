@@ -9,8 +9,8 @@ import { twMerge } from 'tailwind-merge';
 import useAuth from '@/hooks/useAuth';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
-import { buttonVariants } from './ui/button';
-import { Separator } from './ui/separator';
+import { buttonVariants } from '../ui/button';
+import { Separator } from '../ui/separator';
 
 const MotionLink = motion(Link);
 

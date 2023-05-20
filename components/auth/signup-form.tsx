@@ -4,16 +4,16 @@ import { useId } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
-import { Loader } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { CustomAPIError, registerUser } from '@/lib/api';
 import { signupSchema, type Signup } from '@/lib/validations/auth';
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { toast } from './ui/use-toast';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { toast } from '../ui/use-toast';
 
 export default function SignupForm() {
   const id = useId();
@@ -136,7 +136,7 @@ export default function SignupForm() {
           {isLoading ? (
             <div role="status">
               <span className="sr-only">Signing up...</span>
-              <Loader
+              <LoaderIcon
                 aria-hidden="true"
                 className="mr-2 h-5 w-5 animate-spin"
               />

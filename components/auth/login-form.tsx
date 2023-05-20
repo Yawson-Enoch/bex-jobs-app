@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { Eye, EyeOff, Loader } from 'lucide-react';
+import { EyeIcon, EyeOffIcon, LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { CustomAPIError, loginUser } from '@/lib/api';
@@ -14,11 +14,11 @@ import { parseToken } from '@/lib/jwt';
 import { loginSchema, type Login } from '@/lib/validations/auth';
 import useAuth from '@/hooks/useAuth';
 
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Switch } from './ui/switch';
-import { toast } from './ui/use-toast';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Switch } from '../ui/switch';
+import { toast } from '../ui/use-toast';
 
 export const authTokenAtom = atomWithStorage<string | null>(
   'bexjobs-token',
@@ -136,9 +136,9 @@ export default function LoginForm() {
                 {passwordVisible ? 'Hide password' : 'Show password'}
               </span>
               {passwordVisible ? (
-                <EyeOff aria-hidden="true" />
+                <EyeOffIcon aria-hidden="true" />
               ) : (
-                <Eye aria-hidden="true" />
+                <EyeIcon aria-hidden="true" />
               )}
             </Button>
           </div>
@@ -177,7 +177,7 @@ export default function LoginForm() {
           {isLoading ? (
             <div role="status">
               <span className="sr-only">Logging in...</span>
-              <Loader
+              <LoaderIcon
                 aria-hidden="true"
                 className="mr-2 h-5 w-5 animate-spin"
               />

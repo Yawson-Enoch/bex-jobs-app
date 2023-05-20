@@ -2,7 +2,7 @@
 
 import { Variants, motion } from 'framer-motion';
 
-export default function AnimateCharacters({ text }: { text: string }) {
+export default function AnimatedCharacters({ text }: { text: string }) {
   return (
     <>
       <span className="sr-only">{text}</span>

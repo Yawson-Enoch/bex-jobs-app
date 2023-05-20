@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import GradientLogo from './gradient-logo';
-import { ThemeToggle } from './theme-toggle';
-import { buttonVariants } from './ui/button';
+import GradientLogo from '../common/gradient-logo';
+import { ThemeToggle } from '../common/theme-toggle';
+import { buttonVariants } from '../ui/button';
 
 export default function Header() {
   return (

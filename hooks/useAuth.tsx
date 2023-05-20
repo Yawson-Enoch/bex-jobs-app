@@ -8,7 +8,7 @@ import {
   authTokenAtom,
   hasPersistLoginAtom,
   sessionTimeoutAtom,
-} from '@/components/login-form';
+} from '@/components/auth/login-form';
 
 type User = {
   userId: string;

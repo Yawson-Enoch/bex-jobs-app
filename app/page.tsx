@@ -11,9 +11,9 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
-import LandingPageContent from '@/components/landing-page-content';
+import LandingPageContent from '@/components/common/landing-page-content';
+import Footer from '@/components/layout/footer';
+import Header from '@/components/layout/header';
 
 const title = siteInfo.name;
 const description = siteInfo.description;
