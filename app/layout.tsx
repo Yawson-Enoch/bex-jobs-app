@@ -7,7 +7,6 @@ import { fontSans } from '@/lib/fonts';
 import { Toaster } from '@/components/ui/toaster';
 import DecorativeBlobs from '@/components/decorative-blobs';
 import FadedStrips from '@/components/faded-strips';
-import Footer from '@/components/footer';
 import Providers from '@/components/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 
