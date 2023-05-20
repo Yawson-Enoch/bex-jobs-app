@@ -21,7 +21,7 @@ export default function UserProfile() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="secondary" size="sm" className="w-9 rounded-full px-0">
-          <UserIcon aria-hidden="true" className="h-5 w-5 sm:h-6 sm:w-6" />
+          <UserIcon aria-hidden="true" className="h-5 w-5" />
           <span className="sr-only">Profile menu</span>
         </Button>
       </DropdownMenuTrigger>

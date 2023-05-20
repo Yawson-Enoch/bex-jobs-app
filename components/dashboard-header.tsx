@@ -11,8 +11,8 @@ export default function DashboardHeader() {
   const { isCheckingAuth, userAuthInfo } = useAuth();
 
   return (
-    <header className="border-b bg-background/90 backdrop-blur-sm">
-      <div className="container flex items-center justify-between py-4">
+    <header className="flex h-16 items-center border-b bg-background/90 backdrop-blur-sm">
+      <div className="container flex items-center justify-between py-1">
         {isCheckingAuth ? (
           <div role="status">
             <span className="sr-only">Logging in...</span>
