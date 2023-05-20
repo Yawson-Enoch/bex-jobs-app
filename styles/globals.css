@@ -48,10 +48,6 @@
     --ring: 148, 163, 184;
 
     --radius: 0.5rem;
-
-    /* used for adding vars to jsx style prop */
-    --_gradient-strips: rgb(var(--border));
-    --_background: rgb(var(--background));
   }
 
   .dark {
@@ -101,10 +97,6 @@
     --ring: 29, 40, 58;
 
     --radius: 0.5rem;
-
-    /* used for adding vars to jsx style prop */
-    --_gradient-strips: rgba(var(--border), 0.15);
-    --_background: rgb(var(--background));
   }
 }
 

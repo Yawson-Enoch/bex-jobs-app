@@ -6,7 +6,6 @@ import { siteInfo } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
 import { Toaster } from '@/components/ui/toaster';
 import DecorativeBlobs from '@/components/decorative-blobs';
-import FadedStrips from '@/components/faded-strips';
 import Providers from '@/components/providers';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 
@@ -62,7 +61,6 @@ export default function RootLayout({
             {children}
           </div>
           <DecorativeBlobs />
-          <FadedStrips />
           <Toaster />
           <TailwindIndicator />
         </Providers>
