@@ -1,7 +1,7 @@
 export const APP_URL =
-  process.env.NODE_ENV === 'production'
-    ? `https://${process.env.VERCEL_URL}`
-    : `http://localhost:${process.env.PORT || 3000}`;
+  process.env.VERCEL_URL === undefined
+    ? `http://localhost:${process.env.PORT || 3000}`
+    : `https://${process.env.VERCEL_URL}`;
 
 export const siteInfo = {
   name: 'BexJobs',
