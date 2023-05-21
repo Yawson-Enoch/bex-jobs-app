@@ -76,7 +76,9 @@ export default function DashboardSidebar() {
               !isExpanded && 'hidden'
             )}
           >
-            <GradientLogo />
+            <Link href="/dashboard">
+              <GradientLogo />
+            </Link>
           </div>
           <Button
             aria-expanded={isExpanded}

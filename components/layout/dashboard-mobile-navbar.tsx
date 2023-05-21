@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
@@ -59,7 +60,14 @@ export default function DashboardMobileNavbar() {
       className="fixed inset-0 flex max-h-screen flex-col gap-6 overflow-y-scroll overscroll-y-contain bg-background md:hidden"
     >
       <div className="container flex h-16 items-center justify-between border-b">
-        <GradientLogo />
+        <button
+          onClick={() => {
+            router.push('/dashboard');
+            setIsMobileNavbarOpen(false);
+          }}
+        >
+          <GradientLogo />
+        </button>
         <Button
           aria-expanded={isMobileNavbarOpen}
           aria-controls="mobile-navbar"
@@ -100,7 +108,7 @@ export default function DashboardMobileNavbar() {
                   <motion.div
                     aria-hidden="true"
                     layout="position"
-                    layoutId="dashboard-mobile-navbar-links"
+                    layoutId="dashboard-mobile-navbar-link"
                     className="absolute inset-0 rounded-md bg-accent"
                     transition={{
                       type: 'spring',
