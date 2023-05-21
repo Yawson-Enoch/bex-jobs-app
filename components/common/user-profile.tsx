@@ -29,7 +29,7 @@ export default function UserProfile() {
         align="end"
         className="bg-popover/90 backdrop-blur-sm"
       >
-        <DropdownMenuItem onClick={() => router.push('/')}>
+        <DropdownMenuItem onClick={() => router.push('/dashboard/profile')}>
           <UserCircleIcon aria-hidden="true" className="mr-2 h-4 w-4" />
           <span>View Profile</span>
         </DropdownMenuItem>

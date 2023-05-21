@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import useAuth from '@/hooks/useAuth';
+
 import GradientLogo from '../common/gradient-logo';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
@@ -43,6 +45,8 @@ const sidebarItems = [
 
 export default function DashboardSidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const { logOut } = useAuth();
 
   const pathname = usePathname();
 
@@ -86,7 +90,7 @@ export default function DashboardSidebar() {
       </div>
       <ul
         className={twMerge(
-          'my-auto flex flex-col gap-4 p-4',
+          'my-auto flex flex-col gap-4 p-4 font-medium',
           !isExpanded && 'items-center'
         )}
       >
@@ -107,12 +111,17 @@ export default function DashboardSidebar() {
               )}
               <Link
                 href={sidebarItem.path}
-                className="relative z-10 flex items-center gap-3"
+                className="group relative z-10 flex items-center gap-3"
               >
-                <span aria-hidden="true">{sidebarItem.icon}</span>
+                <span
+                  aria-hidden="true"
+                  className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+                >
+                  {sidebarItem.icon}
+                </span>
                 <span
                   className={twMerge(
-                    'animate-in fade-in-0 duration-500 ease-linear',
+                    'animate-in slide-in-from-right-4 duration-300 ease-linear',
                     !isExpanded && 'hidden'
                   )}
                 >
@@ -124,13 +133,19 @@ export default function DashboardSidebar() {
         })}
         <li className="space-y-4">
           <Separator />
-          <button className="flex w-full items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-in-out hover:bg-accent/50">
-            <span aria-hidden="true">
+          <button
+            className="group flex w-full items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-linear hover:bg-accent/50"
+            onClick={() => logOut()}
+          >
+            <span
+              aria-hidden="true"
+              className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+            >
               <LogOutIcon />
             </span>
             <span
               className={twMerge(
-                'animate-in fade-in-0 duration-500 ease-linear',
+                'animate-in slide-in-from-right-4 duration-300 ease-linear',
                 !isExpanded && 'hidden'
               )}
             >
