@@ -52,20 +52,25 @@ const patterns = [
 const randomIndex = Math.floor(Math.random() * patterns.length);
 const randomPattern = patterns[randomIndex];
 
+function DecorativePattern() {
+  return (
+    <div
+      aria-hidden="true"
+      className={twMerge(
+        'fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-10 pattern-size-4 dark:pattern-gray-800',
+        randomPattern
+      )}
+    ></div>
+  );
+}
+
 export default function IndexPage() {
   return (
     <>
       <Header />
       <LandingPageContent />
       <Footer />
-      {/* decorative pattern */}
-      <div
-        aria-hidden="true"
-        className={twMerge(
-          'fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-10 pattern-size-4 dark:pattern-gray-800',
-          randomPattern
-        )}
-      ></div>
+      <DecorativePattern />
     </>
   );
 }
