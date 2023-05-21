@@ -51,6 +51,7 @@ export default function AnimatedThemeTabs() {
             {theme === userTheme.theme && (
               <motion.div
                 aria-hidden="true"
+                layout="position"
                 layoutId="active-theme"
                 className="absolute inset-0 bg-accent"
                 style={{ borderRadius: 9999 }}

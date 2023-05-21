@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
   BarChart3Icon,
@@ -43,13 +44,11 @@ const sidebarItems = [
 export default function DashboardSidebar() {
   const [isExpanded, setIsExpanded] = useState(true);
 
+  const pathname = usePathname();
+
   return (
-    <motion.aside
+    <aside
       id="dashboard-sidebar"
-      layoutId="dashboard-sidebar"
-      transition={{
-        layout: { duration: 0.09 },
-      }}
       className={twMerge(
         'dashboard-sidebar sticky top-0 hidden max-h-screen overflow-y-scroll overscroll-y-contain border-r pt-3 md:flex md:flex-col',
         isExpanded ? 'w-52 lg:w-60' : 'w-20'
@@ -80,39 +79,37 @@ export default function DashboardSidebar() {
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <span className="sr-only">Toggle Sidebar</span>
-          <motion.span
-            aria-hidden="true"
-            layout
-            transition={{
-              layout: { duration: 0.09 },
-            }}
-          >
+          <span aria-hidden="true">
             <ChevronRightIcon className={twMerge(isExpanded && 'rotate-180')} />
-          </motion.span>
+          </span>
         </Button>
       </div>
       <ul
         className={twMerge(
-          'my-auto flex flex-col gap-3 overflow-hidden px-4',
+          'my-auto flex flex-col gap-4 p-4',
           !isExpanded && 'items-center'
         )}
       >
         {sidebarItems.map((sidebarItem) => {
           return (
-            <li
-              key={sidebarItem.title}
-              className="rounded-md p-2 hover:bg-accent/75"
-            >
-              <Link href={sidebarItem.path} className="flex items-center gap-3">
-                <motion.span
+            <li key={sidebarItem.title} className="relative rounded-md p-2">
+              {pathname === sidebarItem.path && (
+                <motion.div
                   aria-hidden="true"
-                  layout
+                  layout="position"
+                  layoutId="dashboard-sidebar-link"
+                  className="absolute inset-0 rounded-md bg-accent"
                   transition={{
-                    layout: { duration: 0.09 },
+                    type: 'spring',
+                    duration: 0.5,
                   }}
-                >
-                  {sidebarItem.icon}
-                </motion.span>
+                />
+              )}
+              <Link
+                href={sidebarItem.path}
+                className="relative z-10 flex items-center gap-3"
+              >
+                <span aria-hidden="true">{sidebarItem.icon}</span>
                 <span
                   className={twMerge(
                     'animate-in fade-in-0 duration-500 ease-linear',
@@ -125,18 +122,12 @@ export default function DashboardSidebar() {
             </li>
           );
         })}
-        <li className="space-y-3">
+        <li className="space-y-4">
           <Separator />
-          <button className="flex w-full items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-in-out hover:bg-accent/75">
-            <motion.span
-              aria-hidden="true"
-              layout
-              transition={{
-                layout: { duration: 0.09 },
-              }}
-            >
+          <button className="flex w-full items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-in-out hover:bg-accent/50">
+            <span aria-hidden="true">
               <LogOutIcon />
-            </motion.span>
+            </span>
             <span
               className={twMerge(
                 'animate-in fade-in-0 duration-500 ease-linear',
@@ -148,6 +139,6 @@ export default function DashboardSidebar() {
           </button>
         </li>
       </ul>
-    </motion.aside>
+    </aside>
   );
 }
