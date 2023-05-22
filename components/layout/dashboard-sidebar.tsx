@@ -1,10 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
 import {
   BarChart3Icon,
   BriefcaseIcon,
@@ -46,9 +46,12 @@ const sidebarItems = [
   },
 ];
 
-export default function DashboardSidebar() {
-  const [isExpanded, setIsExpanded] = useState(true);
+const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
 
+export default function DashboardSidebar() {
+  const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
+    isSidebarExpandedAtom
+  );
   const isMobileNavbarOpen = useAtomValue(isMobileNavbarOpenAtom);
 
   const { logOut } = useAuth();
@@ -61,19 +64,19 @@ export default function DashboardSidebar() {
         id="dashboard-sidebar"
         className={twMerge(
           'dashboard-sidebar sticky top-0 hidden max-h-screen overflow-y-scroll overscroll-y-contain border-r pt-3 md:flex md:flex-col',
-          isExpanded ? 'w-52 lg:w-60' : 'w-20'
+          isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20'
         )}
       >
         <div
           className={twMerge(
             'flex items-center pl-4',
-            !isExpanded && 'justify-center px-4'
+            !isSidebarExpanded && 'justify-center px-4'
           )}
         >
           <div
             className={twMerge(
               'animate-in slide-in-from-right-4 duration-300 ease-linear',
-              !isExpanded && 'hidden'
+              !isSidebarExpanded && 'hidden'
             )}
           >
             <Link href="/dashboard">
@@ -81,26 +84,26 @@ export default function DashboardSidebar() {
             </Link>
           </div>
           <Button
-            aria-expanded={isExpanded}
+            aria-expanded={isSidebarExpanded}
             aria-controls="dashboard-sidebar"
             size="sm"
             className={twMerge(
               'p-2',
-              isExpanded && 'ml-auto rounded-lg rounded-r-none p-0'
+              isSidebarExpanded && 'ml-auto rounded-lg rounded-r-none p-0'
             )}
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}
           >
             <span className="sr-only">Toggle Sidebar</span>
             <ChevronRightIcon
               aria-hidden="true"
-              className={twMerge(isExpanded && 'rotate-180')}
+              className={twMerge(isSidebarExpanded && 'rotate-180')}
             />
           </Button>
         </div>
         <ul
           className={twMerge(
             'my-auto flex flex-col gap-4 p-4 font-medium',
-            !isExpanded && 'items-center'
+            !isSidebarExpanded && 'items-center'
           )}
         >
           {sidebarItems.map((sidebarItem) => {
@@ -131,7 +134,7 @@ export default function DashboardSidebar() {
                   <span
                     className={twMerge(
                       'animate-in slide-in-from-right-4 duration-300 ease-linear',
-                      !isExpanded && 'hidden'
+                      !isSidebarExpanded && 'hidden'
                     )}
                   >
                     {sidebarItem.title}
@@ -155,7 +158,7 @@ export default function DashboardSidebar() {
               <span
                 className={twMerge(
                   'animate-in slide-in-from-right-4 duration-300 ease-linear',
-                  !isExpanded && 'hidden'
+                  !isSidebarExpanded && 'hidden'
                 )}
               >
                 Logout
