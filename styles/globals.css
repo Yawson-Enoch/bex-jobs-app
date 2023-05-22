@@ -4,6 +4,9 @@
 
 @layer base {
   :root {
+    --_primary: rgb(0, 80, 255);
+    --_secondary: rgb(255, 170, 0);
+
     --background: 255, 255, 255;
     --foreground: 15, 23, 42;
 
@@ -135,5 +138,20 @@
 
   .dashboard-main {
     grid-area: main;
+  }
+
+  .gradient-text-stroke {
+    font-size: theme('fontSize.9xl');
+    background-color: theme('colors.foreground');
+    background-image: linear-gradient(
+      45deg,
+      var(--_primary),
+      var(--_secondary)
+    );
+    color: theme('colors.background');
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-stroke-color: transparent;
+    -webkit-text-stroke-width: 15px;
   }
 }
