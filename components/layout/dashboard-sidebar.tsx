@@ -23,7 +23,7 @@ import { Separator } from '../ui/separator';
 import { isMobileNavbarOpenAtom } from './dashboard-header';
 import DashboardMobileNavbar from './dashboard-mobile-navbar';
 
-const sidebarItems = [
+const sidebarRoutes = [
   {
     title: 'Stats',
     path: '/dashboard',
@@ -73,12 +73,7 @@ export default function DashboardSidebar() {
             !isSidebarExpanded && 'justify-center px-4'
           )}
         >
-          <div
-            className={twMerge(
-              'animate-in slide-in-from-right-4 duration-300 ease-linear',
-              !isSidebarExpanded && 'hidden'
-            )}
-          >
+          <div className={twMerge(!isSidebarExpanded && 'hidden')}>
             <Link href="/dashboard">
               <GradientLogo />
             </Link>
@@ -100,44 +95,39 @@ export default function DashboardSidebar() {
             />
           </Button>
         </div>
-        <ul
-          className={twMerge(
-            'my-auto flex flex-col gap-4 p-4 font-medium',
-            !isSidebarExpanded && 'items-center'
-          )}
-        >
-          {sidebarItems.map((sidebarItem) => {
+        <ul className="my-auto flex flex-col gap-4 p-4 font-medium">
+          {sidebarRoutes.map((sidebarRoute) => {
             return (
-              <li key={sidebarItem.title} className="relative rounded-md p-2">
-                {pathname === sidebarItem.path && (
+              <li
+                key={sidebarRoute.title}
+                className={twMerge(
+                  'relative rounded-md p-2',
+                  isSidebarExpanded ? 'w-full' : 'w-fit'
+                )}
+              >
+                {pathname === sidebarRoute.path && (
                   <motion.div
                     aria-hidden="true"
                     layout="position"
                     layoutId="dashboard-sidebar-link"
                     className="absolute inset-0 rounded-md bg-accent"
                     transition={{
-                      type: 'spring',
-                      duration: 0.5,
+                      layout: { type: 'spring', duration: 0.5 },
                     }}
                   />
                 )}
                 <Link
-                  href={sidebarItem.path}
+                  href={sidebarRoute.path}
                   className="group relative z-10 flex items-center gap-3"
                 >
                   <span
                     aria-hidden="true"
                     className="transition-transform duration-300 ease-linear group-hover:rotate-12"
                   >
-                    {sidebarItem.icon}
+                    {sidebarRoute.icon}
                   </span>
-                  <span
-                    className={twMerge(
-                      'animate-in slide-in-from-right-4 duration-300 ease-linear',
-                      !isSidebarExpanded && 'hidden'
-                    )}
-                  >
-                    {sidebarItem.title}
+                  <span className={twMerge(!isSidebarExpanded && 'hidden')}>
+                    {sidebarRoute.title}
                   </span>
                 </Link>
               </li>
@@ -146,21 +136,17 @@ export default function DashboardSidebar() {
           <li className="space-y-4">
             <Separator />
             <button
-              className="group flex w-full items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-linear hover:bg-accent/50"
+              className={twMerge(
+                'group flex items-center gap-3 rounded-md p-2 transition-colors duration-300 ease-linear hover:bg-accent/50',
+                isSidebarExpanded ? 'w-full' : 'w-fit'
+              )}
               onClick={() => logOut()}
             >
-              <span
+              <LogOutIcon
                 aria-hidden="true"
                 className="transition-transform duration-300 ease-linear group-hover:rotate-12"
-              >
-                <LogOutIcon />
-              </span>
-              <span
-                className={twMerge(
-                  'animate-in slide-in-from-right-4 duration-300 ease-linear',
-                  !isSidebarExpanded && 'hidden'
-                )}
-              >
+              />
+              <span className={twMerge(!isSidebarExpanded && 'hidden')}>
                 Logout
               </span>
             </button>
