@@ -24,12 +24,10 @@ export const authTokenAtom = atomWithStorage<string | null>(
   'bexjobs-token',
   null
 );
-
 export const sessionTimeoutAtom = atomWithStorage<number | null>(
   'bexjobs-session-timeout',
   null
 );
-
 export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
 
 export default function LoginForm() {
@@ -44,14 +42,12 @@ export default function LoginForm() {
 
   const { login, isLoggedIn } = useAuth();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
-  } = useForm<Login>({
+  const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
-    mode: 'onChange',
+    mode: 'all',
   });
+  const { register, handleSubmit, formState } = form;
+  const { errors, isDirty, isValid } = formState;
 
   const { mutate, isLoading } = useMutation({
     mutationFn: loginUser,
@@ -90,7 +86,7 @@ export default function LoginForm() {
   }, [isLoggedIn, router]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-5">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
@@ -99,18 +95,16 @@ export default function LoginForm() {
           <Input
             type="email"
             id={id + '-email'}
+            {...register('email')}
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
             autoFocus
             disabled={isLoading}
-            {...register('email')}
           />
-          {errors?.email && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.email.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.email?.message}
+          </p>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
@@ -120,11 +114,11 @@ export default function LoginForm() {
             <Input
               type={passwordVisible ? 'text' : 'password'}
               id={id + '-password'}
+              {...register('password')}
               placeholder="enter password"
               autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
-              {...register('password')}
             />
             <Button
               type="button"
@@ -142,11 +136,9 @@ export default function LoginForm() {
               )}
             </Button>
           </div>
-          {errors?.password && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.password.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.password?.message}
+          </p>
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">

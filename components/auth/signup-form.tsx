@@ -17,17 +17,14 @@ import { toast } from '../ui/use-toast';
 
 export default function SignupForm() {
   const id = useId();
-
   const router = useRouter();
 
-  const {
-    register,
-    formState: { errors, isDirty, isValid },
-    handleSubmit,
-  } = useForm<Signup>({
+  const form = useForm<Signup>({
     resolver: zodResolver(signupSchema),
-    mode: 'onChange',
+    mode: 'all',
   });
+  const { register, handleSubmit, formState } = form;
+  const { errors, isDirty, isValid } = formState;
 
   const { mutate, isLoading } = useMutation({
     mutationFn: registerUser,
@@ -49,7 +46,7 @@ export default function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-5">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-username'}>
@@ -58,18 +55,16 @@ export default function SignupForm() {
           <Input
             type="text"
             id={id + '-username'}
+            {...register('username')}
             placeholder="enter name"
             autoComplete="name"
             autoCorrect="off"
             autoFocus
             disabled={isLoading}
-            {...register('username')}
           />
-          {errors?.username && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.username.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.username?.message}
+          </p>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
@@ -78,17 +73,15 @@ export default function SignupForm() {
           <Input
             type="email"
             id={id + '-email'}
+            {...register('email')}
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
             disabled={isLoading}
-            {...register('email')}
           />
-          {errors?.email && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.email.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.email?.message}
+          </p>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
@@ -97,17 +90,15 @@ export default function SignupForm() {
           <Input
             type="password"
             id={id + '-password'}
+            {...register('password')}
             placeholder="enter password"
             autoComplete="new-password"
             autoCorrect="off"
             disabled={isLoading}
-            {...register('password')}
           />
-          {errors?.password && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.password.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.password?.message}
+          </p>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-confirm-password'}>
@@ -116,17 +107,15 @@ export default function SignupForm() {
           <Input
             type="password"
             id={id + '-confirm-password'}
+            {...register('passwordConfirm')}
             placeholder="confirm password"
             autoComplete="new-password"
             autoCorrect="off"
             disabled={isLoading}
-            {...register('passwordConfirm')}
           />
-          {errors?.passwordConfirm && (
-            <p className="px-1 text-xs text-error-form-foreground">
-              {errors.passwordConfirm.message}
-            </p>
-          )}
+          <p className="px-1 text-xs text-error-form-foreground">
+            {errors.passwordConfirm?.message}
+          </p>
         </div>
         <Button
           type="submit"
