@@ -18,7 +18,7 @@ export default function DashboardHeader() {
   const { isCheckingAuth, userAuthInfo } = useAuth();
 
   return (
-    <header className="dashboard-header sticky top-0 flex h-16 items-center border-b">
+    <header className="dashboard-header sticky top-0 flex h-16 items-center border-b bg-background/70 backdrop-blur-sm">
       <div className="container flex items-center justify-between py-1">
         <button
           aria-expanded={isMobileNavbarOpen}

@@ -7,7 +7,7 @@ import { buttonVariants } from '../ui/button';
 export default function Header() {
   return (
     <header className="sticky top-0 z-10 md:px-[0.5rem]">
-      <div className="container flex items-center justify-between gap-3 border-b bg-background/90 py-4 backdrop-blur-sm md:gap-5 md:rounded-b-full md:rounded-t-none md:border-x md:px-10">
+      <div className="container flex items-center justify-between gap-3 border-b bg-background/70 py-4 backdrop-blur-sm md:gap-5 md:rounded-b-full md:rounded-t-none md:border-x md:px-10">
         <Link
           href="/"
           className="rounded-md p-[1px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"

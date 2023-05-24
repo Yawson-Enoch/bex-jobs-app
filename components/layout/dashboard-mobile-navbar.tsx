@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
@@ -17,7 +16,6 @@ import {
 import useAuth from '@/hooks/useAuth';
 
 import GradientLogo from '../common/gradient-logo';
-import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import { isMobileNavbarOpenAtom } from './dashboard-header';
 
@@ -57,7 +55,7 @@ export default function DashboardMobileNavbar() {
   return (
     <nav
       id="mobile-navbar"
-      className="fixed inset-0 flex max-h-screen flex-col gap-6 overflow-y-scroll overscroll-y-contain bg-background md:hidden"
+      className="fixed inset-0 flex max-h-screen flex-col gap-6 overflow-y-scroll overscroll-y-contain bg-background/70 backdrop-blur-sm md:hidden"
     >
       <div className="container flex h-16 items-center justify-between border-b">
         <button
@@ -68,17 +66,15 @@ export default function DashboardMobileNavbar() {
         >
           <GradientLogo />
         </button>
-        <Button
+        <button
           aria-expanded={isMobileNavbarOpen}
           aria-controls="mobile-navbar"
-          size="sm"
-          variant="ghost"
-          className="aspect-square p-1 text-error-foreground"
+          className="text-error-foreground"
           onClick={() => setIsMobileNavbarOpen(false)}
         >
           <span className="sr-only">Close Mobile Navbar</span>
           <XIcon aria-hidden="true" />
-        </Button>
+        </button>
       </div>
       <div className="container space-y-6">
         {isCheckingAuth ? (
@@ -107,13 +103,11 @@ export default function DashboardMobileNavbar() {
                 {pathname === navLink.path && (
                   <motion.div
                     aria-hidden="true"
+                    className="absolute inset-0 rounded-md bg-accent"
                     layout="position"
                     layoutId="dashboard-mobile-navbar-link"
-                    className="absolute inset-0 rounded-md bg-accent"
                     transition={{
-                      type: 'spring',
-                      duration: 0.75,
-                      ease: 'easeInOut',
+                      layout: { type: 'spring', duration: 0.5 },
                     }}
                   />
                 )}
