@@ -9,6 +9,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
+import StatsSummary from '@/components/common/stats-summary';
 
 const title = 'Stats';
 const description = 'View your jobs statistics';
@@ -40,8 +41,8 @@ export const metadata: Metadata = {
 
 export default function StatsPage() {
   return (
-    <main className="container py-4">
-      <p>this is the dashboard index/stats page</p>
-    </main>
+    <>
+      <StatsSummary />
+    </>
   );
 }

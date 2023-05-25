@@ -20,10 +20,12 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="dashboard-grid-container relative min-h-screen">
+    <div className="dashboard-grid-container min-h-screen">
       <DashboardHeader />
       <DashboardSidebar />
-      <main className="dashboard-main">{children}</main>
+      <main className="dashboard-main container relative z-10 py-4">
+        {children}
+      </main>
       <DecorativePattern />
     </div>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
@@ -52,10 +53,19 @@ export default function DashboardMobileNavbar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  useEffect(() => {
+    if (isMobileNavbarOpen) {
+      document.body.style.overflowY = 'hidden';
+      return () => {
+        document.body.style.overflowY = 'auto';
+      };
+    }
+  }, [isMobileNavbarOpen]);
+
   return (
     <nav
       id="mobile-navbar"
-      className="fixed inset-0 flex max-h-screen flex-col gap-6 overflow-y-scroll overscroll-y-contain bg-background/70 backdrop-blur-sm md:hidden"
+      className="fixed inset-0 z-50 flex max-h-screen flex-col gap-6 overflow-y-scroll overscroll-y-contain bg-background/70 backdrop-blur-sm md:hidden"
     >
       <div className="container flex h-16 items-center justify-between border-b">
         <button
