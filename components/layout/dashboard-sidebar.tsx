@@ -63,7 +63,7 @@ export default function DashboardSidebar() {
       <aside
         id="dashboard-sidebar"
         className={twMerge(
-          'dashboard-sidebar sticky top-0 z-20 hidden max-h-screen overscroll-y-contain border-r bg-background/70 pt-3 backdrop-blur-sm md:flex md:flex-col',
+          'dashboard-sidebar sticky top-0 hidden max-h-screen overflow-y-auto overscroll-y-contain border-r bg-background/70 pt-3 md:flex md:flex-col',
           isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20'
         )}
       >

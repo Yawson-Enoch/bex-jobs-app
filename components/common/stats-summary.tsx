@@ -3,7 +3,7 @@ import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 export default function StatsSummary() {
   return (
     <section className="grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] gap-3 md:gap-5">
-      <div className="space-y-3 rounded-lg border bg-white/30 p-3 backdrop-blur-sm dark:bg-white/5 md:space-y-5 md:p-5">
+      <div className="space-y-3 rounded-lg border bg-white/30 p-3 dark:bg-white/5 md:space-y-5 md:p-5">
         <div className="flex items-center justify-between">
           <p className="text-4xl text-blue-800 dark:text-blue-900 md:text-6xl">
             77
@@ -15,7 +15,7 @@ export default function StatsSummary() {
         </div>
         <p className="text-lg font-medium">Interviews Scheduled</p>
       </div>
-      <div className="space-y-3 rounded-lg border bg-white/30 p-3 backdrop-blur-sm dark:bg-white/5 md:space-y-5 md:p-5">
+      <div className="space-y-3 rounded-lg border bg-white/30 p-3 dark:bg-white/5 md:space-y-5 md:p-5">
         <div className="flex items-center justify-between">
           <p className="text-4xl text-yellow-800 dark:text-yellow-900 md:text-6xl">
             7
@@ -27,7 +27,7 @@ export default function StatsSummary() {
         </div>
         <p className="text-lg font-medium">Pending Applications</p>
       </div>
-      <div className="space-y-3 rounded-lg border bg-white/30 p-3 backdrop-blur-sm dark:bg-white/5 md:space-y-5 md:p-5">
+      <div className="space-y-3 rounded-lg border bg-white/30 p-3 dark:bg-white/5 md:space-y-5 md:p-5">
         <div className="flex items-center justify-between">
           <p className="text-4xl text-red-800 dark:text-red-900 md:text-6xl">
             3

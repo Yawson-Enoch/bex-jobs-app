@@ -23,9 +23,7 @@ export default function DashboardLayout({
     <div className="dashboard-grid-container min-h-screen">
       <DashboardHeader />
       <DashboardSidebar />
-      <main className="dashboard-main container relative z-10 py-4">
-        {children}
-      </main>
+      <main className="dashboard-main container py-4">{children}</main>
       <DecorativePattern />
     </div>
   );
