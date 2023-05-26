@@ -65,28 +65,30 @@ export default function DashboardMobileNavbar() {
   return (
     <nav
       id="mobile-navbar"
-      className="fixed inset-0 z-10 flex max-h-screen flex-col gap-6 overscroll-y-contain bg-background/70 backdrop-blur-sm md:hidden"
+      className="fixed inset-0 z-10 flex max-h-screen flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/70 pb-4 backdrop-blur-sm md:hidden"
     >
-      <div className="container flex h-16 items-center justify-between border-b">
-        <button
-          onClick={() => {
-            router.push('/dashboard');
-            setIsMobileNavbarOpen(false);
-          }}
-        >
-          <GradientLogo />
-        </button>
-        <button
-          aria-expanded={isMobileNavbarOpen}
-          aria-controls="mobile-navbar"
-          className="text-error-foreground"
-          onClick={() => setIsMobileNavbarOpen(false)}
-        >
-          <span className="sr-only">Close Mobile Navbar</span>
-          <XIcon aria-hidden="true" />
-        </button>
-      </div>
-      <div className="container space-y-6">
+      <section className="border-b">
+        <div className="container flex h-16 items-center justify-between">
+          <button
+            onClick={() => {
+              router.push('/dashboard');
+              setIsMobileNavbarOpen(false);
+            }}
+          >
+            <GradientLogo />
+          </button>
+          <button
+            aria-expanded={isMobileNavbarOpen}
+            aria-controls="mobile-navbar"
+            className="text-error-foreground"
+            onClick={() => setIsMobileNavbarOpen(false)}
+          >
+            <span className="sr-only">Close Mobile Navbar</span>
+            <XIcon aria-hidden="true" />
+          </button>
+        </div>
+      </section>
+      <section className="container space-y-6">
         {isCheckingAuth ? (
           <div role="status">
             <span className="sr-only">Loading user info...</span>
@@ -117,7 +119,7 @@ export default function DashboardMobileNavbar() {
                     layout="position"
                     layoutId="dashboard-mobile-navbar-link"
                     transition={{
-                      layout: { type: 'spring', duration: 0.5 },
+                      layout: { duration: 0.3, ease: 'linear' },
                     }}
                   />
                 )}
@@ -148,7 +150,7 @@ export default function DashboardMobileNavbar() {
             </button>
           </li>
         </ul>
-      </div>
+      </section>
     </nav>
   );
 }
