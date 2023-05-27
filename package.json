@@ -31,6 +31,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
+    "recharts": "^2.6.2",
     "sharp": "^0.32.1",
     "tailwind-merge": "^1.12.0",
     "zod": "^3.21.4"

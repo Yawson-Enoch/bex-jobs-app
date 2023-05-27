@@ -9,6 +9,8 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
+import StatsBarChart from '@/components/common/stats-bar-chart';
+import StatsLineChart from '@/components/common/stats-line-chart';
 import StatsSummary from '@/components/common/stats-summary';
 
 const title = 'Stats';
@@ -41,8 +43,10 @@ export const metadata: Metadata = {
 
 export default function StatsPage() {
   return (
-    <>
+    <div className="space-y-3 md:space-y-5">
       <StatsSummary />
-    </>
+      <StatsBarChart />
+      <StatsLineChart />
+    </div>
   );
 }
