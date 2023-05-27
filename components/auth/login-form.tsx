@@ -44,7 +44,7 @@ export default function LoginForm() {
 
   const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
-    mode: 'all',
+    mode: 'onChange',
   });
   const { register, handleSubmit, formState } = form;
   const { errors, isDirty, isValid } = formState;
@@ -66,7 +66,7 @@ export default function LoginForm() {
       toast({
         description: data.msg,
       });
-      router.push('/dashboard');
+      router.replace('/dashboard');
     },
     onError: (error: CustomAPIError) => {
       toast({
@@ -87,7 +87,7 @@ export default function LoginForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-3 md:space-y-5">
+      <div className="space-y-3 md:space-y-6">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
             Email
@@ -102,9 +102,9 @@ export default function LoginForm() {
             autoFocus
             disabled={isLoading}
           />
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.email?.message}
-          </p>
+          </small>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
@@ -136,9 +136,9 @@ export default function LoginForm() {
               )}
             </Button>
           </div>
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.password?.message}
-          </p>
+          </small>
         </div>
         <div className="grid gap-2">
           <div className="flex items-center gap-2">
@@ -179,7 +179,6 @@ export default function LoginForm() {
           )}
         </Button>
       </div>
-      {/* <pre className="mt-2 text-sm">{JSON.stringify(watch(), null, 2)}</pre> */}
     </form>
   );
 }

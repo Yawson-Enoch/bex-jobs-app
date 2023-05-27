@@ -18,7 +18,7 @@ export default function AuthLayout({
   return (
     <>
       <AuthHeader />
-      {children}
+      <main className="container py-6 md:py-12">{children}</main>
       <Footer />
       <DecorativePattern />
     </>

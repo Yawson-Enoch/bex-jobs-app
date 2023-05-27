@@ -29,10 +29,10 @@ export default function GlobalError({ reset }: { reset: () => void }) {
         )}
       >
         <ThemeProvider attribute="class" enableSystem defaultTheme="dark">
-          <div className="container grid min-h-screen place-content-center gap-3 text-center md:gap-5">
-            <p className="text-2xl font-medium md:text-4xl">
+          <div className="container grid min-h-screen place-content-center gap-3 text-center md:gap-6">
+            <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
               Something went wrong!
-            </p>
+            </h2>
             <p className="max-w-md text-muted-foreground">
               Please try again later or refresh the page. If the problem
               persists, kindly reach out to{' '}

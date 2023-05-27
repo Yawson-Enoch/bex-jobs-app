@@ -61,10 +61,6 @@ module.exports = {
           DEFAULT: 'rgba(var(--accent), <alpha-value>)',
           foreground: 'rgba(var(--accent-foreground), <alpha-value>)',
         },
-        popover: {
-          DEFAULT: 'rgba(var(--popover), <alpha-value>)',
-          foreground: 'rgba(var(--popover-foreground), <alpha-value>)',
-        },
       },
       borderRadius: {
         lg: `var(--radius)`,

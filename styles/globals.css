@@ -25,9 +25,6 @@
     --accent: 241, 245, 249;
     --accent-foreground: 15, 23, 42;
 
-    --popover: var(--background);
-    --popover-foreground: var(--foreground);
-
     --destructive: 255, 0, 0;
     --destructive-foreground: 248, 250, 252;
 
@@ -74,9 +71,6 @@
     --accent: 29, 40, 58;
     --accent-foreground: 248, 250, 252;
 
-    --popover: var(--background);
-    --popover-foreground: var(--muted-foreground);
-
     --destructive: 129, 29, 29;
     --destructive-foreground: 248, 250, 252;
 
@@ -114,6 +108,10 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  p {
+    @apply leading-7;
   }
 }
 

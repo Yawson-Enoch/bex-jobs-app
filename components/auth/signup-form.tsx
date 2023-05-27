@@ -21,7 +21,7 @@ export default function SignupForm() {
 
   const form = useForm<Signup>({
     resolver: zodResolver(signupSchema),
-    mode: 'all',
+    mode: 'onChange',
   });
   const { register, handleSubmit, formState } = form;
   const { errors, isDirty, isValid } = formState;
@@ -47,7 +47,7 @@ export default function SignupForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-3 md:space-y-5">
+      <div className="space-y-3 md:space-y-6">
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-username'}>
             Name
@@ -62,9 +62,9 @@ export default function SignupForm() {
             autoFocus
             disabled={isLoading}
           />
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.username?.message}
-          </p>
+          </small>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
@@ -79,9 +79,9 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.email?.message}
-          </p>
+          </small>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
@@ -96,9 +96,9 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.password?.message}
-          </p>
+          </small>
         </div>
         <div className="grid gap-1">
           <Label className="sr-only" htmlFor={id + '-confirm-password'}>
@@ -113,9 +113,9 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <p className="px-1 text-xs text-error-form-foreground">
+          <small className="px-1 text-xs leading-none text-error-form-foreground">
             {errors.passwordConfirm?.message}
-          </p>
+          </small>
         </div>
         <Button
           type="submit"
@@ -135,7 +135,6 @@ export default function SignupForm() {
           )}
         </Button>
       </div>
-      {/* <pre className="mt-2 text-sm">{JSON.stringify(watch(), null, 2)}</pre> */}
     </form>
   );
 }

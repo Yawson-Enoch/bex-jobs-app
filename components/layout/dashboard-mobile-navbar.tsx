@@ -98,7 +98,7 @@ export default function DashboardMobileNavbar() {
             />
           </div>
         ) : (
-          <p className="px-2 text-2xl font-bold">
+          <p className="px-2 text-xl font-medium">
             Hi, {userAuthInfo?.username}
           </p>
         )}

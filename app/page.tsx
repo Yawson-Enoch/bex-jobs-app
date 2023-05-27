@@ -68,7 +68,9 @@ export default function IndexPage() {
   return (
     <>
       <Header />
-      <LandingPageContent />
+      <main className="container py-6 md:py-12">
+        <LandingPageContent />
+      </main>
       <Footer />
       <DecorativePattern />
     </>

@@ -19,7 +19,7 @@ export default function DashboardHeader() {
 
   return (
     <header className="dashboard-header sticky top-0 z-10 flex h-16 items-center border-b bg-background/70 backdrop-blur-sm">
-      <div className="container flex items-center justify-between py-1">
+      <div className="container flex items-center justify-between">
         <button
           aria-expanded={isMobileNavbarOpen}
           aria-controls="mobile-navbar"
@@ -39,10 +39,10 @@ export default function DashboardHeader() {
               />
             </div>
           ) : (
-            <p className="text-3xl font-bold">Hi, {userAuthInfo?.username}</p>
+            <p className="text-xl font-medium">Hi, {userAuthInfo?.username}</p>
           )}
         </div>
-        <div className="flex items-center gap-3 md:gap-5">
+        <div className="flex items-center gap-3 md:gap-6">
           <AnimatedThemeTabs />
           <UserProfile />
         </div>

@@ -36,7 +36,7 @@ export default function useAuth() {
     setUserAuthInfo(null);
     setAuthToken(RESET);
     setSessionTimeout(RESET);
-    router.push('/login');
+    router.replace('/login');
   }, [router, setAuthToken, setSessionTimeout]);
 
   const login = useCallback((user: User) => {

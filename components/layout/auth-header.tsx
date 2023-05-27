@@ -6,13 +6,11 @@ import { buttonVariants } from '../ui/button';
 
 export default function AuthHeader() {
   return (
-    <header>
-      <div className="container flex items-center justify-between gap-3 py-4 md:gap-5">
+    <header className="flex h-16 items-center">
+      <div className="container flex items-center justify-between gap-3 md:gap-6">
         <Link href="/" className={buttonVariants({ variant: 'ghost' })}>
-          <>
-            <ChevronLeftIcon aria-hidden="true" className="mr-2 h-4 w-4" />
-            Back
-          </>
+          <ChevronLeftIcon aria-hidden="true" className="mr-2 h-4 w-4" />
+          <span>Back</span>
         </Link>
         <AnimatedThemeTabs />
       </div>

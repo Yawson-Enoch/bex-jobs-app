@@ -14,64 +14,6 @@ import { Separator } from '../ui/separator';
 
 const MotionLink = motion(Link);
 
-export default function LandingPageContent() {
-  const { matches } = useMediaQuery('(max-width: 480px)');
-
-  const router = useRouter();
-
-  const { isLoggedIn } = useAuth();
-  const isMobile = matches;
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.push('/dashboard');
-    }
-  }, [isLoggedIn, router]);
-
-  return (
-    <motion.main
-      variants={mainContainer}
-      animate="animate"
-      initial="initial"
-      className="container space-y-3 py-4 text-center md:space-y-5"
-    >
-      <motion.h1
-        className="space-y-1 text-3xl font-bold md:space-y-3 md:text-4xl"
-        variants={headingContainer(isMobile)}
-      >
-        <motion.span
-          variants={headingTitle(isMobile)}
-          className="inline-block bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-transparent"
-        >
-          BexJobs
-        </motion.span>
-        <Separator
-          orientation="horizontal"
-          className="mx-auto w-1/2 md:w-1/4"
-        />
-        <motion.p variants={headingDescription}>
-          Effortlessly Manage Your Job Search
-        </motion.p>
-      </motion.h1>
-      <p className="text-muted-foreground md:text-lg">
-        BexJobs is a user-friendly job search management tool designed to help
-        you keep track of all your job applications in one place. With BexJobs,
-        you can easily add job listings and track their status, whether
-        it&apos;s pending, interview scheduled, or declined. Say goodbye to the
-        hassle of managing your job search with spreadsheets or sticky notes,
-        and say hello to BexJobs - your ultimate job search companion.
-      </p>
-      <MotionLink
-        href={isLoggedIn ? '/dashboard' : '/login'}
-        className={twMerge(buttonVariants({ size: 'lg' }), 'md:text-lg')}
-        variants={mainLink}
-      >
-        Start Managing Your Jobs
-      </MotionLink>
-    </motion.main>
-  );
-}
-
 const mainContainer: Variants = {
   animate: {
     transition: {
@@ -142,3 +84,67 @@ const headingDescription: Variants = {
     transition: { duration: 0.7, ease: 'easeInOut' },
   },
 };
+
+export default function LandingPageContent() {
+  const { matches } = useMediaQuery('(max-width: 480px)');
+
+  const router = useRouter();
+
+  const { isLoggedIn } = useAuth();
+  const isMobile = matches;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace('/dashboard');
+    }
+  }, [isLoggedIn, router]);
+
+  return (
+    <motion.div
+      variants={mainContainer}
+      animate="animate"
+      initial="initial"
+      className="flex flex-col gap-3 md:gap-6"
+    >
+      <motion.div
+        className="space-y-1 text-center text-3xl font-bold md:space-y-3 md:text-4xl"
+        variants={headingContainer(isMobile)}
+      >
+        <motion.h1
+          variants={headingTitle(isMobile)}
+          className="scroll-m-20 bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl"
+        >
+          BexJobs
+        </motion.h1>
+        <Separator
+          orientation="horizontal"
+          className="mx-auto w-1/2 md:w-1/4"
+        />
+        <motion.h2
+          variants={headingDescription}
+          className="scroll-m-20 text-3xl font-semibold tracking-tight"
+        >
+          Effortlessly Manage Your Job Search
+        </motion.h2>
+      </motion.div>
+      <p className="md:text-center">
+        BexJobs is a user-friendly job search management tool designed to help
+        you keep track of all your job applications in one place. With BexJobs,
+        you can easily add job listings and track their status, whether
+        it&apos;s pending, interview scheduled, or declined. Say goodbye to the
+        hassle of managing your job search with spreadsheets or sticky notes,
+        and say hello to BexJobs - your ultimate job search companion.
+      </p>
+      <MotionLink
+        href={isLoggedIn ? '/dashboard' : '/login'}
+        className={twMerge(
+          buttonVariants({ size: 'lg' }),
+          'mx-auto font-medium md:text-lg'
+        )}
+        variants={mainLink}
+      >
+        Start Managing Your Jobs
+      </MotionLink>
+    </motion.div>
+  );
+}

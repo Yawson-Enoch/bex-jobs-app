@@ -50,14 +50,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body
-        className={twMerge(
-          'min-h-screen font-sans antialiased',
-          fontSans.variable
-        )}
-      >
+      <body className={twMerge('font-sans antialiased', fontSans.variable)}>
         <Providers>
-          <div className="relative flex min-h-screen flex-col justify-between gap-3 md:gap-5">
+          <div className="relative grid min-h-screen content-between">
             {children}
           </div>
           <DecorativeBlobs />
