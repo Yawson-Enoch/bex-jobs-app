@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { atom, useAtom } from 'jotai';
 import { LoaderIcon, MenuIcon } from 'lucide-react';
 
@@ -15,7 +17,15 @@ export default function DashboardHeader() {
     isMobileNavbarOpenAtom
   );
 
-  const { isCheckingAuth, userAuthInfo } = useAuth();
+  const router = useRouter();
+
+  const { isCheckingAuth, userAuthInfo, isLoggedIn } = useAuth();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.replace('/login');
+    }
+  }, [isLoggedIn, router]);
 
   return (
     <header className="dashboard-header sticky top-0 z-10 flex h-16 items-center border-b bg-background/70 backdrop-blur-sm">
