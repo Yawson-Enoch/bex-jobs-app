@@ -82,7 +82,7 @@ export default function LoginForm() {
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-6">
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
             Email
           </Label>
@@ -96,11 +96,13 @@ export default function LoginForm() {
             autoFocus
             disabled={isLoading}
           />
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.email?.message}
-          </small>
+          {errors.email && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.email.message}
+            </small>
+          )}
         </div>
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
@@ -130,11 +132,13 @@ export default function LoginForm() {
               )}
             </Button>
           </div>
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.password?.message}
-          </small>
+          {errors.password && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.password.message}
+            </small>
+          )}
         </div>
-        <div className="grid gap-2">
+        <div className="space-y-2">
           <div className="flex items-center gap-2">
             <Switch
               id={id + '-persist-login'}

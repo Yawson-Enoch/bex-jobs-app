@@ -48,7 +48,7 @@ export default function SignupForm() {
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
       <div className="space-y-3 md:space-y-6">
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-username'}>
             Name
           </Label>
@@ -62,11 +62,13 @@ export default function SignupForm() {
             autoFocus
             disabled={isLoading}
           />
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.username?.message}
-          </small>
+          {errors.username && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.username.message}
+            </small>
+          )}
         </div>
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
             Email
           </Label>
@@ -79,11 +81,13 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.email?.message}
-          </small>
+          {errors.email && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.email.message}
+            </small>
+          )}
         </div>
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
@@ -96,11 +100,13 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.password?.message}
-          </small>
+          {errors.password && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.password.message}
+            </small>
+          )}
         </div>
-        <div className="grid gap-1">
+        <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-confirm-password'}>
             Confirm Password
           </Label>
@@ -113,9 +119,11 @@ export default function SignupForm() {
             autoCorrect="off"
             disabled={isLoading}
           />
-          <small className="px-1 text-xs leading-none text-error-form-foreground">
-            {errors.passwordConfirm?.message}
-          </small>
+          {errors.passwordConfirm && (
+            <small className="px-1 text-xs leading-none text-error-form-foreground">
+              {errors.passwordConfirm.message}
+            </small>
+          )}
         </div>
         <Button
           type="submit"
