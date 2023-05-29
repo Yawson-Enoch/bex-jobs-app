@@ -29,8 +29,6 @@ export default function useAuth() {
 
   const router = useRouter();
 
-  const isLoggedIn = isAuthenticated;
-
   const logOut = useCallback(() => {
     setIsAuthenticated(false);
     setUserAuthInfo(null);
@@ -105,7 +103,7 @@ export default function useAuth() {
 
   return {
     isCheckingAuth,
-    isLoggedIn,
+    isLoggedIn: isAuthenticated,
     userAuthInfo,
     login,
     logOut,

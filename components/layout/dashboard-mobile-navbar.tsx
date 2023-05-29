@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
@@ -15,6 +14,7 @@ import {
 } from 'lucide-react';
 
 import useAuth from '@/hooks/useAuth';
+import useLockBodyScroll from '@/hooks/useLockBodyScroll';
 
 import GradientLogo from '../common/gradient-logo';
 import { Separator } from '../ui/separator';
@@ -53,14 +53,7 @@ export default function DashboardMobileNavbar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
-    if (isMobileNavbarOpen) {
-      document.body.style.overflowY = 'hidden';
-      return () => {
-        document.body.style.overflowY = 'auto';
-      };
-    }
-  }, [isMobileNavbarOpen]);
+  useLockBodyScroll();
 
   return (
     <nav

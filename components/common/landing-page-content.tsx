@@ -1,12 +1,9 @@
 'use client';
 
-import { useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Variants, motion } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
-import useAuth from '@/hooks/useAuth';
 import useMediaQuery from '@/hooks/useMediaQuery';
 
 import { buttonVariants } from '../ui/button';
@@ -87,17 +84,7 @@ const headingDescription: Variants = {
 
 export default function LandingPageContent() {
   const { matches } = useMediaQuery('(max-width: 480px)');
-
-  const router = useRouter();
-
-  const { isLoggedIn } = useAuth();
   const isMobile = matches;
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.replace('/dashboard');
-    }
-  }, [isLoggedIn, router]);
 
   return (
     <motion.div
@@ -136,7 +123,7 @@ export default function LandingPageContent() {
         and say hello to BexJobs - your ultimate job search companion.
       </p>
       <MotionLink
-        href={isLoggedIn ? '/dashboard' : '/login'}
+        href="/login"
         className={twMerge(
           buttonVariants({ size: 'lg' }),
           'mx-auto font-medium md:text-lg'

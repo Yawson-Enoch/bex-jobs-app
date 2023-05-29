@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
@@ -40,7 +40,7 @@ export default function LoginForm() {
   const id = useId();
   const router = useRouter();
 
-  const { login, isLoggedIn } = useAuth();
+  const { login } = useAuth();
 
   const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
@@ -78,12 +78,6 @@ export default function LoginForm() {
   const onSubmit: SubmitHandler<Login> = (data) => {
     mutate(data);
   };
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.replace('/dashboard');
-    }
-  }, [isLoggedIn, router]);
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>

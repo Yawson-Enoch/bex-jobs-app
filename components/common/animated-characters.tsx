@@ -2,6 +2,21 @@
 
 import { Variants, motion } from 'framer-motion';
 
+const letter: Variants = {
+  initial: {
+    opacity: 0,
+    y: 15,
+  },
+  animate: (custom: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: 'easeInOut',
+      delay: 0.07 * custom,
+    },
+  }),
+};
+
 export default function AnimatedCharacters({ text }: { text: string }) {
   return (
     <>
@@ -25,18 +40,3 @@ export default function AnimatedCharacters({ text }: { text: string }) {
     </>
   );
 }
-
-const letter: Variants = {
-  initial: {
-    opacity: 0,
-    y: 15,
-  },
-  animate: (custom: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      ease: 'easeInOut',
-      delay: 0.07 * custom,
-    },
-  }),
-};

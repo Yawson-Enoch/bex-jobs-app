@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function SignupPage() {
   return (
-    <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background p-3 md:space-y-6 md:p-6">
+    <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
       <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
         <AnimatedCharacters text="Signup" />
       </h3>
