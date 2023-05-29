@@ -9,6 +9,8 @@ import {
   twitterCreator,
   twitterImages,
 } from '@/lib/shared-metadata';
+import AddJobForm from '@/components/common/add-job-form';
+import AnimatedCharacters from '@/components/common/animated-characters';
 
 const title = 'Add A New Job';
 const description =
@@ -40,5 +42,12 @@ export const metadata: Metadata = {
 };
 
 export default function AddJobPage() {
-  return <p>This is the add job page</p>;
+  return (
+    <div className="space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
+      <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
+        Add Job
+      </h3>
+      <AddJobForm />
+    </div>
+  );
 }
