@@ -1,5 +1,5 @@
-import AuthHeader from '@/components/layout/auth-header';
-import Footer from '@/components/layout/footer';
+import AuthHeader from '~/components/layout/auth-header';
+import Footer from '~/components/layout/footer';
 
 function DecorativePattern() {
   return (

@@ -3,7 +3,7 @@
 import { atom, useAtom } from 'jotai';
 import { LoaderIcon, MenuIcon } from 'lucide-react';
 
-import useAuth from '@/hooks/useAuth';
+import useAuth from '~/hooks/useAuth';
 
 import AnimatedThemeTabs from '../common/animated-theme-tabs';
 import UserProfile from '../common/user-profile';

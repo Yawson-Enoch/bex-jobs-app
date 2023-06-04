@@ -8,7 +8,7 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
+} from '~/lib/shared-metadata';
 
 import LoginPageClient from './page.client';
 

@@ -8,9 +8,9 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
-import AddJobForm from '@/components/common/add-job-form';
-import AnimatedCharacters from '@/components/common/animated-characters';
+} from '~/lib/shared-metadata';
+import AddJobForm from '~/components/common/add-job-form';
+import AnimatedCharacters from '~/components/common/animated-characters';
 
 const title = 'Add A New Job';
 const description =

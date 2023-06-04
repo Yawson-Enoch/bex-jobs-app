@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-import useAuth from '@/hooks/useAuth';
+import useAuth from '~/hooks/useAuth';
 
 import GradientLogo from '../common/gradient-logo';
 import { Button } from '../ui/button';

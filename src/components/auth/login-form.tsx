@@ -9,10 +9,10 @@ import { atomWithStorage } from 'jotai/utils';
 import { EyeIcon, EyeOffIcon, LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { CustomAPIError, loginUser } from '@/lib/api';
-import { parseToken } from '@/lib/jwt';
-import { loginSchema, type Login } from '@/lib/validations/auth';
-import useAuth from '@/hooks/useAuth';
+import { CustomAPIError, loginUser } from '~/lib/api';
+import { parseToken } from '~/lib/jwt';
+import { loginSchema, type Login } from '~/lib/validations/auth';
+import useAuth from '~/hooks/useAuth';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';

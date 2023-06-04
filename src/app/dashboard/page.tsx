@@ -8,9 +8,9 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
-import ChartsContainer from '@/components/common/charts-container';
-import StatsSummary from '@/components/common/stats-summary';
+} from '~/lib/shared-metadata';
+import ChartsContainer from '~/components/common/charts-container';
+import StatsSummary from '~/components/common/stats-summary';
 
 const title = 'Stats';
 const description = 'View your jobs statistics';

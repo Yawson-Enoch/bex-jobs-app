@@ -1,6 +1,6 @@
 'use client';
 
-import { Variants, motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 const letter: Variants = {
   initial: {

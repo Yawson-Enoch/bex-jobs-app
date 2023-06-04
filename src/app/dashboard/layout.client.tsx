@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-import useAuth from '@/hooks/useAuth';
-import { buttonVariants } from '@/components/ui/button';
-import AuthLoader from '@/components/common/auth-loader';
-import DashboardHeader from '@/components/layout/dashboard-header';
-import DashboardSidebar from '@/components/layout/dashboard-sidebar';
+import useAuth from '~/hooks/useAuth';
+import { buttonVariants } from '~/components/ui/button';
+import AuthLoader from '~/components/common/auth-loader';
+import DashboardHeader from '~/components/layout/dashboard-header';
+import DashboardSidebar from '~/components/layout/dashboard-sidebar';
 
 function DecorativePattern() {
   return (

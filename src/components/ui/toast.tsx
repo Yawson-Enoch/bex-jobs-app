@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ToastPrimitives from '@radix-ui/react-toast';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { XIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 

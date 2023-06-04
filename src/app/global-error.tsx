@@ -1,14 +1,15 @@
 'use client';
 
-import '@/styles/globals.css';
+import '~/styles/globals.css';
+
 import Link from 'next/link';
 import { ThemeProvider } from 'next-themes';
 import { twMerge } from 'tailwind-merge';
 
-import { siteInfo } from '@/config/site';
-import { fontSans } from '@/lib/fonts';
-import { Button } from '@/components/ui/button';
-import DecorativeBlobs from '@/components/common/decorative-blobs';
+import { siteInfo } from '~/config/site';
+import { fontSans } from '~/lib/fonts';
+import { Button } from '~/components/ui/button';
+import DecorativeBlobs from '~/components/common/decorative-blobs';
 
 function DecorativePattern() {
   return (

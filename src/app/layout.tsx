@@ -1,13 +1,14 @@
-import '@/styles/globals.css';
+import '~/styles/globals.css';
+
 import type { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 
-import { siteInfo } from '@/config/site';
-import { fontSans } from '@/lib/fonts';
-import { Toaster } from '@/components/ui/toaster';
-import DecorativeBlobs from '@/components/common/decorative-blobs';
-import Providers from '@/components/common/providers';
-import TailwindIndicator from '@/components/common/tailwind-indicator';
+import { siteInfo } from '~/config/site';
+import { fontSans } from '~/lib/fonts';
+import { Toaster } from '~/components/ui/toaster';
+import DecorativeBlobs from '~/components/common/decorative-blobs';
+import Providers from '~/components/common/providers';
+import TailwindIndicator from '~/components/common/tailwind-indicator';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteInfo.url),

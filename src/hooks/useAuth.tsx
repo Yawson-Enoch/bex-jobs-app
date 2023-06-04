@@ -3,12 +3,12 @@ import { useRouter } from 'next/navigation';
 import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
-import { parseToken } from '@/lib/jwt';
+import { parseToken } from '~/lib/jwt';
 import {
   authTokenAtom,
   hasPersistLoginAtom,
   sessionTimeoutAtom,
-} from '@/components/auth/login-form';
+} from '~/components/auth/login-form';
 
 type User = {
   userId: string;

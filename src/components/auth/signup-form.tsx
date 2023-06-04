@@ -7,8 +7,8 @@ import { useMutation } from '@tanstack/react-query';
 import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { CustomAPIError, registerUser } from '@/lib/api';
-import { signupSchema, type Signup } from '@/lib/validations/auth';
+import { CustomAPIError, registerUser } from '~/lib/api';
+import { signupSchema, type Signup } from '~/lib/validations/auth';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';

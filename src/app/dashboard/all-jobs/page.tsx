@@ -8,7 +8,7 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
+} from '~/lib/shared-metadata';
 
 const title = 'All Jobs';
 const description = 'Manage your jobs - View, edit and delete your jobs';

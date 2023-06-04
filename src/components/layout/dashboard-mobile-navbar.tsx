@@ -13,8 +13,8 @@ import {
   XIcon,
 } from 'lucide-react';
 
-import useAuth from '@/hooks/useAuth';
-import useLockBodyScroll from '@/hooks/useLockBodyScroll';
+import useAuth from '~/hooks/useAuth';
+import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 
 import GradientLogo from '../common/gradient-logo';
 import { Separator } from '../ui/separator';

@@ -9,9 +9,9 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
-import SignupForm from '@/components/auth/signup-form';
-import AnimatedCharacters from '@/components/common/animated-characters';
+} from '~/lib/shared-metadata';
+import SignupForm from '~/components/auth/signup-form';
+import AnimatedCharacters from '~/components/common/animated-characters';
 
 const title = 'Create An Account';
 const description = 'Create an account to start managing your job applications';

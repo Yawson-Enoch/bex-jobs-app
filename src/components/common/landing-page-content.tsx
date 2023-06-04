@@ -1,11 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Variants, motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { twMerge } from 'tailwind-merge';
 
-import useAuth from '@/hooks/useAuth';
-import useMediaQuery from '@/hooks/useMediaQuery';
+import useAuth from '~/hooks/useAuth';
+import useMediaQuery from '~/hooks/useMediaQuery';
 
 import { buttonVariants } from '../ui/button';
 import { Separator } from '../ui/separator';

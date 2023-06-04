@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { siteInfo } from '@/config/site';
+import { siteInfo } from '~/config/site';
 
 export default function Footer() {
   return (

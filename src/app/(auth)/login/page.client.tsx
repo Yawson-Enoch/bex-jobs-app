@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-import useAuth from '@/hooks/useAuth';
-import { buttonVariants } from '@/components/ui/button';
-import LoginForm from '@/components/auth/login-form';
-import AnimatedCharacters from '@/components/common/animated-characters';
-import AuthLoader from '@/components/common/auth-loader';
+import useAuth from '~/hooks/useAuth';
+import { buttonVariants } from '~/components/ui/button';
+import LoginForm from '~/components/auth/login-form';
+import AnimatedCharacters from '~/components/common/animated-characters';
+import AuthLoader from '~/components/common/auth-loader';
 
 export default function LoginPageClient() {
   const { isLoggedIn, isCheckingAuth } = useAuth();

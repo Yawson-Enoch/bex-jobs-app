@@ -8,7 +8,7 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
+} from '~/lib/shared-metadata';
 
 const title = 'Profile';
 const description = 'View and easily update your profile details';

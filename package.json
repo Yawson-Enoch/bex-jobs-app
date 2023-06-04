@@ -10,8 +10,8 @@
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
     "typecheck": "tsc --noEmit",
-    "format:write": "prettier --write \"**/*.{ts,tsx}\" --cache",
-    "format:check": "prettier --check \"**/*.{ts,tsx}\" --cache"
+    "format:write": "prettier --write \"src/**/*.{ts,tsx}\" --cache",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\" --cache"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",

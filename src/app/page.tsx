@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { twMerge } from 'tailwind-merge';
 
-import { siteInfo } from '@/config/site';
+import { siteInfo } from '~/config/site';
 import {
   openGraphImages,
   openGraphLocale,
@@ -10,10 +10,10 @@ import {
   twitterCard,
   twitterCreator,
   twitterImages,
-} from '@/lib/shared-metadata';
-import LandingPageContent from '@/components/common/landing-page-content';
-import Footer from '@/components/layout/footer';
-import Header from '@/components/layout/header';
+} from '~/lib/shared-metadata';
+import LandingPageContent from '~/components/common/landing-page-content';
+import Footer from '~/components/layout/footer';
+import Header from '~/components/layout/header';
 
 const title = siteInfo.name;
 const description = siteInfo.description;

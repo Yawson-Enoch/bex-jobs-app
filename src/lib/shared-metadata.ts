@@ -1,4 +1,4 @@
-import { siteInfo } from '@/config/site';
+import { siteInfo } from '~/config/site';
 
 export const openGraphName = { siteName: siteInfo.name };
 export const openGraphImages = {

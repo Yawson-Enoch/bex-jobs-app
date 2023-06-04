@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-import { buttonVariants } from '@/components/ui/button';
+import { buttonVariants } from '~/components/ui/button';
 
 function DecorativePattern() {
   return (

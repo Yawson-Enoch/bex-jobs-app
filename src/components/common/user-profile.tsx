@@ -3,15 +3,15 @@
 import { useRouter } from 'next/navigation';
 import { LogOutIcon, UserCircleIcon, UserIcon } from 'lucide-react';
 
-import useAuth from '@/hooks/useAuth';
-import { Button } from '@/components/ui/button';
+import useAuth from '~/hooks/useAuth';
+import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+} from '~/components/ui/dropdown-menu';
 
 export default function UserProfile() {
   const { logOut } = useAuth();
