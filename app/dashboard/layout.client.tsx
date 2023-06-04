@@ -1,9 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { LoaderIcon } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 
 import useAuth from '@/hooks/useAuth';
+import { buttonVariants } from '@/components/ui/button';
+import AuthLoader from '@/components/common/auth-loader';
 import DashboardHeader from '@/components/layout/dashboard-header';
 import DashboardSidebar from '@/components/layout/dashboard-sidebar';
 
@@ -20,6 +22,25 @@ function DecorativePattern() {
   );
 }
 
+function GoToLogin() {
+  return (
+    <div className="grid place-items-center gap-3 md:gap-6">
+      <p className="font-medium md:text-lg">
+        Log in to view and manage your jobs.
+      </p>
+      <Link
+        href="/login"
+        className={twMerge(
+          buttonVariants({ size: 'lg' }),
+          'font-medium md:text-lg'
+        )}
+      >
+        Login
+      </Link>
+    </div>
+  );
+}
+
 export default function DashboardLayoutClient({
   children,
 }: {
@@ -30,14 +51,8 @@ export default function DashboardLayoutClient({
   if (isCheckingAuth) {
     return (
       <div className="dashboard-grid-container min-h-screen">
-        <main className="dashboard-main container py-6 md:py-12">
-          <div role="status" className="flex items-center gap-2">
-            <LoaderIcon
-              aria-hidden="true"
-              className="mr-2 h-5 w-5 animate-spin"
-            />
-            <span>Checking auth...</span>
-          </div>
+        <main className="dashboard-main container grid place-content-center py-6 md:py-12">
+          <AuthLoader />
         </main>
         <DecorativePattern />
       </div>
@@ -47,17 +62,8 @@ export default function DashboardLayoutClient({
   if (!isLoggedIn) {
     return (
       <div className="dashboard-grid-container min-h-screen">
-        <main className="dashboard-main container py-6 md:py-12">
-          <p>
-            Please{' '}
-            <Link
-              href="/login"
-              className="font-medium underline underline-offset-4"
-            >
-              login
-            </Link>{' '}
-            to view and manage your jobs.
-          </p>
+        <main className="dashboard-main container grid place-content-center py-6 md:py-12">
+          <GoToLogin />
         </main>
         <DecorativePattern />
       </div>
