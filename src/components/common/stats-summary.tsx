@@ -14,7 +14,9 @@ export default function StatsSummary() {
             size={70}
           />
         </div>
-        <p className="text-lg font-medium">Interviews Scheduled</p>
+        <p className="text-lg font-medium text-foreground">
+          Interviews Scheduled
+        </p>
       </div>
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
@@ -27,7 +29,9 @@ export default function StatsSummary() {
             size={70}
           />
         </div>
-        <p className="text-lg font-medium">Pending Applications</p>
+        <p className="text-lg font-medium text-foreground">
+          Pending Applications
+        </p>
       </div>
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
@@ -40,7 +44,7 @@ export default function StatsSummary() {
             size={70}
           />
         </div>
-        <p className="text-lg font-medium">Jobs Declined</p>
+        <p className="text-lg font-medium text-foreground">Jobs Declined</p>
       </div>
     </section>
   );

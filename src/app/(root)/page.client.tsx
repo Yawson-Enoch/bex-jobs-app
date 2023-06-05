@@ -101,7 +101,7 @@ export default function IndexPageClient() {
       >
         <motion.h1
           variants={headingTitle(isMobile)}
-          className="scroll-m-20 bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-4xl font-extrabold tracking-tight text-transparent lg:text-5xl"
+          className="bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-transparent"
         >
           BexJobs
         </motion.h1>
@@ -109,10 +109,7 @@ export default function IndexPageClient() {
           orientation="horizontal"
           className="mx-auto w-1/2 md:w-1/4"
         />
-        <motion.h2
-          variants={headingDescription}
-          className="scroll-m-20 text-3xl font-semibold tracking-tight"
-        >
+        <motion.h2 variants={headingDescription}>
           Effortlessly Manage Your Job Search
         </motion.h2>
       </motion.div>

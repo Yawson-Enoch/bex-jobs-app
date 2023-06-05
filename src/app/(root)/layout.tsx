@@ -17,7 +17,7 @@ function DecorativePattern() {
     <div
       aria-hidden="true"
       className={twMerge(
-        'fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-10 pattern-size-4 dark:pattern-gray-800',
+        'fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-5 pattern-size-4 dark:pattern-gray-800 dark:pattern-opacity-10',
         randomPattern
       )}
     ></div>

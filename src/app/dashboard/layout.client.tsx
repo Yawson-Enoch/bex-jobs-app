@@ -25,7 +25,7 @@ function DecorativePattern() {
 function GoToLogin() {
   return (
     <div className="grid place-items-center gap-3 md:gap-6">
-      <p className="font-medium md:text-lg">
+      <p className="font-medium text-foreground md:text-lg">
         Log in to view and manage your jobs.
       </p>
       <Link

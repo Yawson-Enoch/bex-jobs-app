@@ -33,6 +33,10 @@ export default function StatsLineChart() {
             backdropFilter: 'blur(4px)',
             WebkitBackdropFilter: 'blur(4px)',
           }}
+          labelStyle={{
+            color: 'rgb(var(--foreground))',
+            fontWeight: 500,
+          }}
           itemStyle={{
             color: 'var(--_primary)',
             textTransform: 'capitalize',

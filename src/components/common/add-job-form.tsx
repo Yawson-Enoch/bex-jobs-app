@@ -100,7 +100,7 @@ export default function AddJobForm() {
               disabled={isSubmitting}
             />
             {errors.jobPosition && (
-              <small className="px-1 text-xs leading-none text-error-form-foreground">
+              <small className="text-error-form-foreground">
                 {errors.jobPosition.message}
               </small>
             )}
@@ -116,7 +116,7 @@ export default function AddJobForm() {
               disabled={isSubmitting}
             />
             {errors.company && (
-              <small className="px-1 text-xs leading-none text-error-form-foreground">
+              <small className="text-error-form-foreground">
                 {errors.company.message}
               </small>
             )}
@@ -132,7 +132,7 @@ export default function AddJobForm() {
               disabled={isSubmitting}
             />
             {errors.jobLocation && (
-              <small className="px-1 text-xs leading-none text-error-form-foreground">
+              <small className="text-error-form-foreground">
                 {errors.jobLocation.message}
               </small>
             )}
@@ -167,7 +167,7 @@ export default function AddJobForm() {
             />
           </div>
           {errors.jobStatus && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.jobStatus.message}
             </small>
           )}
@@ -197,7 +197,7 @@ export default function AddJobForm() {
             />
           </div>
           {errors.jobType && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.jobType.message}
             </small>
           )}

@@ -97,7 +97,7 @@ export default function LoginForm() {
             disabled={isLoading}
           />
           {errors.email && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.email.message}
             </small>
           )}
@@ -133,7 +133,7 @@ export default function LoginForm() {
             </Button>
           </div>
           {errors.password && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.password.message}
             </small>
           )}
@@ -148,7 +148,7 @@ export default function LoginForm() {
             />
             <Label
               htmlFor={id + '-persist-login'}
-              className="cursor-pointer text-xs"
+              className="cursor-pointer text-sm"
             >
               Stay logged in for 30 days
             </Label>

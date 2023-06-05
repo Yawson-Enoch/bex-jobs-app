@@ -16,14 +16,12 @@ export default function NotFound() {
   return (
     <div className="relative grid min-h-screen place-content-center">
       <main className="container space-y-3 text-center">
-        <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
-          Oops! Page not found
-        </h2>
+        <h2>Oops! Page not found</h2>
         <div className="gradient-text-stroke tracking-wide md:animate-in md:slide-in-from-top-7 md:duration-700 md:ease-linear">
           404
         </div>
         <div className="space-y-3 md:space-y-6">
-          <p className="max-w-md text-muted-foreground">
+          <p className="max-w-md">
             The page you&#39;re looking for seems to have gone on vacation.
             Please double-check the URL or navigate back to our homepage to
             continue exploring.

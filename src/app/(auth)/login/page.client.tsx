@@ -19,7 +19,7 @@ export default function LoginPageClient() {
   if (isLoggedIn) {
     return (
       <div className="flex flex-col items-center gap-3 md:gap-5">
-        <p className="font-medium md:text-lg">
+        <p className="font-medium text-foreground md:text-lg">
           Hooray! You are already logged in
         </p>
         <Link
@@ -37,11 +37,11 @@ export default function LoginPageClient() {
 
   return (
     <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
-      <h3 className="scroll-m-20 text-center text-2xl font-semibold tracking-tight">
+      <h3 className="text-center">
         <AnimatedCharacters text="Login" />
       </h3>
       <LoginForm />
-      <p className="text-center text-sm text-muted-foreground">
+      <p className="text-center text-sm">
         <Link
           href="/signup"
           className="underline underline-offset-4 hover:text-foreground"

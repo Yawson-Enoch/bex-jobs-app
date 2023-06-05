@@ -110,8 +110,32 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 
+  :where(h1, h2, h3, h4) {
+    @apply scroll-m-20 tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold lg:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
+  }
+
   p {
-    @apply leading-7;
+    @apply leading-7 text-muted-foreground;
+  }
+
+  small {
+    @apply text-sm font-medium leading-none;
   }
 }
 

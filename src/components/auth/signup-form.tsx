@@ -63,7 +63,7 @@ export default function SignupForm() {
             disabled={isLoading}
           />
           {errors.username && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.username.message}
             </small>
           )}
@@ -82,7 +82,7 @@ export default function SignupForm() {
             disabled={isLoading}
           />
           {errors.email && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.email.message}
             </small>
           )}
@@ -101,7 +101,7 @@ export default function SignupForm() {
             disabled={isLoading}
           />
           {errors.password && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.password.message}
             </small>
           )}
@@ -120,7 +120,7 @@ export default function SignupForm() {
             disabled={isLoading}
           />
           {errors.passwordConfirm && (
-            <small className="px-1 text-xs leading-none text-error-form-foreground">
+            <small className="text-error-form-foreground">
               {errors.passwordConfirm.message}
             </small>
           )}
