@@ -1,10 +1,11 @@
 'use client';
 
+import { useEffect } from 'react';
 import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
+import { useRouter } from 'next/navigation';
+import { LoaderIcon } from 'lucide-react';
 
 import useAuth from '~/hooks/useAuth';
-import { buttonVariants } from '~/components/ui/button';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
 import AuthLoader from '~/components/common/auth-loader';
@@ -12,25 +13,28 @@ import AuthLoader from '~/components/common/auth-loader';
 export default function LoginPageClient() {
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.replace('/dashboard');
+    }
+  }, [isLoggedIn, router]);
+
   if (isCheckingAuth) {
     return <AuthLoader />;
   }
 
   if (isLoggedIn) {
     return (
-      <div className="flex flex-col items-center gap-3 md:gap-5">
+      <div className="mx-auto grid w-[min(100%,400px)] place-content-center space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
         <p className="font-medium text-foreground md:text-lg">
-          Hooray! You are already logged in
+          Hooray! You are logged in
         </p>
-        <Link
-          href="/dashboard"
-          className={twMerge(
-            buttonVariants({ size: 'lg' }),
-            'mx-auto font-medium md:text-lg'
-          )}
-        >
-          Start Managing Your Jobs
-        </Link>
+        <div role="status" className="flex items-center gap-1">
+          <LoaderIcon aria-hidden="true" className="h-5 w-5 animate-spin" />
+          <p className="text-sm">Redirecting to dashboard...</p>
+        </div>
       </div>
     );
   }

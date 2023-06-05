@@ -1,7 +1,6 @@
 'use client';
 
 import { useId, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
@@ -38,7 +37,6 @@ export default function LoginForm() {
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
   const id = useId();
-  const router = useRouter();
 
   const { login } = useAuth();
 
@@ -66,7 +64,6 @@ export default function LoginForm() {
       toast({
         description: data.msg,
       });
-      router.replace('/dashboard');
     },
     onError: (error: CustomAPIError) => {
       toast({
