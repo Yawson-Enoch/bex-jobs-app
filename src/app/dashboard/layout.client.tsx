@@ -48,33 +48,29 @@ export default function DashboardLayoutClient({
 }) {
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
-  if (isCheckingAuth) {
-    return (
-      <div className="dashboard-grid-container min-h-screen">
-        <main className="dashboard-main container grid place-content-center py-6 md:py-12">
-          <AuthLoader />
-        </main>
-        <DecorativePattern />
-      </div>
-    );
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div className="dashboard-grid-container min-h-screen">
-        <main className="dashboard-main container grid place-content-center py-6 md:py-12">
-          <GoToLogin />
-        </main>
-        <DecorativePattern />
-      </div>
-    );
-  }
-
   return (
-    <div className="dashboard-grid-container min-h-screen">
-      <DashboardHeader />
-      <DashboardSidebar />
-      <main className="dashboard-main container py-6 md:py-12">{children}</main>
+    <div className="dashboard-grid-container relative min-h-screen">
+      {isCheckingAuth ? (
+        <main className="dashboard-main container py-6 md:py-12">
+          <div className="grid h-full place-content-center">
+            <AuthLoader />
+          </div>
+        </main>
+      ) : !isLoggedIn ? (
+        <main className="dashboard-main container py-6 md:py-12">
+          <div className="grid h-full place-content-center">
+            <GoToLogin />
+          </div>
+        </main>
+      ) : (
+        <>
+          <DashboardHeader />
+          <DashboardSidebar />
+          <main className="dashboard-main container py-6 md:py-12">
+            {children}
+          </main>
+        </>
+      )}
       <DecorativePattern />
     </div>
   );

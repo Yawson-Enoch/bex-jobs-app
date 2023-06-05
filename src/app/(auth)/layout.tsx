@@ -1,5 +1,4 @@
 import AuthHeader from '~/components/layout/auth-header';
-import Footer from '~/components/layout/footer';
 
 function DecorativePattern() {
   return (
@@ -16,11 +15,10 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="relative min-h-screen">
       <AuthHeader />
-      <main className="container py-6 md:py-12">{children}</main>
-      <Footer />
+      <main className="container pb-3 pt-6 md:pt-12">{children}</main>
       <DecorativePattern />
-    </>
+    </div>
   );
 }

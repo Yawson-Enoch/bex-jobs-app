@@ -18,8 +18,8 @@ export default function DashboardHeader() {
   const { isCheckingAuth, userAuthInfo } = useAuth();
 
   return (
-    <header className="dashboard-header sticky top-0 z-10 flex h-16 items-center border-b bg-background/70 backdrop-blur-sm">
-      <div className="container flex items-center justify-between">
+    <header className="dashboard-header sticky top-0 z-10 h-16 border-b bg-background/70 backdrop-blur-sm">
+      <div className="container flex h-full items-center justify-between">
         <button
           aria-expanded={isMobileNavbarOpen}
           aria-controls="mobile-navbar"

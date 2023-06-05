@@ -6,9 +6,8 @@ import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
-
-import { buttonVariants } from '../ui/button';
-import { Separator } from '../ui/separator';
+import { buttonVariants } from '~/components/ui/button';
+import { Separator } from '~/components/ui/separator';
 
 const MotionLink = motion(Link);
 
@@ -83,7 +82,7 @@ const headingDescription: Variants = {
   },
 };
 
-export default function LandingPageContent() {
+export default function IndexPageClient() {
   const { matches } = useMediaQuery('(max-width: 480px)');
   const isMobile = matches;
 

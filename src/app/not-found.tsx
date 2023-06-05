@@ -14,12 +14,12 @@ function DecorativePattern() {
 
 export default function NotFound() {
   return (
-    <>
-      <section className="container grid min-h-screen place-content-center gap-3 text-center md:gap-6">
+    <div className="relative grid min-h-screen place-content-center">
+      <main className="container space-y-3 text-center">
         <h2 className="scroll-m-20 text-3xl font-semibold tracking-tight">
           Oops! Page not found
         </h2>
-        <div className="gradient-text-stroke tracking-wide md:animate-in md:slide-in-from-top-7 md:duration-700  md:ease-linear">
+        <div className="gradient-text-stroke tracking-wide md:animate-in md:slide-in-from-top-7 md:duration-700 md:ease-linear">
           404
         </div>
         <div className="space-y-3 md:space-y-6">
@@ -38,8 +38,8 @@ export default function NotFound() {
             GO HOME
           </Link>
         </div>
-      </section>
+      </main>
       <DecorativePattern />
-    </>
+    </div>
   );
 }

@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function WrapperLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -53,9 +53,7 @@ export default function RootLayout({
       <head />
       <body className={twMerge('font-sans antialiased', fontSans.variable)}>
         <Providers>
-          <div className="relative grid min-h-screen content-between">
-            {children}
-          </div>
+          {children}
           <DecorativeBlobs />
           <Toaster />
           <TailwindIndicator />

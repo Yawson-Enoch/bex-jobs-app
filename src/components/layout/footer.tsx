@@ -4,8 +4,8 @@ import { siteInfo } from '~/config/site';
 
 export default function Footer() {
   return (
-    <footer className="flex h-16 items-center border-t bg-background/70">
-      <div className="container flex items-center justify-center gap-1">
+    <footer className="h-16 border-t bg-background/70">
+      <div className="container flex h-full items-center justify-center gap-1">
         <span>Built</span>
         <span>by</span>
         <Link

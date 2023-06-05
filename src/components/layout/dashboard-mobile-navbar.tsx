@@ -60,8 +60,8 @@ export default function DashboardMobileNavbar() {
       id="mobile-navbar"
       className="fixed inset-0 z-10 flex max-h-screen flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/70 pb-4 backdrop-blur-sm md:hidden"
     >
-      <section className="border-b">
-        <div className="container flex h-16 items-center justify-between">
+      <section className="h-16 border-b">
+        <div className="container flex h-full items-center justify-between">
           <button
             onClick={() => {
               router.push('/dashboard');
