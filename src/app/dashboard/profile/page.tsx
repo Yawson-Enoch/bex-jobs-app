@@ -9,6 +9,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
+import ProfileUpdateForm from '~/components/common/profile-update-form';
 
 const title = 'Profile';
 const description = 'View and easily update your profile details';
@@ -39,5 +40,10 @@ export const metadata: Metadata = {
 };
 
 export default function ProfilePage() {
-  return <p>This is the profile page</p>;
+  return (
+    <div className="space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
+      <h3>Profile</h3>
+      <ProfileUpdateForm />
+    </div>
+  );
 }
