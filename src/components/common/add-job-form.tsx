@@ -99,12 +99,12 @@ export default function AddJobForm() {
               autoFocus
               disabled={isSubmitting}
             />
-            {errors.jobPosition && (
-              <small className="text-error-form-foreground">
-                {errors.jobPosition.message}
-              </small>
-            )}
           </div>
+          {errors.jobPosition && (
+            <small className="text-error-form-foreground">
+              {errors.jobPosition.message}
+            </small>
+          )}
         </div>
         <div className="space-y-1">
           <div className="space-y-2">
@@ -115,12 +115,12 @@ export default function AddJobForm() {
               {...register('company')}
               disabled={isSubmitting}
             />
-            {errors.company && (
-              <small className="text-error-form-foreground">
-                {errors.company.message}
-              </small>
-            )}
           </div>
+          {errors.company && (
+            <small className="text-error-form-foreground">
+              {errors.company.message}
+            </small>
+          )}
         </div>
         <div className="space-y-1">
           <div className="space-y-2">
@@ -131,12 +131,12 @@ export default function AddJobForm() {
               {...register('jobLocation')}
               disabled={isSubmitting}
             />
-            {errors.jobLocation && (
-              <small className="text-error-form-foreground">
-                {errors.jobLocation.message}
-              </small>
-            )}
           </div>
+          {errors.jobLocation && (
+            <small className="text-error-form-foreground">
+              {errors.jobLocation.message}
+            </small>
+          )}
         </div>
         <div className="space-y-1">
           <div className="space-y-2">
