@@ -17,7 +17,7 @@ export default function AuthLayout({
   return (
     <div className="relative min-h-screen">
       <AuthHeader />
-      <main className="container pb-3 pt-6 md:pt-12">{children}</main>
+      <main className="container py-6 md:py-12">{children}</main>
       <DecorativePattern />
     </div>
   );

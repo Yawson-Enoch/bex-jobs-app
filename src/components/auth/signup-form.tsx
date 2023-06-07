@@ -47,26 +47,48 @@ export default function SignupForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="space-y-3 md:space-y-6">
-        <div className="space-y-1">
-          <Label className="sr-only" htmlFor={id + '-username'}>
-            Name
-          </Label>
-          <Input
-            type="text"
-            id={id + '-username'}
-            {...register('username')}
-            placeholder="enter name"
-            autoComplete="name"
-            autoCorrect="off"
-            autoFocus
-            disabled={isLoading}
-          />
-          {errors.username && (
-            <small className="text-error-form-foreground">
-              {errors.username.message}
-            </small>
-          )}
+      <div className="grid gap-3 md:gap-6">
+        <div className="grid grid-cols-1 items-start gap-3 md:grid-cols-2 md:gap-6">
+          <div className="space-y-1">
+            <Label className="sr-only" htmlFor={id + '-firstName'}>
+              First Name
+            </Label>
+            <Input
+              type="text"
+              id={id + '-firstName'}
+              {...register('firstName')}
+              placeholder="enter first name"
+              autoComplete="name"
+              autoCorrect="off"
+              autoFocus
+              disabled={isLoading}
+            />
+            {errors.firstName && (
+              <small className="text-error-form-foreground">
+                {errors.firstName.message}
+              </small>
+            )}
+          </div>
+          <div className="space-y-1">
+            <Label className="sr-only" htmlFor={id + '-lastName'}>
+              Last Name
+            </Label>
+            <Input
+              type="text"
+              id={id + '-lastName'}
+              {...register('lastName')}
+              placeholder="enter last name"
+              autoComplete="name"
+              autoCorrect="off"
+              autoFocus
+              disabled={isLoading}
+            />
+            {errors.lastName && (
+              <small className="text-error-form-foreground">
+                {errors.lastName.message}
+              </small>
+            )}
+          </div>
         </div>
         <div className="space-y-1">
           <Label className="sr-only" htmlFor={id + '-email'}>
@@ -125,11 +147,7 @@ export default function SignupForm() {
             </small>
           )}
         </div>
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={isLoading || !isValid || !isDirty}
-        >
+        <Button type="submit" disabled={isLoading || !isValid || !isDirty}>
           {isLoading ? (
             <div role="status">
               <span className="sr-only">Signing up...</span>

@@ -4,43 +4,18 @@ import { useId } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
+
+import { Profile, profileSchema } from '~/lib/validations/auth';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
-const profileUpdateschema = z.object({
-  firstName: z
-    .string({
-      required_error: 'First name is required',
-      invalid_type_error: 'First name must be a string',
-    })
-    .trim()
-    .min(2, { message: 'First name must be 2 or more characters long' }),
-  lastName: z
-    .string({
-      required_error: 'Last name is required',
-      invalid_type_error: 'Last name must be a string',
-    })
-    .trim()
-    .min(2, { message: 'Last name must be 2 or more characters long' }),
-  email: z
-    .string({
-      required_error: 'Email is required',
-      invalid_type_error: 'Email must be a string',
-    })
-    .trim()
-    .email({ message: 'Invalid email address' }),
-});
-
-type Profile = z.infer<typeof profileUpdateschema>;
-
 export default function ProfileUpdateForm() {
   const id = useId();
 
   const form = useForm<Profile>({
-    resolver: zodResolver(profileUpdateschema),
+    resolver: zodResolver(profileSchema),
     mode: 'onChange',
   });
   const { register, handleSubmit, formState } = form;
