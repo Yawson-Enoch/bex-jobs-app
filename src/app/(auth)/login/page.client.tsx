@@ -27,7 +27,7 @@ export default function LoginPageClient() {
 
   if (isLoggedIn) {
     return (
-      <div className="mx-auto grid w-[min(100%,400px)] place-content-center space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
+      <div className="mx-auto grid w-[min(100%,_400px)] place-content-center space-y-3 rounded-lg border bg-background/70 p-3 md:space-y-6 md:p-6">
         <p className="font-medium text-foreground md:text-lg">
           Hooray! You are logged in
         </p>
@@ -40,7 +40,7 @@ export default function LoginPageClient() {
   }
 
   return (
-    <div className="mx-auto w-[min(100%,400px)] space-y-3 rounded-lg border border-border bg-background/70 p-3 md:space-y-6 md:p-6">
+    <div className="mx-auto w-[min(100%,_400px)] space-y-3 rounded-lg border bg-background/70 p-3 md:space-y-6 md:p-6">
       <h3 className="text-center">
         <AnimatedCharacters text="Login" />
       </h3>
