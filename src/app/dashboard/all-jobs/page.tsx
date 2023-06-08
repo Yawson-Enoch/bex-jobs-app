@@ -9,6 +9,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
+import AllJobsSubHeader from '~/components/common/all-jobs-sub-header';
 
 const title = 'All Jobs';
 const description = 'Manage your jobs - View, edit and delete your jobs';
@@ -39,5 +40,9 @@ export const metadata: Metadata = {
 };
 
 export default function AllJobsPage() {
-  return <p>This is the all jobs page</p>;
+  return (
+    <div className="space-y-6 md:space-y-12">
+      <AllJobsSubHeader />
+    </div>
+  );
 }
