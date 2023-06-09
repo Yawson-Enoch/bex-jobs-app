@@ -1,6 +1,8 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
+
+import useQueryParams from '~/hooks/useQueryParams';
 
 import { Label } from '../ui/label';
 import {
@@ -15,15 +17,26 @@ import {
 const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'];
 
 export default function AllJobsSort() {
+  const [selectedSortOption, setSelectedSortOption] = useState<string>(
+    SORT_OPTIONS[0]
+  );
+
+  const { setQueryParams } = useQueryParams();
+
+  const handleSortOptionChange = (value: string) => {
+    setSelectedSortOption(value);
+    setQueryParams({ sort: value });
+  };
+
   const id = useId();
 
   return (
     <div className="flex items-center gap-1">
       <Label htmlFor={id + '-sort'}>SORT</Label>
       <Select
-      //   onValueChange={field.onChange}
-      //   defaultValue={field.value}
-      //   key={resetSelectKey}
+        value={selectedSortOption}
+        onValueChange={handleSortOptionChange}
+        defaultValue={SORT_OPTIONS[0]}
       >
         <SelectTrigger
           id={id + '-sort'}
@@ -33,9 +46,9 @@ export default function AllJobsSort() {
         </SelectTrigger>
         <SelectContent className="bg-background/90 backdrop-blur-sm">
           <SelectGroup>
-            {SORT_OPTIONS.map((option) => (
-              <SelectItem key={option} value={option}>
-                {option}
+            {SORT_OPTIONS.map((sortOption) => (
+              <SelectItem key={sortOption} value={sortOption}>
+                {sortOption}
               </SelectItem>
             ))}
           </SelectGroup>
