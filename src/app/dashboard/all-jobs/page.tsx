@@ -9,6 +9,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
+import AllJobsPaginate from '~/components/common/all-jobs-paginate';
 import AllJobsSubHeader from '~/components/common/all-jobs-sub-header';
 
 const title = 'All Jobs';
@@ -43,6 +44,7 @@ export default function AllJobsPage() {
   return (
     <div className="space-y-6 md:space-y-12">
       <AllJobsSubHeader />
+      <AllJobsPaginate />
     </div>
   );
 }

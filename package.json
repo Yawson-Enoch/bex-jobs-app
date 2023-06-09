@@ -34,6 +34,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.44.3",
+    "react-paginate": "^8.2.0",
     "recharts": "^2.6.2",
     "sharp": "^0.32.1",
     "tailwind-merge": "^1.13.0",
