@@ -18,6 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+import AllJobsSearch from './all-jobs-search';
 
 const STATUS_OPTIONS = ['all', 'pending', 'interview', 'declined'];
 const JOB_TYPES = ['all', 'full-time', 'part-time', 'remote', 'internship'];
@@ -51,22 +52,8 @@ export default function AllJobsSubHeader() {
   };
 
   return (
-    <section className="flex flex-col items-center gap-3 md:flex-row md:justify-between md:gap-6">
-      <form>
-        <div className="flex items-center">
-          <Input
-            type="search"
-            className="h-9 rounded-none rounded-l-full placeholder:truncate"
-            placeholder="Search..."
-          />
-          <Button
-            type="submit"
-            className="h-9 rounded-none rounded-r-full px-2"
-          >
-            <SearchIcon />
-          </Button>
-        </div>
-      </form>
+    <section className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+      <AllJobsSearch />
 
       <div className="flex items-center gap-3 font-medium">
         <Popover>
