@@ -18,31 +18,29 @@ export default function AllJobsSort() {
   const id = useId();
 
   return (
-    <form noValidate>
-      <div className="flex items-center gap-1">
-        <Label htmlFor={id + '-sort'}>SORT</Label>
-        <Select
-        //   onValueChange={field.onChange}
-        //   defaultValue={field.value}
-        //   key={resetSelectKey}
+    <div className="flex items-center gap-1">
+      <Label htmlFor={id + '-sort'}>SORT</Label>
+      <Select
+      //   onValueChange={field.onChange}
+      //   defaultValue={field.value}
+      //   key={resetSelectKey}
+      >
+        <SelectTrigger
+          id={id + '-sort'}
+          className="flex h-9 items-center gap-2"
         >
-          <SelectTrigger
-            id={id + '-sort'}
-            className="flex h-9 items-center gap-2"
-          >
-            <SelectValue placeholder="Sort option" />
-          </SelectTrigger>
-          <SelectContent className="bg-background/90 backdrop-blur-sm">
-            <SelectGroup>
-              {SORT_OPTIONS.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
-    </form>
+          <SelectValue placeholder="Sort option" />
+        </SelectTrigger>
+        <SelectContent className="bg-background/90 backdrop-blur-sm">
+          <SelectGroup>
+            {SORT_OPTIONS.map((option) => (
+              <SelectItem key={option} value={option}>
+                {option}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }
