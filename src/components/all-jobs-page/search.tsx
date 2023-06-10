@@ -6,7 +6,7 @@ import { SearchIcon } from 'lucide-react';
 import useDebounce from '~/hooks/useDebounce';
 import useQueryParams from '~/hooks/useQueryParams';
 
-export default function AllJobsSearch() {
+export default function Search() {
   const [searchValue, setSearchValue] = useState('');
 
   const { setQueryParams, deleteQueryParam } = useQueryParams();

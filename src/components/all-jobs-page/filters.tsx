@@ -26,7 +26,7 @@ type Job = {
   jobType: string;
 };
 
-export default function AllJobsFilters() {
+export default function Filters() {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 
   const id = useId();

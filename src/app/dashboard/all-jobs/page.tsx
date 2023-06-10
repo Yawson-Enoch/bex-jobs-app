@@ -9,9 +9,9 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
-import AllJobsMainContent from '~/components/common/all-jobs-main-content';
-import AllJobsPaginate from '~/components/common/all-jobs-paginate';
-import AllJobsSubHeader from '~/components/common/all-jobs-sub-header';
+import Jobs from '~/components/all-jobs-page/jobs';
+import PaginationButtons from '~/components/all-jobs-page/pagination-buttons';
+import SubHeader from '~/components/all-jobs-page/sub-header';
 
 const title = 'All Jobs';
 const description = 'Manage your jobs - View, edit and delete your jobs';
@@ -44,9 +44,9 @@ export const metadata: Metadata = {
 export default function AllJobsPage() {
   return (
     <div className="space-y-6 md:space-y-12">
-      <AllJobsSubHeader />
-      <AllJobsMainContent />
-      <AllJobsPaginate />
+      <SubHeader />
+      <Jobs />
+      <PaginationButtons />
     </div>
   );
 }

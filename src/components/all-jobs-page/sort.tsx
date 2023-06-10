@@ -16,7 +16,7 @@ import {
 
 const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'];
 
-export default function AllJobsSort() {
+export default function Sort() {
   const [selectedSortOption, setSelectedSortOption] = useState<string>(
     SORT_OPTIONS[0]
   );

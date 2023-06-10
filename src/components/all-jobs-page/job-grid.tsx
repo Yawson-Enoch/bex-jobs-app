@@ -2,7 +2,7 @@ import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 
 import { Button } from '../ui/button';
 
-export default function AllJobsList() {
+export default function JobGrid() {
   return (
     <li className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
       <div className="flex gap-3 border-b-4 border-dotted border-accent py-3 md:gap-6">

@@ -6,7 +6,7 @@ import { GridIcon, ListIcon } from 'lucide-react';
 
 const displayStyleAtom = atom<'grid' | 'list'>('grid');
 
-export default function AllJobsDisplay() {
+export default function ViewTypes() {
   const [displayStyle, setDisplayStyle] = useAtom(displayStyleAtom);
 
   return (

@@ -25,7 +25,7 @@ const paginationVariants: Variants = {
   },
 };
 
-export default function AllJobsPaginate() {
+export default function PaginationButtons() {
   const { queryParams, setQueryParams } = useQueryParams<{
     page: number;
   }>();
