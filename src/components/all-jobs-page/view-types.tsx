@@ -30,7 +30,7 @@ export default function ViewTypes() {
               }}
             />
           )}
-          <GridIcon size={20} className="relative z-10" />
+          <GridIcon size={20} className="relative z-[1]" />
         </button>
         <button
           className="relative rounded-sm p-1"
@@ -47,7 +47,7 @@ export default function ViewTypes() {
               }}
             />
           )}
-          <ListIcon size={20} className="relative z-10" />
+          <ListIcon size={20} className="relative z-[1]" />
         </button>
       </div>
       <button onClick={() => setDisplayStyle('list')} className="text-sm">
