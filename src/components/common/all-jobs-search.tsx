@@ -9,12 +9,16 @@ import useQueryParams from '~/hooks/useQueryParams';
 export default function AllJobsSearch() {
   const [searchValue, setSearchValue] = useState('');
 
-  const { setQueryParams } = useQueryParams();
+  const { setQueryParams, deleteQueryParam } = useQueryParams();
   const debouncedSearchValue = useDebounce(searchValue);
 
   useEffect(() => {
-    setQueryParams({ search: debouncedSearchValue });
-  }, [debouncedSearchValue, setQueryParams]);
+    if (debouncedSearchValue.trim() === '') {
+      deleteQueryParam('search');
+    } else {
+      setQueryParams({ search: debouncedSearchValue });
+    }
+  }, [debouncedSearchValue, deleteQueryParam, setQueryParams]);
 
   return (
     <div className="group/search flex h-9 items-center gap-2 rounded-md border border-input p-1 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
