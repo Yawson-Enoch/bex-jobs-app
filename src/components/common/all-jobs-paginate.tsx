@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import {
   ChevronLeftIcon,
@@ -8,6 +7,8 @@ import {
   MoreHorizontalIcon,
 } from 'lucide-react';
 import ReactPaginate from 'react-paginate';
+
+import useQueryParams from '~/hooks/useQueryParams';
 
 const paginationVariants: Variants = {
   initial: {
@@ -25,12 +26,14 @@ const paginationVariants: Variants = {
 };
 
 export default function AllJobsPaginate() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const { queryParams, setQueryParams } = useQueryParams<{
+    page: number;
+  }>();
 
-  console.log(currentPage);
+  const initialPage = queryParams?.page ? queryParams.page - 1 : 0;
 
   const handlePageClick = ({ selected }: { selected: number }) => {
-    setCurrentPage(selected);
+    setQueryParams({ page: selected + 1 });
   };
 
   return (
@@ -65,6 +68,7 @@ export default function AllJobsPaginate() {
         activeLinkClassName="bg-primary text-primary-foreground border-0 hover:bg-primary/90"
         disabledClassName="pointer-events-none text-muted-foreground"
         renderOnZeroPageCount={null}
+        initialPage={initialPage}
       />
     </motion.div>
   );
