@@ -1,25 +1,32 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { atom, useAtom } from 'jotai';
 import { GridIcon, ListIcon } from 'lucide-react';
 
-const displayStyleAtom = atom<'grid' | 'list'>('grid');
+import useQueryParams from '~/hooks/useQueryParams';
+
+export type TViewTypes = 'grid' | 'list';
 
 export default function ViewTypes() {
-  const [displayStyle, setDisplayStyle] = useAtom(displayStyleAtom);
+  const { setQueryParams, queryParams } = useQueryParams<{
+    view: TViewTypes;
+  }>();
+
+  const handleViewTypeChange = (option: TViewTypes) => {
+    setQueryParams({ view: option });
+  };
 
   return (
     <div className="flex items-center gap-1">
-      <button onClick={() => setDisplayStyle('grid')} className="text-sm">
+      <button onClick={() => handleViewTypeChange('grid')} className="text-sm">
         GRID
       </button>
       <div className="flex h-9 items-center gap-1 rounded-md bg-background p-1">
         <button
           className="relative rounded-sm p-1"
-          onClick={() => setDisplayStyle('grid')}
+          onClick={() => handleViewTypeChange('grid')}
         >
-          {displayStyle === 'grid' && (
+          {queryParams.view !== 'list' && (
             <motion.div
               aria-hidden="true"
               className="absolute inset-0 rounded-sm bg-accent"
@@ -34,9 +41,9 @@ export default function ViewTypes() {
         </button>
         <button
           className="relative rounded-sm p-1"
-          onClick={() => setDisplayStyle('list')}
+          onClick={() => handleViewTypeChange('list')}
         >
-          {displayStyle === 'list' && (
+          {queryParams.view === 'list' && (
             <motion.div
               aria-hidden="true"
               className="absolute inset-0 rounded-sm bg-accent"
@@ -50,7 +57,7 @@ export default function ViewTypes() {
           <ListIcon size={20} className="relative z-[1]" />
         </button>
       </div>
-      <button onClick={() => setDisplayStyle('list')} className="text-sm">
+      <button onClick={() => handleViewTypeChange('list')} className="text-sm">
         LIST
       </button>
     </div>
