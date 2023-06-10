@@ -20,5 +20,14 @@ export default function useQueryParams<T = {}>() {
     router.push(`${pathname}${query}`);
   };
 
-  return { queryParams, setQueryParams };
+  const deleteQueryParam = (param: string) => {
+    urlSearchParams.delete(param);
+
+    const search = urlSearchParams.toString();
+    const query = search ? `?${search}` : '';
+
+    router.push(`${pathname}${query}`);
+  };
+
+  return { queryParams, setQueryParams, deleteQueryParam };
 }
