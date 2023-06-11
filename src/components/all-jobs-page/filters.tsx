@@ -49,7 +49,7 @@ export default function Filters() {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline" className="h-9 gap-1">
-          <span>Filter</span>
+          <span>FILTER</span>
           <FilterIcon size={20} />
         </Button>
       </PopoverTrigger>

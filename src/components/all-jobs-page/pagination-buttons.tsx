@@ -49,7 +49,7 @@ export default function PaginationButtons() {
         }
         nextLabel={
           <button className="flex items-center gap-1">
-            <span>Next</span>
+            <span>NEXT</span>
             <ChevronRightIcon />
           </button>
         }
@@ -59,7 +59,7 @@ export default function PaginationButtons() {
         previousLabel={
           <button className="flex items-center gap-1">
             <ChevronLeftIcon />
-            <span>Previous</span>
+            <span>PREV</span>
           </button>
         }
         containerClassName="flex items-center justify-center gap-3"

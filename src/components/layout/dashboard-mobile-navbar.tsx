@@ -92,7 +92,8 @@ export default function DashboardMobileNavbar() {
           </div>
         ) : (
           <p className="px-2 text-xl font-medium">
-            Hi, {userAuthInfo?.username}
+            Hi,{' '}
+            <span className="text-foreground">{userAuthInfo?.username}</span>
           </p>
         )}
         <ul className="flex flex-col gap-3 font-medium">

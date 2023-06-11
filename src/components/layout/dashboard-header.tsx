@@ -39,7 +39,10 @@ export default function DashboardHeader() {
               />
             </div>
           ) : (
-            <p className="text-xl font-medium">Hi, {userAuthInfo?.username}</p>
+            <p className="text-xl font-medium">
+              Hi,{' '}
+              <span className="text-foreground">{userAuthInfo?.username}</span>
+            </p>
           )}
         </div>
         <div className="flex items-center gap-3 md:gap-6">

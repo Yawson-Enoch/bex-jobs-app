@@ -93,7 +93,7 @@ export default function IndexPageClient() {
       variants={mainContainer}
       animate="animate"
       initial="initial"
-      className="flex flex-col gap-3 md:gap-6"
+      className="grid h-full content-center gap-3 md:gap-6"
     >
       <motion.div
         className="space-y-1 text-center text-3xl font-bold md:space-y-3 md:text-4xl"

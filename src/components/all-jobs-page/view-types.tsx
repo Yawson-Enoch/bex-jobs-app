@@ -18,9 +18,7 @@ export default function ViewTypes() {
 
   return (
     <div className="flex items-center gap-1">
-      <button onClick={() => handleViewTypeChange('grid')} className="text-sm">
-        GRID
-      </button>
+      <button onClick={() => handleViewTypeChange('grid')}>GRID</button>
       <div className="flex h-9 items-center gap-1 rounded-md bg-background p-1">
         <button
           className="relative rounded-sm p-1"
@@ -57,9 +55,7 @@ export default function ViewTypes() {
           <ListIcon size={20} className="relative z-[1]" />
         </button>
       </div>
-      <button onClick={() => handleViewTypeChange('list')} className="text-sm">
-        LIST
-      </button>
+      <button onClick={() => handleViewTypeChange('list')}>LIST</button>
     </div>
   );
 }
