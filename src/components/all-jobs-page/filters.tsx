@@ -31,7 +31,7 @@ export default function Filters() {
 
   const id = useId();
 
-  const { setQueryParams } = useQueryParams();
+  const { setQueryParams, deleteQueryParam } = useQueryParams();
 
   const form = useForm({
     defaultValues: {
@@ -118,6 +118,8 @@ export default function Filters() {
                 onClick={() => {
                   reset();
                   setResetSelectKey(Date.now());
+                  deleteQueryParam('status');
+                  deleteQueryParam('type');
                 }}
               >
                 Reset
