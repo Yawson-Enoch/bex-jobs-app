@@ -4,6 +4,7 @@ import { useId, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderIcon } from 'lucide-react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
 
 import { Button } from '../ui/button';
@@ -57,7 +58,7 @@ const addJobSchema = z.object({
 
 type Job = z.infer<typeof addJobSchema>;
 
-export default function AddJobForm() {
+export default function AddJobForm({ isModalForm = false }) {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 
   const id = useId();
@@ -88,7 +89,13 @@ export default function AddJobForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] items-start gap-3 md:gap-6">
+      <div
+        className={twMerge(
+          'grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] items-start gap-3 md:gap-6',
+          isModalForm &&
+            'grid grid-cols-[repeat(auto-fit,_minmax(min(10rem,_100%),_1fr))]'
+        )}
+      >
         <div className="space-y-1">
           <div className="space-y-2">
             <Label htmlFor={id + '-jobPosition'}>Job Position</Label>

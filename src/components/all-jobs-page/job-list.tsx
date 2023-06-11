@@ -1,5 +1,15 @@
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '~/components/ui/dialog';
+
+import AddJobForm from '../common/add-job-form';
 import { Button } from '../ui/button';
 
 export default function JobList() {
@@ -41,9 +51,22 @@ export default function JobList() {
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-1">
-        <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] dark:bg-yellow-700 [&:not(:disabled)]:hover:bg-yellow-500/90 [&:not(:disabled)]:dark:hover:bg-yellow-700/90">
-          Edit
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] dark:bg-yellow-700 [&:not(:disabled)]:hover:bg-yellow-500/90 [&:not(:disabled)]:dark:hover:bg-yellow-700/90">
+              Edit
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="inset-y-6 left-1/2 w-[280px] -translate-x-1/2 overflow-y-auto md:bottom-auto md:top-1/2 md:w-full md:-translate-y-1/2">
+            <DialogHeader>
+              <DialogTitle>
+                <h3>Edit Job</h3>
+              </DialogTitle>
+              <DialogDescription>Make changes to job.</DialogDescription>
+            </DialogHeader>
+            <AddJobForm isModalForm />
+          </DialogContent>
+        </Dialog>
         <Button variant="destructive">Delete</Button>
       </div>
     </li>
