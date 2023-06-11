@@ -1,4 +1,5 @@
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 
 import {
   Dialog,
@@ -12,7 +13,17 @@ import {
 import AddJobForm from '../common/add-job-form';
 import { Button } from '../ui/button';
 
-export default function JobList() {
+export const statusColors = {
+  pending: 'bg-yellow-500/20 text-yellow-500 dark:bg-yellow-500/10',
+  interview: 'bg-blue-500/20 text-blue-500 dark:bg-blue-500/10',
+  declined: 'bg-red-500/20 text-red-500 dark:bg-red-500/10',
+};
+
+export default function JobList({
+  status,
+}: {
+  status: keyof typeof statusColors;
+}) {
   return (
     <li className="grid gap-3 rounded-lg border bg-slate-500/10 p-3 text-xs md:grid-cols-[auto,_2fr,1fr] md:justify-between md:gap-6 md:p-6 md:text-base">
       <div className="space-y-3 border-b-4 border-dotted border-accent pb-3 md:border-b-0 md:border-r-4 md:pb-0 md:pr-6">
@@ -44,8 +55,13 @@ export default function JobList() {
             <BriefcaseIcon size={15} />
             <span>Type</span>
           </div>
-          <span className="rounded-md bg-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-500 dark:bg-blue-500/10">
-            Status
+          <span
+            className={twMerge(
+              'rounded-md px-2.5 py-0.5 text-xs font-medium',
+              statusColors[status]
+            )}
+          >
+            {status}
           </span>
         </div>
       </div>

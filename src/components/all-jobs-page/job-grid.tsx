@@ -1,4 +1,5 @@
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
+import { twMerge } from 'tailwind-merge';
 
 import {
   Dialog,
@@ -11,8 +12,13 @@ import {
 
 import AddJobForm from '../common/add-job-form';
 import { Button } from '../ui/button';
+import { statusColors } from './job-list';
 
-export default function JobGrid() {
+export default function JobGrid({
+  status,
+}: {
+  status: keyof typeof statusColors;
+}) {
   return (
     <li className="space-y-3 rounded-lg border bg-slate-500/10 p-3 text-xs md:p-6 md:text-base">
       <div className="space-y-3 border-b-4 border-dotted border-accent pb-3">
@@ -42,8 +48,13 @@ export default function JobGrid() {
             <BriefcaseIcon size={15} />
             <span className="truncate">Type</span>
           </div>
-          <span className="rounded-md bg-blue-500/20 px-2.5 py-0.5 text-xs font-medium text-blue-500 dark:bg-blue-500/10">
-            Status
+          <span
+            className={twMerge(
+              'rounded-md px-2.5 py-0.5 text-xs font-medium',
+              statusColors[status]
+            )}
+          >
+            {status}
           </span>
         </div>
       </div>
