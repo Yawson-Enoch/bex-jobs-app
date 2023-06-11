@@ -58,7 +58,7 @@ export default function DashboardMobileNavbar() {
   return (
     <nav
       id="mobile-navbar"
-      className="fixed inset-0 z-10 flex max-h-screen flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/70 pb-4 backdrop-blur-sm md:hidden"
+      className="fixed inset-0 z-10 flex max-h-screen flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/90 pb-4 backdrop-blur-sm dark:bg-background/70 md:hidden"
     >
       <section className="h-16 border-b">
         <div className="container flex h-full items-center justify-between">

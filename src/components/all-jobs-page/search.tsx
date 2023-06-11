@@ -21,14 +21,14 @@ export default function Search() {
   }, [debouncedSearchValue, deleteQueryParam, setQueryParams]);
 
   return (
-    <div className="group/search flex h-9 items-center gap-2 rounded-md border border-input p-1 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+    <div className="group/search flex h-9 items-center gap-2 rounded-md bg-muted px-2 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
       <SearchIcon
         size={20}
         className="text-muted-foreground group-focus-within/search:text-foreground"
       />
       <input
         type="search"
-        placeholder="Search..."
+        placeholder="Search job..."
         className="h-full w-full bg-transparent placeholder:truncate placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}

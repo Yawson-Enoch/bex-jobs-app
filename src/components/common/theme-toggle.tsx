@@ -31,7 +31,7 @@ export function ThemeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
-        className="bg-background/90 backdrop-blur-sm"
+        className="bg-background dark:bg-background/90 dark:backdrop-blur-sm"
       >
         <DropdownMenuItem onClick={() => setTheme('light')}>
           <SunIcon aria-hidden="true" className="mr-2 h-4 w-4" />

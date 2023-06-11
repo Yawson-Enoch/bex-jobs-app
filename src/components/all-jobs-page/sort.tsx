@@ -44,7 +44,7 @@ export default function Sort() {
         >
           <SelectValue placeholder="Sort option" />
         </SelectTrigger>
-        <SelectContent className="bg-background/90 backdrop-blur-sm">
+        <SelectContent className="bg-background dark:bg-background/90 dark:backdrop-blur-sm">
           <SelectGroup>
             {SORT_OPTIONS.map((sortOption) => (
               <SelectItem key={sortOption} value={sortOption}>

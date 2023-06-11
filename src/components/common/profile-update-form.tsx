@@ -32,7 +32,7 @@ export default function ProfileUpdateForm() {
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="grid grid-cols-[repeat(auto-fit,_minmax(min(20rem,_100%),_1fr))] items-start gap-3 md:gap-6">
+      <div className="grid items-start gap-3 md:grid-cols-2 md:gap-6">
         <div className="space-y-1">
           <div className="space-y-2">
             <Label htmlFor={id + '-firstName'}>First Name</Label>

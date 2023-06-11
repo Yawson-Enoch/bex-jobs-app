@@ -19,7 +19,7 @@ export default function ViewTypes() {
   return (
     <div className="flex items-center gap-1">
       <button onClick={() => handleViewTypeChange('grid')}>GRID</button>
-      <div className="flex h-9 items-center gap-1 rounded-md bg-background p-1">
+      <div className="flex h-9 items-center gap-1 rounded-md bg-background p-1 dark:bg-background/90">
         <button
           className="relative rounded-sm p-1"
           onClick={() => handleViewTypeChange('grid')}

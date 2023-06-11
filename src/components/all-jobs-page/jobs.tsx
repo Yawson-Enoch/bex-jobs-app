@@ -14,7 +14,7 @@ export default function Jobs() {
       <h4>30 Jobs Found</h4>
 
       {queryParams.view !== 'list' ? (
-        <ul className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
           <JobGrid status="interview" />
           <JobGrid status="pending" />
           <JobGrid status="declined" />

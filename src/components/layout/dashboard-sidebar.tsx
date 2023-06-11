@@ -63,7 +63,7 @@ export default function DashboardSidebar() {
       <aside
         id="dashboard-sidebar"
         className={twMerge(
-          'dashboard-sidebar sticky top-0 hidden max-h-screen overflow-y-auto overscroll-y-contain border-r bg-background/70 pt-3 md:flex md:flex-col',
+          'dashboard-sidebar sticky top-0 hidden max-h-screen overflow-y-auto overscroll-y-contain border-r bg-background/70 pt-3 md:flex md:flex-col md:gap-12',
           isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20'
         )}
       >
@@ -95,7 +95,7 @@ export default function DashboardSidebar() {
             />
           </Button>
         </div>
-        <ul className="my-auto flex flex-col gap-4 p-4 font-medium">
+        <ul className="flex flex-col gap-4 p-4 font-medium">
           {sidebarRoutes.map((sidebarRoute) => {
             return (
               <li

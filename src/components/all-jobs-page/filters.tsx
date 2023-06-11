@@ -53,7 +53,7 @@ export default function Filters() {
           <FilterIcon size={20} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-fit bg-background/90 backdrop-blur-sm">
+      <PopoverContent className="w-fit bg-background dark:bg-background/90 dark:backdrop-blur-sm">
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <div className="space-y-4">
             <div className="space-y-2">
