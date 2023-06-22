@@ -75,8 +75,8 @@ export default function JobList({
           </DialogTrigger>
           <DialogContent className="inset-y-6 left-1/2 w-[280px] -translate-x-1/2 overflow-y-auto md:bottom-auto md:top-1/2 md:w-full md:-translate-y-1/2">
             <DialogHeader>
-              <DialogTitle>
-                <h3>Edit Job</h3>
+              <DialogTitle className="scroll-m-20 text-2xl font-semibold tracking-tight">
+                Edit Job
               </DialogTitle>
               <DialogDescription>Make changes to job.</DialogDescription>
             </DialogHeader>
