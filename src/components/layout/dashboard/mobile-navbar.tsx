@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname, useRouter } from 'next/navigation';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import {
@@ -15,10 +16,9 @@ import {
 
 import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
+import GradientLogo from '~/components/common/gradient-logo';
 
-import GradientLogo from '../common/gradient-logo';
-import { Separator } from '../ui/separator';
-import { isMobileNavbarOpenAtom } from './dashboard-header';
+import { isMobileNavbarOpenAtom } from './header';
 
 const navLinks = [
   {
@@ -43,7 +43,7 @@ const navLinks = [
   },
 ];
 
-export default function DashboardMobileNavbar() {
+export default function MobileNavbar() {
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useAtom(
     isMobileNavbarOpenAtom
   );

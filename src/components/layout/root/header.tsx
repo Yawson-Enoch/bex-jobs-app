@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import GradientLogo from '../common/gradient-logo';
-import { ThemeToggle } from '../common/theme-toggle';
-import { buttonVariants } from '../ui/button';
+import { buttonVariants } from '~/components/ui/button';
+import DropdownThemeToggler from '~/components/common/dropdown-theme-toggler';
+import GradientLogo from '~/components/common/gradient-logo';
 
 export default function Header() {
   return (
@@ -15,7 +15,7 @@ export default function Header() {
           <GradientLogo />
         </Link>
         <div className="flex items-center gap-3 md:gap-10">
-          <ThemeToggle />
+          <DropdownThemeToggler />
           <div className="flex items-center gap-2 md:gap-3">
             <Link
               href="/login"

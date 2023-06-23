@@ -9,7 +9,7 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
-import ProfileUpdateForm from '~/components/common/profile-update-form';
+import ProfileUpdateForm from '~/components/dashboard/profile-update-form';
 
 const title = 'Profile';
 const description = 'View and easily update your profile details';

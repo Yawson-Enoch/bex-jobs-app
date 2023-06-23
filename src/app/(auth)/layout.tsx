@@ -1,4 +1,4 @@
-import AuthHeader from '~/components/layout/auth-header';
+import Header from '~/components/layout/auth/header';
 
 function DecorativePattern() {
   return (
@@ -16,7 +16,7 @@ export default function AuthLayout({
 }) {
   return (
     <div className="relative min-h-screen">
-      <AuthHeader />
+      <Header />
       <main className="container py-6 md:py-12">{children}</main>
       <DecorativePattern />
     </div>

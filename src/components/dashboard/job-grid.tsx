@@ -10,8 +10,8 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 
-import AddJobForm from '../common/add-job-form';
 import { Button } from '../ui/button';
+import AddJobForm from './add-job-form';
 import { statusColors } from './job-list';
 
 export default function JobGrid({

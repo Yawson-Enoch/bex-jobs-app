@@ -5,9 +5,9 @@ import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
 import { buttonVariants } from '~/components/ui/button';
-import AuthLoader from '~/components/common/auth-loader';
-import DashboardHeader from '~/components/layout/dashboard-header';
-import DashboardSidebar from '~/components/layout/dashboard-sidebar';
+import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
+import Header from '~/components/layout/dashboard/header';
+import Sidebar from '~/components/layout/dashboard/sidebar';
 
 function DecorativePattern() {
   return (
@@ -53,7 +53,7 @@ export default function DashboardLayoutClient({
       {isCheckingAuth ? (
         <main className="dashboard-main container py-6 md:py-12">
           <div className="grid h-full place-content-center">
-            <AuthLoader />
+            <AuthLoadingIndicator />
           </div>
         </main>
       ) : !isLoggedIn ? (
@@ -64,8 +64,8 @@ export default function DashboardLayoutClient({
         </main>
       ) : (
         <>
-          <DashboardHeader />
-          <DashboardSidebar />
+          <Header />
+          <Sidebar />
           <main className="dashboard-main container py-6 md:py-12">
             {children}
           </main>

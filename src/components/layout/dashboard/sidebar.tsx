@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Separator } from '@radix-ui/react-dropdown-menu';
 import { motion } from 'framer-motion';
 import { useAtom, useAtomValue } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -16,12 +17,11 @@ import {
 import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
+import { Button } from '~/components/ui/button';
+import GradientLogo from '~/components/common/gradient-logo';
 
-import GradientLogo from '../common/gradient-logo';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
-import { isMobileNavbarOpenAtom } from './dashboard-header';
-import DashboardMobileNavbar from './dashboard-mobile-navbar';
+import { isMobileNavbarOpenAtom } from './header';
+import MobileNavbar from './mobile-navbar';
 
 const sidebarRoutes = [
   {
@@ -48,7 +48,7 @@ const sidebarRoutes = [
 
 const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
 
-export default function DashboardSidebar() {
+export default function Sidebar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
     isSidebarExpandedAtom
   );
@@ -153,7 +153,7 @@ export default function DashboardSidebar() {
           </li>
         </ul>
       </aside>
-      {isMobileNavbarOpen && <DashboardMobileNavbar />}
+      {isMobileNavbarOpen && <MobileNavbar />}
     </>
   );
 }

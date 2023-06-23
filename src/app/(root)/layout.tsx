@@ -1,7 +1,7 @@
 import { twMerge } from 'tailwind-merge';
 
-import Footer from '~/components/layout/footer';
-import Header from '~/components/layout/header';
+import Footer from '~/components/layout/root/footer';
+import Header from '~/components/layout/root/header';
 
 const patterns = [
   'pattern-zigzag',

@@ -8,7 +8,7 @@ import { LoaderIcon } from 'lucide-react';
 import useAuth from '~/hooks/useAuth';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
-import AuthLoader from '~/components/common/auth-loader';
+import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
 
 export default function LoginPageClient() {
   const { isLoggedIn, isCheckingAuth } = useAuth();
@@ -22,7 +22,7 @@ export default function LoginPageClient() {
   }, [isLoggedIn, router]);
 
   if (isCheckingAuth) {
-    return <AuthLoader />;
+    return <AuthLoadingIndicator />;
   }
 
   if (isLoggedIn) {

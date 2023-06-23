@@ -10,8 +10,8 @@ import {
   DialogTrigger,
 } from '~/components/ui/dialog';
 
-import AddJobForm from '../common/add-job-form';
 import { Button } from '../ui/button';
+import AddJobForm from './add-job-form';
 
 export const statusColors = {
   pending: 'bg-yellow-500/20 text-yellow-500 dark:bg-yellow-500/10',

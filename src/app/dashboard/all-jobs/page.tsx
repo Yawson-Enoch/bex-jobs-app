@@ -9,9 +9,12 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
-import Jobs from '~/components/all-jobs-page/jobs';
-import PaginationButtons from '~/components/all-jobs-page/pagination-buttons';
-import SubHeader from '~/components/all-jobs-page/sub-header';
+import Filters from '~/components/dashboard/filters';
+import Jobs from '~/components/dashboard/jobs';
+import PaginationButtons from '~/components/dashboard/pagination-buttons';
+import Search from '~/components/dashboard/search';
+import Sort from '~/components/dashboard/sort';
+import ViewTypes from '~/components/dashboard/view-types';
 
 const title = 'All Jobs';
 const description = 'Manage your jobs - View, edit and delete your jobs';
@@ -44,7 +47,14 @@ export const metadata: Metadata = {
 export default function AllJobsPage() {
   return (
     <div className="space-y-6 md:space-y-12">
-      <SubHeader />
+      <div className="flex flex-wrap items-center justify-between gap-3 lg:gap-6">
+        <Search />
+        <div className="flex items-center gap-3 font-medium">
+          <Filters />
+          <Sort />
+        </div>
+        <ViewTypes />
+      </div>
       <Jobs />
       <PaginationButtons />
     </div>

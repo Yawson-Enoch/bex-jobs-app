@@ -1,6 +1,6 @@
 import { LoaderIcon } from 'lucide-react';
 
-export default function AuthLoader() {
+export default function AuthLoadingIndicator() {
   return (
     <div className="mx-auto w-[min(100%,_400px)] space-y-3 rounded-lg border bg-background/70 p-3 md:space-y-6 md:p-6">
       <div role="status" className="flex items-center gap-2">

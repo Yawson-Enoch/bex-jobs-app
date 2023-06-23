@@ -20,7 +20,7 @@ const themes = [
   },
 ];
 
-export default function AnimatedThemeTabs() {
+export default function TabsThemeToggler() {
   const { theme, setTheme } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
 
