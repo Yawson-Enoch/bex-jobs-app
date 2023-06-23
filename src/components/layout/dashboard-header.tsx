@@ -41,7 +41,7 @@ export default function DashboardHeader() {
           ) : (
             <p className="text-xl font-medium">
               Hi,{' '}
-              <span className="text-foreground">{userAuthInfo?.username}</span>
+              <span className="text-foreground">{userAuthInfo?.firstName}</span>
             </p>
           )}
         </div>

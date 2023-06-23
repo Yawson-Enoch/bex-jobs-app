@@ -58,7 +58,7 @@ export default function LoginForm() {
       hasPersistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
       login({
         userId: authInfo.userId,
-        username: authInfo.username,
+        firstName: authInfo.firstName,
         email: authInfo.email,
       });
       toast({

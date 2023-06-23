@@ -12,7 +12,7 @@ import {
 
 type User = {
   userId: string;
-  username: string;
+  firstName: string;
   email: string;
 };
 
@@ -47,7 +47,7 @@ export default function useAuth() {
       const authInfo = parseToken(authToken);
       login({
         userId: authInfo.userId,
-        username: authInfo.username,
+        firstName: authInfo.firstName,
         email: authInfo.email,
       });
     }
