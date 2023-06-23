@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 import useQueryParams from '~/hooks/useQueryParams';
 
@@ -14,16 +14,27 @@ import {
   SelectValue,
 } from '../ui/select';
 
-const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'];
+const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'] as const;
+type TSortOption = (typeof SORT_OPTIONS)[number];
 
 export default function Sort() {
-  const [selectedSortOption, setSelectedSortOption] = useState<string>(
-    SORT_OPTIONS[0]
+  const { setQueryParams, queryParams } = useQueryParams<{
+    sort: TSortOption;
+  }>();
+
+  const { sort } = queryParams;
+
+  const [selectedSortOption, setSelectedSortOption] = useState<TSortOption>(
+    sort ? sort : SORT_OPTIONS[0]
   );
 
-  const { setQueryParams } = useQueryParams();
+  useEffect(() => {
+    if (!sort) {
+      setQueryParams({ sort: selectedSortOption });
+    }
+  }, [selectedSortOption, setQueryParams, sort]);
 
-  const handleSortOptionChange = (value: string) => {
+  const handleSortOptionChange = (value: TSortOption) => {
     setSelectedSortOption(value);
     setQueryParams({ sort: value });
   };
@@ -36,7 +47,7 @@ export default function Sort() {
       <Select
         value={selectedSortOption}
         onValueChange={handleSortOptionChange}
-        defaultValue={SORT_OPTIONS[0]}
+        defaultValue={selectedSortOption}
       >
         <SelectTrigger
           id={id + '-sort'}
