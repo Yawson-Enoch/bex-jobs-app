@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { siteInfo } from '~/config/site';
 
 export default function Footer() {
@@ -7,14 +5,14 @@ export default function Footer() {
     <footer className="h-16 border-t bg-background/70">
       <div className="container flex h-full items-center justify-center gap-1">
         <p>Built by</p>
-        <Link
+        <a
           href={siteInfo.links.twitter}
           target="_blank"
           rel="noreferrer"
           className="font-medium underline underline-offset-4"
         >
           GyBex
-        </Link>
+        </a>
       </div>
     </footer>
   );

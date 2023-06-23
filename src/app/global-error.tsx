@@ -2,7 +2,6 @@
 
 import '~/styles/globals.css';
 
-import Link from 'next/link';
 import { ThemeProvider } from 'next-themes';
 import { twMerge } from 'tailwind-merge';
 
@@ -35,14 +34,14 @@ export default function GlobalError({ reset }: { reset: () => void }) {
             <p className="max-w-md">
               Please try again later or refresh the page. If the problem
               persists, kindly reach out to{' '}
-              <Link
+              <a
                 href={siteInfo.links.twitter}
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium underline underline-offset-4"
               >
                 GyBex
-              </Link>{' '}
+              </a>{' '}
               for assistance.
             </p>
             <Button
