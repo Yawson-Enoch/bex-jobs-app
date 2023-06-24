@@ -4,11 +4,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 import { parseToken } from '~/lib/jwt';
-import {
-  authTokenAtom,
-  hasPersistLoginAtom,
-  sessionTimeoutAtom,
-} from '~/components/auth/login-form';
+import { hasPersistLoginAtom } from '~/components/auth/login-form';
+
+import { authTokenAtom, sessionTimeoutAtom } from './api/useLogin';
 
 type User = {
   userId: string;

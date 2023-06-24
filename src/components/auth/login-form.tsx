@@ -2,43 +2,27 @@
 
 import { useId, useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import { EyeIcon, EyeOffIcon, LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { CustomAPIError, loginUser } from '~/lib/api';
-import { parseToken } from '~/lib/jwt';
 import { loginSchema, type Login } from '~/lib/validations/auth';
-import useAuth from '~/hooks/useAuth';
+import useLogin from '~/hooks/api/useLogin';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Switch } from '../ui/switch';
-import { toast } from '../ui/use-toast';
 
-export const authTokenAtom = atomWithStorage<string | null>(
-  'bexjobs-token',
-  null
-);
-export const sessionTimeoutAtom = atomWithStorage<number | null>(
-  'bexjobs-session-timeout',
-  null
-);
 export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
 
 export default function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [hasPersistLogin, setHasPersistLogin] = useAtom(hasPersistLoginAtom);
-  const setAuthToken = useSetAtom(authTokenAtom);
-  const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
   const id = useId();
-
-  const { login } = useAuth();
 
   const form = useForm<Login>({
     resolver: zodResolver(loginSchema),
@@ -47,30 +31,7 @@ export default function LoginForm() {
   const { register, handleSubmit, formState } = form;
   const { errors, isDirty, isValid } = formState;
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: loginUser,
-    onSuccess: (data) => {
-      const authInfo = parseToken(data.token);
-
-      const sessionTimeoutPersistLogin = authInfo.tokenExpirationDate * 1000; // convert date to milliseconds
-
-      setAuthToken(data.token);
-      hasPersistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
-      login({
-        userId: authInfo.userId,
-        firstName: authInfo.firstName,
-        email: authInfo.email,
-      });
-      toast({
-        description: data.msg,
-      });
-    },
-    onError: (error: CustomAPIError) => {
-      toast({
-        description: error.message,
-      });
-    },
-  });
+  const { mutate, isLoading } = useLogin();
 
   const onSubmit: SubmitHandler<Login> = (data) => {
     mutate(data);
