@@ -64,7 +64,7 @@ export default function LoginForm() {
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
-          <div className="relative">
+          <div className="flex h-10 items-center justify-between gap-2 rounded-md border border-input pr-3 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
             <Input
               type={passwordVisible ? 'text' : 'password'}
               id={id + '-password'}
@@ -73,23 +73,25 @@ export default function LoginForm() {
               autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
+              className="grow border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             <Button
               type="button"
               variant="ghost"
               onClick={() => setPasswordVisible(!passwordVisible)}
-              className="absolute inset-y-0 right-0"
+              className="h-fit self-center rounded-full p-1"
             >
               <span className="sr-only">
                 {passwordVisible ? 'Hide password' : 'Show password'}
               </span>
               {passwordVisible ? (
-                <EyeOffIcon aria-hidden="true" />
+                <EyeOffIcon aria-hidden="true" size={17} />
               ) : (
-                <EyeIcon aria-hidden="true" />
+                <EyeIcon aria-hidden="true" size={17} />
               )}
             </Button>
           </div>
+
           {errors.password && (
             <small className="text-error-form-foreground">
               {errors.password.message}

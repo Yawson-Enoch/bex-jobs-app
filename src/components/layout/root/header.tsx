@@ -8,10 +8,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 h-16 md:px-[0.5rem]">
       <div className="container flex h-full items-center justify-between gap-3 border-b bg-background/70 backdrop-blur-sm md:gap-6 md:rounded-b-full md:rounded-t-none md:border-x md:px-10">
-        <Link
-          href="/"
-          className="rounded-md p-[1px] ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        >
+        <Link href="/">
           <GradientLogo />
         </Link>
         <div className="flex items-center gap-3 md:gap-10">

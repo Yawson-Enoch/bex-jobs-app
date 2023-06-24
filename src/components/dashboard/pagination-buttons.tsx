@@ -43,30 +43,32 @@ export default function PaginationButtons() {
       animate="animate"
     >
       <ReactPaginate
-        breakClassName="hidden lg:block"
+        breakClassName="hidden lg:flex lg:items-center"
         breakLabel={
           <MoreHorizontalIcon size={15} className="text-muted-foreground" />
         }
         nextLabel={
-          <button className="flex items-center gap-1">
+          <>
             <span>NEXT</span>
             <ChevronRightIcon />
-          </button>
+          </>
         }
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={10}
         previousLabel={
-          <button className="flex items-center gap-1">
+          <>
             <ChevronLeftIcon />
             <span>PREV</span>
-          </button>
+          </>
         }
         containerClassName="flex items-center justify-center gap-3"
         pageClassName="hidden lg:block"
         pageLinkClassName="w-10 aspect-square lg:flex items-center justify-center rounded-full border hover:bg-accent"
         activeLinkClassName="bg-primary text-primary-foreground border-0 hover:bg-primary/90"
         disabledClassName="pointer-events-none text-muted-foreground"
+        previousLinkClassName="inline-flex items-center gap-2"
+        nextLinkClassName="inline-flex items-center gap-2"
         renderOnZeroPageCount={null}
         initialPage={initialPage}
       />

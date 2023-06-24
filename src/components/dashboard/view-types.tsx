@@ -5,6 +5,8 @@ import { GridIcon, ListIcon } from 'lucide-react';
 
 import useQueryParams from '~/hooks/useQueryParams';
 
+import { Button } from '../ui/button';
+
 export type TViewTypes = 'grid' | 'list';
 
 export default function ViewTypes() {
@@ -18,16 +20,23 @@ export default function ViewTypes() {
 
   return (
     <div className="flex items-center gap-1">
-      <button onClick={() => handleViewTypeChange('grid')}>GRID</button>
-      <div className="flex h-9 items-center gap-1 rounded-md bg-background p-1 dark:bg-background/90">
-        <button
-          className="relative rounded-sm p-1"
+      <Button
+        variant="ghost"
+        className="h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1"
+        onClick={() => handleViewTypeChange('grid')}
+      >
+        GRID
+      </Button>
+      <div className="flex h-9 items-center gap-1 rounded-lg bg-background p-1 dark:bg-background/90">
+        <Button
+          variant="ghost"
+          className="relative h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1 [&:not(:disabled)]:hover:bg-transparent"
           onClick={() => handleViewTypeChange('grid')}
         >
           {queryParams.view !== 'list' && (
             <motion.div
               aria-hidden="true"
-              className="absolute inset-0 rounded-sm bg-accent"
+              className="absolute inset-0 rounded-md bg-accent"
               layout="position"
               layoutId="display-style"
               transition={{
@@ -36,15 +45,16 @@ export default function ViewTypes() {
             />
           )}
           <GridIcon size={20} className="relative z-[1]" />
-        </button>
-        <button
-          className="relative rounded-sm p-1"
+        </Button>
+        <Button
+          variant="ghost"
+          className="relative h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1 [&:not(:disabled)]:hover:bg-transparent"
           onClick={() => handleViewTypeChange('list')}
         >
           {queryParams.view === 'list' && (
             <motion.div
               aria-hidden="true"
-              className="absolute inset-0 rounded-sm bg-accent"
+              className="absolute inset-0 rounded-md bg-accent"
               layout="position"
               layoutId="display-style"
               transition={{
@@ -53,9 +63,15 @@ export default function ViewTypes() {
             />
           )}
           <ListIcon size={20} className="relative z-[1]" />
-        </button>
+        </Button>
       </div>
-      <button onClick={() => handleViewTypeChange('list')}>LIST</button>
+      <Button
+        variant="ghost"
+        className="h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1"
+        onClick={() => handleViewTypeChange('list')}
+      >
+        LIST
+      </Button>
     </div>
   );
 }

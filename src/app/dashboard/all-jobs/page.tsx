@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 export default function AllJobsPage() {
   return (
     <div className="space-y-6 md:space-y-12">
-      <div className="flex flex-wrap items-center justify-between gap-3 lg:gap-6">
+      <div className="flex flex-wrap items-center justify-between gap-3 md:gap-6 [&>*]:grow [&>*]:lg:grow-0">
         <Search />
         <div className="flex items-center gap-3 font-medium">
           <Filters />

@@ -63,7 +63,6 @@ export default function SignupForm() {
               placeholder="enter last name"
               autoComplete="name"
               autoCorrect="off"
-              autoFocus
               disabled={isLoading}
             />
             {errors.lastName && (

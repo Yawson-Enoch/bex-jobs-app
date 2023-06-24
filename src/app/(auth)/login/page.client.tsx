@@ -31,7 +31,7 @@ export default function LoginPageClient() {
         <p className="font-medium text-foreground md:text-lg">
           Hooray! You are logged in
         </p>
-        <div role="status" className="flex items-center gap-1">
+        <div role="status" className="flex items-center gap-2">
           <LoaderIcon aria-hidden="true" className="h-5 w-5 animate-spin" />
           <p className="text-sm">Redirecting to dashboard...</p>
         </div>

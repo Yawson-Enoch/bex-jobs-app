@@ -7,6 +7,9 @@ import { twMerge } from 'tailwind-merge';
 import useDebounce from '~/hooks/useDebounce';
 import useQueryParams from '~/hooks/useQueryParams';
 
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+
 export default function Search() {
   const [searchValue, setSearchValue] = useState('');
 
@@ -22,27 +25,28 @@ export default function Search() {
   }, [debouncedSearchValue, deleteQueryParam, setQueryParams]);
 
   return (
-    <div className="group/search grid h-9 grid-cols-[auto,_1fr,_auto] items-center gap-2 rounded-md bg-muted pl-2 pr-1 text-sm ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+    <div className="group/search grid h-9 grid-cols-[auto,_1fr,_auto] content-center items-center rounded-md bg-muted pl-3 pr-2 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
       <SearchIcon
         size={20}
         className="text-muted-foreground group-focus-within/search:text-foreground"
       />
-      <input
+      <Input
         type="search"
-        placeholder="Search job..."
-        className="bg-transparent placeholder:truncate placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        placeholder="Search for job..."
+        className="border-0 placeholder:truncate placeholder:italic focus-visible:ring-0 focus-visible:ring-offset-0"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value.trim())}
       />
-      <button
+      <Button
+        variant="ghost"
         className={twMerge(
-          'pointer-events-none invisible rounded-full border-2 border-transparent p-0.5 focus-visible:border-background focus-visible:outline-none active:border-background',
+          'pointer-events-none invisible h-fit rounded-full p-1',
           searchValue !== '' && 'pointer-events-auto visible'
         )}
         onClick={() => setSearchValue('')}
       >
         <XIcon size={17} />
-      </button>
+      </Button>
     </div>
   );
 }

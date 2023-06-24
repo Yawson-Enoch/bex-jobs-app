@@ -101,7 +101,7 @@ export default function IndexPageClient() {
       >
         <motion.h1
           variants={headingTitle(isMobile)}
-          className="bg-gradient-to-r from-transparent from-35% to-foreground to-65% bg-clip-text text-transparent"
+          className="mx-auto w-fit bg-gradient-to-b from-transparent to-foreground bg-clip-text text-transparent"
         >
           BexJobs
         </motion.h1>
@@ -125,7 +125,7 @@ export default function IndexPageClient() {
         href={isLoggedIn ? '/dashboard' : '/login'}
         className={twMerge(
           buttonVariants({ size: 'lg' }),
-          'mx-auto font-medium md:text-lg'
+          'mx-auto bg-gradient-to-r from-primary to-secondary font-bold'
         )}
         variants={mainLink}
       >

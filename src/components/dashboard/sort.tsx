@@ -42,7 +42,7 @@ export default function Sort() {
   const id = useId();
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-2">
       <Label htmlFor={id + '-sort'}>SORT</Label>
       <Select
         value={selectedSortOption}

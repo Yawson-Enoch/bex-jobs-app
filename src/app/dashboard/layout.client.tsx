@@ -1,12 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import { useAtomValue } from 'jotai';
 import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
+import useMediaQuery from '~/hooks/useMediaQuery';
 import { buttonVariants } from '~/components/ui/button';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
-import Header from '~/components/layout/dashboard/header';
+import Header, {
+  isMobileNavbarOpenAtom,
+} from '~/components/layout/dashboard/header';
+import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
 import Sidebar from '~/components/layout/dashboard/sidebar';
 
 function DecorativePattern() {
@@ -46,6 +51,9 @@ export default function DashboardLayoutClient({
 }: {
   children: React.ReactNode;
 }) {
+  const isMobileNavbarOpen = useAtomValue(isMobileNavbarOpenAtom);
+
+  const { matches } = useMediaQuery('(min-width: 768px)');
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
   return (
@@ -66,6 +74,7 @@ export default function DashboardLayoutClient({
         <>
           <Header />
           <Sidebar />
+          {isMobileNavbarOpen && !matches && <MobileNavbar />}
           <main className="dashboard-main container py-6 md:py-12">
             {children}
           </main>
