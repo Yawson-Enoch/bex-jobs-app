@@ -1,23 +1,19 @@
 'use client';
 
 import { useId } from 'react';
-import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
 import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { CustomAPIError, registerUser } from '~/lib/api';
 import { signupSchema, type Signup } from '~/lib/validations/auth';
+import useSignup from '~/hooks/api/useSignup';
 
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { toast } from '../ui/use-toast';
 
 export default function SignupForm() {
   const id = useId();
-  const router = useRouter();
 
   const form = useForm<Signup>({
     resolver: zodResolver(signupSchema),
@@ -26,20 +22,7 @@ export default function SignupForm() {
   const { register, handleSubmit, formState } = form;
   const { errors, isDirty, isValid } = formState;
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: registerUser,
-    onSuccess: (data) => {
-      toast({
-        description: data.msg,
-      });
-      router.push('/login');
-    },
-    onError: (error: CustomAPIError) => {
-      toast({
-        description: error.message,
-      });
-    },
-  });
+  const { mutate, isLoading } = useSignup();
 
   const onSubmit: SubmitHandler<Signup> = (data) => {
     mutate(data);
