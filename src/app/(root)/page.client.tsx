@@ -101,7 +101,7 @@ export default function IndexPageClient() {
       >
         <motion.h1
           variants={headingTitle(isMobile)}
-          className="bg-gradient-to-tr from-transparent to-foreground to-70% bg-clip-text text-transparent"
+          className="bg-gradient-to-r from-transparent from-35% to-foreground to-65% bg-clip-text text-transparent"
         >
           BexJobs
         </motion.h1>

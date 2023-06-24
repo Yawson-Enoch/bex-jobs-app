@@ -38,11 +38,11 @@ export default function StatsLineChart() {
             fontWeight: 500,
           }}
           itemStyle={{
-            color: 'var(--_primary)',
+            color: 'rgb(var(--secondary))',
             textTransform: 'capitalize',
             fontWeight: 500,
           }}
-          cursor={{ stroke: 'var(--_primary)', strokeOpacity: 0.5 }}
+          cursor={{ stroke: 'rgb(var(--primary))', strokeOpacity: 0.5 }}
         />
         <Line
           type="monotone"
@@ -52,7 +52,7 @@ export default function StatsLineChart() {
           dot={{ r: 2, fill: 'rgb(var(--foreground))' }}
           activeDot={{
             r: 4,
-            fill: 'var(--_primary)',
+            fill: 'rgb(var(--primary))',
             stroke: 'rgb(var(--foreground))',
           }}
         />

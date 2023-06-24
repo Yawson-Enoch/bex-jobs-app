@@ -87,7 +87,7 @@ export default function StatsBarChart() {
             fontWeight: 500,
           }}
           itemStyle={{
-            color: 'var(--_primary)',
+            color: 'rgb(var(--secondary))',
             textTransform: 'capitalize',
             fontWeight: 500,
           }}
