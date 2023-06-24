@@ -57,6 +57,8 @@ const addJobSchema = z.object({
 });
 
 type Job = z.infer<typeof addJobSchema>;
+type TStatusOption = z.infer<typeof addJobSchema.shape.jobStatus>;
+type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
 
 export default function AddJobForm({ isModalForm = false }) {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
@@ -153,7 +155,9 @@ export default function AddJobForm({ isModalForm = false }) {
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={
+                    field.onChange as (value: TStatusOption) => void
+                  }
                   defaultValue={field.value}
                   key={resetSelectKey}
                 >
@@ -186,7 +190,10 @@ export default function AddJobForm({ isModalForm = false }) {
               name="jobType"
               control={control}
               render={({ field }) => (
-                <Select onValueChange={field.onChange} key={resetSelectKey}>
+                <Select
+                  onValueChange={field.onChange as (value: TJobType) => void}
+                  key={resetSelectKey}
+                >
                   <SelectTrigger id={id + '-jobType'}>
                     <SelectValue placeholder="Select job type" />
                   </SelectTrigger>
