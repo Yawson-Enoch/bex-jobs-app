@@ -1,6 +1,7 @@
 import '~/styles/globals.css';
 
 import type { Metadata } from 'next';
+import NextTopLoader from 'nextjs-toploader';
 import { twMerge } from 'tailwind-merge';
 
 import { siteInfo } from '~/config/site';
@@ -54,6 +55,11 @@ export default function WrapperLayout({
       <head />
       <body className={twMerge('font-sans antialiased', fontSans.variable)}>
         <Providers>
+          <NextTopLoader
+            color="rgb(var(--secondary))"
+            showSpinner={false}
+            shadow={false}
+          />
           {children}
           <DecorativeBlobs />
           <Toaster />
