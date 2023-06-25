@@ -34,13 +34,14 @@ export const metadata: Metadata = {
   creator: 'GyBex',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: '(prefers-color-scheme: dark)', color: '#030711' },
   ],
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon-32x32.png',
+    shortcut: '/shortcut-icon.png',
     apple: '/apple-touch-icon.png',
   },
+  manifest: '/manifest.json',
 };
 
 export default function WrapperLayout({
