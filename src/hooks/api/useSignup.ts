@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 
-import { BASE_URL, CustomAPIError } from '~/lib/api';
+import { BASE_URL } from '~/lib/api';
 import type { Signup } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
 
@@ -21,10 +21,7 @@ const signupUser = async (payload: Signup): Promise<TResponse> => {
   const data: TResponse = await response.json();
 
   if (!response.ok) {
-    const error = new Error(data.msg || 'Failed to register') as CustomAPIError;
-    error.info = data;
-    error.status = response.status;
-    throw error;
+    throw new Error(data.msg || 'Failed to register');
   }
 
   return data;
@@ -41,7 +38,7 @@ export default function useSignup() {
       });
       router.push('/login');
     },
-    onError: (error: CustomAPIError) => {
+    onError: (error: Error) => {
       toast({
         description: error.message,
       });

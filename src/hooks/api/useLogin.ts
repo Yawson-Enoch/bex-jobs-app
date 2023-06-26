@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
-import { BASE_URL, CustomAPIError } from '~/lib/api';
+import { BASE_URL } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
 import type { Login } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
@@ -27,10 +27,7 @@ const loginUser = async (payload: Login): Promise<TResponse> => {
   const data: TResponse = await response.json();
 
   if (!response.ok) {
-    const error = new Error(data.msg || 'Failed to login') as CustomAPIError;
-    error.info = data;
-    error.status = response.status;
-    throw error;
+    throw new Error(data.msg || 'Failed to login');
   }
 
   return data;
@@ -70,7 +67,7 @@ export default function useLogin() {
         description: data.msg,
       });
     },
-    onError: (error: CustomAPIError) => {
+    onError: (error: Error) => {
       toast({
         description: error.message,
       });
