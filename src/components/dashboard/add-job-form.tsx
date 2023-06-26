@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderIcon } from 'lucide-react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -246,6 +247,7 @@ export default function AddJobForm({ isModalForm = false }) {
           </div>
         </div>
       </div>
+      <DevTool control={control} />
     </form>
   );
 }

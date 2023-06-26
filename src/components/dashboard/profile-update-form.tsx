@@ -1,6 +1,7 @@
 'use client';
 
 import { useId } from 'react';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -18,7 +19,7 @@ export default function ProfileUpdateForm() {
     resolver: zodResolver(profileSchema),
     mode: 'onChange',
   });
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState, control } = form;
   const { errors, isDirty, isValid, isSubmitting } = formState;
 
   const onSubmit: SubmitHandler<Profile> = (data): Promise<void> => {
@@ -109,6 +110,7 @@ export default function ProfileUpdateForm() {
           </Button>
         </div>
       </div>
+      <DevTool control={control} />
     </form>
   );
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useId } from 'react';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -19,7 +20,7 @@ export default function SignupForm() {
     resolver: zodResolver(signupSchema),
     mode: 'onChange',
   });
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState, control } = form;
   const { errors, isDirty, isValid } = formState;
 
   const { mutate, isLoading } = useSignup();
@@ -143,6 +144,7 @@ export default function SignupForm() {
           )}
         </Button>
       </div>
+      <DevTool control={control} />
     </form>
   );
 }

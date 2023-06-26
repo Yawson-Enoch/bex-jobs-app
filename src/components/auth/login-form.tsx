@@ -1,6 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
+import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -28,7 +29,7 @@ export default function LoginForm() {
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   });
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState, control } = form;
   const { errors, isDirty, isValid } = formState;
 
   const { mutate, isLoading } = useLogin();
@@ -137,6 +138,7 @@ export default function LoginForm() {
           )}
         </Button>
       </div>
+      <DevTool control={control} />
     </form>
   );
 }
