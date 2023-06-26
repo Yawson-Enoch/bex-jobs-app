@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 
-import { BASE_URL_DEV, CustomAPIError } from '~/lib/api';
+import { BASE_URL, CustomAPIError } from '~/lib/api';
 import type { Signup } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
 
@@ -10,7 +10,7 @@ type TResponse = {
 };
 
 const signupUser = async (payload: Signup): Promise<TResponse> => {
-  const response = await fetch(`${BASE_URL_DEV}/auth/register`, {
+  const response = await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

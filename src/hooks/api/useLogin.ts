@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 
-import { BASE_URL_DEV, CustomAPIError } from '~/lib/api';
+import { BASE_URL, CustomAPIError } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
 import type { Login } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
@@ -16,7 +16,7 @@ type TResponse = {
 };
 
 const loginUser = async (payload: Login): Promise<TResponse> => {
-  const response = await fetch(`${BASE_URL_DEV}/auth/login`, {
+  const response = await fetch(`${BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

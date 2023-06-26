@@ -10,6 +10,7 @@ import {
   UserIcon,
 } from 'lucide-react';
 
+import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
 import { Button } from '~/components/ui/button';
 import {
@@ -28,9 +29,11 @@ export default function Header() {
     isMobileNavbarOpenAtom
   );
 
-  const { isCheckingAuth, userAuthInfo, logOut } = useAuth();
+  const { logOut } = useAuth();
 
   const router = useRouter();
+
+  const { data, isLoading, isError, error } = useGetUser();
 
   return (
     <header className="dashboard-header sticky top-0 z-10 h-16 border-b bg-background/70 backdrop-blur-sm">
@@ -44,22 +47,21 @@ export default function Header() {
           <span className="sr-only">Open Mobile Nav</span>
           <MenuIcon aria-hidden="true" />
         </button>
-        <div className="hidden md:block">
-          {isCheckingAuth ? (
-            <div role="status">
-              <span className="sr-only">Getting user info...</span>
-              <LoaderIcon
-                aria-hidden="true"
-                className="mr-2 h-5 w-5 animate-spin"
-              />
-            </div>
-          ) : (
-            <p className="text-xl font-medium">
-              Hi,{' '}
-              <span className="text-foreground">{userAuthInfo?.firstName}</span>
-            </p>
-          )}
-        </div>
+        {isLoading ? (
+          <div role="status">
+            <span className="sr-only">Fetching user...</span>
+            <LoaderIcon
+              aria-hidden="true"
+              className="mr-2 h-5 w-5 animate-spin"
+            />
+          </div>
+        ) : isError ? (
+          <p>{error.message}</p>
+        ) : (
+          <p className="text-xl font-medium">
+            Hi, <span className="text-foreground">{data.user.firstName}</span>
+          </p>
+        )}
         <div className="flex items-center gap-3 md:gap-6">
           <TabsThemeToggler />
           <DropdownMenu>
