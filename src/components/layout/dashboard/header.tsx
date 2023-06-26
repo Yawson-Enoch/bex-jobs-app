@@ -20,6 +20,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
+import ErrorDisplay from '~/components/common/error-display';
 import TabsThemeToggler from '~/components/common/tabs-theme-toggler';
 
 export const isMobileNavbarOpenAtom = atom(false);
@@ -37,7 +38,7 @@ export default function Header() {
 
   return (
     <header className="dashboard-header sticky top-0 z-10 h-16 border-b bg-background/70 backdrop-blur-sm">
-      <div className="container flex h-full items-center justify-between">
+      <div className="container flex h-full items-center justify-between gap-3">
         <button
           aria-expanded={isMobileNavbarOpen}
           aria-controls="mobile-navbar"
@@ -52,11 +53,11 @@ export default function Header() {
             <span className="sr-only">Fetching user...</span>
             <LoaderIcon
               aria-hidden="true"
-              className="mr-2 h-5 w-5 animate-spin"
+              className="aspect-square w-5 animate-spin"
             />
           </div>
         ) : isError ? (
-          <p>{error.message}</p>
+          <ErrorDisplay msg={error.message} />
         ) : (
           <p className="text-xl font-medium">
             Hi, <span className="text-foreground">{data.user.firstName}</span>

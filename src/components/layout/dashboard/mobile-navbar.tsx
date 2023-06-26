@@ -14,8 +14,10 @@ import {
   XIcon,
 } from 'lucide-react';
 
+import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
+import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
 
 import { isMobileNavbarOpenAtom } from './header';
@@ -48,7 +50,9 @@ export default function MobileNavbar() {
     isMobileNavbarOpenAtom
   );
 
-  const { isCheckingAuth, userAuthInfo, logOut } = useAuth();
+  const { logOut } = useAuth();
+
+  const { data, isLoading, isError, error } = useGetUser();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -82,18 +86,19 @@ export default function MobileNavbar() {
         </div>
       </section>
       <section className="container space-y-6">
-        {isCheckingAuth ? (
+        {isLoading ? (
           <div role="status">
-            <span className="sr-only">Loading user info...</span>
+            <span className="sr-only">Fetching user...</span>
             <LoaderIcon
               aria-hidden="true"
-              className="mr-2 h-5 w-5 animate-spin"
+              className="aspect-square w-5 animate-spin"
             />
           </div>
+        ) : isError ? (
+          <ErrorDisplay msg={error.message} />
         ) : (
-          <p className="px-2 text-xl font-medium">
-            Hi,{' '}
-            <span className="text-foreground">{userAuthInfo?.firstName}</span>
+          <p className="text-xl font-medium">
+            Hi, <span className="text-foreground">{data.user.firstName}</span>
           </p>
         )}
         <ul className="flex flex-col gap-3 font-medium">
