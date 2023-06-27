@@ -3,12 +3,12 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { LoaderIcon } from 'lucide-react';
 
 import useAuth from '~/hooks/useAuth';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
+import LoadingIndicator from '~/components/common/loading-indicator';
 
 export default function LoginPageClient() {
   const { isLoggedIn, isCheckingAuth } = useAuth();
@@ -28,13 +28,8 @@ export default function LoginPageClient() {
   if (isLoggedIn) {
     return (
       <div className="mx-auto grid w-[min(100%,_400px)] place-content-center space-y-3 rounded-lg border bg-background/70 p-3 md:space-y-6 md:p-6">
-        <p className="font-medium text-foreground md:text-lg">
-          Hooray! You are logged in
-        </p>
-        <div role="status" className="flex items-center gap-2">
-          <LoaderIcon aria-hidden="true" className="h-5 w-5 animate-spin" />
-          <p className="text-sm">Redirecting to dashboard...</p>
-        </div>
+        <h4>Hooray! You are logged in</h4>
+        <LoadingIndicator type="both" msg="Redirecting to dashboard..." />
       </div>
     );
   }

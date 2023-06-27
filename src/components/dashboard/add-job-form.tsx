@@ -3,11 +3,11 @@
 import { useId, useState } from 'react';
 import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoaderIcon } from 'lucide-react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
 
+import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -233,13 +233,7 @@ export default function AddJobForm({ isModalForm = false }) {
               disabled={isSubmitting || !isValid || !isDirty}
             >
               {isSubmitting ? (
-                <div role="status">
-                  <span className="sr-only">Adding new job...</span>
-                  <LoaderIcon
-                    aria-hidden="true"
-                    className="mr-2 h-5 w-5 animate-spin"
-                  />
-                </div>
+                <LoadingIndicator msg="Adding new job..." />
               ) : (
                 'Add Job'
               )}

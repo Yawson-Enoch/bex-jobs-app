@@ -5,12 +5,13 @@ import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
-import { EyeIcon, EyeOffIcon, LoaderIcon } from 'lucide-react';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { loginSchema, type Login } from '~/lib/validations/auth';
 import useLogin from '~/hooks/api/useLogin';
 
+import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -125,17 +126,7 @@ export default function LoginForm() {
           className="w-full"
           disabled={isLoading || !isValid || !isDirty}
         >
-          {isLoading ? (
-            <div role="status">
-              <span className="sr-only">Logging in...</span>
-              <LoaderIcon
-                aria-hidden="true"
-                className="mr-2 h-5 w-5 animate-spin"
-              />
-            </div>
-          ) : (
-            'Log in'
-          )}
+          {isLoading ? <LoadingIndicator msg="Logging in..." /> : 'Log in'}
         </Button>
       </div>
       <DevTool control={control} />

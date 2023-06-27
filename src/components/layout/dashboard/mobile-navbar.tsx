@@ -7,7 +7,6 @@ import { useAtom } from 'jotai';
 import {
   BarChart3Icon,
   BriefcaseIcon,
-  LoaderIcon,
   LogOutIcon,
   PlusCircleIcon,
   UserCircleIcon,
@@ -19,6 +18,7 @@ import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
+import LoadingIndicator from '~/components/common/loading-indicator';
 
 import { isMobileNavbarOpenAtom } from './header';
 
@@ -87,13 +87,7 @@ export default function MobileNavbar() {
       </section>
       <section className="container space-y-6">
         {isLoading ? (
-          <div role="status">
-            <span className="sr-only">Fetching user...</span>
-            <LoaderIcon
-              aria-hidden="true"
-              className="aspect-square w-5 animate-spin"
-            />
-          </div>
+          <LoadingIndicator msg="Fetching user..." />
         ) : isError ? (
           <ErrorDisplay msg={error.message} />
         ) : (

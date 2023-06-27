@@ -2,13 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { atom, useAtom } from 'jotai';
-import {
-  LoaderIcon,
-  LogOutIcon,
-  MenuIcon,
-  UserCircleIcon,
-  UserIcon,
-} from 'lucide-react';
+import { LogOutIcon, MenuIcon, UserCircleIcon, UserIcon } from 'lucide-react';
 
 import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
@@ -21,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
 import ErrorDisplay from '~/components/common/error-display';
+import LoadingIndicator from '~/components/common/loading-indicator';
 import TabsThemeToggler from '~/components/common/tabs-theme-toggler';
 
 export const isMobileNavbarOpenAtom = atom(false);
@@ -49,13 +44,7 @@ export default function Header() {
           <MenuIcon aria-hidden="true" />
         </button>
         {isLoading ? (
-          <div role="status">
-            <span className="sr-only">Fetching user...</span>
-            <LoaderIcon
-              aria-hidden="true"
-              className="aspect-square w-5 animate-spin"
-            />
-          </div>
+          <LoadingIndicator msg="Fetching user..." />
         ) : isError ? (
           <ErrorDisplay msg={error.message} />
         ) : (

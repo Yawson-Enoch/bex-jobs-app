@@ -3,11 +3,11 @@
 import { useId } from 'react';
 import { DevTool } from '@hookform/devtools';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoaderIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Profile, profileSchema } from '~/lib/validations/auth';
 
+import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -97,13 +97,7 @@ export default function ProfileUpdateForm() {
             className="flex w-full"
           >
             {isSubmitting ? (
-              <div role="status">
-                <span className="sr-only">Updating profile...</span>
-                <LoaderIcon
-                  aria-hidden="true"
-                  className="mr-2 h-5 w-5 animate-spin"
-                />
-              </div>
+              <LoadingIndicator msg="Updating profile..." />
             ) : (
               'Update Profile'
             )}

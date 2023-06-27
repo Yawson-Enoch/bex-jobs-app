@@ -1,15 +1,11 @@
 'use client';
 
-import {
-  CalendarCheckIcon,
-  CalendarOffIcon,
-  ClockIcon,
-  LoaderIcon,
-} from 'lucide-react';
+import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 
 import useGetStats from '~/hooks/api/useStats';
 
 import ErrorDisplay from '../common/error-display';
+import LoadingIndicator from '../common/loading-indicator';
 
 export default function StatsSummary() {
   const { data, isLoading, isError, error } = useGetStats();
@@ -19,13 +15,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <div role="status">
-              <span className="sr-only">Fetching status...</span>
-              <LoaderIcon
-                aria-hidden="true"
-                className="aspect-square w-5 animate-spin"
-              />
-            </div>
+            <LoadingIndicator msg="Fetching stats..." />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
@@ -46,13 +36,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <div role="status">
-              <span className="sr-only">Fetching status...</span>
-              <LoaderIcon
-                aria-hidden="true"
-                className="aspect-square w-5 animate-spin"
-              />
-            </div>
+            <LoadingIndicator msg="Fetching stats..." />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
@@ -73,13 +57,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <div role="status">
-              <span className="sr-only">Fetching status...</span>
-              <LoaderIcon
-                aria-hidden="true"
-                className="aspect-square w-5 animate-spin"
-              />
-            </div>
+            <LoadingIndicator msg="Fetching stats..." />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (

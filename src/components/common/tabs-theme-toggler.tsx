@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { LaptopIcon, LoaderIcon, MoonIcon, SunIcon } from 'lucide-react';
+import { LaptopIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+import LoadingIndicator from './loading-indicator';
 
 const themes = [
   {
@@ -29,12 +31,7 @@ export default function TabsThemeToggler() {
   }, [theme]);
 
   if (isLoading) {
-    return (
-      <div role="status">
-        <span className="sr-only">Checking theme toggler state...</span>
-        <LoaderIcon aria-hidden="true" className="mr-2 h-5 w-5 animate-spin" />
-      </div>
-    );
+    return <LoadingIndicator msg="Checking theme toggler state..." />;
   }
 
   return (
