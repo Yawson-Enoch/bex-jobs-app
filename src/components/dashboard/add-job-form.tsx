@@ -61,7 +61,13 @@ type Job = z.infer<typeof addJobSchema>;
 type TStatusOption = z.infer<typeof addJobSchema.shape.jobStatus>;
 type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
 
-export default function AddJobForm({ isModalForm = false }) {
+export default function AddJobForm({
+  className,
+  isModalForm = false,
+}: {
+  className?: string;
+  isModalForm: boolean;
+}) {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 
   const id = useId();
@@ -95,8 +101,7 @@ export default function AddJobForm({ isModalForm = false }) {
       <div
         className={twMerge(
           'grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] items-start gap-3 md:gap-6',
-          isModalForm &&
-            'grid grid-cols-[repeat(auto-fit,_minmax(min(10rem,_100%),_1fr))]'
+          className
         )}
       >
         <div className="space-y-1">
