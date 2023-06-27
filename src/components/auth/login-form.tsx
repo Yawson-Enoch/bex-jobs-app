@@ -129,7 +129,7 @@ export default function LoginForm() {
           {isLoading ? <LoadingIndicator msg="Logging in..." /> : 'Log in'}
         </Button>
       </div>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </form>
   );
 }

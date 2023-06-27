@@ -134,7 +134,7 @@ export default function SignupForm() {
           {isLoading ? <LoadingIndicator msg="Signing up..." /> : 'Sign up'}
         </Button>
       </div>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </form>
   );
 }

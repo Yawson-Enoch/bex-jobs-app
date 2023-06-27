@@ -32,7 +32,17 @@ export default function Header() {
   const { data, isLoading, isError, error } = useGetUser();
 
   return (
-    <header className="dashboard-header sticky top-0 z-10 h-16 border-b bg-background/70 backdrop-blur-sm">
+    <header
+      className="dashboard-header sticky top-0 z-10 h-16 border-b"
+      style={{
+        backgroundImage: `radial-gradient(
+        transparent 1px,
+        rgb(var(--background)) 1px
+  )`,
+        backgroundSize: '3px 3px',
+        backdropFilter: 'blur(4px)',
+      }}
+    >
       <div className="container flex h-full items-center justify-between gap-3">
         <button
           aria-expanded={isMobileNavbarOpen}
