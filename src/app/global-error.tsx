@@ -22,14 +22,9 @@ function DecorativePattern() {
 export default function GlobalError({ reset }: { reset: () => void }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={twMerge(
-          'min-h-screen font-sans antialiased',
-          fontSans.variable
-        )}
-      >
+      <body className={twMerge('font-sans antialiased', fontSans.variable)}>
         <ThemeProvider attribute="class" enableSystem defaultTheme="dark">
-          <div className="container grid min-h-screen place-content-center gap-3 text-center md:gap-6">
+          <div className="min-h-dm container grid place-content-center gap-3 text-center md:gap-6">
             <h2>Something went wrong!</h2>
             <p className="max-w-md">
               Please try again later or refresh the page. If the problem

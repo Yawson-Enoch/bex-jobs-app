@@ -57,7 +57,7 @@ export default function DashboardLayoutClient({
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
   return (
-    <div className="dashboard-grid-container relative min-h-screen">
+    <div className="dashboard-grid-container min-h-dm relative">
       {isCheckingAuth ? (
         <main className="dashboard-main container py-6 md:py-12">
           <div className="grid h-full place-content-center">

@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative grid min-h-screen grid-rows-[auto,_1fr,_auto]">
+    <div className="min-h-dm relative grid grid-rows-[auto,_1fr,_auto]">
       <Header />
       <main className="container py-6 md:py-12">{children}</main>
       <Footer />

@@ -14,7 +14,7 @@ function DecorativePattern() {
 
 export default function NotFound() {
   return (
-    <div className="relative grid min-h-screen place-content-center">
+    <div className="min-h-dm relative grid place-content-center">
       <main className="container space-y-3 text-center">
         <h2>Oops! Page not found</h2>
         <div className="gradient-text-stroke tracking-wide md:animate-in md:slide-in-from-top-7 md:duration-700 md:ease-linear">

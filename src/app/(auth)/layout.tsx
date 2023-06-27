@@ -15,7 +15,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative grid min-h-screen grid-rows-[auto,_1fr]">
+    <div className="min-h-dm relative grid grid-rows-[auto,_1fr]">
       <Header />
       <main className="container grid items-center py-6 md:py-12">
         {children}

@@ -209,3 +209,14 @@
     -webkit-text-stroke-width: 15px;
   }
 }
+
+@layer utilities {
+  .min-h-dm {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+  .max-h-dm {
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
+}
