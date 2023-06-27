@@ -77,7 +77,7 @@ export default function MobileNavbar() {
           <button
             aria-expanded={isMobileNavbarOpen}
             aria-controls="mobile-navbar"
-            className="text-error-foreground"
+            className="text-destructive"
             onClick={() => setIsMobileNavbarOpen(false)}
           >
             <span className="sr-only">Close Mobile Navbar</span>
