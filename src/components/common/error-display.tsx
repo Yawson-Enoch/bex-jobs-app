@@ -1,36 +1,10 @@
 import { AlertCircleIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-function DisplayOptions({
-  type,
-  msg = 'Something went wrong',
-}: {
-  type?: 'icon' | 'text';
-  msg: string;
-}) {
-  if (type === 'icon') {
-    return (
-      <>
-        <span className="sr-only">{msg}</span>
-        <AlertCircleIcon aria-hidden="true" />
-      </>
-    );
-  }
-  if (type === 'text') {
-    return <p className="truncate text-sm text-destructive">{msg}</p>;
-  }
-  return (
-    <>
-      <AlertCircleIcon aria-hidden="true" />
-      <p className="truncate text-sm text-destructive">{msg}</p>
-    </>
-  );
-}
-
 export default function ErrorDisplay({
-  type,
   className,
-  msg,
+  type,
+  msg = 'Something went wrong!',
 }: {
   type?: 'icon' | 'text';
   className?: string;
@@ -44,7 +18,17 @@ export default function ErrorDisplay({
         className
       )}
     >
-      <DisplayOptions type={type} msg={msg} />
+      <AlertCircleIcon
+        aria-hidden="true"
+        className={type === 'text' ? 'hidden' : 'inline-block'}
+      />
+      <p
+        className={
+          type === 'icon' ? 'sr-only' : 'truncate text-sm text-destructive'
+        }
+      >
+        {msg}
+      </p>
     </div>
   );
 }

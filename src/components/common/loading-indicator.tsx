@@ -1,39 +1,13 @@
 import { LoaderIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-function DisplayOptions({
+export default function LoadingIndicator({
+  className,
   type = 'icon',
   msg = 'Loading...',
 }: {
-  type?: 'icon' | 'text' | 'both';
-  msg: string;
-}) {
-  if (type === 'icon') {
-    return (
-      <>
-        <span className="sr-only">{msg}</span>
-        <LoaderIcon aria-hidden="true" className="animate-spin" />
-      </>
-    );
-  }
-  if (type === 'text') {
-    return <p className="truncate">{msg}</p>;
-  }
-  return (
-    <>
-      <LoaderIcon aria-hidden="true" className="animate-spin" />
-      <p className="truncate">{msg}</p>
-    </>
-  );
-}
-
-export default function LoadingIndicator({
-  type,
-  className,
-  msg,
-}: {
-  type?: 'icon' | 'text' | 'both';
   className?: string;
+  type?: 'icon' | 'text' | 'both';
   msg: string;
 }) {
   return (
@@ -44,7 +18,11 @@ export default function LoadingIndicator({
         className
       )}
     >
-      <DisplayOptions type={type} msg={msg} />
+      <LoaderIcon
+        aria-hidden="true"
+        className={type === 'text' ? 'hidden' : 'inline-block animate-spin'}
+      />
+      <p className={type === 'icon' ? 'sr-only' : 'truncate'}>{msg}</p>
     </div>
   );
 }
