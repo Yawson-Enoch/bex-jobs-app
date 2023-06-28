@@ -107,7 +107,6 @@ export default function Sidebar() {
         <Button
           aria-expanded={isSidebarExpanded}
           aria-controls="dashboard-sidebar"
-          size="sm"
           className={twMerge(
             'p-2',
             isSidebarExpanded && 'ml-auto rounded-lg rounded-r-none p-0'
@@ -175,7 +174,7 @@ export default function Sidebar() {
                     onClick={() => logOut()}
                   />
                 </TooltipTrigger>
-                <TooltipContent side="right" align="start" alignOffset={-10}>
+                <TooltipContent side="right" align="start" alignOffset={-12}>
                   <span>Log out</span>
                 </TooltipContent>
               </Tooltip>

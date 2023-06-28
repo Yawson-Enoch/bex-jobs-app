@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
-import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
-import { buttonVariants } from '~/components/ui/button';
+import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
 
 const MotionLink = motion(Link);
@@ -121,16 +120,18 @@ export default function IndexPageClient() {
         hassle of managing your job search with spreadsheets or sticky notes,
         and say hello to BexJobs - your ultimate job search companion.
       </p>
-      <MotionLink
-        href={isLoggedIn ? '/dashboard' : '/login'}
-        className={twMerge(
-          buttonVariants({ size: 'lg' }),
-          'mx-auto bg-gradient-to-r from-primary to-secondary font-bold'
-        )}
-        variants={mainLink}
+      <Button
+        asChild
+        size="lg"
+        className="mx-auto bg-gradient-to-r from-primary to-secondary text-lg font-bold"
       >
-        Start Managing Your Jobs
-      </MotionLink>
+        <MotionLink
+          href={isLoggedIn ? '/dashboard' : '/login'}
+          variants={mainLink}
+        >
+          Start Managing Your Jobs
+        </MotionLink>
+      </Button>
     </motion.div>
   );
 }

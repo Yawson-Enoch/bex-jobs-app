@@ -17,7 +17,7 @@ export default function DropdownThemeToggler() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="w-9 px-0">
+        <Button variant="ghost" className="w-9 px-0">
           <SunIcon
             aria-hidden="true"
             className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 sm:h-6 sm:w-6"

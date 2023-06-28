@@ -30,7 +30,7 @@ export default function ViewTypes() {
       <div className="flex h-9 items-center gap-1 rounded-lg bg-background p-1 dark:bg-background/90">
         <Button
           variant="ghost"
-          className="relative h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1 [&:not(:disabled)]:hover:bg-transparent"
+          className="relative h-fit bg-transparent p-1 hover:bg-transparent focus-visible:ring-1 focus-visible:ring-offset-1"
           onClick={() => handleViewTypeChange('grid')}
         >
           {queryParams.view !== 'list' && (
@@ -48,7 +48,7 @@ export default function ViewTypes() {
         </Button>
         <Button
           variant="ghost"
-          className="relative h-fit bg-transparent p-1 focus-visible:ring-1 focus-visible:ring-offset-1 [&:not(:disabled)]:hover:bg-transparent"
+          className="relative h-fit bg-transparent p-1 hover:bg-transparent focus-visible:ring-1 focus-visible:ring-offset-1"
           onClick={() => handleViewTypeChange('list')}
         >
           {queryParams.view === 'list' && (

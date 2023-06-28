@@ -15,7 +15,7 @@ export default function EditJobBtn() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] dark:bg-yellow-700 [&:not(:disabled)]:hover:bg-yellow-500/90 [&:not(:disabled)]:dark:hover:bg-yellow-700/90">
+        <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90">
           Edit
         </Button>
       </DialogTrigger>

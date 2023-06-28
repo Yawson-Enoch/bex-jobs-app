@@ -1,7 +1,6 @@
 import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
 
-import { buttonVariants } from '~/components/ui/button';
+import { Button } from '~/components/ui/button';
 
 function DecorativePattern() {
   return (
@@ -26,15 +25,9 @@ export default function NotFound() {
             Please double-check the URL or navigate back to our homepage to
             continue exploring.
           </p>
-          <Link
-            href="/"
-            className={twMerge(
-              buttonVariants(),
-              'rounded-full text-lg font-medium'
-            )}
-          >
-            GO HOME
-          </Link>
+          <Button asChild size="lg" className="rounded-full text-lg font-bold">
+            <Link href="/">GO HOME</Link>
+          </Button>
         </div>
       </main>
       <DecorativePattern />

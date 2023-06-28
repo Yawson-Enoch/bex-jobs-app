@@ -48,7 +48,7 @@ export default function Filters() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="h-9 gap-1">
+        <Button variant="outline" className="gap-1">
           <span>FILTER</span>
           <FilterIcon size={20} />
         </Button>
@@ -70,7 +70,7 @@ export default function Filters() {
                     defaultValue={field.value}
                     key={resetSelectKey}
                   >
-                    <SelectTrigger id={id + '-jobStatus'} className="h-9">
+                    <SelectTrigger id={id + '-jobStatus'}>
                       <SelectValue placeholder="Select job status" />
                     </SelectTrigger>
                     <SelectContent className="bg-background/90 backdrop-blur-sm">
@@ -97,7 +97,7 @@ export default function Filters() {
                     defaultValue={field.value}
                     key={resetSelectKey}
                   >
-                    <SelectTrigger id={id + '-jobType'} className="h-9">
+                    <SelectTrigger id={id + '-jobType'}>
                       <SelectValue placeholder="Select job type" />
                     </SelectTrigger>
                     <SelectContent className="bg-background/90 backdrop-blur-sm">
@@ -117,7 +117,6 @@ export default function Filters() {
               <Button
                 type="button"
                 variant="outline"
-                className="h-9"
                 onClick={() => {
                   reset();
                   setResetSelectKey(Date.now());
@@ -127,9 +126,7 @@ export default function Filters() {
               >
                 Reset
               </Button>
-              <Button type="submit" className="h-9">
-                Apply
-              </Button>
+              <Button type="submit">Apply</Button>
             </div>
           </div>
         </form>

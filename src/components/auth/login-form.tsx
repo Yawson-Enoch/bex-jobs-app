@@ -66,7 +66,7 @@ export default function LoginForm() {
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
-          <div className="flex h-10 items-center justify-between gap-2 rounded-md border border-input pr-3 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+          <div className="flex h-9 items-center justify-between gap-2 rounded-md border border-input pr-3 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
             <Input
               type={passwordVisible ? 'text' : 'password'}
               id={id + '-password'}

@@ -2,11 +2,10 @@
 
 import Link from 'next/link';
 import { useAtomValue } from 'jotai';
-import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
-import { buttonVariants } from '~/components/ui/button';
+import { Button } from '~/components/ui/button';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
 import Header, {
   isMobileNavbarOpenAtom,
@@ -33,15 +32,9 @@ function GoToLogin() {
       <p className="font-medium text-foreground md:text-lg">
         Log in to view and manage your jobs.
       </p>
-      <Link
-        href="/login"
-        className={twMerge(
-          buttonVariants({ size: 'lg' }),
-          'font-medium md:text-lg'
-        )}
-      >
-        Login
-      </Link>
+      <Button asChild size="lg" className="text-lg font-bold">
+        <Link href="/login">Login</Link>
+      </Button>
     </div>
   );
 }

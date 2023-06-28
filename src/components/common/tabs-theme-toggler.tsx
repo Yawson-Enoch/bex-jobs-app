@@ -35,7 +35,7 @@ export default function TabsThemeToggler() {
   }
 
   return (
-    <div className="flex items-center gap-1 rounded-full border p-1">
+    <div className="flex h-9 items-center gap-1 rounded-full border p-1">
       {themes.map((userTheme, index) => {
         return (
           <button

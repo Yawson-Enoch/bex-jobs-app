@@ -66,11 +66,7 @@ export default function Header() {
           <TabsThemeToggler />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="secondary"
-                size="sm"
-                className="w-9 rounded-full px-0"
-              >
+              <Button variant="secondary" className="w-9 rounded-full px-0">
                 <UserIcon aria-hidden="true" className="h-5 w-5" />
                 <span className="sr-only">Profile menu</span>
               </Button>

@@ -51,7 +51,7 @@ export default function Sort() {
       >
         <SelectTrigger
           id={id + '-sort'}
-          className="flex h-9 w-[5.5rem] items-center gap-1"
+          className="flex w-[5.5rem] items-center gap-1"
         >
           <SelectValue placeholder="Sort option" />
         </SelectTrigger>
