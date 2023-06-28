@@ -1,11 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { atom, useAtom } from 'jotai';
 import { LogOutIcon, MenuIcon, UserCircleIcon, UserIcon } from 'lucide-react';
 
 import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
+import useCustomRouter from '~/hooks/useCustomRouter';
 import { Button } from '~/components/ui/button';
 import {
   DropdownMenu,
@@ -27,7 +27,7 @@ export default function Header() {
 
   const { logOut } = useAuth();
 
-  const router = useRouter();
+  const router = useCustomRouter();
 
   const { data, isLoading, isError, error } = useGetUser();
 

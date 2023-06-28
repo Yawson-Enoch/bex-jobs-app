@@ -1,9 +1,10 @@
-import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 
 import { BASE_URL } from '~/lib/api';
 import type { Signup } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
+
+import useCustomRouter from '../useCustomRouter';
 
 type TResponse = {
   msg: string;
@@ -28,7 +29,7 @@ const signupUser = async (payload: Signup): Promise<TResponse> => {
 };
 
 export default function useSignup() {
-  const router = useRouter();
+  const router = useCustomRouter();
 
   const { mutate, isLoading } = useMutation({
     mutationFn: signupUser,

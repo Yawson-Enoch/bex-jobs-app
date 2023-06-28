@@ -1,7 +1,9 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
+
+import useCustomRouter from './useCustomRouter';
 
 export default function useQueryParams<T = {}>() {
-  const router = useRouter();
+  const router = useCustomRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const queryParams = Object.fromEntries(searchParams.entries()) as Partial<T>;

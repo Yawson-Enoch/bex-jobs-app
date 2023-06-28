@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -65,6 +65,9 @@ dependencies:
   nextjs-toploader:
     specifier: ^1.4.2
     version: 1.4.2(next@13.4.7)(react-dom@18.2.0)(react@18.2.0)
+  nprogress:
+    specifier: ^0.2.0
+    version: 0.2.0
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -106,6 +109,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.3.1
     version: 20.3.1
+  '@types/nprogress':
+    specifier: ^0.2.0
+    version: 0.2.0
   '@types/react':
     specifier: ^18.2.14
     version: 18.2.14
@@ -1624,7 +1630,6 @@ packages:
 
   /@types/nprogress@0.2.0:
     resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
-    dev: false
 
   /@types/parse-json@4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}

@@ -2,9 +2,9 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import useAuth from '~/hooks/useAuth';
+import useCustomRouter from '~/hooks/useCustomRouter';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
@@ -13,7 +13,7 @@ import LoadingIndicator from '~/components/common/loading-indicator';
 export default function LoginPageClient() {
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
-  const router = useRouter();
+  const router = useCustomRouter();
 
   useEffect(() => {
     if (isLoggedIn) {
