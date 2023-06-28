@@ -18,6 +18,12 @@ import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
 import { Button } from '~/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '~/components/ui/tooltip';
 import GradientLogo from '~/components/common/gradient-logo';
 
 const sidebarRoutes = [
@@ -44,6 +50,31 @@ const sidebarRoutes = [
 ];
 
 const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
+
+function LogoutBtn({
+  isSidebarExpanded,
+  onClick,
+}: {
+  isSidebarExpanded: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <Button
+      variant="ghost"
+      className={twMerge(
+        'group flex items-center justify-start gap-3 p-2',
+        isSidebarExpanded ? 'w-full' : 'w-fit'
+      )}
+      onClick={onClick}
+    >
+      <LogOutIcon
+        aria-hidden="true"
+        className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+      />
+      <span className={twMerge(!isSidebarExpanded && 'hidden')}>Logout</span>
+    </Button>
+  );
+}
 
 export default function Sidebar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
@@ -130,22 +161,26 @@ export default function Sidebar() {
         })}
         <li className="space-y-4">
           <Separator />
-          <Button
-            variant="ghost"
-            className={twMerge(
-              'group flex items-center justify-start gap-3 p-2',
-              isSidebarExpanded ? 'w-full' : 'w-fit'
-            )}
-            onClick={() => logOut()}
-          >
-            <LogOutIcon
-              aria-hidden="true"
-              className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+          {isSidebarExpanded ? (
+            <LogoutBtn
+              isSidebarExpanded={isSidebarExpanded}
+              onClick={() => logOut()}
             />
-            <span className={twMerge(!isSidebarExpanded && 'hidden')}>
-              Logout
-            </span>
-          </Button>
+          ) : (
+            <TooltipProvider delayDuration={300}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <LogoutBtn
+                    isSidebarExpanded={isSidebarExpanded}
+                    onClick={() => logOut()}
+                  />
+                </TooltipTrigger>
+                <TooltipContent side="right" align="start" alignOffset={-10}>
+                  <span>Log out</span>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          )}
         </li>
       </ul>
     </aside>
