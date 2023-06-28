@@ -29,7 +29,7 @@ const DialogOverlay = React.forwardRef<
   <DialogPrimitive.Overlay
     ref={ref}
     className={twMerge(
-      'fixed inset-0 z-50 overflow-y-auto bg-background/80 backdrop-blur-sm transition-all duration-100 data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=open]:fade-in',
+      'fixed inset-0 z-50 overflow-y-auto bg-background/80 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
       className
     )}
     {...props}
@@ -45,7 +45,10 @@ const DialogContent = React.forwardRef<
     <DialogOverlay>
       <DialogPrimitive.Content
         ref={ref}
-        className={twMerge('fixed z-50', className)}
+        className={twMerge(
+          'fixed z-50 duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+          className
+        )}
         {...props}
       >
         {children}
