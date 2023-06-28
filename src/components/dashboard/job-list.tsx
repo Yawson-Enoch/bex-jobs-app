@@ -1,29 +1,8 @@
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '~/components/ui/alert-dialog';
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '~/components/ui/dialog';
-
-import { Button } from '../ui/button';
-import AddJobForm from './add-job-form';
+import DeleteJobBtn from './delete-job-btn';
+import EditJobBtn from './edit-job-btn';
 
 export const statusColors = {
   pending: 'bg-yellow-500/20 text-yellow-500 dark:bg-yellow-500/10',
@@ -79,48 +58,8 @@ export default function JobList({
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:my-auto md:h-fit md:grid-cols-1">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] dark:bg-yellow-700 [&:not(:disabled)]:hover:bg-yellow-500/90 [&:not(:disabled)]:dark:hover:bg-yellow-700/90">
-              Edit
-            </Button>
-          </DialogTrigger>
-          <DialogContent className="left-1/2 w-[min(calc(100%_-_1rem),_500px)] -translate-x-1/2 py-3 md:top-1/2 md:-translate-y-1/2 md:py-6">
-            <div className="space-y-3 rounded-lg border bg-background p-3 md:space-y-6 md:p-6">
-              <DialogHeader className="flex flex-row items-start justify-between text-left">
-                <div>
-                  <DialogTitle className="scroll-m-20 text-2xl font-semibold tracking-tight">
-                    Edit Job
-                  </DialogTitle>
-                  <DialogDescription>Make changes to job.</DialogDescription>
-                </div>
-                <DialogClose />
-              </DialogHeader>
-              <AddJobForm isModalForm className="grid-cols-1 md:grid-cols-2" />
-            </div>
-          </DialogContent>
-        </Dialog>
-        <AlertDialog>
-          <AlertDialogTrigger>
-            <Button variant="destructive" className="w-full">
-              Delete
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] justify-items-center rounded-lg">
-            <AlertDialogHeader>
-              <AlertDialogTitle className="text-center">
-                Delete Job Confirmation
-              </AlertDialogTitle>
-              <AlertDialogDescription>
-                Are you sure you want to delete this job?
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter className="w-full sm:w-auto">
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction>Yes, Delete</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <EditJobBtn />
+        <DeleteJobBtn />
       </div>
     </li>
   );
