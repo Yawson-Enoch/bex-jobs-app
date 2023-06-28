@@ -45,7 +45,7 @@ const DialogContent = React.forwardRef<
     <DialogOverlay>
       <DialogPrimitive.Content
         ref={ref}
-        className={twMerge('min-h-dm fixed inset-x-0 z-50', className)}
+        className={twMerge('fixed z-50', className)}
         {...props}
       >
         {children}
