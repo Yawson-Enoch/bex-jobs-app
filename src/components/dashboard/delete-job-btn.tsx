@@ -15,11 +15,9 @@ import { Button } from '../ui/button';
 export default function DeleteJobBtn() {
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <Button variant="destructive" className="w-full">
-          Delete
-        </Button>
-      </AlertDialogTrigger>
+      <Button asChild variant="destructive" className="w-full">
+        <AlertDialogTrigger>Delete</AlertDialogTrigger>
+      </Button>
       <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] justify-items-center rounded-lg">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center">

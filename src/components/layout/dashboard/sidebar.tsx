@@ -51,34 +51,6 @@ const sidebarRoutes = [
 
 const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
 
-function LogoutBtn({
-  isSidebarExpanded,
-  onClick,
-}: {
-  isSidebarExpanded: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <Button
-      asChild
-      variant="ghost"
-      className={twMerge(
-        'group flex items-center justify-start gap-3 p-2',
-        isSidebarExpanded ? 'w-full' : 'w-fit'
-      )}
-      onClick={onClick}
-    >
-      <div>
-        <LogOutIcon
-          aria-hidden="true"
-          className="transition-transform duration-300 ease-linear group-hover:rotate-12"
-        />
-        <span className={twMerge(!isSidebarExpanded && 'hidden')}>Logout</span>
-      </div>
-    </Button>
-  );
-}
-
 export default function Sidebar() {
   const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
     isSidebarExpandedAtom
@@ -164,19 +136,44 @@ export default function Sidebar() {
         <li className="space-y-4">
           <Separator />
           {isSidebarExpanded ? (
-            <LogoutBtn
-              isSidebarExpanded={isSidebarExpanded}
+            <Button
+              variant="ghost"
+              className={twMerge(
+                'group flex items-center justify-start gap-3 p-2',
+                isSidebarExpanded ? 'w-full' : 'w-fit'
+              )}
               onClick={() => logOut()}
-            />
+            >
+              <LogOutIcon
+                aria-hidden="true"
+                className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+              />
+              <span className={twMerge(!isSidebarExpanded && 'hidden')}>
+                Logout
+              </span>
+            </Button>
           ) : (
             <TooltipProvider delayDuration={300}>
               <Tooltip>
-                <TooltipTrigger>
-                  <LogoutBtn
-                    isSidebarExpanded={isSidebarExpanded}
-                    onClick={() => logOut()}
-                  />
-                </TooltipTrigger>
+                <Button
+                  asChild
+                  variant="ghost"
+                  className={twMerge(
+                    'group flex items-center justify-start gap-3 p-2',
+                    isSidebarExpanded ? 'w-full' : 'w-fit'
+                  )}
+                  onClick={() => logOut()}
+                >
+                  <TooltipTrigger>
+                    <LogOutIcon
+                      aria-hidden="true"
+                      className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+                    />
+                    <span className={twMerge(!isSidebarExpanded && 'hidden')}>
+                      Logout
+                    </span>
+                  </TooltipTrigger>
+                </Button>
                 <TooltipContent side="right" align="start" alignOffset={-12}>
                   <span>Log out</span>
                 </TooltipContent>

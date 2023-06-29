@@ -14,11 +14,12 @@ import AddJobForm from './add-job-form';
 export default function EditJobBtn() {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90">
-          Edit
-        </Button>
-      </DialogTrigger>
+      <Button
+        asChild
+        className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90"
+      >
+        <DialogTrigger>Edit</DialogTrigger>
+      </Button>
       <DialogContent className="left-1/2 w-[min(calc(100%_-_1rem),_500px)] -translate-x-1/2 py-3 md:top-1/2 md:-translate-y-1/2 md:py-6">
         <div className="space-y-3 rounded-lg border bg-background p-3 md:space-y-6 md:p-6">
           <DialogHeader className="flex flex-row items-start justify-between text-left">
