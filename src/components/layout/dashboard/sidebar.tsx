@@ -1,15 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { motion } from 'framer-motion';
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 import {
   BarChart3Icon,
   BriefcaseIcon,
-  ChevronRightIcon,
   LogOutIcon,
   PlusCircleIcon,
   UserCircleIcon,
@@ -49,12 +49,10 @@ const sidebarRoutes = [
   },
 ];
 
-const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
+export const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
 
 export default function Sidebar() {
-  const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
-    isSidebarExpandedAtom
-  );
+  const isSidebarExpanded = useAtomValue(isSidebarExpandedAtom);
 
   const { logOut } = useAuth();
 
@@ -74,26 +72,24 @@ export default function Sidebar() {
           !isSidebarExpanded && 'justify-center px-4'
         )}
       >
-        <div className={twMerge(!isSidebarExpanded && 'hidden')}>
+        {isSidebarExpanded ? (
           <Link href="/dashboard">
             <GradientLogo />
           </Link>
-        </div>
-        <Button
-          aria-expanded={isSidebarExpanded}
-          aria-controls="dashboard-sidebar"
-          className={twMerge(
-            'p-2',
-            isSidebarExpanded && 'ml-auto rounded-lg rounded-r-none p-0'
-          )}
-          onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}
-        >
-          <span className="sr-only">Toggle Sidebar</span>
-          <ChevronRightIcon
-            aria-hidden="true"
-            className={twMerge(isSidebarExpanded && 'rotate-180')}
-          />
-        </Button>
+        ) : (
+          <Link href="/" className="relative inline-block aspect-square w-10">
+            <Image
+              src="/assets/logo.png"
+              alt="Logo"
+              fill
+              priority
+              sizes="(max-width: 768px) 35vw,
+              (max-width: 1200px) 10vw,
+              50vw"
+              className="object-contain"
+            />
+          </Link>
+        )}
       </div>
       <ul className="flex flex-col gap-4 p-4 font-medium">
         {sidebarRoutes.map((sidebarRoute) => {
