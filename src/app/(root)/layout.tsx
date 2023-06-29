@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <div className="min-h-dm relative grid grid-rows-[auto,_1fr,_auto]">
       <Header />
-      <main className="container py-6 md:py-12">{children}</main>
+      <main className="container pb-6 pt-8 md:py-12">{children}</main>
       <Footer />
       <DecorativePattern />
     </div>

@@ -1,19 +1,10 @@
 'use client';
 
 import { atom, useAtom } from 'jotai';
-import { LogOutIcon, MenuIcon, UserCircleIcon, UserIcon } from 'lucide-react';
+import { MenuIcon } from 'lucide-react';
 
 import useGetUser from '~/hooks/api/useUser';
-import useAuth from '~/hooks/useAuth';
-import useCustomRouter from '~/hooks/useCustomRouter';
-import { Button } from '~/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu';
+import AuthActions from '~/components/common/auth-actions';
 import ErrorDisplay from '~/components/common/error-display';
 import LoadingIndicator from '~/components/common/loading-indicator';
 import TabsThemeToggler from '~/components/common/tabs-theme-toggler';
@@ -24,10 +15,6 @@ export default function Header() {
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useAtom(
     isMobileNavbarOpenAtom
   );
-
-  const { logOut } = useAuth();
-
-  const router = useCustomRouter();
 
   const { data, isLoading, isError, error } = useGetUser();
 
@@ -64,30 +51,7 @@ export default function Header() {
         )}
         <div className="flex items-center gap-3 md:gap-6">
           <TabsThemeToggler />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="w-9 rounded-full px-0">
-                <UserIcon aria-hidden="true" className="h-5 w-5" />
-                <span className="sr-only">Profile menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="end"
-              className="bg-background dark:bg-background/90 dark:backdrop-blur-sm"
-            >
-              <DropdownMenuItem
-                onClick={() => router.push('/dashboard/profile')}
-              >
-                <UserCircleIcon aria-hidden="true" className="mr-2 h-4 w-4" />
-                <span>View Profile</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => logOut()}>
-                <LogOutIcon aria-hidden="true" className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <AuthActions />
         </div>
       </div>
     </header>

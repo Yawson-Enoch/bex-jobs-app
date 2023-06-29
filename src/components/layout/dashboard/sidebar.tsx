@@ -60,6 +60,7 @@ function LogoutBtn({
 }) {
   return (
     <Button
+      asChild
       variant="ghost"
       className={twMerge(
         'group flex items-center justify-start gap-3 p-2',
@@ -67,11 +68,13 @@ function LogoutBtn({
       )}
       onClick={onClick}
     >
-      <LogOutIcon
-        aria-hidden="true"
-        className="transition-transform duration-300 ease-linear group-hover:rotate-12"
-      />
-      <span className={twMerge(!isSidebarExpanded && 'hidden')}>Logout</span>
+      <div>
+        <LogOutIcon
+          aria-hidden="true"
+          className="transition-transform duration-300 ease-linear group-hover:rotate-12"
+        />
+        <span className={twMerge(!isSidebarExpanded && 'hidden')}>Logout</span>
+      </div>
     </Button>
   );
 }

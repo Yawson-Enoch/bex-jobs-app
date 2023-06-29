@@ -123,7 +123,7 @@ export default function IndexPageClient() {
       <Button
         asChild
         size="lg"
-        className="mx-auto bg-gradient-to-r from-primary to-secondary text-lg font-bold"
+        className="mx-auto bg-gradient-to-r from-primary to-secondary font-bold md:text-lg"
       >
         <MotionLink
           href={isLoggedIn ? '/dashboard' : '/login'}
