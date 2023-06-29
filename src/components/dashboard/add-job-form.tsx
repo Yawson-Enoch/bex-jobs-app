@@ -63,10 +63,10 @@ type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
 
 export default function AddJobForm({
   className,
-  isModalForm = false,
+  isJobEdit = false,
 }: {
   className?: string;
-  isModalForm: boolean;
+  isJobEdit?: boolean;
 }) {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 

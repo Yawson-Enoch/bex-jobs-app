@@ -1,12 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useAtomValue } from 'jotai';
 
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
 import { Button } from '~/components/ui/button';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
+import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
 import Header, {
   isMobileNavbarOpenAtom,
 } from '~/components/layout/dashboard/header';
@@ -49,6 +51,8 @@ export default function DashboardLayoutClient({
   const { matches } = useMediaQuery('(min-width: 768px)');
   const { isLoggedIn, isCheckingAuth } = useAuth();
 
+  const pathname = usePathname();
+
   return (
     <div className="dashboard-grid-container min-h-dm relative">
       {isCheckingAuth ? (
@@ -74,6 +78,7 @@ export default function DashboardLayoutClient({
         </>
       )}
       <DecorativePattern />
+      {isLoggedIn && pathname !== '/dashboard/add-job' && <AddJobFloatingBtn />}
     </div>
   );
 }
