@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 
 import useAuth from '~/hooks/useAuth';
-import useMediaQuery from '~/hooks/useMediaQuery';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
 
@@ -30,7 +29,7 @@ const mainLink: Variants = {
   },
 };
 
-const headingContainer = (isMobile: boolean): Variants => ({
+const headingContainer: Variants = {
   initial: {
     scaleX: 0.25,
   },
@@ -39,34 +38,19 @@ const headingContainer = (isMobile: boolean): Variants => ({
     transition: {
       when: 'beforeChildren',
       staggerChildren: 0.65,
-      staggerDirection: isMobile ? 1 : -1,
     },
   },
-});
+};
 
-const headingTitle = (isMobile: boolean): Variants => {
-  return isMobile
-    ? {
-        initial: {
-          opacity: 0,
-          x: 10,
-        },
-        animate: {
-          opacity: 1,
-          x: 0,
-          transition: { type: 'spring', bounce: 0.25 },
-        },
-      }
-    : {
-        initial: {
-          opacity: 0,
-        },
-        animate: {
-          opacity: 1,
-          rotateX: [0, 45, 0, -45, 0],
-          transition: { duration: 1 },
-        },
-      };
+const headingTitle: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    rotateX: [0, 45, 0, -45, 0],
+    transition: { duration: 1 },
+  },
 };
 
 const headingDescription: Variants = {
@@ -82,9 +66,6 @@ const headingDescription: Variants = {
 };
 
 export default function IndexPageClient() {
-  const { matches } = useMediaQuery('(max-width: 480px)');
-  const isMobile = matches;
-
   const { isLoggedIn } = useAuth();
 
   return (
@@ -96,10 +77,10 @@ export default function IndexPageClient() {
     >
       <motion.div
         className="space-y-1 text-center text-3xl font-bold md:space-y-3 md:text-4xl"
-        variants={headingContainer(isMobile)}
+        variants={headingContainer}
       >
         <motion.h1
-          variants={headingTitle(isMobile)}
+          variants={headingTitle}
           className="mx-auto w-fit bg-gradient-to-b from-transparent to-foreground bg-clip-text text-transparent"
         >
           BexJobs
