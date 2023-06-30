@@ -25,7 +25,7 @@ export default function AddJobFloatingBtn() {
         <Tooltip>
           <Button
             asChild
-            className="max-h-dm fixed right-2 top-1/2 z-30 h-fit w-fit -translate-y-1/2 rounded-full p-2"
+            className="max-h-dm fixed bottom-10 right-4 z-30 h-fit w-fit rounded-full p-2 lg:bottom-20"
           >
             <TooltipTrigger asChild>
               <DialogTrigger>

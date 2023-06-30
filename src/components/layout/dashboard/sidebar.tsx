@@ -77,7 +77,10 @@ export default function Sidebar() {
             <GradientLogo />
           </Link>
         ) : (
-          <Link href="/" className="relative inline-block aspect-square w-10">
+          <Link
+            href="/dashboard"
+            className="relative inline-block aspect-square w-10"
+          >
             <Image
               src="/assets/logo.png"
               alt="Logo"
