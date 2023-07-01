@@ -51,7 +51,7 @@ export default function AddJobFloatingBtn() {
             </DialogTitle>
             <DialogClose />
           </DialogHeader>
-          <AddJobForm className="grid-cols-1 md:grid-cols-2" />
+          <AddJobForm isModal className="grid-cols-1 md:grid-cols-2" />
         </div>
       </DialogContent>
     </Dialog>

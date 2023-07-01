@@ -69,9 +69,11 @@ type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
 export default function AddJobForm({
   className,
   isJobEdit = false,
+  isModal = false,
 }: {
   className?: string;
   isJobEdit?: boolean;
+  isModal?: boolean;
 }) {
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 
@@ -251,7 +253,7 @@ export default function AddJobForm({
           </div>
         </div>
       </div>
-      <DevTool control={control} />
+      {!isModal && <DevTool control={control} />}
     </form>
   );
 }

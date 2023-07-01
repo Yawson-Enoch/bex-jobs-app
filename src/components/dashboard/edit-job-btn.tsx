@@ -31,7 +31,11 @@ export default function EditJobBtn() {
             </div>
             <DialogClose />
           </DialogHeader>
-          <AddJobForm isJobEdit className="grid-cols-1 md:grid-cols-2" />
+          <AddJobForm
+            isModal
+            isJobEdit
+            className="grid-cols-1 md:grid-cols-2"
+          />
         </div>
       </DialogContent>
     </Dialog>
