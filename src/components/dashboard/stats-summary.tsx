@@ -5,7 +5,7 @@ import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 import useGetStats from '~/hooks/api/useStats';
 
 import ErrorDisplay from '../common/error-display';
-import LoadingIndicator from '../common/loading-indicator';
+import Skeleton from '../ui/skeleton';
 
 export default function StatsSummary() {
   const { data, isLoading, isError, error } = useGetStats();
@@ -15,7 +15,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <LoadingIndicator msg="Fetching stats..." />
+            <Skeleton className="aspect-video w-16" />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
@@ -36,7 +36,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <LoadingIndicator msg="Fetching stats..." />
+            <Skeleton className="aspect-video w-16" />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
@@ -57,7 +57,7 @@ export default function StatsSummary() {
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
           {isLoading ? (
-            <LoadingIndicator msg="Fetching stats..." />
+            <Skeleton className="aspect-video w-16" />
           ) : isError ? (
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
