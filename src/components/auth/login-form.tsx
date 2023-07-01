@@ -75,7 +75,7 @@ export default function LoginForm() {
               autoComplete="current-password"
               autoCorrect="off"
               disabled={isLoading}
-              className="grow border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
+              className="grow rounded-r-none border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             <Button
               type="button"
