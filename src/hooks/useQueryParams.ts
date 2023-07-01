@@ -9,6 +9,14 @@ export default function useQueryParams<T = {}>() {
   const queryParams = Object.fromEntries(searchParams.entries()) as Partial<T>;
   const urlSearchParams = new URLSearchParams(searchParams.toString());
 
+  const createQueryParam = (params: Partial<T>) => {
+    Object.entries(params).forEach(([key, value]) => {
+      urlSearchParams.set(key, String(value));
+    });
+
+    return urlSearchParams.toString();
+  };
+
   const setQueryParams = (params: Partial<T>) => {
     Object.entries(params).forEach(([key, value]) => {
       urlSearchParams.set(key, String(value));
@@ -29,5 +37,5 @@ export default function useQueryParams<T = {}>() {
     router.push(`${pathname}${query}`);
   };
 
-  return { queryParams, setQueryParams, deleteQueryParam };
+  return { queryParams, setQueryParams, deleteQueryParam, createQueryParam };
 }

@@ -17,6 +17,7 @@ import {
 import { twMerge } from 'tailwind-merge';
 
 import useAuth from '~/hooks/useAuth';
+import useQueryParams from '~/hooks/useQueryParams';
 import { Button } from '~/components/ui/button';
 import {
   Tooltip,
@@ -55,6 +56,7 @@ export default function Sidebar() {
   const isSidebarExpanded = useAtomValue(isSidebarExpandedAtom);
 
   const { logOut } = useAuth();
+  const { createQueryParam } = useQueryParams();
 
   const pathname = usePathname();
 
@@ -116,7 +118,13 @@ export default function Sidebar() {
                 />
               )}
               <Link
-                href={sidebarRoute.path}
+                href={
+                  sidebarRoute.path === '/dashboard/all-jobs'
+                    ? sidebarRoute.path +
+                      '?' +
+                      createQueryParam({ sort: 'latest' })
+                    : sidebarRoute.path
+                }
                 className="group relative z-10 flex items-center gap-3 rounded-md p-2"
               >
                 <span

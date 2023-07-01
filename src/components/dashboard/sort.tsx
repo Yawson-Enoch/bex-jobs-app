@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useId, useState } from 'react';
+import { useId } from 'react';
 
 import useQueryParams from '~/hooks/useQueryParams';
 
@@ -24,18 +24,7 @@ export default function Sort() {
 
   const { sort } = queryParams;
 
-  const [selectedSortOption, setSelectedSortOption] = useState<TSortOption>(
-    sort ? sort : SORT_OPTIONS[0]
-  );
-
-  useEffect(() => {
-    if (!sort) {
-      setQueryParams({ sort: selectedSortOption });
-    }
-  }, [selectedSortOption, setQueryParams, sort]);
-
   const handleSortOptionChange = (value: TSortOption) => {
-    setSelectedSortOption(value);
     setQueryParams({ sort: value });
   };
 
@@ -45,9 +34,9 @@ export default function Sort() {
     <div className="flex items-center gap-2">
       <Label htmlFor={id + '-sort'}>SORT</Label>
       <Select
-        value={selectedSortOption}
+        value={sort}
+        defaultValue={sort}
         onValueChange={handleSortOptionChange}
-        defaultValue={selectedSortOption}
       >
         <SelectTrigger
           id={id + '-sort'}

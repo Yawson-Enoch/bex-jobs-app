@@ -17,6 +17,7 @@ import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
 import useCustomRouter from '~/hooks/useCustomRouter';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
+import useQueryParams from '~/hooks/useQueryParams';
 import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
 import LoadingIndicator from '~/components/common/loading-indicator';
@@ -52,6 +53,7 @@ export default function MobileNavbar() {
   );
 
   const { logOut } = useAuth();
+  const { createQueryParam } = useQueryParams();
 
   const { data, isLoading, isError, error } = useGetUser();
 
@@ -119,7 +121,13 @@ export default function MobileNavbar() {
                 )}
                 <button
                   onClick={() => {
-                    router.push(navLink.path);
+                    router.push(
+                      navLink.path === '/dashboard/all-jobs'
+                        ? navLink.path +
+                            '?' +
+                            createQueryParam({ sort: 'latest' })
+                        : navLink.path
+                    );
                     setIsMobileNavbarOpen(false);
                   }}
                   className="relative z-10 flex items-center gap-3"
