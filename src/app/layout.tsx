@@ -12,7 +12,6 @@ import Providers from '~/components/common/providers';
 import TailwindIndicator from '~/components/common/tailwind-indicator';
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteInfo.url),
   title: {
     default: siteInfo.name,
     template: `%s | ${siteInfo.name}`,
@@ -37,11 +36,6 @@ export const metadata: Metadata = {
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: '#030711' },
   ],
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/shortcut-icon.png',
-    apple: '/apple-touch-icon.png',
-  },
   manifest: '/manifest.json',
 };
 

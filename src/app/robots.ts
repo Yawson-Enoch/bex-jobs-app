@@ -1,12 +1,15 @@
 import { MetadataRoute } from 'next';
 
+import { siteInfo } from '~/config/site';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/private/', '/dashboard/'],
+      disallow: '/dashboard/',
     },
-    sitemap: 'https://acme.com/sitemap.xml',
+    host: siteInfo.url,
+    sitemap: `${siteInfo.url}/sitemap.xml`,
   };
 }

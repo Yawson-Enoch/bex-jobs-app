@@ -4,7 +4,7 @@ export const openGraphName = { siteName: siteInfo.name };
 export const openGraphImages = {
   images: [
     {
-      url: '/og.png',
+      url: '/opengraph-image.png',
       width: 1200,
       height: 630,
     },
@@ -15,4 +15,4 @@ export const openGraphType = { type: 'website' };
 
 export const twitterCard = { card: 'summary_large_image' };
 export const twitterCreator = { creator: '@GyBex_Enoch' };
-export const twitterImages = { images: ['/og.png'] };
+export const twitterImages = { images: ['/opengraph-image.png'] };

@@ -1,7 +1,7 @@
 {
   "name": "BexJobs",
   "short_name": "BexJobs",
-  "description": "Job search management tool designed to help you keep track of all your job applications in one place",
+  "description": "Job search management tool designed to help you keep track of all your job applications in place",
   "display": "fullscreen",
   "orientation": "portrait",
   "id": "/",
