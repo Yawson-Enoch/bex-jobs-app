@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { atom, useAtom } from 'jotai';
 import { ChevronRightIcon, MenuIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
@@ -9,9 +10,13 @@ import { Button } from '~/components/ui/button';
 import AuthActions from '~/components/common/auth-actions';
 import ErrorDisplay from '~/components/common/error-display';
 import LoadingIndicator from '~/components/common/loading-indicator';
-import TabsThemeToggler from '~/components/common/tabs-theme-toggler';
 
 import { isSidebarExpandedAtom } from './sidebar';
+
+const TabsThemeToggler = dynamic(
+  () => import('~/components/common/tabs-theme-toggler'),
+  { ssr: false }
+);
 
 export const isMobileNavbarOpenAtom = atom(false);
 

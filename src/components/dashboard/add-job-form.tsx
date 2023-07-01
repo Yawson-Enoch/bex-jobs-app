@@ -1,7 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
-import { DevTool } from '@hookform/devtools';
+import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
@@ -19,6 +19,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
+
+const DevTool: React.ElementType = dynamic(
+  () => import('@hookform/devtools').then((module) => module.DevTool),
+  { ssr: false }
+);
 
 const STATUS_OPTIONS = ['pending', 'interview', 'declined'] as const;
 const JOB_TYPES = ['full-time', 'part-time', 'remote', 'internship'] as const;
@@ -246,7 +251,7 @@ export default function AddJobForm({
           </div>
         </div>
       </div>
-      {/* <DevTool control={control} /> */}
+      <DevTool control={control} />
     </form>
   );
 }

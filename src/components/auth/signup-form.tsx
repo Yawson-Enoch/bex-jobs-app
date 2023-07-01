@@ -1,7 +1,7 @@
 'use client';
 
 import { useId } from 'react';
-import { DevTool } from '@hookform/devtools';
+import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -12,6 +12,11 @@ import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
+
+const DevTool: React.ElementType = dynamic(
+  () => import('@hookform/devtools').then((module) => module.DevTool),
+  { ssr: false }
+);
 
 export default function SignupForm() {
   const id = useId();
@@ -134,7 +139,7 @@ export default function SignupForm() {
           {isLoading ? <LoadingIndicator msg="Signing up..." /> : 'Sign up'}
         </Button>
       </div>
-      {/* <DevTool control={control} /> */}
+      <DevTool control={control} />
     </form>
   );
 }

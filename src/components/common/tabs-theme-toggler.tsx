@@ -1,11 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LaptopIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
-import LoadingIndicator from './loading-indicator';
 
 const themes = [
   {
@@ -24,26 +21,17 @@ const themes = [
 
 export default function TabsThemeToggler() {
   const { theme, setTheme } = useTheme();
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [theme]);
-
-  if (isLoading) {
-    return <LoadingIndicator msg="Checking theme toggler state..." />;
-  }
 
   return (
     <div className="flex h-9 items-center gap-1 rounded-full border p-1">
-      {themes.map((userTheme, index) => {
+      {themes.map((userTheme) => {
         return (
           <button
+            key={userTheme.theme}
             onClick={() => {
               setTheme(userTheme.theme);
             }}
             className="relative rounded-full p-1 focus-visible:outline-none focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring"
-            key={index}
           >
             {theme === userTheme.theme && (
               <motion.div

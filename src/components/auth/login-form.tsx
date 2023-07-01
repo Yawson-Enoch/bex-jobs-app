@@ -1,7 +1,7 @@
 'use client';
 
 import { useId, useState } from 'react';
-import { DevTool } from '@hookform/devtools';
+import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAtom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
@@ -16,6 +16,11 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Switch } from '../ui/switch';
+
+const DevTool: React.ElementType = dynamic(
+  () => import('@hookform/devtools').then((module) => module.DevTool),
+  { ssr: false }
+);
 
 export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
 
@@ -129,7 +134,7 @@ export default function LoginForm() {
           {isLoading ? <LoadingIndicator msg="Logging in..." /> : 'Log in'}
         </Button>
       </div>
-      {/* <DevTool control={control} /> */}
+      <DevTool control={control} />
     </form>
   );
 }
