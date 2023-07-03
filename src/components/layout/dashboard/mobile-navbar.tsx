@@ -64,7 +64,7 @@ export default function MobileNavbar() {
   return (
     <nav
       id="mobile-navbar"
-      className="max-h-dm fixed inset-0 z-10 flex flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/90 pb-4 backdrop-blur-sm dark:bg-background/70 md:hidden"
+      className="max-h-dm fixed inset-0 z-50 flex flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/90 pb-4 backdrop-blur-sm dark:bg-background/70 md:hidden"
     >
       <section className="h-16 border-b bg-background">
         <div className="container flex h-full items-center justify-between">
@@ -93,7 +93,7 @@ export default function MobileNavbar() {
         ) : isError ? (
           <ErrorDisplay msg={error.message} />
         ) : (
-          <p className="text-xl font-medium">
+          <p className="text-lg font-medium sm:text-xl">
             Hi, <span className="text-foreground">{data.user.firstName}</span>
           </p>
         )}

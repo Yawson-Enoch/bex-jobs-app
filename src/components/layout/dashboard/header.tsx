@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import { useAtom } from 'jotai';
-import { ChevronRightIcon, MenuIcon } from 'lucide-react';
+import { ChevronRightIcon, PanelTopOpenIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
 import useGetUser from '~/hooks/api/useUser';
@@ -48,14 +48,14 @@ export default function Header() {
           onClick={() => setIsMobileNavbarOpen(true)}
         >
           <span className="sr-only">Open Mobile Nav</span>
-          <MenuIcon aria-hidden="true" />
+          <PanelTopOpenIcon aria-hidden="true" />
         </button>
         {isLoading ? (
           <LoadingIndicator msg="Fetching user..." />
         ) : isError ? (
           <ErrorDisplay msg={error.message} />
         ) : (
-          <p className="text-xl font-medium">
+          <p className="text-lg font-medium sm:text-xl">
             Hi, <span className="text-foreground">{data.user.firstName}</span>
           </p>
         )}
