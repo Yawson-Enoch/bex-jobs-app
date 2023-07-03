@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { useAtomValue } from 'jotai';
 
 import useAuth from '~/hooks/useAuth';
@@ -9,9 +10,7 @@ import useMediaQuery from '~/hooks/useMediaQuery';
 import { Button } from '~/components/ui/button';
 import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
 import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
-import Header, {
-  isMobileNavbarOpenAtom,
-} from '~/components/layout/dashboard/header';
+import Header from '~/components/layout/dashboard/header';
 import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
 import Sidebar from '~/components/layout/dashboard/sidebar';
 

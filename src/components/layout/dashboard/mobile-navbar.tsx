@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import {
@@ -21,8 +22,6 @@ import useQueryParams from '~/hooks/useQueryParams';
 import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
 import LoadingIndicator from '~/components/common/loading-indicator';
-
-import { isMobileNavbarOpenAtom } from './header';
 
 const navLinks = [
   {

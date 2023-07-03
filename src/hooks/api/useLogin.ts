@@ -1,12 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
+import { persistLoginAtom } from '~/atoms/persist';
+import { sessionTimeoutAtom } from '~/atoms/session';
+import { accessTokenAtom } from '~/atoms/token';
 import { useAtomValue, useSetAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
 import { BASE_URL } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
 import type { Login } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
-import { hasPersistLoginAtom } from '~/components/auth/login-form';
 
 import useAuth from '../useAuth';
 
@@ -33,18 +34,9 @@ const loginUser = async (payload: Login): Promise<TResponse> => {
   return data;
 };
 
-export const authTokenAtom = atomWithStorage<string | null>(
-  'bexjobs-token',
-  null
-);
-export const sessionTimeoutAtom = atomWithStorage<number | null>(
-  'bexjobs-session-timeout',
-  null
-);
-
 export default function useLogin() {
-  const hasPersistLogin = useAtomValue(hasPersistLoginAtom);
-  const setAuthToken = useSetAtom(authTokenAtom);
+  const persistLogin = useAtomValue(persistLoginAtom);
+  const setAccessToken = useSetAtom(accessTokenAtom);
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
   const { login } = useAuth();
@@ -56,8 +48,8 @@ export default function useLogin() {
 
       const sessionTimeoutPersistLogin = authInfo.tokenExpirationDate * 1000;
 
-      setAuthToken(data.token);
-      hasPersistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
+      setAccessToken(data.token);
+      persistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
       login({
         userId: authInfo.userId,
         firstName: authInfo.firstName,

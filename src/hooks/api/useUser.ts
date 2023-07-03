@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { accessTokenAtom } from '~/atoms/token';
 import { useAtomValue } from 'jotai';
 import { z } from 'zod';
 
 import { BASE_URL } from '~/lib/api';
-
-import { authTokenAtom } from './useLogin';
 
 const userSchema = z.object({
   msg: z.string(),
@@ -32,7 +31,7 @@ const getUser = async (token: string | null) => {
 };
 
 export default function useGetUser() {
-  const token = useAtomValue(authTokenAtom);
+  const token = useAtomValue(accessTokenAtom);
 
   return useQuery<TUser, Error>({
     queryKey: ['user'],

@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import {
   BarChart3Icon,
   BriefcaseIcon,
@@ -49,8 +49,6 @@ const sidebarRoutes = [
     icon: <UserCircleIcon />,
   },
 ];
-
-export const isSidebarExpandedAtom = atomWithStorage('bexjobs-sidebar', true);
 
 export default function Sidebar() {
   const isSidebarExpanded = useAtomValue(isSidebarExpandedAtom);

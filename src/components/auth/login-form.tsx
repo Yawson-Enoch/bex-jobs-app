@@ -3,8 +3,8 @@
 import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { persistLoginAtom } from '~/atoms/persist';
 import { useAtom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -22,12 +22,10 @@ const DevTool: React.ElementType = dynamic(
   { ssr: false }
 );
 
-export const hasPersistLoginAtom = atomWithStorage('bexjobs-persist', true);
-
 export default function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const [hasPersistLogin, setHasPersistLogin] = useAtom(hasPersistLoginAtom);
+  const [persistLogin, setPersistLogin] = useAtom(persistLoginAtom);
 
   const id = useId();
 
@@ -109,8 +107,8 @@ export default function LoginForm() {
           <div className="flex items-center gap-2">
             <Switch
               id={id + '-persist-login'}
-              checked={hasPersistLogin}
-              onCheckedChange={() => setHasPersistLogin(!hasPersistLogin)}
+              checked={persistLogin}
+              onCheckedChange={() => setPersistLogin(!persistLogin)}
               disabled={isLoading}
             />
             <Label
@@ -120,7 +118,7 @@ export default function LoginForm() {
               Stay logged in for 30 days
             </Label>
           </div>
-          {!hasPersistLogin && (
+          {!persistLogin && (
             <p className="rounded-md border border-warning-border bg-warning px-3 py-2 text-xs text-warning-foreground">
               You will be logged out after 30 minutes of inactivity.
             </p>

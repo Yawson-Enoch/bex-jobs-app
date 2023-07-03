@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
+import { accessTokenAtom } from '~/atoms/token';
 import { useAtomValue } from 'jotai';
 import { z } from 'zod';
 
 import { BASE_URL } from '~/lib/api';
-
-import { authTokenAtom } from './useLogin';
 
 const statusSchema = z.object({
   pending: z.number().catch(0),
@@ -41,7 +40,7 @@ const getStats = async (token: string | null) => {
 };
 
 export default function useGetStats() {
-  const token = useAtomValue(authTokenAtom);
+  const token = useAtomValue(accessTokenAtom);
 
   return useQuery<TStats, Error>({
     queryKey: ['stats'],

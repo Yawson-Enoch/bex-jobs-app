@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
+import { persistLoginAtom } from '~/atoms/persist';
+import { sessionTimeoutAtom } from '~/atoms/session';
+import { accessTokenAtom } from '~/atoms/token';
 import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 import { parseToken } from '~/lib/jwt';
-import { hasPersistLoginAtom } from '~/components/auth/login-form';
 
-import { authTokenAtom, sessionTimeoutAtom } from './api/useLogin';
 import useCustomRouter from './useCustomRouter';
 
 type User = {
@@ -21,19 +22,19 @@ export default function useAuth() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userAuthInfo, setUserAuthInfo] = useState<User | null>(null);
 
-  const [authToken, setAuthToken] = useAtom(authTokenAtom);
+  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [sessionTimeout, setSessionTimeout] = useAtom(sessionTimeoutAtom);
-  const hasPersistLogin = useAtomValue(hasPersistLoginAtom);
+  const persistLogin = useAtomValue(persistLoginAtom);
 
   const router = useCustomRouter();
 
   const logOut = useCallback(() => {
     setIsAuthenticated(false);
     setUserAuthInfo(null);
-    setAuthToken(RESET);
+    setAccessToken(RESET);
     setSessionTimeout(RESET);
     router.replace('/login');
-  }, [router, setAuthToken, setSessionTimeout]);
+  }, [router, setAccessToken, setSessionTimeout]);
 
   const login = useCallback((user: User) => {
     setIsAuthenticated(true);
@@ -41,8 +42,8 @@ export default function useAuth() {
   }, []);
 
   useEffect(() => {
-    if (authToken) {
-      const authInfo = parseToken(authToken);
+    if (accessToken) {
+      const authInfo = parseToken(accessToken);
       login({
         userId: authInfo.userId,
         firstName: authInfo.firstName,
@@ -50,7 +51,7 @@ export default function useAuth() {
       });
     }
     setIsCheckingAuth(false);
-  }, [authToken, login]);
+  }, [accessToken, login]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -80,7 +81,7 @@ export default function useAuth() {
       }, 1000);
     };
 
-    if (sessionTimeout && hasPersistLogin) {
+    if (sessionTimeout) {
       handleLogoutPersist();
     } else {
       handleLogoutNoPersist();
@@ -92,12 +93,12 @@ export default function useAuth() {
       if (interval) {
         clearInterval(interval);
       }
-      if (hasPersistLogin === false) {
+      if (!persistLogin) {
         window.removeEventListener('mousemove', handleTimeReset);
         window.removeEventListener('keypress', handleTimeReset);
       }
     };
-  }, [hasPersistLogin, logOut, sessionTimeout]);
+  }, [persistLogin, logOut, sessionTimeout]);
 
   return {
     isCheckingAuth,

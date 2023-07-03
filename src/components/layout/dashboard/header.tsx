@@ -1,7 +1,9 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { atom, useAtom } from 'jotai';
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
+import { isSidebarExpandedAtom } from '~/atoms/sidebar';
+import { useAtom } from 'jotai';
 import { ChevronRightIcon, MenuIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
@@ -11,14 +13,10 @@ import AuthActions from '~/components/common/auth-actions';
 import ErrorDisplay from '~/components/common/error-display';
 import LoadingIndicator from '~/components/common/loading-indicator';
 
-import { isSidebarExpandedAtom } from './sidebar';
-
 const TabsThemeToggler = dynamic(
   () => import('~/components/common/tabs-theme-toggler'),
   { ssr: false }
 );
-
-export const isMobileNavbarOpenAtom = atom(false);
 
 export default function Header() {
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useAtom(
