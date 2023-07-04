@@ -3,9 +3,13 @@
 import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { accessTokenAtom } from '~/atoms/token';
+import { useAtomValue } from 'jotai';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
+
+import { useAddJob } from '~/hooks/api/useJobs';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -62,7 +66,7 @@ const addJobSchema = z.object({
   }),
 });
 
-type Job = z.infer<typeof addJobSchema>;
+export type Job = z.infer<typeof addJobSchema>;
 type TStatusOption = z.infer<typeof addJobSchema.shape.jobStatus>;
 type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
 
@@ -87,20 +91,18 @@ export default function AddJobForm({
     },
   });
   const { register, handleSubmit, formState, control, reset } = form;
-  const { errors, isDirty, isValid, isSubmitting } = formState;
+  const { errors, isDirty, isValid } = formState;
 
   const resetAllFormFields = () => {
     reset();
     setResetSelectKey(Date.now());
   };
 
-  const onSubmit: SubmitHandler<Job> = (data): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(data);
-        resolve();
-      }, 2000);
-    });
+  const { mutate, isLoading } = useAddJob();
+  const token = useAtomValue(accessTokenAtom);
+
+  const onSubmit: SubmitHandler<Job> = (data) => {
+    mutate({ token, payload: data });
   };
 
   return (
@@ -119,7 +121,7 @@ export default function AddJobForm({
               id={id + '-jobPosition'}
               {...register('jobPosition')}
               autoFocus
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.jobPosition && (
@@ -135,7 +137,7 @@ export default function AddJobForm({
               type="text"
               id={id + '-company'}
               {...register('company')}
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.company && (
@@ -151,7 +153,7 @@ export default function AddJobForm({
               type="text"
               id={id + '-jobLocation'}
               {...register('jobLocation')}
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.jobLocation && (
@@ -235,16 +237,13 @@ export default function AddJobForm({
             <Button
               type="button"
               variant="outline"
-              disabled={isSubmitting}
+              disabled={isLoading}
               onClick={resetAllFormFields}
             >
               Clear
             </Button>
-            <Button
-              type="submit"
-              disabled={isSubmitting || !isValid || !isDirty}
-            >
-              {isSubmitting ? (
+            <Button type="submit" disabled={isLoading || !isValid || !isDirty}>
+              {isLoading ? (
                 <LoadingIndicator msg="Adding new job..." />
               ) : (
                 'Add Job'
