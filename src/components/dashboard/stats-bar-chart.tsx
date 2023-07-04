@@ -10,20 +10,25 @@ import {
   YAxis,
 } from 'recharts';
 
-import useGetStats from '~/hooks/api/useStats';
+import { useGetJobStats } from '~/hooks/api/useJob';
 
 import ErrorDisplay from '../common/error-display';
 import LoadingIndicator from '../common/loading-indicator';
 
 export default function StatsBarChart() {
-  const { isLoading, isError, data: stats } = useGetStats();
+  const { isLoading, isError, error, data: stats } = useGetJobStats();
 
   if (isLoading) {
-    return <LoadingIndicator msg="Loading chart..." />;
+    return (
+      <LoadingIndicator
+        msg="Loading chart..."
+        className="flex justify-center"
+      />
+    );
   }
 
   if (isError) {
-    return <ErrorDisplay msg="Failed to load chart" />;
+    return <ErrorDisplay msg={error.message} className="flex justify-center" />;
   }
 
   return (

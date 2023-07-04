@@ -3,13 +3,11 @@
 import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { accessTokenAtom } from '~/atoms/token';
-import { useAtomValue } from 'jotai';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
 
-import { useAddJob } from '~/hooks/api/useJobs';
+import { useAddJob } from '~/hooks/api/useJob';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -99,10 +97,9 @@ export default function AddJobForm({
   };
 
   const { mutate, isLoading } = useAddJob();
-  const token = useAtomValue(accessTokenAtom);
 
   const onSubmit: SubmitHandler<Job> = (data) => {
-    mutate({ token, payload: data });
+    mutate(data);
   };
 
   return (

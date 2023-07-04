@@ -2,13 +2,13 @@
 
 import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 
-import useGetStats from '~/hooks/api/useStats';
+import { useGetJobStats } from '~/hooks/api/useJob';
 
 import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsSummary() {
-  const { data, isLoading, isError, error } = useGetStats();
+  const { isLoading, isError, error, data: stats } = useGetJobStats();
 
   return (
     <section className="grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] gap-3 md:gap-6">
@@ -20,7 +20,7 @@ export default function StatsSummary() {
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-blue-800 dark:text-blue-900 md:text-6xl">
-              {data.statusStats.interview}
+              {stats.statusStats.interview}
             </p>
           )}
           <CalendarCheckIcon
@@ -41,7 +41,7 @@ export default function StatsSummary() {
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-yellow-800 dark:text-yellow-900 md:text-6xl">
-              {data.statusStats.pending}
+              {stats.statusStats.pending}
             </p>
           )}
           <ClockIcon
@@ -62,7 +62,7 @@ export default function StatsSummary() {
             <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-red-800 dark:text-red-900 md:text-6xl">
-              {data.statusStats.declined}
+              {stats.statusStats.declined}
             </p>
           )}
           <CalendarOffIcon
