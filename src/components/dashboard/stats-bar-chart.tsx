@@ -10,67 +10,31 @@ import {
   YAxis,
 } from 'recharts';
 
-export const monthlyChartData = [
-  {
-    month: 'Jan',
-    total: 11,
-  },
-  {
-    month: 'Feb',
-    total: 15,
-  },
-  {
-    month: 'Mar',
-    total: 5,
-  },
-  {
-    month: 'Apr',
-    total: 10,
-  },
-  {
-    month: 'May',
-    total: 9,
-  },
-  {
-    month: 'Jun',
-    total: 10,
-  },
-  {
-    month: 'Jul',
-    total: 8,
-  },
-  {
-    month: 'Aug',
-    total: 7,
-  },
-  {
-    month: 'Sep',
-    total: 6,
-  },
-  {
-    month: 'Oct',
-    total: 13,
-  },
-  {
-    month: 'Nov',
-    total: 4,
-  },
-  {
-    month: 'Dec',
-    total: 9,
-  },
-];
+import useGetStats from '~/hooks/api/useStats';
+
+import ErrorDisplay from '../common/error-display';
+import LoadingIndicator from '../common/loading-indicator';
 
 export default function StatsBarChart() {
+  const { isLoading, isError, data: stats } = useGetStats();
+
+  if (isLoading) {
+    return <LoadingIndicator msg="Loading chart..." />;
+  }
+
+  if (isError) {
+    return <ErrorDisplay msg="Failed to load chart" />;
+  }
+
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={monthlyChartData}>
+      <BarChart data={stats.monthlyApplications} maxBarSize={70}>
         <CartesianGrid
           stroke="rgb(var(--primary))"
           strokeOpacity={0.3}
           strokeDasharray="2 2"
         />
-        <XAxis dataKey="month" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip
           contentStyle={{
@@ -93,7 +57,7 @@ export default function StatsBarChart() {
           }}
           cursor={{ fill: 'rgb(var(--accent))' }}
         />
-        <Bar dataKey="total" fill="rgb(var(--primary))" />
+        <Bar dataKey="count" fill="rgb(var(--primary))" />
       </BarChart>
     </ResponsiveContainer>
   );

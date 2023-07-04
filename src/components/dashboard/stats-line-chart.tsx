@@ -10,18 +10,31 @@ import {
   YAxis,
 } from 'recharts';
 
-import { monthlyChartData } from './stats-bar-chart';
+import useGetStats from '~/hooks/api/useStats';
+
+import ErrorDisplay from '../common/error-display';
+import LoadingIndicator from '../common/loading-indicator';
 
 export default function StatsLineChart() {
+  const { isLoading, isError, data: stats } = useGetStats();
+
+  if (isLoading) {
+    return <LoadingIndicator msg="Loading chart..." />;
+  }
+
+  if (isError) {
+    return <ErrorDisplay msg="Failed to load chart" />;
+  }
+
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <LineChart data={monthlyChartData}>
+      <LineChart data={stats.monthlyApplications}>
         <CartesianGrid
           stroke="rgb(var(--primary))"
           strokeOpacity={0.3}
           strokeDasharray="2 2"
         />
-        <XAxis dataKey="month" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip
           contentStyle={{
@@ -46,7 +59,7 @@ export default function StatsLineChart() {
         />
         <Line
           type="monotone"
-          dataKey="total"
+          dataKey="count"
           stroke="rgb(var(--primary))"
           strokeWidth={2}
           dot={{ r: 2, fill: 'rgb(var(--foreground))' }}
