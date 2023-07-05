@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
-import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import {
@@ -16,6 +15,7 @@ import {
 } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import useAuth from '~/hooks/useAuth';
 import useQueryParams from '~/hooks/useQueryParams';
 import { Button } from '~/components/ui/button';

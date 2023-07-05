@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { useAtomValue } from 'jotai';
 
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
 import { Button } from '~/components/ui/button';

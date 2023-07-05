@@ -2,7 +2,6 @@
 
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
-import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import {
@@ -14,6 +13,7 @@ import {
   XIcon,
 } from 'lucide-react';
 
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useGetUser from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
 import useCustomRouter from '~/hooks/useCustomRouter';

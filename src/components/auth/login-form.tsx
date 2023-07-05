@@ -3,12 +3,12 @@
 import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { persistLoginAtom } from '~/atoms/persist';
 import { useAtom } from 'jotai';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { loginSchema, type Login } from '~/lib/validations/auth';
+import { persistLoginAtom } from '~/atoms/persist';
 import useLogin from '~/hooks/api/useLogin';
 
 import LoadingIndicator from '../common/loading-indicator';

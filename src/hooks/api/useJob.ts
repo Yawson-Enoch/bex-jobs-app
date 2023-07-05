@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { accessTokenAtom } from '~/atoms/token';
 import { useAtomValue } from 'jotai';
 import { z } from 'zod';
 
 import { BASE_URL } from '~/lib/api';
+import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 import { Job } from '~/components/dashboard/add-job-form';
 

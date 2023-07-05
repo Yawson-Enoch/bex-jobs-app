@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { persistLoginAtom } from '~/atoms/persist';
-import { sessionTimeoutAtom } from '~/atoms/session';
-import { accessTokenAtom } from '~/atoms/token';
 import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
 import { parseToken } from '~/lib/jwt';
+import { persistLoginAtom } from '~/atoms/persist';
+import { sessionTimeoutAtom } from '~/atoms/session';
+import { accessTokenAtom } from '~/atoms/token';
 
 import useCustomRouter from './useCustomRouter';
 

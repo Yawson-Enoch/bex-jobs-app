@@ -19,6 +19,7 @@ module.exports = {
     '^~/config/(.*)$',
     '^~/lib/(.*)$',
     '^~/store/(.*)$',
+    '^~/atoms/(.*)$',
     '^~/context/(.*)$',
     '^~/hooks/(.*)$',
     '^~/components/ui/(.*)$',

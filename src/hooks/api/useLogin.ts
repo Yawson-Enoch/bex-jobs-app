@@ -1,12 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
-import { persistLoginAtom } from '~/atoms/persist';
-import { sessionTimeoutAtom } from '~/atoms/session';
-import { accessTokenAtom } from '~/atoms/token';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { BASE_URL } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
 import type { Login } from '~/lib/validations/auth';
+import { persistLoginAtom } from '~/atoms/persist';
+import { sessionTimeoutAtom } from '~/atoms/session';
+import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
 import useAuth from '../useAuth';

@@ -1,12 +1,12 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
-import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import { useAtom } from 'jotai';
 import { ChevronRightIcon, PanelTopOpenIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
+import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import useGetUser from '~/hooks/api/useUser';
 import { Button } from '~/components/ui/button';
 import AuthActions from '~/components/common/auth-actions';
