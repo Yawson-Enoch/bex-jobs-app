@@ -30,7 +30,7 @@ const getUser = async (token: string | null) => {
   return data;
 };
 
-export default function useGetUser() {
+export function useGetUser() {
   const token = useAtomValue(accessTokenAtom);
 
   return useQuery<TUser, Error>({

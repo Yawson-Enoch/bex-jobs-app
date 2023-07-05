@@ -7,7 +7,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { isSidebarExpandedAtom } from '~/atoms/sidebar';
-import useGetUser from '~/hooks/api/useUser';
+import { useGetUser } from '~/hooks/api/useUser';
 import { Button } from '~/components/ui/button';
 import AuthActions from '~/components/common/auth-actions';
 import ErrorDisplay from '~/components/common/error-display';

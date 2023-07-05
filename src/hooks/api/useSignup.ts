@@ -28,7 +28,7 @@ const signupUser = async (payload: Signup): Promise<TResponse> => {
   return data;
 };
 
-export default function useSignup() {
+export function useSignup() {
   const router = useCustomRouter();
 
   const { mutate, isLoading } = useMutation({

@@ -34,7 +34,7 @@ const loginUser = async (payload: Login): Promise<TResponse> => {
   return data;
 };
 
-export default function useLogin() {
+export function useLogin() {
   const persistLogin = useAtomValue(persistLoginAtom);
   const setAccessToken = useSetAtom(accessTokenAtom);
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
