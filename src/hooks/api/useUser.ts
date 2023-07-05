@@ -1,9 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { z } from 'zod';
 
 import { BASE_URL } from '~/lib/api';
+import type { Profile } from '~/lib/validations/auth';
 import { accessTokenAtom } from '~/atoms/token';
+import { toast } from '~/components/ui/use-toast';
+
+const userQueryKey = 'user';
 
 const userSchema = z.object({
   msg: z.string(),
@@ -16,6 +20,7 @@ const userSchema = z.object({
 
 type TUser = z.infer<typeof userSchema>;
 
+/* get user */
 const getUser = async (token: string | null) => {
   const response = await fetch(`${BASE_URL}/auth/get-user`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -34,8 +39,58 @@ export function useGetUser() {
   const token = useAtomValue(accessTokenAtom);
 
   return useQuery<TUser, Error>({
-    queryKey: ['user'],
+    queryKey: [userQueryKey],
     queryFn: () => getUser(token),
     enabled: !!token,
   });
+}
+
+/* update user */
+type TResponse = {
+  msg: string;
+};
+
+const updateProfile = async (
+  token: string | null,
+  payload: Profile
+): Promise<TResponse> => {
+  const response = await fetch(`${BASE_URL}/auth/update-user`, {
+    method: 'PATCH',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data: TResponse = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.msg || 'Failed to add job');
+  }
+
+  return data;
+};
+
+export function useUpdateProfile() {
+  const token = useAtomValue(accessTokenAtom);
+
+  const queryClient = useQueryClient();
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (payload: Profile) => updateProfile(token, payload),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [userQueryKey] });
+      toast({
+        description: data.msg,
+      });
+    },
+    onError: (error: Error) => {
+      toast({
+        description: error.message,
+      });
+    },
+  });
+
+  return { mutate, isLoading };
 }

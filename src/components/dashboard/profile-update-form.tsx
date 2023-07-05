@@ -1,11 +1,12 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Profile, profileSchema } from '~/lib/validations/auth';
+import { useGetUser, useUpdateProfile } from '~/hooks/api/useUser';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -20,20 +21,20 @@ const DevTool: React.ElementType = dynamic(
 export default function ProfileUpdateForm() {
   const id = useId();
 
+  const { data } = useGetUser();
+
   const form = useForm<Profile>({
     resolver: zodResolver(profileSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
+    values: useMemo(() => data?.user, [data]),
   });
   const { register, handleSubmit, formState, control } = form;
-  const { errors, isDirty, isValid, isSubmitting } = formState;
+  const { errors } = formState;
 
-  const onSubmit: SubmitHandler<Profile> = (data): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        console.log(data);
-        resolve();
-      }, 2000);
-    });
+  const { mutate, isLoading } = useUpdateProfile();
+
+  const onSubmit: SubmitHandler<Profile> = (data) => {
+    mutate(data);
   };
 
   return (
@@ -49,7 +50,7 @@ export default function ProfileUpdateForm() {
               autoComplete="name"
               autoCorrect="off"
               autoFocus
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.firstName && (
@@ -67,7 +68,7 @@ export default function ProfileUpdateForm() {
               {...register('lastName')}
               autoComplete="name"
               autoCorrect="off"
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.lastName && (
@@ -85,7 +86,7 @@ export default function ProfileUpdateForm() {
               {...register('email')}
               autoComplete="email"
               autoCorrect="off"
-              disabled={isSubmitting}
+              disabled={isLoading}
             />
           </div>
           {errors.email && (
@@ -96,12 +97,8 @@ export default function ProfileUpdateForm() {
         </div>
         <div className="space-y-2">
           <Label>Action</Label>
-          <Button
-            type="submit"
-            disabled={isSubmitting || !isValid || !isDirty}
-            className="flex w-full"
-          >
-            {isSubmitting ? (
+          <Button type="submit" disabled={isLoading} className="flex w-full">
+            {isLoading ? (
               <LoadingIndicator msg="Updating profile..." />
             ) : (
               'Update Profile'
