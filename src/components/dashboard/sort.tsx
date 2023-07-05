@@ -38,10 +38,7 @@ export default function Sort() {
         defaultValue={sort}
         onValueChange={handleSortOptionChange}
       >
-        <SelectTrigger
-          id={id + '-sort'}
-          className="flex w-[5.5rem] items-center gap-1"
-        >
+        <SelectTrigger id={id + '-sort'} className="flex items-center gap-1">
           <SelectValue placeholder="Sort option" />
         </SelectTrigger>
         <SelectContent className="bg-background dark:bg-background/90 dark:backdrop-blur-sm">

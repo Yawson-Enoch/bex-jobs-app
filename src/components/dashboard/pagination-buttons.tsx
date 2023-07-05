@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import ReactPaginate from 'react-paginate';
 
+import { useGetJobs } from '~/hooks/api/useJob';
 import useQueryParams from '~/hooks/useQueryParams';
 
 const paginationVariants: Variants = {
@@ -26,11 +27,15 @@ const paginationVariants: Variants = {
 };
 
 export default function PaginationButtons() {
-  const { queryParams, setQueryParams } = useQueryParams<{
+  const { queryParams, setQueryParams, combinedQueryParams } = useQueryParams<{
     page: number;
   }>();
 
   const initialPage = queryParams?.page ? queryParams.page - 1 : 0;
+
+  const params = combinedQueryParams();
+
+  const { data: jobs } = useGetJobs(params);
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setQueryParams({ page: selected + 1 });
@@ -55,7 +60,7 @@ export default function PaginationButtons() {
         }
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
-        pageCount={10}
+        pageCount={jobs?.paginatedData.totalNumberOfPages || 0}
         previousLabel={
           <>
             <ChevronLeftIcon />

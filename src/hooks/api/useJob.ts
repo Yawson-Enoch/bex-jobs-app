@@ -5,8 +5,9 @@ import { z } from 'zod';
 import { BASE_URL } from '~/lib/api';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
-import { Job } from '~/components/dashboard/add-job-form';
+import { addJobSchema, Job } from '~/components/dashboard/add-job-form';
 
+/* add job */
 type TResponse = {
   msg: string;
 };
@@ -57,6 +58,7 @@ export function useAddJob() {
   return { mutate, isLoading };
 }
 
+/* get job stats */
 const statusSchema = z.object({
   pending: z.number().catch(0),
   interview: z.number().catch(0),
@@ -96,5 +98,57 @@ export function useGetJobStats() {
     queryKey: ['job-stats'],
     queryFn: () => getJobStats(token),
     enabled: !!token,
+  });
+}
+
+/* get jobs based on query params */
+const jobSchema = addJobSchema.extend({
+  _id: z.string(),
+  createdBy: z.string(),
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+});
+export type TJob = z.infer<typeof jobSchema>;
+
+const paginatedDataSchema = z.object({
+  totalNumberOfJobs: z.number(),
+  currentPageJobs: z.array(jobSchema),
+  totalNumberOfJobsOnCurrPage: z.number(),
+  resultsPerPage: z.number(),
+  totalNumberOfPages: z.number(),
+  currentPageNumber: z.number(),
+  prevPageNumber: z.number().nullable(),
+  nextPageNumber: z.number().nullable(),
+});
+
+const jobsSchema = z.object({
+  msg: z.string(),
+  paginatedData: paginatedDataSchema,
+});
+
+type TJobs = z.infer<typeof jobsSchema>;
+
+const getJobs = async (token: string | null, queryParams: string) => {
+  const response = await fetch(`${BASE_URL}/jobs/${queryParams}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.msg || 'Failed to fetch stats');
+  }
+
+  return data;
+};
+
+export function useGetJobs(queryParams: string) {
+  const token = useAtomValue(accessTokenAtom);
+
+  return useQuery<TJobs, Error>({
+    queryKey: ['jobs', queryParams],
+    queryFn: () => getJobs(token, queryParams),
+    enabled: !!token,
+    keepPreviousData: true,
   });
 }

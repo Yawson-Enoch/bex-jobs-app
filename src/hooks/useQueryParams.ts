@@ -37,5 +37,18 @@ export default function useQueryParams<T = {}>() {
     router.push(`${pathname}${query}`);
   };
 
-  return { queryParams, setQueryParams, deleteQueryParam, createQueryParam };
+  const combinedQueryParams = () => {
+    const search = urlSearchParams.toString();
+    const query = search ? `?${search}` : '';
+
+    return query;
+  };
+
+  return {
+    queryParams,
+    setQueryParams,
+    deleteQueryParam,
+    createQueryParam,
+    combinedQueryParams,
+  };
 }

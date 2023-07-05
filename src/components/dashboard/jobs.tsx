@@ -1,5 +1,6 @@
 'use client';
 
+import { useGetJobs } from '~/hooks/api/useJob';
 import useQueryParams from '~/hooks/useQueryParams';
 
 import JobGrid from './job-grid';
@@ -8,24 +9,27 @@ import { TViewTypes } from './view-types';
 
 export default function Jobs() {
   const { queryParams } = useQueryParams<{ view: TViewTypes }>();
+  const { combinedQueryParams } = useQueryParams();
+
+  const params = combinedQueryParams();
+
+  const { data: jobs } = useGetJobs(params);
 
   return (
     <section className="space-y-6">
-      <h4>30 Jobs Found</h4>
+      <h4>{jobs?.paginatedData?.totalNumberOfJobs ?? 0} Jobs Found</h4>
 
       {queryParams.view !== 'list' ? (
         <ul className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
-          <JobGrid status="interview" />
-          <JobGrid status="pending" />
-          <JobGrid status="declined" />
-          <JobGrid status="interview" />
+          {jobs?.paginatedData.currentPageJobs.map((job) => {
+            return <JobGrid key={job._id} job={job} />;
+          })}
         </ul>
       ) : (
         <ul className="space-y-3 md:space-y-6">
-          <JobList status="interview" />
-          <JobList status="pending" />
-          <JobList status="declined" />
-          <JobList status="interview" />
+          {jobs?.paginatedData.currentPageJobs.map((job) => {
+            return <JobList key={job._id} job={job} />;
+          })}
         </ul>
       )}
     </section>

@@ -30,7 +30,7 @@ const DevTool: React.ElementType = dynamic(
 const STATUS_OPTIONS = ['pending', 'interview', 'declined'] as const;
 const JOB_TYPES = ['full-time', 'part-time', 'remote', 'internship'] as const;
 
-const addJobSchema = z.object({
+export const addJobSchema = z.object({
   jobPosition: z
     .string({
       required_error: 'Position is required',
