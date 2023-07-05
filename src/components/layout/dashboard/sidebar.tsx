@@ -100,7 +100,7 @@ export default function Sidebar() {
             <li
               key={sidebarRoute.title}
               className={twMerge(
-                'relative',
+                'relative overflow-hidden',
                 isSidebarExpanded ? 'w-full' : 'w-fit'
               )}
             >

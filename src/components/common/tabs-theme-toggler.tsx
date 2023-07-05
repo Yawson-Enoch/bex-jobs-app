@@ -31,7 +31,7 @@ export default function TabsThemeToggler() {
             onClick={() => {
               setTheme(userTheme.theme);
             }}
-            className="relative rounded-full p-1 focus-visible:outline-none focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring"
+            className="relative overflow-hidden rounded-full p-1 focus-visible:outline-none focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring"
           >
             {theme === userTheme.theme && (
               <motion.div

@@ -48,7 +48,7 @@ export default function ViewTypes() {
         </Button>
         <Button
           variant="ghost"
-          className="relative h-fit bg-transparent p-1 hover:bg-transparent focus-visible:ring-1 focus-visible:ring-offset-1"
+          className="relative h-fit overflow-hidden bg-transparent p-1 hover:bg-transparent focus-visible:ring-1 focus-visible:ring-offset-1"
           onClick={() => handleViewTypeChange('list')}
         >
           {queryParams.view === 'list' && (
