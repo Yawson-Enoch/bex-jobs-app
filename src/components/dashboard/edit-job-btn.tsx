@@ -1,3 +1,6 @@
+import { useSetAtom } from 'jotai';
+
+import { jobIdAtom } from '~/atoms/job-id';
 import {
   Dialog,
   DialogClose,
@@ -11,12 +14,15 @@ import {
 import { Button } from '../ui/button';
 import AddJobForm from './add-job-form';
 
-export default function EditJobBtn() {
+export default function EditJobBtn({ id }: { id: string }) {
+  const setJobId = useSetAtom(jobIdAtom);
+
   return (
     <Dialog>
       <Button
         asChild
         className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90"
+        onClick={() => setJobId(id)}
       >
         <DialogTrigger>Edit</DialogTrigger>
       </Button>

@@ -53,8 +53,8 @@ export default function JobGrid({ job }: { job: TJobAPIResponse }) {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <EditJobBtn />
-        <DeleteJobBtn />
+        <EditJobBtn id={job._id} />
+        <DeleteJobBtn id={job._id} />
       </div>
     </li>
   );

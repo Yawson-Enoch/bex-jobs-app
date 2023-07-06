@@ -1,3 +1,7 @@
+import { useSetAtom } from 'jotai';
+
+import { jobIdAtom } from '~/atoms/job-id';
+import { useDeleteJob } from '~/hooks/api/useJob';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,12 +14,22 @@ import {
   AlertDialogTrigger,
 } from '~/components/ui/alert-dialog';
 
+import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 
-export default function DeleteJobBtn() {
+export default function DeleteJobBtn({ id }: { id: string }) {
+  const setJobId = useSetAtom(jobIdAtom);
+
+  const { mutate, isLoading } = useDeleteJob();
+
   return (
     <AlertDialog>
-      <Button asChild variant="destructive" className="w-full">
+      <Button
+        asChild
+        variant="destructive"
+        className="w-full"
+        onClick={() => setJobId(id)}
+      >
         <AlertDialogTrigger>Delete</AlertDialogTrigger>
       </Button>
       <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] justify-items-center rounded-lg">
@@ -29,7 +43,13 @@ export default function DeleteJobBtn() {
         </AlertDialogHeader>
         <AlertDialogFooter className="w-full sm:w-auto">
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Yes, Delete</AlertDialogAction>
+          <AlertDialogAction onClick={() => mutate()}>
+            {isLoading ? (
+              <LoadingIndicator msg="Deleting job" />
+            ) : (
+              'Yes, Delete'
+            )}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
