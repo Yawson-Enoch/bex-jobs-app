@@ -53,7 +53,7 @@ export default function Header() {
         {isLoading ? (
           <LoadingIndicator msg="Fetching user..." />
         ) : isError ? (
-          <ErrorDisplay msg={error.message} />
+          <ErrorDisplay msg={error.message} type="icon" />
         ) : (
           <p className="text-lg font-medium sm:text-xl">
             Hi, <span className="text-foreground">{data.user.firstName}</span>
