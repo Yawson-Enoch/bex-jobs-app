@@ -19,20 +19,20 @@ const url = '/';
 
 export const metadata: Metadata = {
   openGraph: {
-    title,
-    description,
-    url,
     ...openGraphName,
     ...openGraphImages,
     ...openGraphLocale,
     ...openGraphType,
-  },
-  twitter: {
     title,
     description,
+    url,
+  },
+  twitter: {
     ...twitterCard,
     ...twitterCreator,
     ...twitterImages,
+    title,
+    description,
   },
   alternates: {
     canonical: url,
