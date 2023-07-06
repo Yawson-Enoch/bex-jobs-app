@@ -120,7 +120,11 @@ export default function Sidebar() {
                   sidebarRoute.path === '/dashboard/all-jobs'
                     ? sidebarRoute.path +
                       '?' +
-                      createQueryParam({ sort: 'latest' })
+                      createQueryParam({
+                        type: 'all',
+                        status: 'all',
+                        sort: 'latest',
+                      })
                     : sidebarRoute.path
                 }
                 className="group relative z-10 flex items-center gap-3 rounded-md p-2"

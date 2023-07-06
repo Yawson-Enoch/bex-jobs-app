@@ -124,7 +124,11 @@ export default function MobileNavbar() {
                       navLink.path === '/dashboard/all-jobs'
                         ? navLink.path +
                             '?' +
-                            createQueryParam({ sort: 'latest' })
+                            createQueryParam({
+                              type: 'all',
+                              status: 'all',
+                              sort: 'latest',
+                            })
                         : navLink.path
                     );
                     setIsMobileNavbarOpen(false);

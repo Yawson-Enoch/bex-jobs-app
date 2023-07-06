@@ -31,12 +31,15 @@ export default function Filters() {
 
   const id = useId();
 
-  const { setQueryParams, deleteQueryParam } = useQueryParams();
+  const { setQueryParams, queryParams } = useQueryParams<{
+    type: string;
+    status: string;
+  }>();
 
   const form = useForm({
     defaultValues: {
-      jobStatus: 'all',
-      jobType: 'all',
+      jobStatus: queryParams?.status ?? 'all',
+      jobType: queryParams?.type ?? 'all',
     },
   });
   const { handleSubmit, control, reset } = form;
@@ -120,8 +123,7 @@ export default function Filters() {
                 onClick={() => {
                   reset();
                   setResetSelectKey(Date.now());
-                  deleteQueryParam('status');
-                  deleteQueryParam('type');
+                  setQueryParams({ status: 'all', type: 'all' });
                 }}
               >
                 Reset
