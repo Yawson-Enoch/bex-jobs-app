@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { TSignup } from '~/schemas/auth';
 import { BASE_URL } from '~/lib/api';
-import type { Signup } from '~/lib/validations/auth';
 import { toast } from '~/components/ui/use-toast';
 
 import useCustomRouter from '../useCustomRouter';
@@ -10,7 +10,7 @@ type TResponse = {
   msg: string;
 };
 
-const signupUser = async (payload: Signup): Promise<TResponse> => {
+const signupUser = async (payload: TSignup): Promise<TResponse> => {
   const response = await fetch(`${BASE_URL}/auth/register`, {
     method: 'POST',
     headers: {

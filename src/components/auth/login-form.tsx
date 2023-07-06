@@ -7,7 +7,7 @@ import { useAtom } from 'jotai';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { loginSchema, type Login } from '~/lib/validations/auth';
+import { loginSchema, TLogin } from '~/schemas/auth';
 import { persistLoginAtom } from '~/atoms/persist';
 import { useLogin } from '~/hooks/api/useLogin';
 
@@ -29,7 +29,7 @@ export default function LoginForm() {
 
   const id = useId();
 
-  const form = useForm<Login>({
+  const form = useForm<TLogin>({
     resolver: zodResolver(loginSchema),
     mode: 'onChange',
   });
@@ -38,7 +38,7 @@ export default function LoginForm() {
 
   const { mutate, isLoading } = useLogin();
 
-  const onSubmit: SubmitHandler<Login> = (data) => {
+  const onSubmit: SubmitHandler<TLogin> = (data) => {
     mutate(data);
   };
 

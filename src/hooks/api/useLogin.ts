@@ -1,9 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { useAtomValue, useSetAtom } from 'jotai';
 
+import { TLogin } from '~/schemas/auth';
 import { BASE_URL } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
-import type { Login } from '~/lib/validations/auth';
 import { persistLoginAtom } from '~/atoms/persist';
 import { sessionTimeoutAtom } from '~/atoms/session';
 import { accessTokenAtom } from '~/atoms/token';
@@ -16,7 +16,7 @@ type TResponse = {
   token: string;
 };
 
-const loginUser = async (payload: Login): Promise<TResponse> => {
+const loginUser = async (payload: TLogin): Promise<TResponse> => {
   const response = await fetch(`${BASE_URL}/auth/login`, {
     method: 'POST',
     headers: {

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { Profile, profileSchema } from '~/lib/validations/auth';
+import { profileSchema, TProfile } from '~/schemas/auth';
 import { useGetUser, useUpdateProfile } from '~/hooks/api/useUser';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -23,7 +23,7 @@ export default function ProfileUpdateForm() {
 
   const { data } = useGetUser();
 
-  const form = useForm<Profile>({
+  const form = useForm<TProfile>({
     resolver: zodResolver(profileSchema),
     mode: 'onSubmit',
     values: useMemo(() => data?.user, [data]),
@@ -33,7 +33,7 @@ export default function ProfileUpdateForm() {
 
   const { mutate, isLoading } = useUpdateProfile();
 
-  const onSubmit: SubmitHandler<Profile> = (data) => {
+  const onSubmit: SubmitHandler<TProfile> = (data) => {
     mutate(data);
   };
 

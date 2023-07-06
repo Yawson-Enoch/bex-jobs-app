@@ -3,18 +3,17 @@
 import { motion } from 'framer-motion';
 import { GridIcon, ListIcon } from 'lucide-react';
 
+import { TViewType } from '~/lib/types';
 import useQueryParams from '~/hooks/useQueryParams';
 
 import { Button } from '../ui/button';
 
-export type TViewTypes = 'grid' | 'list';
-
 export default function ViewTypes() {
   const { setQueryParams, queryParams } = useQueryParams<{
-    view: TViewTypes;
+    view: TViewType;
   }>();
 
-  const handleViewTypeChange = (option: TViewTypes) => {
+  const handleViewTypeChange = (option: TViewType) => {
     setQueryParams({ view: option });
   };
 

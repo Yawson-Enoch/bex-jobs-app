@@ -2,8 +2,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 import { z } from 'zod';
 
+import { TProfile } from '~/schemas/auth';
 import { BASE_URL } from '~/lib/api';
-import type { Profile } from '~/lib/validations/auth';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
@@ -52,7 +52,7 @@ type TResponse = {
 
 const updateProfile = async (
   token: string | null,
-  payload: Profile
+  payload: TProfile
 ): Promise<TResponse> => {
   const response = await fetch(`${BASE_URL}/auth/update-user`, {
     method: 'PATCH',
@@ -78,7 +78,7 @@ export function useUpdateProfile() {
   const queryClient = useQueryClient();
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: (payload: Profile) => updateProfile(token, payload),
+    mutationFn: (payload: TProfile) => updateProfile(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [userQueryKey] });
       toast({

@@ -37,33 +37,24 @@ const authSchema = z.object({
     .trim(),
 });
 
-const signupSchema = authSchema.refine(
+export const signupSchema = authSchema.refine(
   (data) => data.password === data.passwordConfirm,
   {
     message: 'Passwords do not match',
     path: ['passwordConfirm'],
   }
 );
-type Signup = z.infer<typeof signupSchema>;
+export type TSignup = z.infer<typeof signupSchema>;
 
-const loginSchema = authSchema.omit({
+export const loginSchema = authSchema.omit({
   firstName: true,
   lastName: true,
   passwordConfirm: true,
 });
-type Login = z.infer<typeof loginSchema>;
+export type TLogin = z.infer<typeof loginSchema>;
 
-const profileSchema = authSchema.omit({
+export const profileSchema = authSchema.omit({
   password: true,
   passwordConfirm: true,
 });
-type Profile = z.infer<typeof profileSchema>;
-
-export {
-  signupSchema,
-  loginSchema,
-  profileSchema,
-  type Signup,
-  type Login,
-  type Profile,
-};
+export type TProfile = z.infer<typeof profileSchema>;

@@ -5,8 +5,15 @@ import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
-import { z } from 'zod';
 
+import {
+  JOB_STATUS,
+  JOB_TYPE,
+  jobSchema,
+  TJob,
+  TJobStatus,
+  TJobType,
+} from '~/schemas/job';
 import { useAddJob } from '~/hooks/api/useJob';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -27,47 +34,6 @@ const DevTool: React.ElementType = dynamic(
   { ssr: false }
 );
 
-const STATUS_OPTIONS = ['pending', 'interview', 'declined'] as const;
-const JOB_TYPES = ['full-time', 'part-time', 'remote', 'internship'] as const;
-
-export const addJobSchema = z.object({
-  jobPosition: z
-    .string({
-      required_error: 'Position is required',
-      invalid_type_error: 'Position must be a string',
-    })
-    .min(2, { message: 'Position must be 2 or more characters long' })
-    .max(200, {
-      message: 'Position cannot be more than 200 characters long',
-    }),
-  company: z
-    .string({
-      required_error: 'Company name is required',
-      invalid_type_error: 'Company name must be a string',
-    })
-    .min(2, { message: 'Company name must be 2 or more characters long' })
-    .max(100, {
-      message: 'Company name cannot be more than 100 characters long',
-    }),
-  jobLocation: z
-    .string({
-      required_error: 'Location is required',
-      invalid_type_error: 'Location must be a string',
-    })
-    .min(2, { message: 'Location name must be 2 or more characters long' })
-    .max(100, {
-      message: 'Location name cannot be more than 200 characters long',
-    }),
-  jobStatus: z.enum(STATUS_OPTIONS).default('pending'),
-  jobType: z.enum(JOB_TYPES, {
-    errorMap: () => ({ message: 'Please select job type' }),
-  }),
-});
-
-export type Job = z.infer<typeof addJobSchema>;
-type TStatusOption = z.infer<typeof addJobSchema.shape.jobStatus>;
-type TJobType = z.infer<typeof addJobSchema.shape.jobType>;
-
 export default function AddJobForm({
   className,
   isJobEdit = false,
@@ -81,8 +47,8 @@ export default function AddJobForm({
 
   const id = useId();
 
-  const form = useForm<Job>({
-    resolver: zodResolver(addJobSchema),
+  const form = useForm<TJob>({
+    resolver: zodResolver(jobSchema),
     mode: 'onChange',
     defaultValues: {
       jobStatus: 'pending',
@@ -98,7 +64,7 @@ export default function AddJobForm({
 
   const { mutate, isLoading } = useAddJob();
 
-  const onSubmit: SubmitHandler<Job> = (data) => {
+  const onSubmit: SubmitHandler<TJob> = (data) => {
     mutate(data);
   };
 
@@ -167,9 +133,7 @@ export default function AddJobForm({
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={
-                    field.onChange as (value: TStatusOption) => void
-                  }
+                  onValueChange={field.onChange as (value: TJobStatus) => void}
                   defaultValue={field.value}
                   key={resetSelectKey}
                 >
@@ -178,7 +142,7 @@ export default function AddJobForm({
                   </SelectTrigger>
                   <SelectContent className="bg-background/90 backdrop-blur-sm">
                     <SelectGroup>
-                      {STATUS_OPTIONS.map((status) => (
+                      {JOB_STATUS.map((status) => (
                         <SelectItem key={status} value={status}>
                           {status}
                         </SelectItem>
@@ -211,7 +175,7 @@ export default function AddJobForm({
                   </SelectTrigger>
                   <SelectContent className="bg-background/90 backdrop-blur-sm">
                     <SelectGroup>
-                      {JOB_TYPES.map((type) => (
+                      {JOB_TYPE.map((type) => (
                         <SelectItem key={type} value={type}>
                           {type}
                         </SelectItem>

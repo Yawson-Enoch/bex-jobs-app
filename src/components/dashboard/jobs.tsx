@@ -1,14 +1,14 @@
 'use client';
 
+import { TViewType } from '~/lib/types';
 import { useGetJobs } from '~/hooks/api/useJob';
 import useQueryParams from '~/hooks/useQueryParams';
 
 import JobGrid from './job-grid';
 import JobList from './job-list';
-import { TViewTypes } from './view-types';
 
 export default function Jobs() {
-  const { queryParams } = useQueryParams<{ view: TViewTypes }>();
+  const { queryParams } = useQueryParams<{ view: TViewType }>();
   const { combinedQueryParams } = useQueryParams();
 
   const params = combinedQueryParams();

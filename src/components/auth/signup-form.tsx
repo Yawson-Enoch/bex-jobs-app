@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { signupSchema, type Signup } from '~/lib/validations/auth';
+import { signupSchema, TSignup } from '~/schemas/auth';
 import { useSignup } from '~/hooks/api/useSignup';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -21,7 +21,7 @@ const DevTool: React.ElementType = dynamic(
 export default function SignupForm() {
   const id = useId();
 
-  const form = useForm<Signup>({
+  const form = useForm<TSignup>({
     resolver: zodResolver(signupSchema),
     mode: 'onChange',
   });
@@ -30,7 +30,7 @@ export default function SignupForm() {
 
   const { mutate, isLoading } = useSignup();
 
-  const onSubmit: SubmitHandler<Signup> = (data) => {
+  const onSubmit: SubmitHandler<TSignup> = (data) => {
     mutate(data);
   };
 

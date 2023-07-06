@@ -17,6 +17,7 @@ module.exports = {
     '^~/env(.*)$',
     '^~/types/(.*)$',
     '^~/config/(.*)$',
+    '^~/schemas/(.*)$',
     '^~/lib/(.*)$',
     '^~/store/(.*)$',
     '^~/atoms/(.*)$',

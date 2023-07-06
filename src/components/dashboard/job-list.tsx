@@ -2,18 +2,13 @@ import format from 'date-fns/format';
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-import { TJob } from '~/hooks/api/useJob';
+import { TJobAPIResponse } from '~/schemas/job';
+import { jobStatusColors } from '~/lib/utils';
 
 import DeleteJobBtn from './delete-job-btn';
 import EditJobBtn from './edit-job-btn';
 
-export const statusColors = {
-  pending: 'bg-yellow-500/20 text-yellow-500 dark:bg-yellow-500/10',
-  interview: 'bg-blue-500/20 text-blue-500 dark:bg-blue-500/10',
-  declined: 'bg-red-500/20 text-red-500 dark:bg-red-500/10',
-};
-
-export default function JobList({ job }: { job: TJob }) {
+export default function JobList({ job }: { job: TJobAPIResponse }) {
   const date = new Date(job.createdAt);
   const formattedDate = format(date, 'do MMMM, yyyy');
 
@@ -51,7 +46,7 @@ export default function JobList({ job }: { job: TJob }) {
           <span
             className={twMerge(
               'rounded-md px-2.5 py-0.5 text-xs font-medium',
-              statusColors[job.jobStatus]
+              jobStatusColors[job.jobStatus]
             )}
           >
             {job.jobStatus}
