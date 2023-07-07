@@ -72,8 +72,8 @@ export default function PaginationButtons() {
         pageLinkClassName="w-10 aspect-square lg:flex items-center justify-center rounded-full border hover:bg-accent"
         activeLinkClassName="bg-primary text-primary-foreground border-0 hover:bg-primary/90"
         disabledClassName="pointer-events-none text-muted-foreground"
-        previousLinkClassName="inline-flex items-center gap-2"
-        nextLinkClassName="inline-flex items-center gap-2"
+        previousLinkClassName="flex items-center gap-2"
+        nextLinkClassName="flex items-center gap-2"
         renderOnZeroPageCount={null}
         initialPage={initialPage}
       />
