@@ -31,11 +31,12 @@ export default function PaginationButtons() {
     page: number;
   }>();
 
-  const initialPage = queryParams?.page ? queryParams.page - 1 : 0;
-
   const params = combinedQueryParams();
-
   const { data: jobs } = useGetJobs(params);
+  const initialPage =
+    jobs?.paginatedData.totalNumberOfPages === 1
+      ? 0
+      : (queryParams.page as number) - 1;
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setQueryParams({ page: selected + 1 });
@@ -48,6 +49,7 @@ export default function PaginationButtons() {
       animate="animate"
     >
       <ReactPaginate
+        key={initialPage}
         breakClassName="hidden lg:flex lg:items-center"
         breakLabel={
           <MoreHorizontalIcon size={15} className="text-muted-foreground" />
