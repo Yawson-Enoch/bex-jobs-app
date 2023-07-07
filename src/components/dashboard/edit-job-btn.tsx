@@ -12,7 +12,7 @@ import {
 } from '~/components/ui/dialog';
 
 import { Button } from '../ui/button';
-import AddJobForm from './add-job-form';
+import JobForm from './job-form';
 
 export default function EditJobBtn({ id }: { id: string }) {
   const setJobId = useSetAtom(jobIdAtom);
@@ -37,11 +37,7 @@ export default function EditJobBtn({ id }: { id: string }) {
             </div>
             <DialogClose />
           </DialogHeader>
-          <AddJobForm
-            isModal
-            isJobEdit
-            className="grid-cols-1 md:grid-cols-2"
-          />
+          <JobForm isModal isJobEdit className="grid-cols-1 md:grid-cols-2" />
         </div>
       </DialogContent>
     </Dialog>

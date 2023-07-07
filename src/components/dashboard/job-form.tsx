@@ -34,7 +34,7 @@ const DevTool: React.ElementType = dynamic(
   { ssr: false }
 );
 
-export default function AddJobForm({
+export default function JobForm({
   className,
   isJobEdit = false,
   isModal = false,

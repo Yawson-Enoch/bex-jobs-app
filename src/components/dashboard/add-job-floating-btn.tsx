@@ -16,7 +16,7 @@ import {
 } from '~/components/ui/tooltip';
 
 import { Button } from '../ui/button';
-import AddJobForm from './add-job-form';
+import JobForm from './job-form';
 
 export default function AddJobFloatingBtn() {
   return (
@@ -51,7 +51,7 @@ export default function AddJobFloatingBtn() {
             </DialogTitle>
             <DialogClose />
           </DialogHeader>
-          <AddJobForm isModal className="grid-cols-1 md:grid-cols-2" />
+          <JobForm isModal className="grid-cols-1 md:grid-cols-2" />
         </div>
       </DialogContent>
     </Dialog>
