@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -14,7 +14,7 @@ import {
   TJobStatus,
   TJobType,
 } from '~/schemas/job';
-import { useAddJob } from '~/hooks/api/useJob';
+import { useAddJob, useEditJob, useGetJob } from '~/hooks/api/useJob';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -47,11 +47,18 @@ export default function AddJobForm({
 
   const id = useId();
 
+  const { data } = useGetJob();
+
   const form = useForm<TJob>({
     resolver: zodResolver(jobSchema),
     mode: 'onChange',
+    /* 
+    - must set default values for controller inputs 
+    - so the reset(re-rendering) picks the default value 
+    */
     defaultValues: {
-      jobStatus: 'pending',
+      jobStatus: data?.job.jobStatus ?? 'pending',
+      jobType: data?.job.jobType ?? 'remote',
     },
   });
   const { register, handleSubmit, formState, control, reset } = form;
@@ -63,10 +70,19 @@ export default function AddJobForm({
   };
 
   const { mutate, isLoading } = useAddJob();
+  const { mutate: editJobMutation, isLoading: isEditingJob } = useEditJob();
 
   const onSubmit: SubmitHandler<TJob> = (data) => {
-    mutate(data);
+    isJobEdit ? editJobMutation(data) : mutate(data);
   };
+
+  useEffect(() => {
+    if (isJobEdit && data) {
+      const newData = jobSchema.parse(data.job);
+      reset(newData);
+      setResetSelectKey(Date.now());
+    }
+  }, [data, isJobEdit, reset]);
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -84,7 +100,7 @@ export default function AddJobForm({
               id={id + '-jobPosition'}
               {...register('jobPosition')}
               autoFocus
-              disabled={isLoading}
+              disabled={isJobEdit ? isEditingJob : isLoading}
             />
           </div>
           {errors.jobPosition && (
@@ -100,7 +116,7 @@ export default function AddJobForm({
               type="text"
               id={id + '-company'}
               {...register('company')}
-              disabled={isLoading}
+              disabled={isJobEdit ? isEditingJob : isLoading}
             />
           </div>
           {errors.company && (
@@ -116,7 +132,7 @@ export default function AddJobForm({
               type="text"
               id={id + '-jobLocation'}
               {...register('jobLocation')}
-              disabled={isLoading}
+              disabled={isJobEdit ? isEditingJob : isLoading}
             />
           </div>
           {errors.jobLocation && (
@@ -168,6 +184,7 @@ export default function AddJobForm({
               render={({ field }) => (
                 <Select
                   onValueChange={field.onChange as (value: TJobType) => void}
+                  defaultValue={field.value}
                   key={resetSelectKey}
                 >
                   <SelectTrigger id={id + '-jobType'}>
@@ -198,14 +215,18 @@ export default function AddJobForm({
             <Button
               type="button"
               variant="outline"
-              disabled={isLoading}
+              disabled={isJobEdit ? isEditingJob : isLoading}
               onClick={resetAllFormFields}
             >
               Clear
             </Button>
             <Button type="submit" disabled={isLoading || !isValid || !isDirty}>
               {isLoading ? (
-                <LoadingIndicator msg="Adding new job..." />
+                <LoadingIndicator
+                  msg={isJobEdit ? 'Editing job...' : 'Adding new job...'}
+                />
+              ) : isJobEdit ? (
+                'Edit Job'
               ) : (
                 'Add Job'
               )}

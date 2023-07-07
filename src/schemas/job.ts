@@ -52,17 +52,20 @@ const mutationResponse = z.object({
 });
 export type TMutationResponse = z.infer<typeof mutationResponse>;
 
-const jobAPIResponseSchema = jobSchema.extend({
-  _id: z.string(),
-  createdBy: z.string(),
-  createdAt: z.string().datetime(),
-  updatedAt: z.string().datetime(),
+export const jobAPIResponseSchema = z.object({
+  msg: z.string(),
+  job: jobSchema.extend({
+    _id: z.string(),
+    createdBy: z.string(),
+    createdAt: z.string().datetime(),
+    updatedAt: z.string().datetime(),
+  }),
 });
-export type TJobAPIResponse = z.infer<typeof jobAPIResponseSchema>;
+export type TJobAPIResponse = z.infer<typeof jobAPIResponseSchema.shape.job>;
 
 const paginatedDataSchema = z.object({
   totalNumberOfJobs: z.number(),
-  currentPageJobs: z.array(jobAPIResponseSchema),
+  currentPageJobs: z.array(jobAPIResponseSchema.shape.job),
   totalNumberOfJobsOnCurrPage: z.number(),
   resultsPerPage: z.number(),
   totalNumberOfPages: z.number(),
