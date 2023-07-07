@@ -121,7 +121,10 @@ export default function Filters() {
                 type="button"
                 variant="outline"
                 onClick={() => {
-                  reset();
+                  reset({
+                    jobStatus: 'all',
+                    jobType: 'all',
+                  });
                   setResetSelectKey(Date.now());
                   setQueryParams({ status: 'all', type: 'all' });
                 }}
