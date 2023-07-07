@@ -35,7 +35,6 @@ const addJob = async (
 
   return data;
 };
-
 export function useAddJob() {
   const token = useAtomValue(accessTokenAtom);
 
@@ -74,12 +73,11 @@ const getJobs = async (token: string | null, queryParams: string) => {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.msg || 'Failed to fetch stats');
+    throw new Error(data.msg || 'Failed to fetch jobs');
   }
 
   return data;
 };
-
 export function useGetJobs(queryParams: string) {
   const token = useAtomValue(accessTokenAtom);
 
@@ -105,7 +103,6 @@ const getJobStats = async (token: string | null) => {
 
   return data;
 };
-
 export function useGetJobStats() {
   const token = useAtomValue(accessTokenAtom);
 
@@ -116,7 +113,7 @@ export function useGetJobStats() {
   });
 }
 
-/* add job */
+/* delete job */
 const deleteJob = async (
   token: string | null,
   jobId: string
@@ -136,7 +133,6 @@ const deleteJob = async (
 
   return data;
 };
-
 export function useDeleteJob() {
   const token = useAtomValue(accessTokenAtom);
   const jobId = useAtomValue(jobIdAtom);
@@ -179,7 +175,6 @@ const getJob = async (token: string | null, jobId: string) => {
 
   return parsedData;
 };
-
 export function useGetJob() {
   const token = useAtomValue(accessTokenAtom);
   const jobId = useAtomValue(jobIdAtom);
@@ -214,7 +209,6 @@ const editJob = async (
 
   return data;
 };
-
 export function useEditJob() {
   const token = useAtomValue(accessTokenAtom);
   const jobId = useAtomValue(jobIdAtom);
