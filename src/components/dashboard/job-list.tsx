@@ -3,7 +3,7 @@ import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
 import { TJobAPI } from '~/schemas/job';
-import { jobStatusColors } from '~/lib/utils';
+import { jobStatusColors } from '~/lib/misc';
 
 import DeleteJobBtn from './delete-job-btn';
 import EditJobBtn from './edit-job-btn';

@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-interface User {
+type User = {
   _id: string;
   firstName: string;
   email: string;
-}
+};
 
 type TokenInfo = jwt.JwtPayload & User;
 
