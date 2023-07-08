@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
@@ -16,7 +16,6 @@ import {
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { useGetUser } from '~/hooks/api/useAuth';
 import useAuth from '~/hooks/useAuth';
-import useCustomRouter from '~/hooks/useCustomRouter';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 import useQueryParams from '~/hooks/useQueryParams';
 import ErrorDisplay from '~/components/common/error-display';
@@ -57,7 +56,7 @@ export default function MobileNavbar() {
   const { isLoading, error, data } = useGetUser();
 
   const pathname = usePathname();
-  const router = useCustomRouter();
+  const router = useRouter();
 
   useLockBodyScroll();
 

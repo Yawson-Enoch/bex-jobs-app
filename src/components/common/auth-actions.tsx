@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
   LogInIcon,
   LogOutIcon,
@@ -9,7 +10,6 @@ import {
 } from 'lucide-react';
 
 import useAuth from '~/hooks/useAuth';
-import useCustomRouter from '~/hooks/useCustomRouter';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +21,7 @@ import {
 import { Button } from '../ui/button';
 
 export default function AuthActions() {
-  const router = useCustomRouter();
+  const router = useRouter();
   const { logOut, isLoggedIn } = useAuth();
 
   return (

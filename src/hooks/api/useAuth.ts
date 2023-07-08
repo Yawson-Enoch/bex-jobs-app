@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -18,7 +19,6 @@ import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
 import useAuth from '../useAuth';
-import useCustomRouter from '../useCustomRouter';
 
 const userQueryKey = 'user';
 
@@ -47,7 +47,7 @@ const signupUser = async (payload: TSignup) => {
   return result.data;
 };
 export function useSignup() {
-  const router = useCustomRouter();
+  const router = useRouter();
 
   const signupMutation = useMutation({
     mutationFn: signupUser,

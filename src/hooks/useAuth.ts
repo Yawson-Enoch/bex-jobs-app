@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAtom, useAtomValue } from 'jotai';
 import { RESET } from 'jotai/utils';
 
@@ -6,8 +7,6 @@ import { parseToken } from '~/lib/jwt';
 import { persistLoginAtom } from '~/atoms/persist';
 import { sessionTimeoutAtom } from '~/atoms/session';
 import { accessTokenAtom } from '~/atoms/token';
-
-import useCustomRouter from './useCustomRouter';
 
 type User = {
   userId: string;
@@ -26,7 +25,7 @@ export default function useAuth() {
   const [sessionTimeout, setSessionTimeout] = useAtom(sessionTimeoutAtom);
   const persistLogin = useAtomValue(persistLoginAtom);
 
-  const router = useCustomRouter();
+  const router = useRouter();
 
   const logOut = useCallback(() => {
     setIsAuthenticated(false);
