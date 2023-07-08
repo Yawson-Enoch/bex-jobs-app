@@ -121,8 +121,8 @@ export default function Sidebar() {
                     ? sidebarRoute.path +
                       '?' +
                       createQueryParam({
-                        type: 'all',
                         status: 'all',
+                        type: 'all',
                         sort: 'latest',
                         page: 1,
                       })
