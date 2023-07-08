@@ -25,11 +25,11 @@ export default function ProfileUpdateForm() {
 
   const form = useForm<TProfile>({
     resolver: zodResolver(profileSchema),
-    mode: 'onSubmit',
+    mode: 'onChange',
     values: useMemo(() => data?.user, [data]),
   });
   const { register, handleSubmit, formState, control } = form;
-  const { errors } = formState;
+  const { errors, isDirty, isValid } = formState;
 
   const updateUserProfileMutation = useUpdateUserProfile();
 
@@ -99,7 +99,9 @@ export default function ProfileUpdateForm() {
           <Label>Action</Label>
           <Button
             type="submit"
-            disabled={updateUserProfileMutation.isLoading}
+            disabled={
+              updateUserProfileMutation.isLoading || !isValid || !isDirty
+            }
             className="flex w-full"
           >
             {updateUserProfileMutation.isLoading ? (

@@ -23,10 +23,10 @@ export default function SignupForm() {
 
   const form = useForm<TSignup>({
     resolver: zodResolver(signupSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
   const { register, handleSubmit, formState, control } = form;
-  const { errors, isDirty, isValid } = formState;
+  const { errors } = formState;
 
   const signupMutation = useSignup();
 
@@ -135,10 +135,7 @@ export default function SignupForm() {
             </small>
           )}
         </div>
-        <Button
-          type="submit"
-          disabled={signupMutation.isLoading || !isValid || !isDirty}
-        >
+        <Button type="submit" disabled={signupMutation.isLoading}>
           {signupMutation.isLoading ? (
             <LoadingIndicator msg="Signing up..." />
           ) : (

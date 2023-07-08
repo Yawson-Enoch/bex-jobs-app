@@ -51,7 +51,7 @@ export default function JobForm({
 
   const form = useForm<TJob>({
     resolver: zodResolver(jobSchema),
-    mode: 'onChange',
+    mode: isJobEdit ? 'onChange' : 'onSubmit',
     /* 
     - must set default values for controller inputs 
     - so the reset(re-rendering) picks the default value 
@@ -217,18 +217,16 @@ export default function JobForm({
         </div>
         <div className="space-y-2">
           <Label>Actions</Label>
-          <div className="grid grid-cols-2 gap-3">
-            <Button
-              type="button"
-              variant="outline"
-              disabled={
-                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
-              }
-              onClick={resetAllFormFields}
-            >
-              Clear
-            </Button>
-            {isJobEdit ? (
+          {isJobEdit ? (
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                disabled={editJobMutation.isLoading || !isDirty}
+                onClick={resetAllFormFields}
+              >
+                Clear
+              </Button>
               <Button
                 type="submit"
                 disabled={editJobMutation.isLoading || !isValid || !isDirty}
@@ -239,19 +237,26 @@ export default function JobForm({
                   'Edit Job'
                 )}
               </Button>
-            ) : (
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 gap-3">
               <Button
-                type="submit"
-                disabled={addJobMutation.isLoading || !isValid || !isDirty}
+                type="button"
+                variant="outline"
+                disabled={addJobMutation.isLoading || !isDirty}
+                onClick={resetAllFormFields}
               >
+                Clear
+              </Button>
+              <Button type="submit" disabled={addJobMutation.isLoading}>
                 {addJobMutation.isLoading ? (
                   <LoadingIndicator msg={'Adding job...'} />
                 ) : (
                   'Add Job'
                 )}
               </Button>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
       {!isModal && <DevTool control={control} />}

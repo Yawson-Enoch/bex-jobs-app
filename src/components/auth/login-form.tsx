@@ -31,10 +31,10 @@ export default function LoginForm() {
 
   const form = useForm<TLogin>({
     resolver: zodResolver(loginSchema),
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
   const { register, handleSubmit, formState, control } = form;
-  const { errors, isDirty, isValid } = formState;
+  const { errors } = formState;
 
   const loginMutation = useLogin();
 
@@ -127,7 +127,7 @@ export default function LoginForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={loginMutation.isLoading || !isValid || !isDirty}
+          disabled={loginMutation.isLoading}
         >
           {loginMutation.isLoading ? (
             <LoadingIndicator msg="Logging in..." />

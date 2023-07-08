@@ -41,8 +41,9 @@ export default function Filters() {
       jobStatus: queryParams?.status ?? 'all',
       jobType: queryParams?.type ?? 'all',
     },
+    mode: 'onChange',
   });
-  const { handleSubmit, control, reset } = form;
+  const { handleSubmit, control, reset, formState } = form;
 
   const onSubmit: SubmitHandler<Job> = (data) => {
     setQueryParams({ status: data.jobStatus, type: data.jobType });
@@ -128,10 +129,15 @@ export default function Filters() {
                   setResetSelectKey(Date.now());
                   setQueryParams({ status: 'all', type: 'all' });
                 }}
+                disabled={
+                  queryParams.status === 'all' && queryParams.type === 'all'
+                }
               >
                 Reset
               </Button>
-              <Button type="submit">Apply</Button>
+              <Button type="submit" disabled={!formState.isDirty}>
+                Apply
+              </Button>
             </div>
           </div>
         </form>
