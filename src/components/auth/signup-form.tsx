@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { signupSchema, TSignup } from '~/schemas/auth';
-import { useSignup } from '~/hooks/api/useSignup';
+import { useSignup } from '~/hooks/api/useAuth';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -28,10 +28,10 @@ export default function SignupForm() {
   const { register, handleSubmit, formState, control } = form;
   const { errors, isDirty, isValid } = formState;
 
-  const { mutate, isLoading } = useSignup();
+  const signupMutation = useSignup();
 
   const onSubmit: SubmitHandler<TSignup> = (data) => {
-    mutate(data);
+    signupMutation.mutate(data);
   };
 
   return (
@@ -50,7 +50,7 @@ export default function SignupForm() {
               autoComplete="name"
               autoCorrect="off"
               autoFocus
-              disabled={isLoading}
+              disabled={signupMutation.isLoading}
             />
             {errors.firstName && (
               <small className="text-error-form-foreground">
@@ -69,7 +69,7 @@ export default function SignupForm() {
               placeholder="enter last name"
               autoComplete="name"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={signupMutation.isLoading}
             />
             {errors.lastName && (
               <small className="text-error-form-foreground">
@@ -89,7 +89,7 @@ export default function SignupForm() {
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
-            disabled={isLoading}
+            disabled={signupMutation.isLoading}
           />
           {errors.email && (
             <small className="text-error-form-foreground">
@@ -108,7 +108,7 @@ export default function SignupForm() {
             placeholder="enter password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={isLoading}
+            disabled={signupMutation.isLoading}
           />
           {errors.password && (
             <small className="text-error-form-foreground">
@@ -127,7 +127,7 @@ export default function SignupForm() {
             placeholder="confirm password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={isLoading}
+            disabled={signupMutation.isLoading}
           />
           {errors.passwordConfirm && (
             <small className="text-error-form-foreground">
@@ -135,8 +135,15 @@ export default function SignupForm() {
             </small>
           )}
         </div>
-        <Button type="submit" disabled={isLoading || !isValid || !isDirty}>
-          {isLoading ? <LoadingIndicator msg="Signing up..." /> : 'Sign up'}
+        <Button
+          type="submit"
+          disabled={signupMutation.isLoading || !isValid || !isDirty}
+        >
+          {signupMutation.isLoading ? (
+            <LoadingIndicator msg="Signing up..." />
+          ) : (
+            'Sign up'
+          )}
         </Button>
       </div>
       <DevTool control={control} />

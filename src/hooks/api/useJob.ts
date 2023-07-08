@@ -9,6 +9,7 @@ import {
   TJob,
 } from '~/schemas/job';
 import { BASE_URL } from '~/lib/api';
+import { TToken } from '~/lib/types';
 import { jobIdAtom } from '~/atoms/job-id';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
@@ -16,7 +17,7 @@ import { toast } from '~/components/ui/use-toast';
 import useQueryParams from '../useQueryParams';
 
 /* queries */
-const getJobs = async (token: string | null, queryParams: string) => {
+const getJobs = async (token: TToken, queryParams: string) => {
   const response = await fetch(`${BASE_URL}/jobs/${queryParams}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -49,7 +50,7 @@ export function useGetJobs() {
   });
 }
 
-const getJob = async (token: string | null, jobId: string) => {
+const getJob = async (token: TToken, jobId: string) => {
   const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -80,7 +81,7 @@ export function useGetJob() {
   });
 }
 
-const getJobsStats = async (token: string | null) => {
+const getJobsStats = async (token: TToken) => {
   const response = await fetch(`${BASE_URL}/jobs/stats`, {
     headers: { Authorization: `Bearer ${token}` },
   });
@@ -111,7 +112,7 @@ export function useGetJobsStats() {
 }
 
 /* mutations */
-const addJob = async (token: string | null, payload: TJob) => {
+const addJob = async (token: TToken, payload: TJob) => {
   const response = await fetch(`${BASE_URL}/jobs`, {
     method: 'POST',
     headers: {
@@ -165,7 +166,7 @@ export function useAddJob() {
   return addJobMutation;
 }
 
-const editJob = async (token: string | null, jobId: string, payload: TJob) => {
+const editJob = async (token: TToken, jobId: string, payload: TJob) => {
   const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
     method: 'PATCH',
     headers: {
@@ -216,7 +217,7 @@ export function useEditJob() {
   return editJobMutation;
 }
 
-const deleteJob = async (token: string | null, jobId: string) => {
+const deleteJob = async (token: TToken, jobId: string) => {
   const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
     method: 'DELETE',
     headers: {

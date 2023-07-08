@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { profileSchema, TProfile } from '~/schemas/auth';
-import { useGetUser, useUpdateUserProfile } from '~/hooks/api/useUser';
+import { useGetUser, useUpdateUserProfile } from '~/hooks/api/useAuth';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';

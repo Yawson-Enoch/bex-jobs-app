@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
-import { useGetUser } from '~/hooks/api/useUser';
+import { useGetUser } from '~/hooks/api/useAuth';
 import useAuth from '~/hooks/useAuth';
 import useCustomRouter from '~/hooks/useCustomRouter';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';

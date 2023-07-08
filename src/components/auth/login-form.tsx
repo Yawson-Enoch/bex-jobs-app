@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { loginSchema, TLogin } from '~/schemas/auth';
 import { persistLoginAtom } from '~/atoms/persist';
-import { useLogin } from '~/hooks/api/useLogin';
+import { useLogin } from '~/hooks/api/useAuth';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -36,10 +36,10 @@ export default function LoginForm() {
   const { register, handleSubmit, formState, control } = form;
   const { errors, isDirty, isValid } = formState;
 
-  const { mutate, isLoading } = useLogin();
+  const loginMutation = useLogin();
 
   const onSubmit: SubmitHandler<TLogin> = (data) => {
-    mutate(data);
+    loginMutation.mutate(data);
   };
 
   return (
@@ -57,7 +57,7 @@ export default function LoginForm() {
             autoComplete="email"
             autoCorrect="off"
             autoFocus
-            disabled={isLoading}
+            disabled={loginMutation.isLoading}
           />
           {errors.email && (
             <small className="text-error-form-foreground">
@@ -77,7 +77,7 @@ export default function LoginForm() {
               placeholder="enter password"
               autoComplete="current-password"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={loginMutation.isLoading}
               className="grow rounded-r-none border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             <Button
@@ -109,7 +109,7 @@ export default function LoginForm() {
               id={id + '-persist-login'}
               checked={persistLogin}
               onCheckedChange={() => setPersistLogin(!persistLogin)}
-              disabled={isLoading}
+              disabled={loginMutation.isLoading}
             />
             <Label
               htmlFor={id + '-persist-login'}
@@ -127,9 +127,13 @@ export default function LoginForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={isLoading || !isValid || !isDirty}
+          disabled={loginMutation.isLoading || !isValid || !isDirty}
         >
-          {isLoading ? <LoadingIndicator msg="Logging in..." /> : 'Log in'}
+          {loginMutation.isLoading ? (
+            <LoadingIndicator msg="Logging in..." />
+          ) : (
+            'Log in'
+          )}
         </Button>
       </div>
       <DevTool control={control} />

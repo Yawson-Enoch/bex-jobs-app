@@ -37,6 +37,10 @@ const authSchema = z.object({
     .trim(),
 });
 
+export const mutationResponseSchema = z.object({
+  msg: z.string(),
+});
+
 export const signupSchema = authSchema.refine(
   (data) => data.password === data.passwordConfirm,
   {
@@ -51,6 +55,9 @@ export const loginSchema = authSchema.omit({
   lastName: true,
   passwordConfirm: true,
 });
+export const loginMutationResponseSchema = mutationResponseSchema.extend({
+  token: z.string(),
+});
 export type TLogin = z.infer<typeof loginSchema>;
 
 export const profileSchema = authSchema.omit({
@@ -58,3 +65,12 @@ export const profileSchema = authSchema.omit({
   passwordConfirm: true,
 });
 export type TProfile = z.infer<typeof profileSchema>;
+
+export const profileAPISchema = z.object({
+  msg: z.string(),
+  user: z.object({
+    firstName: z.string(),
+    lastName: z.string(),
+    email: z.string(),
+  }),
+});
