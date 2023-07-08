@@ -63,13 +63,13 @@ export default function Sidebar() {
       id="dashboard-sidebar"
       className={twMerge(
         'dashboard-sidebar max-h-dm sticky top-0 hidden overflow-y-auto overscroll-y-contain border-r bg-background/70 pt-3 md:flex md:flex-col md:gap-12',
-        isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20'
+        isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20',
       )}
     >
       <div
         className={twMerge(
           'flex items-center pl-4',
-          !isSidebarExpanded && 'justify-center px-4'
+          !isSidebarExpanded && 'justify-center px-4',
         )}
       >
         {isSidebarExpanded ? (
@@ -101,7 +101,7 @@ export default function Sidebar() {
               key={sidebarRoute.title}
               className={twMerge(
                 'relative overflow-hidden',
-                isSidebarExpanded ? 'w-full' : 'w-fit'
+                isSidebarExpanded ? 'w-full' : 'w-fit',
               )}
             >
               {pathname === sidebarRoute.path && (
@@ -150,7 +150,7 @@ export default function Sidebar() {
               variant="ghost"
               className={twMerge(
                 'group flex items-center justify-start gap-3 p-2',
-                isSidebarExpanded ? 'w-full' : 'w-fit'
+                isSidebarExpanded ? 'w-full' : 'w-fit',
               )}
               onClick={() => logOut()}
             >
@@ -170,7 +170,7 @@ export default function Sidebar() {
                   variant="ghost"
                   className={twMerge(
                     'group flex items-center justify-start gap-3 p-2',
-                    isSidebarExpanded ? 'w-full' : 'w-fit'
+                    isSidebarExpanded ? 'w-full' : 'w-fit',
                   )}
                   onClick={() => logOut()}
                 >

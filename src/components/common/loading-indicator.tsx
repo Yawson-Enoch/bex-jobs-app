@@ -15,7 +15,7 @@ export default function LoadingIndicator({
       role="status"
       className={twMerge(
         'grid grid-cols-[auto,_1fr] items-center gap-1',
-        className
+        className,
       )}
     >
       <LoaderIcon

@@ -19,7 +19,7 @@ import { Switch } from '../ui/switch';
 
 const DevTool: React.ElementType = dynamic(
   () => import('@hookform/devtools').then((module) => module.DevTool),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function LoginForm() {

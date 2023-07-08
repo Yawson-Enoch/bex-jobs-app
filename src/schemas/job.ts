@@ -86,7 +86,7 @@ const monthlyApplicationsSchema = z.array(
   z.object({
     date: z.string(),
     count: z.number(),
-  })
+  }),
 );
 export const jobsStatsAPISchema = z.object({
   msg: z.string(),

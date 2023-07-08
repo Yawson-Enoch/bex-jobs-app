@@ -44,7 +44,7 @@ export default function JobGrid({ job }: { job: TJobAPI }) {
           <span
             className={twMerge(
               'rounded-md px-2.5 py-0.5 text-xs font-medium',
-              jobStatusColors[job.jobStatus]
+              jobStatusColors[job.jobStatus],
             )}
           >
             {job.jobStatus}

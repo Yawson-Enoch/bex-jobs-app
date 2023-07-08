@@ -15,15 +15,15 @@ import LoadingIndicator from '~/components/common/loading-indicator';
 
 const TabsThemeToggler = dynamic(
   () => import('~/components/common/tabs-theme-toggler'),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function Header() {
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useAtom(
-    isMobileNavbarOpenAtom
+    isMobileNavbarOpenAtom,
   );
   const [isSidebarExpanded, setIsSidebarExpanded] = useAtom(
-    isSidebarExpandedAtom
+    isSidebarExpandedAtom,
   );
 
   const { isLoading, error, data } = useGetUser();
@@ -75,7 +75,7 @@ export default function Header() {
           aria-hidden="true"
           className={twMerge(
             'h-4 w-4 lg:h-5 lg:w-5',
-            isSidebarExpanded && 'rotate-180'
+            isSidebarExpanded && 'rotate-180',
           )}
         />
       </Button>

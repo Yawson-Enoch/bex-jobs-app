@@ -15,7 +15,7 @@ export default function ErrorDisplay({
       role="status"
       className={twMerge(
         'grid grid-cols-[auto,_1fr] items-center gap-1 text-destructive',
-        className
+        className,
       )}
     >
       <AlertCircleIcon

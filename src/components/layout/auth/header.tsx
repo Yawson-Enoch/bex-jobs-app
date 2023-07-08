@@ -6,7 +6,7 @@ import { Button } from '~/components/ui/button';
 
 const TabsThemeToggler = dynamic(
   () => import('~/components/common/tabs-theme-toggler'),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function Header() {

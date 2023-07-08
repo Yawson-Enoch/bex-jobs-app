@@ -15,7 +15,7 @@ import { Label } from '../ui/label';
 
 const DevTool: React.ElementType = dynamic(
   () => import('@hookform/devtools').then((module) => module.DevTool),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function SignupForm() {

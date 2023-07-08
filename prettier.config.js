@@ -2,12 +2,7 @@
 
 /** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
 module.exports = {
-  tabWidth: 2,
-  printWidth: 80,
   singleQuote: true,
-  semi: true,
-  arrowParens: 'always',
-  endOfLine: 'lf',
   importOrder: [
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',

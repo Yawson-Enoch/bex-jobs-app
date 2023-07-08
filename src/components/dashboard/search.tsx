@@ -41,7 +41,7 @@ export default function Search() {
         variant="ghost"
         className={twMerge(
           'pointer-events-none invisible h-fit rounded-full p-1',
-          searchValue !== '' && 'pointer-events-auto visible'
+          searchValue !== '' && 'pointer-events-auto visible',
         )}
         onClick={() => setSearchValue('')}
       >

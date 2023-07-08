@@ -47,7 +47,7 @@ const navLinks = [
 
 export default function MobileNavbar() {
   const [isMobileNavbarOpen, setIsMobileNavbarOpen] = useAtom(
-    isMobileNavbarOpenAtom
+    isMobileNavbarOpenAtom,
   );
 
   const { logOut } = useAuth();
@@ -129,7 +129,7 @@ export default function MobileNavbar() {
                               sort: 'latest',
                               page: 1,
                             })
-                        : navLink.path
+                        : navLink.path,
                     );
                     setIsMobileNavbarOpen(false);
                   }}

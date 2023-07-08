@@ -31,7 +31,7 @@ import {
 
 const DevTool: React.ElementType = dynamic(
   () => import('@hookform/devtools').then((module) => module.DevTool),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function JobForm({
@@ -89,7 +89,7 @@ export default function JobForm({
       <div
         className={twMerge(
           'grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] items-start gap-3 md:gap-6',
-          className
+          className,
         )}
       >
         <div className="space-y-1">
