@@ -124,6 +124,7 @@ export default function Sidebar() {
                         type: 'all',
                         status: 'all',
                         sort: 'latest',
+                        page: 1,
                       })
                     : sidebarRoute.path
                 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import {
   ChevronLeftIcon,
@@ -31,11 +32,24 @@ export default function PaginationButtons() {
     page: number;
   }>();
 
+  const [initialPage, setInitialPage] = useState(0);
+
   const { data: jobs } = useGetJobs();
-  const initialPage =
-    jobs?.paginatedData.totalNumberOfPages === 1
-      ? 0
-      : (queryParams.page as number) - 1;
+
+  useEffect(() => {
+    const page = queryParams?.page ?? 0;
+    const totalNumOfPages = jobs?.paginatedData?.totalNumberOfPages ?? 0;
+
+    if (page > totalNumOfPages) {
+      setQueryParams({ page: 1 });
+    } else {
+      setInitialPage(page - 1);
+    }
+  }, [
+    jobs?.paginatedData?.totalNumberOfPages,
+    queryParams?.page,
+    setQueryParams,
+  ]);
 
   const handlePageClick = ({ selected }: { selected: number }) => {
     setQueryParams({ page: selected + 1 });

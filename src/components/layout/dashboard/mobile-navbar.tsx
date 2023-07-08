@@ -128,6 +128,7 @@ export default function MobileNavbar() {
                               type: 'all',
                               status: 'all',
                               sort: 'latest',
+                              page: 1,
                             })
                         : navLink.path
                     );
