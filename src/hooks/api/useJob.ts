@@ -16,6 +16,7 @@ import { toast } from '~/components/ui/use-toast';
 
 import useQueryParams from '../useQueryParams';
 
+const jobsQueryKey = 'jobs';
 /* queries */
 const getJobs = async (token: TToken, queryParams: string) => {
   const response = await fetch(`${BASE_URL}/jobs/${queryParams}`, {
@@ -43,7 +44,7 @@ export function useGetJobs() {
   const queryParams = combinedQueryParams();
 
   return useQuery({
-    queryKey: ['jobs', queryParams],
+    queryKey: [jobsQueryKey, queryParams],
     queryFn: () => getJobs(token, queryParams),
     enabled: !!token && !!queryParams,
     keepPreviousData: true,
@@ -75,7 +76,7 @@ export function useGetJob() {
   const jobId = useAtomValue(jobIdAtom);
 
   return useQuery({
-    queryKey: ['job', jobId],
+    queryKey: [jobsQueryKey, jobId],
     queryFn: () => getJob(token, jobId),
     enabled: !!token && !!jobId,
   });
@@ -105,7 +106,7 @@ export function useGetJobsStats() {
   const token = useAtomValue(accessTokenAtom);
 
   return useQuery({
-    queryKey: ['job-stats'],
+    queryKey: [jobsQueryKey, 'stats'],
     queryFn: () => getJobsStats(token),
     enabled: !!token,
   });
@@ -150,7 +151,7 @@ export function useAddJob() {
     mutationFn: (payload: TJob) => addJob(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        predicate: (query) => (query.queryKey[0] as string).startsWith('job'),
+        queryKey: [jobsQueryKey],
       });
       toast({
         description: data.msg,
@@ -201,7 +202,7 @@ export function useEditJob() {
     mutationFn: (payload: TJob) => editJob(token, jobId, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        predicate: (query) => (query.queryKey[0] as string).startsWith('job'),
+        queryKey: [jobsQueryKey],
       });
       toast({
         description: data.msg,
@@ -250,7 +251,7 @@ export function useDeleteJob() {
     mutationFn: () => deleteJob(token, jobId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
-        predicate: (query) => (query.queryKey[0] as string).startsWith('job'),
+        queryKey: [jobsQueryKey],
       });
       toast({
         description: data.msg,
