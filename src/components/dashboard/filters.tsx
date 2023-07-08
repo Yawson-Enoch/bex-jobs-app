@@ -34,6 +34,7 @@ export default function Filters() {
   const { setQueryParams, queryParams } = useQueryParams<{
     type: string;
     status: string;
+    page: number;
   }>();
 
   const form = useForm({
@@ -46,7 +47,7 @@ export default function Filters() {
   const { handleSubmit, control, reset, formState } = form;
 
   const onSubmit: SubmitHandler<Job> = (data) => {
-    setQueryParams({ status: data.jobStatus, type: data.jobType });
+    setQueryParams({ status: data.jobStatus, type: data.jobType, page: 1 });
   };
 
   return (

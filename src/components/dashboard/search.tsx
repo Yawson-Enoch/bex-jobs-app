@@ -20,7 +20,7 @@ export default function Search() {
     if (debouncedSearchValue === '') {
       deleteQueryParam('search');
     } else {
-      setQueryParams({ search: debouncedSearchValue });
+      setQueryParams({ search: debouncedSearchValue, page: 1 });
     }
   }, [debouncedSearchValue, deleteQueryParam, setQueryParams]);
 
