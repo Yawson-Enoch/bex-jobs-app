@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { profileSchema, TProfile } from '~/schemas/auth';
-import { useGetUser, useUpdateProfile } from '~/hooks/api/useUser';
+import { useGetUser, useUpdateUserProfile } from '~/hooks/api/useUser';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
@@ -31,10 +31,10 @@ export default function ProfileUpdateForm() {
   const { register, handleSubmit, formState, control } = form;
   const { errors } = formState;
 
-  const { mutate, isLoading } = useUpdateProfile();
+  const updateUserProfileMutation = useUpdateUserProfile();
 
   const onSubmit: SubmitHandler<TProfile> = (data) => {
-    mutate(data);
+    updateUserProfileMutation.mutate(data);
   };
 
   return (
@@ -50,7 +50,7 @@ export default function ProfileUpdateForm() {
               autoComplete="name"
               autoCorrect="off"
               autoFocus
-              disabled={isLoading}
+              disabled={updateUserProfileMutation.isLoading}
             />
           </div>
           {errors.firstName && (
@@ -68,7 +68,7 @@ export default function ProfileUpdateForm() {
               {...register('lastName')}
               autoComplete="name"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={updateUserProfileMutation.isLoading}
             />
           </div>
           {errors.lastName && (
@@ -86,7 +86,7 @@ export default function ProfileUpdateForm() {
               {...register('email')}
               autoComplete="email"
               autoCorrect="off"
-              disabled={isLoading}
+              disabled={updateUserProfileMutation.isLoading}
             />
           </div>
           {errors.email && (
@@ -97,8 +97,12 @@ export default function ProfileUpdateForm() {
         </div>
         <div className="space-y-2">
           <Label>Action</Label>
-          <Button type="submit" disabled={isLoading} className="flex w-full">
-            {isLoading ? (
+          <Button
+            type="submit"
+            disabled={updateUserProfileMutation.isLoading}
+            className="flex w-full"
+          >
+            {updateUserProfileMutation.isLoading ? (
               <LoadingIndicator msg="Updating profile..." />
             ) : (
               'Update Profile'

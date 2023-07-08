@@ -47,12 +47,11 @@ export type TJobStatus = z.infer<typeof jobSchema.shape.jobStatus>;
 export type TJobType = z.infer<typeof jobSchema.shape.jobType>;
 
 /* jobs api response */
-const mutationResponse = z.object({
+export const mutationResponseSchema = z.object({
   msg: z.string(),
 });
-export type TMutationResponse = z.infer<typeof mutationResponse>;
 
-export const jobAPIResponseSchema = z.object({
+export const jobAPISchema = z.object({
   msg: z.string(),
   job: jobSchema.extend({
     _id: z.string(),
@@ -61,11 +60,11 @@ export const jobAPIResponseSchema = z.object({
     updatedAt: z.string().datetime(),
   }),
 });
-export type TJobAPIResponse = z.infer<typeof jobAPIResponseSchema.shape.job>;
+export type TJobAPI = z.infer<typeof jobAPISchema.shape.job>;
 
 const paginatedDataSchema = z.object({
   totalNumberOfJobs: z.number(),
-  currentPageJobs: z.array(jobAPIResponseSchema.shape.job),
+  currentPageJobs: z.array(jobAPISchema.shape.job),
   totalNumberOfJobsOnCurrPage: z.number(),
   resultsPerPage: z.number(),
   totalNumberOfPages: z.number(),
@@ -73,11 +72,10 @@ const paginatedDataSchema = z.object({
   prevPageNumber: z.number().nullable(),
   nextPageNumber: z.number().nullable(),
 });
-const jobsAPIResponseSchema = z.object({
+export const jobsAPISchema = z.object({
   msg: z.string(),
   paginatedData: paginatedDataSchema,
 });
-export type TJobsAPIResponse = z.infer<typeof jobsAPIResponseSchema>;
 
 const statusSchema = z.object({
   pending: z.number().catch(0),
@@ -90,9 +88,8 @@ const monthlyApplicationsSchema = z.array(
     count: z.number(),
   })
 );
-const statsSchema = z.object({
+export const jobsStatsAPISchema = z.object({
   msg: z.string(),
   statusStats: statusSchema,
   monthlyApplications: monthlyApplicationsSchema,
 });
-export type TJobsStats = z.infer<typeof statsSchema>;

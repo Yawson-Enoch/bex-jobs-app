@@ -54,7 +54,7 @@ export default function MobileNavbar() {
   const { logOut } = useAuth();
   const { createQueryParam } = useQueryParams();
 
-  const { data, isLoading, isError, error } = useGetUser();
+  const { isLoading, error, data } = useGetUser();
 
   const pathname = usePathname();
   const router = useCustomRouter();
@@ -90,11 +90,11 @@ export default function MobileNavbar() {
       <section className="container space-y-6">
         {isLoading ? (
           <LoadingIndicator msg="Fetching user..." />
-        ) : isError ? (
+        ) : error instanceof Error ? (
           <ErrorDisplay msg={error.message} />
         ) : (
           <p className="text-lg font-medium sm:text-xl">
-            Hi, <span className="text-foreground">{data.user.firstName}</span>
+            Hi, <span className="text-foreground">{data?.user.firstName}</span>
           </p>
         )}
         <ul className="flex flex-col gap-3 font-medium">

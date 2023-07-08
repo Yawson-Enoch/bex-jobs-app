@@ -20,7 +20,7 @@ import { Button } from '../ui/button';
 export default function DeleteJobBtn({ id }: { id: string }) {
   const setJobId = useSetAtom(jobIdAtom);
 
-  const { mutate, isLoading } = useDeleteJob();
+  const deleteJobMutation = useDeleteJob();
 
   return (
     <AlertDialog>
@@ -43,8 +43,8 @@ export default function DeleteJobBtn({ id }: { id: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter className="w-full sm:w-auto">
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => mutate()}>
-            {isLoading ? (
+          <AlertDialogAction onClick={() => deleteJobMutation.mutate()}>
+            {deleteJobMutation.isLoading ? (
               <LoadingIndicator msg="Deleting job" />
             ) : (
               'Yes, Delete'

@@ -26,7 +26,7 @@ export default function Header() {
     isSidebarExpandedAtom
   );
 
-  const { data, isLoading, isError, error } = useGetUser();
+  const { isLoading, error, data } = useGetUser();
 
   return (
     <header
@@ -52,11 +52,11 @@ export default function Header() {
         </button>
         {isLoading ? (
           <LoadingIndicator msg="Fetching user..." />
-        ) : isError ? (
+        ) : error instanceof Error ? (
           <ErrorDisplay msg={error.message} type="icon" />
         ) : (
           <p className="text-lg font-medium sm:text-xl">
-            Hi, <span className="text-foreground">{data.user.firstName}</span>
+            Hi, <span className="text-foreground">{data?.user.firstName}</span>
           </p>
         )}
         <div className="flex items-center gap-3 md:gap-6">

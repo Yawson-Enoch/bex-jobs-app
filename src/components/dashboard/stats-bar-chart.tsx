@@ -10,13 +10,13 @@ import {
   YAxis,
 } from 'recharts';
 
-import { useGetJobStats } from '~/hooks/api/useJob';
+import { useGetJobsStats } from '~/hooks/api/useJob';
 
 import ErrorDisplay from '../common/error-display';
 import LoadingIndicator from '../common/loading-indicator';
 
 export default function StatsBarChart() {
-  const { isLoading, isError, error, data: stats } = useGetJobStats();
+  const { isLoading, error, data: stats } = useGetJobsStats();
 
   if (isLoading) {
     return (
@@ -27,13 +27,13 @@ export default function StatsBarChart() {
     );
   }
 
-  if (isError) {
+  if (error instanceof Error) {
     return <ErrorDisplay msg={error.message} className="flex justify-center" />;
   }
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      <BarChart data={stats.monthlyApplications} maxBarSize={70}>
+      <BarChart data={stats?.monthlyApplications} maxBarSize={70}>
         <CartesianGrid
           stroke="rgb(var(--primary))"
           strokeOpacity={0.3}

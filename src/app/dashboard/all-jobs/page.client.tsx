@@ -1,7 +1,6 @@
 'use client';
 
 import { useGetJobs } from '~/hooks/api/useJob';
-import useQueryParams from '~/hooks/useQueryParams';
 import ErrorDisplay from '~/components/common/error-display';
 import LoadingIndicator from '~/components/common/loading-indicator';
 import Filters from '~/components/dashboard/filters';
@@ -12,11 +11,7 @@ import Sort from '~/components/dashboard/sort';
 import ViewTypes from '~/components/dashboard/view-types';
 
 export default function AllJobsPageClient() {
-  const { combinedQueryParams } = useQueryParams();
-
-  const params = combinedQueryParams();
-
-  const { isLoading, isError, error } = useGetJobs(params);
+  const { isLoading, error } = useGetJobs();
 
   if (isLoading) {
     return (
@@ -26,7 +21,7 @@ export default function AllJobsPageClient() {
     );
   }
 
-  if (isError) {
+  if (error instanceof Error) {
     return (
       <div className="flex items-center justify-center">
         <ErrorDisplay msg={error.message} />

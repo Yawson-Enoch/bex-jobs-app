@@ -2,13 +2,13 @@ import format from 'date-fns/format';
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-import { TJobAPIResponse } from '~/schemas/job';
+import { TJobAPI } from '~/schemas/job';
 import { jobStatusColors } from '~/lib/utils';
 
 import DeleteJobBtn from './delete-job-btn';
 import EditJobBtn from './edit-job-btn';
 
-export default function JobGrid({ job }: { job: TJobAPIResponse }) {
+export default function JobGrid({ job }: { job: TJobAPI }) {
   const date = new Date(job.createdAt);
   const formattedDate = format(date, 'do MMMM, yyyy');
 

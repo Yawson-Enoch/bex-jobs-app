@@ -9,15 +9,12 @@ import JobList from './job-list';
 
 export default function Jobs() {
   const { queryParams } = useQueryParams<{ view: TViewType }>();
-  const { combinedQueryParams } = useQueryParams();
 
-  const params = combinedQueryParams();
-
-  const { data: jobs } = useGetJobs(params);
+  const { data: jobs } = useGetJobs();
 
   return (
     <section className="space-y-6">
-      <h4>{jobs?.paginatedData?.totalNumberOfJobs ?? 0} Jobs Found</h4>
+      <h4>{jobs?.paginatedData.totalNumberOfJobs ?? 0} Jobs Found</h4>
 
       {queryParams.view !== 'list' ? (
         <ul className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">

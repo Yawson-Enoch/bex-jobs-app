@@ -27,12 +27,11 @@ const paginationVariants: Variants = {
 };
 
 export default function PaginationButtons() {
-  const { queryParams, setQueryParams, combinedQueryParams } = useQueryParams<{
+  const { queryParams, setQueryParams } = useQueryParams<{
     page: number;
   }>();
 
-  const params = combinedQueryParams();
-  const { data: jobs } = useGetJobs(params);
+  const { data: jobs } = useGetJobs();
   const initialPage =
     jobs?.paginatedData.totalNumberOfPages === 1
       ? 0

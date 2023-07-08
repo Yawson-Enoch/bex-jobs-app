@@ -1,26 +1,15 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
-import { z } from 'zod';
 
 import { TProfile } from '~/schemas/auth';
+import { mutationResponseSchema, userSchema } from '~/schemas/user';
 import { BASE_URL } from '~/lib/api';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
 const userQueryKey = 'user';
 
-const userSchema = z.object({
-  msg: z.string(),
-  user: z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    email: z.string(),
-  }),
-});
-
-type TUser = z.infer<typeof userSchema>;
-
-/* get user */
+/* queries */
 const getUser = async (token: string | null) => {
   const response = await fetch(`${BASE_URL}/auth/get-user`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -32,28 +21,26 @@ const getUser = async (token: string | null) => {
     throw new Error(data.msg || 'Failed to fetch user info');
   }
 
-  return data;
-};
+  const result = userSchema.safeParse(data);
 
+  if (!result.success) {
+    throw new Error('Failed to parse data');
+  }
+
+  return result.data;
+};
 export function useGetUser() {
   const token = useAtomValue(accessTokenAtom);
 
-  return useQuery<TUser, Error>({
+  return useQuery({
     queryKey: [userQueryKey],
     queryFn: () => getUser(token),
     enabled: !!token,
   });
 }
 
-/* update user */
-type TResponse = {
-  msg: string;
-};
-
-const updateProfile = async (
-  token: string | null,
-  payload: TProfile
-): Promise<TResponse> => {
+/* mutations */
+const updateUserProfile = async (token: string | null, payload: TProfile) => {
   const response = await fetch(`${BASE_URL}/auth/update-user`, {
     method: 'PATCH',
     headers: {
@@ -63,22 +50,27 @@ const updateProfile = async (
     body: JSON.stringify(payload),
   });
 
-  const data: TResponse = await response.json();
+  const data = await response.json();
 
   if (!response.ok) {
     throw new Error(data.msg || 'Failed to add job');
   }
 
-  return data;
-};
+  const result = mutationResponseSchema.safeParse(data);
 
-export function useUpdateProfile() {
+  if (!result.success) {
+    throw new Error('Failed to parse data');
+  }
+
+  return result.data;
+};
+export function useUpdateUserProfile() {
   const token = useAtomValue(accessTokenAtom);
 
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
-    mutationFn: (payload: TProfile) => updateProfile(token, payload),
+  const updateUserProfileMutation = useMutation({
+    mutationFn: (payload: TProfile) => updateUserProfile(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [userQueryKey] });
       toast({
@@ -92,5 +84,5 @@ export function useUpdateProfile() {
     },
   });
 
-  return { mutate, isLoading };
+  return updateUserProfileMutation;
 }

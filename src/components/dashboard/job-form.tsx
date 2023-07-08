@@ -69,11 +69,11 @@ export default function JobForm({
     setResetSelectKey(Date.now());
   };
 
-  const { mutate, isLoading } = useAddJob();
-  const { mutate: editJobMutation, isLoading: isEditingJob } = useEditJob();
+  const addJobMutation = useAddJob();
+  const editJobMutation = useEditJob();
 
   const onSubmit: SubmitHandler<TJob> = (data) => {
-    isJobEdit ? editJobMutation(data) : mutate(data);
+    isJobEdit ? editJobMutation.mutate(data) : addJobMutation.mutate(data);
   };
 
   useEffect(() => {
@@ -100,7 +100,9 @@ export default function JobForm({
               id={id + '-jobPosition'}
               {...register('jobPosition')}
               autoFocus
-              disabled={isJobEdit ? isEditingJob : isLoading}
+              disabled={
+                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+              }
             />
           </div>
           {errors.jobPosition && (
@@ -116,7 +118,9 @@ export default function JobForm({
               type="text"
               id={id + '-company'}
               {...register('company')}
-              disabled={isJobEdit ? isEditingJob : isLoading}
+              disabled={
+                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+              }
             />
           </div>
           {errors.company && (
@@ -132,7 +136,9 @@ export default function JobForm({
               type="text"
               id={id + '-jobLocation'}
               {...register('jobLocation')}
-              disabled={isJobEdit ? isEditingJob : isLoading}
+              disabled={
+                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+              }
             />
           </div>
           {errors.jobLocation && (
@@ -215,22 +221,36 @@ export default function JobForm({
             <Button
               type="button"
               variant="outline"
-              disabled={isJobEdit ? isEditingJob : isLoading}
+              disabled={
+                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+              }
               onClick={resetAllFormFields}
             >
               Clear
             </Button>
-            <Button type="submit" disabled={isLoading || !isValid || !isDirty}>
-              {isLoading ? (
-                <LoadingIndicator
-                  msg={isJobEdit ? 'Editing job...' : 'Adding new job...'}
-                />
-              ) : isJobEdit ? (
-                'Edit Job'
-              ) : (
-                'Add Job'
-              )}
-            </Button>
+            {isJobEdit ? (
+              <Button
+                type="submit"
+                disabled={editJobMutation.isLoading || !isValid || !isDirty}
+              >
+                {editJobMutation.isLoading ? (
+                  <LoadingIndicator msg={'Editing job...'} />
+                ) : (
+                  'Edit Job'
+                )}
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                disabled={addJobMutation.isLoading || !isValid || !isDirty}
+              >
+                {addJobMutation.isLoading ? (
+                  <LoadingIndicator msg={'Adding job...'} />
+                ) : (
+                  'Add Job'
+                )}
+              </Button>
+            )}
           </div>
         </div>
       </div>
