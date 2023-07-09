@@ -19,27 +19,27 @@ export default function JobGrid({ job }: { job: TJobAPI }) {
           {job.company.split('')[0]}
         </p>
         <div>
-          <p className="text-sm font-medium text-foreground md:text-lg">
+          <p className="truncate text-sm font-medium text-foreground md:text-lg">
             {job.jobPosition}
           </p>
-          <p>{job.company}</p>
+          <p className="truncate">{job.company}</p>
         </div>
       </div>
 
       <div className="space-y-3">
         <div className="flex items-center gap-1">
           <MapPinIcon size={15} />
-          <span className="truncate">{job.jobLocation}</span>
+          <span>{job.jobLocation}</span>
         </div>
         <div className="flex items-center gap-1">
           <CalendarDaysIcon size={15} />
-          <span className="truncate">{formattedDate}</span>
+          <span>{formattedDate}</span>
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3 md:gap-6">
           <div className="flex items-center gap-1">
             <BriefcaseIcon size={15} />
-            <span className="truncate">{job.jobType}</span>
+            <span>{job.jobType}</span>
           </div>
           <span
             className={twMerge(
