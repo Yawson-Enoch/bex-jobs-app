@@ -15,7 +15,14 @@ export default function JobList({ job }: { job: TJobAPI }) {
   return (
     <li className="grid gap-3 rounded-lg border bg-slate-500/10 p-3 text-xs md:grid-cols-[10rem,_2fr,_1fr] md:justify-between md:gap-6 md:p-6 md:text-base lg:grid-cols-[20rem,_2fr,_1fr]">
       <div className="space-y-3 border-b-4 border-dotted border-accent pb-3 md:border-b-0 md:border-r-4 md:pb-0 md:pr-6">
-        <p className="rounded-md bg-primary py-1 text-center text-5xl font-bold text-primary-foreground">
+        <p
+          className="rounded-md bg-primary/50 py-1 text-center text-5xl font-bold text-primary-foreground"
+          style={{
+            boxShadow: `inset 3px 3px 6px rgba(255, 255, 255, 0.1),
+            inset -6px -6px 12px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.3)`,
+            backdropFilter: 'blur(12px)',
+          }}
+        >
           {job.company.split('')[0]}
         </p>
         <div>

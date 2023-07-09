@@ -15,7 +15,14 @@ export default function JobGrid({ job }: { job: TJobAPI }) {
   return (
     <li className="space-y-3 rounded-lg border bg-slate-500/10 p-3 text-xs md:p-6 md:text-base">
       <div className="space-y-3 border-b-4 border-dotted border-accent pb-3">
-        <p className="rounded-md bg-primary py-1 text-center text-5xl font-bold text-primary-foreground">
+        <p
+          className="rounded-md bg-primary/50 py-1 text-center text-5xl font-bold text-primary-foreground"
+          style={{
+            boxShadow: `inset 3px 3px 6px rgba(255, 255, 255, 0.1),
+            inset -6px -6px 12px rgba(0, 0, 0, 0.3), 0 6px 12px rgba(0, 0, 0, 0.3)`,
+            backdropFilter: 'blur(12px)',
+          }}
+        >
           {job.company.split('')[0]}
         </p>
         <div>
