@@ -27,7 +27,7 @@ export default function Header() {
     isSidebarExpandedAtom,
   );
 
-  const { isLoading, error, data } = useGetUser();
+  const { isLoading, isError, data } = useGetUser();
 
   return (
     <header
@@ -51,10 +51,8 @@ export default function Header() {
           <span className="sr-only">Open Mobile Nav</span>
           <PanelTopOpenIcon aria-hidden="true" />
         </button>
-        {isLoading ? (
+        {isLoading || isError ? (
           <Skeleton className="h-5 w-32" />
-        ) : error instanceof Error ? (
-          <ErrorDisplay msg={error.message} type="icon" />
         ) : (
           <p className="text-lg font-medium sm:text-xl">
             Hi, <span className="text-foreground">{data?.user.firstName}</span>

@@ -18,6 +18,7 @@ import { useGetUser } from '~/hooks/api/useAuth';
 import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 import useQueryParams from '~/hooks/useQueryParams';
+import Skeleton from '~/components/ui/skeleton';
 import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
 import LoadingIndicator from '~/components/common/loading-indicator';
@@ -53,7 +54,7 @@ export default function MobileNavbar() {
   const { logOut } = useAuth();
   const { createQueryParam } = useQueryParams();
 
-  const { isLoading, error, data } = useGetUser();
+  const { isLoading, isError, data } = useGetUser();
 
   const pathname = usePathname();
   const router = useRouter();
@@ -63,7 +64,7 @@ export default function MobileNavbar() {
   return (
     <nav
       id="mobile-navbar"
-      className="max-h-dm fixed inset-0 z-50 flex flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/90 pb-4 backdrop-blur-sm dark:bg-background/70 md:hidden"
+      className="max-h-dm fixed inset-0 z-50 flex flex-col gap-6 overflow-y-auto overscroll-y-contain bg-background/95 pb-4 backdrop-blur-sm md:hidden"
     >
       <section className="h-16 border-b bg-background">
         <div className="container flex h-full items-center justify-between">
@@ -87,10 +88,8 @@ export default function MobileNavbar() {
         </div>
       </section>
       <section className="container space-y-6">
-        {isLoading ? (
-          <LoadingIndicator msg="Fetching user..." />
-        ) : error instanceof Error ? (
-          <ErrorDisplay msg={error.message} />
+        {isLoading || isError ? (
+          <Skeleton className="h-5 w-32" />
         ) : (
           <p className="text-lg font-medium sm:text-xl">
             Hi, <span className="text-foreground">{data?.user.firstName}</span>

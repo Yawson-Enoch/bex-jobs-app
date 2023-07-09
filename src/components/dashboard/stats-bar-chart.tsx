@@ -12,18 +12,15 @@ import {
 
 import { useGetJobsStats } from '~/hooks/api/useJob';
 
-import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsBarChart() {
-  const { isLoading, error, data: stats } = useGetJobsStats();
+  const { isLoading, isError, data: stats } = useGetJobsStats();
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      {isLoading ? (
+      {isLoading || isError ? (
         <Skeleton className="h-full w-full" />
-      ) : error instanceof Error ? (
-        <ErrorDisplay msg={error.message} className="flex justify-center" />
       ) : (
         <BarChart data={stats?.monthlyApplications} maxBarSize={70}>
           <CartesianGrid

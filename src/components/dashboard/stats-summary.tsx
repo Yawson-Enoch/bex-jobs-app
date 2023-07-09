@@ -8,16 +8,14 @@ import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsSummary() {
-  const { isLoading, error, data: stats } = useGetJobsStats();
+  const { isLoading, isError, data: stats } = useGetJobsStats();
 
   return (
     <section className="grid grid-cols-[repeat(auto-fit,_minmax(min(15rem,_100%),_1fr))] gap-3 md:gap-6">
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
-          {isLoading ? (
+          {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
-          ) : error instanceof Error ? (
-            <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-blue-800 dark:text-blue-900 md:text-6xl">
               {stats?.statusStats.interview}
@@ -35,10 +33,8 @@ export default function StatsSummary() {
       </div>
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
-          {isLoading ? (
+          {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
-          ) : error instanceof Error ? (
-            <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-yellow-800 dark:text-yellow-900 md:text-6xl">
               {stats?.statusStats.pending}
@@ -56,10 +52,8 @@ export default function StatsSummary() {
       </div>
       <div className="space-y-3 rounded-lg border bg-slate-500/10 p-3 md:space-y-6 md:p-6">
         <div className="flex items-center justify-between">
-          {isLoading ? (
+          {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
-          ) : error instanceof Error ? (
-            <ErrorDisplay msg={error.message} type="icon" />
           ) : (
             <p className="text-4xl text-red-800 dark:text-red-900 md:text-6xl">
               {stats?.statusStats.declined}

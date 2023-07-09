@@ -16,14 +16,12 @@ import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsLineChart() {
-  const { isLoading, error, data: stats } = useGetJobsStats();
+  const { isLoading, isError, data: stats } = useGetJobsStats();
 
   return (
     <ResponsiveContainer width="100%" height={300}>
-      {isLoading ? (
+      {isLoading || isError ? (
         <Skeleton className="h-full w-full" />
-      ) : error instanceof Error ? (
-        <ErrorDisplay msg={error.message} className="flex justify-center" />
       ) : (
         <LineChart data={stats?.monthlyApplications}>
           <CartesianGrid

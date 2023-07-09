@@ -11,18 +11,18 @@ import JobList from './job-list';
 export default function Jobs() {
   const { queryParams } = useQueryParams<{ view: TViewType }>();
 
-  const { isLoading, data: jobs } = useGetJobs();
+  const { isLoading, isError, data: jobs } = useGetJobs();
 
   return (
     <section className="space-y-6">
-      {isLoading ? (
+      {isLoading || isError ? (
         <Skeleton className="h-5 w-32" />
       ) : (
         <h4>{jobs?.paginatedData.totalNumberOfJobs ?? 0} Jobs Found</h4>
       )}
 
       {queryParams.view !== 'list' ? (
-        isLoading ? (
+        isLoading || isError ? (
           <ul className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
             {Array(3)
               .fill('')
@@ -40,7 +40,7 @@ export default function Jobs() {
             })}
           </ul>
         )
-      ) : isLoading ? (
+      ) : isLoading || isError ? (
         <ul className="space-y-3 md:space-y-6">
           {Array(3)
             .fill('')
