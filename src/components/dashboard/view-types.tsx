@@ -26,7 +26,7 @@ export default function ViewTypes() {
       >
         GRID
       </Button>
-      <div className="flex h-9 items-center gap-1 rounded-lg bg-background p-1 dark:bg-background/90">
+      <div className="flex h-9 items-center gap-1 overflow-hidden rounded-lg bg-background p-1 dark:bg-background/90">
         <Button
           variant="ghost"
           className="relative h-fit bg-transparent p-1 hover:bg-transparent focus-visible:ring-1 focus-visible:ring-offset-1"

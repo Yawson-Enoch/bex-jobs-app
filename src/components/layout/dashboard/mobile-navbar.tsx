@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
-import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import {
   BarChart3Icon,
@@ -19,9 +18,7 @@ import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 import useQueryParams from '~/hooks/useQueryParams';
 import Skeleton from '~/components/ui/skeleton';
-import ErrorDisplay from '~/components/common/error-display';
 import GradientLogo from '~/components/common/gradient-logo';
-import LoadingIndicator from '~/components/common/loading-indicator';
 
 const navLinks = [
   {
@@ -106,14 +103,9 @@ export default function MobileNavbar() {
                 }}
               >
                 {pathname === navLink.path && (
-                  <motion.div
+                  <div
                     aria-hidden="true"
                     className="absolute inset-0 rounded-md bg-accent"
-                    layout="position"
-                    layoutId="dashboard-mobile-navbar-link"
-                    transition={{
-                      layout: { duration: 0.3, ease: 'linear' },
-                    }}
                   />
                 )}
                 <button
