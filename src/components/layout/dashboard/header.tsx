@@ -9,6 +9,7 @@ import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import { useGetUser } from '~/hooks/api/useAuth';
 import { Button } from '~/components/ui/button';
+import Skeleton from '~/components/ui/skeleton';
 import AuthActions from '~/components/common/auth-actions';
 import ErrorDisplay from '~/components/common/error-display';
 import LoadingIndicator from '~/components/common/loading-indicator';
@@ -51,7 +52,7 @@ export default function Header() {
           <PanelTopOpenIcon aria-hidden="true" />
         </button>
         {isLoading ? (
-          <LoadingIndicator msg="Fetching user..." />
+          <Skeleton className="h-5 w-32" />
         ) : error instanceof Error ? (
           <ErrorDisplay msg={error.message} type="icon" />
         ) : (
