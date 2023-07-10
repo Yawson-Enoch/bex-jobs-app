@@ -17,7 +17,7 @@ export default function AuthLayout({
   return (
     <div className="min-h-dm relative grid grid-rows-[auto,_1fr]">
       <Header />
-      <main className="container grid items-center py-6 md:py-12">
+      <main className="container grid h-full content-center py-6 md:py-12">
         {children}
       </main>
       <DecorativePattern />
