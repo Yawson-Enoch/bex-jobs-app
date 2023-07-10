@@ -17,7 +17,6 @@ type User = {
 const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
 
 export default function useAuth() {
-  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userAuthInfo, setUserAuthInfo] = useState<User | null>(null);
 
@@ -49,7 +48,6 @@ export default function useAuth() {
         email: authInfo.email,
       });
     }
-    setIsCheckingAuth(false);
   }, [accessToken, login]);
 
   useEffect(() => {
@@ -100,7 +98,6 @@ export default function useAuth() {
   }, [persistLogin, logOut, sessionTimeout]);
 
   return {
-    isCheckingAuth,
     isLoggedIn: isAuthenticated,
     userAuthInfo,
     login,

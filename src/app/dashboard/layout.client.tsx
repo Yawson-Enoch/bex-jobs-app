@@ -8,7 +8,6 @@ import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
 import { Button } from '~/components/ui/button';
-import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
 import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
 import Header from '~/components/layout/dashboard/header';
 import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
@@ -27,19 +26,6 @@ function DecorativePattern() {
   );
 }
 
-function GoToLogin() {
-  return (
-    <div className="grid place-items-center gap-3 md:gap-6">
-      <p className="font-medium text-foreground md:text-lg">
-        Log in to view and manage your jobs.
-      </p>
-      <Button asChild size="lg" className="text-lg font-bold">
-        <Link href="/login">Login</Link>
-      </Button>
-    </div>
-  );
-}
-
 export default function DashboardLayoutClient({
   children,
 }: {
@@ -48,22 +34,23 @@ export default function DashboardLayoutClient({
   const isMobileNavbarOpen = useAtomValue(isMobileNavbarOpenAtom);
 
   const { matches } = useMediaQuery('(min-width: 768px)');
-  const { isLoggedIn, isCheckingAuth } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   const pathname = usePathname();
 
   return (
     <div className="dashboard-grid-container min-h-dm relative">
-      {isCheckingAuth ? (
+      {!isLoggedIn ? (
         <main className="dashboard-main container py-6 md:py-12">
           <div className="grid h-full place-content-center">
-            <AuthLoadingIndicator />
-          </div>
-        </main>
-      ) : !isLoggedIn ? (
-        <main className="dashboard-main container py-6 md:py-12">
-          <div className="grid h-full place-content-center">
-            <GoToLogin />
+            <div className="grid place-items-center gap-3 md:gap-6">
+              <p className="font-medium text-foreground md:text-lg">
+                Log in to view and manage your jobs.
+              </p>
+              <Button asChild size="lg" className="text-lg font-bold">
+                <Link href="/login">Login</Link>
+              </Button>
+            </div>
           </div>
         </main>
       ) : (

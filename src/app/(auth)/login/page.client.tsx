@@ -1,37 +1,17 @@
 'use client';
 
-import { useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 import useAuth from '~/hooks/useAuth';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
-import AuthLoadingIndicator from '~/components/common/auth-loading-indicator';
-import LoadingIndicator from '~/components/common/loading-indicator';
 
 export default function LoginPageClient() {
-  const { isLoggedIn, isCheckingAuth } = useAuth();
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (isLoggedIn) {
-      router.replace('/dashboard');
-    }
-  }, [isLoggedIn, router]);
-
-  if (isCheckingAuth) {
-    return <AuthLoadingIndicator />;
-  }
+  const { isLoggedIn } = useAuth();
 
   if (isLoggedIn) {
-    return (
-      <div className="mx-auto grid w-[min(100%,_400px)] place-content-center space-y-3 rounded-lg border bg-background/70 p-3 md:space-y-6 md:p-6">
-        <h4>Hooray! You are logged in</h4>
-        <LoadingIndicator type="both" msg="Redirecting to dashboard..." />
-      </div>
-    );
+    redirect('/dashboard');
   }
 
   return (
