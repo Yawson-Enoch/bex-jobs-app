@@ -11,6 +11,7 @@ import Providers from '~/components/common/providers';
 import TailwindIndicator from '~/components/common/tailwind-indicator';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteInfo.URL),
   title: {
     default: siteInfo.name,
     template: `%s | ${siteInfo.name}`,
