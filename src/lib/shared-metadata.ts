@@ -14,5 +14,5 @@ export const openGraphLocale = { locale: 'en_US' };
 export const openGraphType = { type: 'website' };
 
 export const twitterCard = { card: 'summary_large_image' };
-export const twitterCreator = { creator: '@GyBex_Enoch' };
+export const twitterCreator = { creator: '@gybex_enock' };
 export const twitterImages = { images: ['/opengraph-image.png'] };

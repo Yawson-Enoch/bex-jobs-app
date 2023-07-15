@@ -11,8 +11,10 @@ export const siteInfo = {
     ? 'https://bex-jobs-api.onrender.com/api/v1'
     : 'http://localhost:5000/api/v1',
   links: {
-    twitter: 'https://twitter.com/GyBex_Enoch',
+    twitter: 'https://twitter.com/gybex_enock',
     github: 'https://github.com/Yawson-Enoch',
-    portfolio: 'https://yawson-enoch.netlify.app',
+    linkedin: 'https://www.linkedin.com/in/enock-yawson-696b71222',
+    codepen: 'https://codepen.io/gybex_enock',
+    portfolio: 'https://enock-yawson.netlify.app',
   },
 };
