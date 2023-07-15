@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { loginSchema, TLogin } from '~/schemas/auth';
 import { persistLoginAtom } from '~/atoms/persist';
-import { useLogin } from '~/hooks/api/useAuth';
+import { useLogin } from '~/hooks/api/useLogin';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';

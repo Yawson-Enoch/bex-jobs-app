@@ -7,12 +7,10 @@ import { twMerge } from 'tailwind-merge';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import { isSidebarExpandedAtom } from '~/atoms/sidebar';
-import { useGetUser } from '~/hooks/api/useAuth';
+import { useGetUser } from '~/hooks/api/useUser';
 import { Button } from '~/components/ui/button';
 import Skeleton from '~/components/ui/skeleton';
 import AuthActions from '~/components/common/auth-actions';
-import ErrorDisplay from '~/components/common/error-display';
-import LoadingIndicator from '~/components/common/loading-indicator';
 
 const TabsThemeToggler = dynamic(
   () => import('~/components/common/tabs-theme-toggler'),

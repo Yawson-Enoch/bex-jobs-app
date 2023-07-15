@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { signupSchema, TSignup } from '~/schemas/auth';
-import { useSignup } from '~/hooks/api/useAuth';
+import { useSignup } from '~/hooks/api/useSignup';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
