@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/dashboard/',
     },
-    host: siteInfo.url,
-    sitemap: `${siteInfo.url}/sitemap.xml`,
+    host: siteInfo.URL,
+    sitemap: `${siteInfo.URL}/sitemap.xml`,
   };
 }

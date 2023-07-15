@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue, useSetAtom } from 'jotai';
 
+import { siteInfo } from '~/config/site';
 import {
   loginMutationResponseSchema,
   mutationResponseSchema,
@@ -10,7 +11,6 @@ import {
   TProfile,
   TSignup,
 } from '~/schemas/auth';
-import { BASE_URL } from '~/lib/api';
 import { parseToken } from '~/lib/jwt';
 import { TToken } from '~/lib/types';
 import { persistLoginAtom } from '~/atoms/persist';
@@ -24,7 +24,7 @@ const userQueryKey = 'user';
 
 /* mutations */
 const signupUser = async (payload: TSignup) => {
-  const response = await fetch(`${BASE_URL}/auth/register`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/auth/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ export function useSignup() {
 }
 
 const loginUser = async (payload: TLogin) => {
-  const response = await fetch(`${BASE_URL}/auth/login`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/auth/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ export function useLogin() {
 }
 
 const updateUserProfile = async (token: TToken, payload: TProfile) => {
-  const response = await fetch(`${BASE_URL}/auth/update-user`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/auth/update-user`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -174,7 +174,7 @@ export function useUpdateUserProfile() {
 
 /* queries */
 const getUser = async (token: TToken) => {
-  const response = await fetch(`${BASE_URL}/auth/get-user`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/auth/get-user`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

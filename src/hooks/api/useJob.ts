@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
+import { siteInfo } from '~/config/site';
 import {
   jobAPISchema,
   jobsAPISchema,
@@ -8,7 +9,6 @@ import {
   mutationResponseSchema,
   TJob,
 } from '~/schemas/job';
-import { BASE_URL } from '~/lib/api';
 import { TToken } from '~/lib/types';
 import { jobIdAtom } from '~/atoms/job-id';
 import { accessTokenAtom } from '~/atoms/token';
@@ -19,7 +19,7 @@ import useQueryParams from '../useQueryParams';
 const jobsQueryKey = 'jobs';
 /* queries */
 const getJobs = async (token: TToken, queryParams: string) => {
-  const response = await fetch(`${BASE_URL}/jobs/${queryParams}`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${queryParams}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -31,7 +31,6 @@ const getJobs = async (token: TToken, queryParams: string) => {
 
   const result = jobsAPISchema.safeParse(data);
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
@@ -52,7 +51,7 @@ export function useGetJobs() {
 }
 
 const getJob = async (token: TToken, jobId: string) => {
-  const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -65,7 +64,6 @@ const getJob = async (token: TToken, jobId: string) => {
   const result = jobAPISchema.safeParse(data);
 
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
@@ -83,7 +81,7 @@ export function useGetJob() {
 }
 
 const getJobsStats = async (token: TToken) => {
-  const response = await fetch(`${BASE_URL}/jobs/stats`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/stats`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -96,7 +94,6 @@ const getJobsStats = async (token: TToken) => {
   const result = jobsStatsAPISchema.safeParse(data);
 
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
@@ -114,7 +111,7 @@ export function useGetJobsStats() {
 
 /* mutations */
 const addJob = async (token: TToken, payload: TJob) => {
-  const response = await fetch(`${BASE_URL}/jobs`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -132,7 +129,6 @@ const addJob = async (token: TToken, payload: TJob) => {
   const result = mutationResponseSchema.safeParse(data);
 
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
@@ -168,7 +164,7 @@ export function useAddJob() {
 }
 
 const editJob = async (token: TToken, jobId: string, payload: TJob) => {
-  const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -186,7 +182,6 @@ const editJob = async (token: TToken, jobId: string, payload: TJob) => {
   const result = mutationResponseSchema.safeParse(data);
 
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
@@ -219,7 +214,7 @@ export function useEditJob() {
 }
 
 const deleteJob = async (token: TToken, jobId: string) => {
-  const response = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -235,7 +230,6 @@ const deleteJob = async (token: TToken, jobId: string) => {
   const result = mutationResponseSchema.safeParse(data);
 
   if (!result.success) {
-    // console.log(result.error)
     throw new Error('Failed to parse data');
   }
 
