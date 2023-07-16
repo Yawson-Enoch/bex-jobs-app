@@ -49,13 +49,16 @@ export default function Header() {
           <span className="sr-only">Open Mobile Nav</span>
           <PanelTopOpenIcon aria-hidden="true" />
         </button>
-        {isLoading || isError ? (
-          <Skeleton className="h-5 w-32" />
-        ) : (
-          <p className="text-lg font-medium sm:text-xl">
-            Hi, <span className="text-foreground">{data?.user.firstName}</span>
-          </p>
-        )}
+        <div className="hidden md:block">
+          {isLoading || isError ? (
+            <Skeleton className="h-5 w-32" />
+          ) : (
+            <p className="text-lg font-medium sm:text-xl">
+              Hi,{' '}
+              <span className="text-foreground">{data?.user.firstName}</span>
+            </p>
+          )}
+        </div>
         <div className="flex items-center gap-3 md:gap-6">
           <TabsThemeToggler />
           <AuthActions />
