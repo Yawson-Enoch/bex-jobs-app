@@ -43,8 +43,8 @@ export default function AddJobFloatingBtn() {
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
-      <DialogContent className="left-1/2 w-[min(calc(100%_-_1rem),_500px)] -translate-x-1/2 py-3 md:top-1/2 md:-translate-y-1/2 md:py-6">
-        <div className="space-y-3 rounded-lg border bg-background p-3 md:space-y-6 md:p-6">
+      <DialogContent className="left-1/2 w-[min(calc(100%_-_1rem),_500px)] -translate-x-1/2 md:top-1/2 md:-translate-y-1/2">
+        <div className="my-6 space-y-3 rounded-lg border bg-background p-3 md:my-0 md:space-y-6 md:p-6">
           <DialogHeader className="flex flex-row items-start justify-between text-left">
             <DialogTitle className="scroll-m-20 text-2xl font-semibold tracking-tight">
               Add New Job
