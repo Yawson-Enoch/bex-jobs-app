@@ -17,6 +17,18 @@ import { useGetUser } from '~/hooks/api/useUser';
 import useAuth from '~/hooks/useAuth';
 import useLockBodyScroll from '~/hooks/useLockBodyScroll';
 import useQueryParams from '~/hooks/useQueryParams';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '~/components/ui/alert-dialog';
+import { Button } from '~/components/ui/button';
 import Skeleton from '~/components/ui/skeleton';
 import GradientLogo from '~/components/common/gradient-logo';
 
@@ -134,16 +146,40 @@ export default function MobileNavbar() {
           })}
           <li className="space-y-3">
             <Separator />
-            <button
-              className="flex w-full items-center gap-3 rounded-md p-2 active:bg-accent"
-              onClick={() => {
-                logOut();
-                setIsMobileNavbarOpen(false);
-              }}
-            >
-              <LogOutIcon aria-hidden="true" />
-              <span>Logout</span>
-            </button>
+            <AlertDialog>
+              <Button
+                variant="ghost"
+                className="w-full justify-start gap-3 rounded-md p-2 text-base active:bg-accent"
+                asChild
+              >
+                <AlertDialogTrigger>
+                  <LogOutIcon aria-hidden="true" />
+                  <span>Logout</span>
+                </AlertDialogTrigger>
+              </Button>
+              <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] rounded-lg">
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-center">
+                    Logout Confirmation
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Would you like to conclude your current session and close
+                    the page?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter className="w-full sm:w-auto">
+                  <AlertDialogCancel>No</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => {
+                      setIsMobileNavbarOpen(false);
+                      logOut();
+                    }}
+                  >
+                    Yes, Log out
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </li>
         </ul>
       </section>
