@@ -12,7 +12,6 @@ import {
 
 import { useGetJobsStats } from '~/hooks/api/useJob';
 
-import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsLineChart() {

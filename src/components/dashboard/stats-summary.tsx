@@ -4,7 +4,6 @@ import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 
 import { useGetJobsStats } from '~/hooks/api/useJob';
 
-import ErrorDisplay from '../common/error-display';
 import Skeleton from '../ui/skeleton';
 
 export default function StatsSummary() {

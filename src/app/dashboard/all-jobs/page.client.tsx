@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import { useGetJobs } from '~/hooks/api/useJob';
 import Skeleton from '~/components/ui/skeleton';
 import Filters from '~/components/dashboard/filters';
@@ -10,7 +12,21 @@ import Sort from '~/components/dashboard/sort';
 import ViewTypes from '~/components/dashboard/view-types';
 
 export default function AllJobsPageClient() {
-  const { isLoading, isError } = useGetJobs();
+  const { isLoading, isError, isSuccess, data } = useGetJobs();
+
+  if (isSuccess && data.paginatedData.totalNumberOfJobs === 0) {
+    return (
+      <p>
+        You have no jobs available,
+        <Link
+          href="/dashboard/add-job"
+          className="font-medium text-foreground underline underline-offset-4"
+        >
+          add a job
+        </Link>
+      </p>
+    );
+  }
 
   return (
     <div className="space-y-6 md:space-y-12">

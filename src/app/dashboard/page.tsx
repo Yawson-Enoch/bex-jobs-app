@@ -9,8 +9,8 @@ import {
   twitterCreator,
   twitterImages,
 } from '~/lib/shared-metadata';
-import ChartsContainer from '~/components/dashboard/charts-container';
-import StatsSummary from '~/components/dashboard/stats-summary';
+
+import StatsPageClient from './page.client';
 
 const title = 'Stats';
 const description = 'View your jobs statistics';
@@ -41,10 +41,5 @@ export const metadata: Metadata = {
 };
 
 export default function StatsPage() {
-  return (
-    <div className="space-y-6 md:space-y-12">
-      <StatsSummary />
-      <ChartsContainer />
-    </div>
-  );
+  return <StatsPageClient />;
 }
