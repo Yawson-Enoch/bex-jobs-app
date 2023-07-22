@@ -139,7 +139,7 @@ export function useAddJob() {
 
   const queryClient = useQueryClient();
 
-  const addJobMutation = useMutation({
+  return useMutation({
     /* 
     - mutation fn only takes one param
     - auto passes the payload as arg to fetcher when the fetcher has a single param(the payload)
@@ -159,8 +159,6 @@ export function useAddJob() {
       });
     },
   });
-
-  return addJobMutation;
 }
 
 const editJob = async (token: TToken, jobId: string, payload: TJob) => {
@@ -193,7 +191,7 @@ export function useEditJob() {
 
   const queryClient = useQueryClient();
 
-  const editJobMutation = useMutation({
+  return useMutation({
     mutationFn: (payload: TJob) => editJob(token, jobId, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -209,8 +207,6 @@ export function useEditJob() {
       });
     },
   });
-
-  return editJobMutation;
 }
 
 const deleteJob = async (token: TToken, jobId: string) => {
@@ -241,7 +237,7 @@ export function useDeleteJob() {
 
   const queryClient = useQueryClient();
 
-  const deleteJobMutation = useMutation({
+  return useMutation({
     mutationFn: () => deleteJob(token, jobId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -257,6 +253,4 @@ export function useDeleteJob() {
       });
     },
   });
-
-  return deleteJobMutation;
 }

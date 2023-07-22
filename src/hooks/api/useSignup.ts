@@ -31,7 +31,7 @@ const signupUser = async (payload: TSignup) => {
 export function useSignup() {
   const router = useRouter();
 
-  const signupMutation = useMutation({
+  return useMutation({
     mutationFn: signupUser,
     onSuccess: (data) => {
       toast({
@@ -45,6 +45,4 @@ export function useSignup() {
       });
     },
   });
-
-  return signupMutation;
 }

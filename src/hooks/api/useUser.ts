@@ -73,7 +73,7 @@ export function useUpdateUserProfile() {
 
   const queryClient = useQueryClient();
 
-  const updateUserProfileMutation = useMutation({
+  return useMutation({
     mutationFn: (payload: TProfile) => updateUserProfile(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [userQueryKey] });
@@ -87,6 +87,4 @@ export function useUpdateUserProfile() {
       });
     },
   });
-
-  return updateUserProfileMutation;
 }

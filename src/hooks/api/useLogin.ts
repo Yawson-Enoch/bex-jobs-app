@@ -37,7 +37,7 @@ export function useLogin() {
   const setAccessToken = useSetAtom(accessTokenAtom);
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
-  const loginMutation = useMutation({
+  return useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       const authInfo = parseToken(data.token);
@@ -56,6 +56,4 @@ export function useLogin() {
       });
     },
   });
-
-  return loginMutation;
 }
