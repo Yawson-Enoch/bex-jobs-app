@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { motion, Variants } from 'framer-motion';
 
 import useAuth from '~/hooks/useAuth';
@@ -72,6 +73,10 @@ const headingDescription: Variants = {
 
 export default function IndexPageClient() {
   const { isLoggedIn } = useAuth();
+
+  if (isLoggedIn) {
+    redirect('/dashboard');
+  }
 
   return (
     <>

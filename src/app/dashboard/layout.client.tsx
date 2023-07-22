@@ -1,13 +1,11 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { useAtomValue } from 'jotai';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useAuth from '~/hooks/useAuth';
 import useMediaQuery from '~/hooks/useMediaQuery';
-import { Button } from '~/components/ui/button';
 import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
 import Header from '~/components/layout/dashboard/header';
 import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
@@ -38,32 +36,17 @@ export default function DashboardLayoutClient({
 
   const pathname = usePathname();
 
+  if (!isLoggedIn) {
+    redirect('/login');
+  }
+
   return (
     <div className="dashboard-grid-container min-h-dm relative">
-      {!isLoggedIn ? (
-        <main className="dashboard-main container py-6 md:py-12">
-          <div className="grid h-full place-content-center">
-            <div className="grid place-items-center gap-3 md:gap-6">
-              <p className="font-medium text-foreground md:text-lg">
-                Log in to view and manage your jobs.
-              </p>
-              <Button asChild size="lg" className="text-lg font-bold">
-                <Link href="/login">Login</Link>
-              </Button>
-            </div>
-          </div>
-        </main>
-      ) : (
-        <>
-          <Header />
-          <Sidebar />
-          {isMobileNavbarOpen && !matches && <MobileNavbar />}
-          <main className="dashboard-main container py-6 md:py-12">
-            {children}
-          </main>
-        </>
-      )}
+      <Header />
+      <Sidebar />
+      <main className="dashboard-main container py-6 md:py-12">{children}</main>
       <DecorativePattern />
+      {isMobileNavbarOpen && !matches && <MobileNavbar />}
       {isLoggedIn && pathname !== '/dashboard/add-job' && <AddJobFloatingBtn />}
     </div>
   );

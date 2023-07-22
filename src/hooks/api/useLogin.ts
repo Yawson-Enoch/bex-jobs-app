@@ -9,8 +9,6 @@ import { sessionTimeoutAtom } from '~/atoms/session';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
-import useAuth from '../useAuth';
-
 const loginUser = async (payload: TLogin) => {
   const response = await fetch(`${siteInfo.APIBaseURL}/auth/login`, {
     method: 'POST',
@@ -39,8 +37,6 @@ export function useLogin() {
   const setAccessToken = useSetAtom(accessTokenAtom);
   const setSessionTimeout = useSetAtom(sessionTimeoutAtom);
 
-  const { login } = useAuth();
-
   const loginMutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
@@ -50,11 +46,6 @@ export function useLogin() {
 
       setAccessToken(data.token);
       persistLogin && setSessionTimeout(sessionTimeoutPersistLogin);
-      login({
-        userId: authInfo.userId,
-        firstName: authInfo.firstName,
-        email: authInfo.email,
-      });
       toast({
         description: data.msg,
       });

@@ -1,54 +1,25 @@
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAtom, useAtomValue } from 'jotai';
+import { useCallback, useEffect } from 'react';
+import { redirect } from 'next/navigation';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
-import { parseToken } from '~/lib/jwt';
 import { persistLoginAtom } from '~/atoms/persist';
 import { sessionTimeoutAtom } from '~/atoms/session';
-import { accessTokenAtom } from '~/atoms/token';
-
-type User = {
-  userId: string;
-  firstName: string;
-  email: string;
-};
+import { accessTokenAtom, isAuthenticatedAtom } from '~/atoms/token';
 
 const SESSION_TIMEOUT_NO_PERSIST_LOGIN_MS = 30 * 60 * 1000;
 
 export default function useAuth() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userAuthInfo, setUserAuthInfo] = useState<User | null>(null);
-
-  const [accessToken, setAccessToken] = useAtom(accessTokenAtom);
   const [sessionTimeout, setSessionTimeout] = useAtom(sessionTimeoutAtom);
+  const setAccessToken = useSetAtom(accessTokenAtom);
   const persistLogin = useAtomValue(persistLoginAtom);
-
-  const router = useRouter();
+  const isLoggedIn = useAtomValue(isAuthenticatedAtom);
 
   const logOut = useCallback(() => {
-    setIsAuthenticated(false);
-    setUserAuthInfo(null);
     setAccessToken(RESET);
     setSessionTimeout(RESET);
-    router.replace('/login');
-  }, [router, setAccessToken, setSessionTimeout]);
-
-  const login = useCallback((user: User) => {
-    setIsAuthenticated(true);
-    setUserAuthInfo(user);
-  }, []);
-
-  useEffect(() => {
-    if (accessToken) {
-      const authInfo = parseToken(accessToken);
-      login({
-        userId: authInfo.userId,
-        firstName: authInfo.firstName,
-        email: authInfo.email,
-      });
-    }
-  }, [accessToken, login]);
+    redirect('/login');
+  }, [setAccessToken, setSessionTimeout]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -98,9 +69,7 @@ export default function useAuth() {
   }, [persistLogin, logOut, sessionTimeout]);
 
   return {
-    isLoggedIn: isAuthenticated,
-    userAuthInfo,
-    login,
+    isLoggedIn,
     logOut,
   };
 }
