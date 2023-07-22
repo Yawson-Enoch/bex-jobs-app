@@ -97,10 +97,7 @@ export default function Sidebar() {
               alt="Logo"
               fill
               priority
-              sizes="(max-width: 768px) 35vw,
-              (max-width: 1200px) 10vw,
-              50vw"
-              className="object-contain"
+              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 35vw, 20vw"
             />
           </Link>
         )}
