@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { LaptopIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
@@ -22,7 +23,7 @@ export default function TabsThemeToggler() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex h-9 items-center gap-1 overflow-hidden rounded-full border p-1">
+    <div className="flex h-9 items-center gap-1 rounded-full border p-1">
       {themes.map((userTheme) => {
         return (
           <button
@@ -33,9 +34,13 @@ export default function TabsThemeToggler() {
             className="relative rounded-full p-1 focus-visible:outline-none focus-visible:outline-1 focus-visible:outline-offset-1 focus-visible:outline-ring"
           >
             {theme === userTheme.theme && (
-              <div
+              <motion.div
                 aria-hidden="true"
-                className="absolute inset-0 rounded-full bg-accent"
+                layout="position"
+                layoutId="active-theme"
+                layoutDependency={userTheme.theme}
+                className="absolute inset-0 bg-accent"
+                style={{ borderRadius: 9999 }}
               />
             )}
             <span aria-hidden="true" className="relative z-10">

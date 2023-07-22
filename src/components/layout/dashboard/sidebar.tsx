@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { motion } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 import {
   BarChart3Icon,
@@ -104,7 +105,7 @@ export default function Sidebar() {
           </Link>
         )}
       </div>
-      <ul className="flex flex-col gap-4 overflow-hidden p-4 font-medium">
+      <ul className="flex flex-col gap-4 p-4 font-medium">
         {sidebarRoutes.map((sidebarRoute) => {
           return (
             <li
@@ -115,9 +116,15 @@ export default function Sidebar() {
               )}
             >
               {pathname === sidebarRoute.path && (
-                <div
+                <motion.div
                   aria-hidden="true"
                   className="absolute inset-0 rounded-md bg-accent"
+                  layout="position"
+                  layoutId="dashboard-sidebar-link"
+                  layoutDependency={sidebarRoute.path}
+                  transition={{
+                    layout: { type: 'tween', duration: 0.5, ease: 'easeOut' },
+                  }}
                 />
               )}
               <Link

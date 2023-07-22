@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import { Separator } from '@radix-ui/react-dropdown-menu';
+import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import {
   BarChart3Icon,
@@ -115,9 +116,15 @@ export default function MobileNavbar() {
                 }}
               >
                 {pathname === navLink.path && (
-                  <div
+                  <motion.div
                     aria-hidden="true"
                     className="absolute inset-0 rounded-md bg-accent"
+                    layout="position"
+                    layoutId="dashboard-mobile-navbar-link"
+                    layoutDependency={navLink.path}
+                    transition={{
+                      layout: { type: 'tween', duration: 0.5, ease: 'easeOut' },
+                    }}
                   />
                 )}
                 <button
