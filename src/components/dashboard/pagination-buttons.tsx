@@ -7,6 +7,7 @@ import {
   MoreHorizontalIcon,
 } from 'lucide-react';
 import ReactPaginate from 'react-paginate';
+import { twMerge } from 'tailwind-merge';
 
 import { useGetJobs } from '~/hooks/api/useJob';
 import useQueryParams from '~/hooks/useQueryParams';
@@ -68,7 +69,10 @@ export default function PaginationButtons() {
             <span>PREV</span>
           </>
         }
-        containerClassName="flex items-center justify-center gap-3"
+        containerClassName={twMerge(
+          'flex items-center justify-center gap-3',
+          jobs?.paginatedData.totalNumberOfPages === 1 && 'hidden',
+        )}
         pageClassName="hidden lg:block"
         pageLinkClassName="w-10 aspect-square lg:flex items-center justify-center rounded-full border hover:bg-accent"
         activeLinkClassName="bg-primary text-primary-foreground border-0 hover:bg-primary/90"
