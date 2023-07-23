@@ -27,6 +27,7 @@ type Job = {
 };
 
 export default function Filters() {
+  const [open, setOpen] = useState(false);
   const [resetSelectKey, setResetSelectKey] = useState(Date.now());
 
   const id = useId();
@@ -48,10 +49,11 @@ export default function Filters() {
 
   const onSubmit: SubmitHandler<Job> = (data) => {
     setQueryParams({ status: data.jobStatus, type: data.jobType, page: 1 });
+    setOpen(false);
   };
 
   return (
-    <Popover>
+    <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button variant="outline" className="gap-1">
           <span>FILTER</span>
