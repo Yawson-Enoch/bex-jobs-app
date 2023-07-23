@@ -1,9 +1,6 @@
-import { useRouter } from 'next/navigation';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect, useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
-import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { loginSchema, TLogin } from '~/schemas/auth';
 import { demoAppAtom } from '~/atoms/demo-app';
 import { useLogin } from '~/hooks/api/useLogin';
 import {
@@ -22,23 +19,7 @@ export default function DemoApp() {
 
   const router = useRouter();
 
-  const form = useForm<TLogin>({
-    resolver: zodResolver(loginSchema),
-    mode: 'onChange',
-    defaultValues: {
-      email: 'test@user.com',
-      password: 'top-secret',
-    },
-  });
-  const { handleSubmit } = form;
-
   const loginMutation = useLogin();
-
-  const onSubmit: SubmitHandler<TLogin> = (data) => {
-    loginMutation.mutate(data);
-    router.push('/dashboard');
-    setIsDemoApp(false);
-  };
 
   return (
     <Dialog
@@ -50,7 +31,7 @@ export default function DemoApp() {
         <div className="my-6 space-y-3 rounded-lg border bg-background p-3 md:my-0 md:space-y-6 md:p-6">
           <DialogHeader className="flex flex-row items-start justify-between text-left">
             <div>
-              <DialogTitle className="scroll-m-20 text-2xl font-semibold tracking-tight">
+              <DialogTitle className="scroll-m-20 text-xl font-semibold tracking-tight">
                 Try BexJobs or Register for Full Access!
               </DialogTitle>
               <DialogDescription>
@@ -60,16 +41,20 @@ export default function DemoApp() {
               </DialogDescription>
             </div>
           </DialogHeader>
-          <form
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-center"
-          >
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-center">
             <Button
-              type="submit"
+              type="button"
               variant="outline"
               size="lg"
               disabled={loginMutation.isLoading}
+              onClick={() => {
+                loginMutation.mutate({
+                  email: 'test@user.com',
+                  password: 'top-secret',
+                });
+                setIsDemoApp(false);
+                redirect('/dashboard');
+              }}
             >
               {loginMutation.isLoading ? (
                 <LoadingIndicator msg="Logging in..." />
@@ -87,7 +72,7 @@ export default function DemoApp() {
             >
               Register
             </Button>
-          </form>
+          </div>
         </div>
       </DialogContent>
     </Dialog>
