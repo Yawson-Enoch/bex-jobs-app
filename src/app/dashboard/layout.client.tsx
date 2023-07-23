@@ -5,7 +5,9 @@ import { useAtomValue } from 'jotai';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useAuth from '~/hooks/useAuth';
+import useIsMounted from '~/hooks/useIsMounted';
 import useMediaQuery from '~/hooks/useMediaQuery';
+import Preloader from '~/components/common/preloader';
 import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
 import Header from '~/components/layout/dashboard/header';
 import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
@@ -33,8 +35,13 @@ export default function DashboardLayoutClient({
 
   const { matches } = useMediaQuery('(min-width: 768px)');
   const { isLoggedIn } = useAuth();
+  const { isMounted } = useIsMounted();
 
   const pathname = usePathname();
+
+  if (!isMounted) {
+    return <Preloader />;
+  }
 
   if (!isLoggedIn) {
     redirect('/login');

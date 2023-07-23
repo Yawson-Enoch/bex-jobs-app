@@ -4,11 +4,19 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import useAuth from '~/hooks/useAuth';
+import useIsMounted from '~/hooks/useIsMounted';
 import LoginForm from '~/components/auth/login-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
+import Preloader from '~/components/common/preloader';
 
 export default function LoginPageClient() {
   const { isLoggedIn } = useAuth();
+
+  const { isMounted } = useIsMounted();
+
+  if (!isMounted) {
+    return <Preloader />;
+  }
 
   if (isLoggedIn) {
     redirect('/dashboard');

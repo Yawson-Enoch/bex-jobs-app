@@ -6,8 +6,10 @@ import { redirect } from 'next/navigation';
 import { motion, Variants } from 'framer-motion';
 
 import useAuth from '~/hooks/useAuth';
+import useIsMounted from '~/hooks/useIsMounted';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
+import Preloader from '~/components/common/preloader';
 
 const DemoApp = dynamic(() => import('~/components/common/demo-app'), {
   ssr: false,
@@ -74,6 +76,12 @@ const headingDescription: Variants = {
 export default function IndexPageClient() {
   const { isLoggedIn } = useAuth();
 
+  const { isMounted } = useIsMounted();
+
+  if (!isMounted) {
+    return <Preloader />;
+  }
+
   if (isLoggedIn) {
     redirect('/dashboard');
   }
@@ -118,10 +126,7 @@ export default function IndexPageClient() {
           size="lg"
           className="mx-auto bg-gradient-to-r from-primary to-secondary font-bold md:text-lg"
         >
-          <MotionLink
-            href={isLoggedIn ? '/dashboard' : '/login'}
-            variants={mainLink}
-          >
+          <MotionLink href="/login" variants={mainLink}>
             Start Managing Your Jobs
           </MotionLink>
         </Button>
