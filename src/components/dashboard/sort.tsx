@@ -18,25 +18,18 @@ const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'] as const;
 type TSortOption = (typeof SORT_OPTIONS)[number];
 
 export default function Sort() {
+  const id = useId();
+
   const { setQueryParams, queryParams } = useQueryParams<{
     sort: TSortOption;
   }>();
 
-  const { sort } = queryParams;
-
-  const handleSortOptionChange = (value: TSortOption) => {
-    setQueryParams({ sort: value });
-  };
-
-  const id = useId();
-
   return (
-    <div className="flex items-center gap-2">
+    <form className="flex items-center gap-2">
       <Label htmlFor={id + '-sort'}>SORT</Label>
       <Select
-        value={sort}
-        defaultValue={sort}
-        onValueChange={handleSortOptionChange}
+        value={queryParams?.sort ?? 'latest'}
+        onValueChange={(value: TSortOption) => setQueryParams({ sort: value })}
       >
         <SelectTrigger id={id + '-sort'} className="flex items-center gap-1">
           <SelectValue placeholder="Sort option" />
@@ -51,6 +44,6 @@ export default function Sort() {
           </SelectGroup>
         </SelectContent>
       </Select>
-    </div>
+    </form>
   );
 }
