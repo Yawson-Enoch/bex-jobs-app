@@ -5,7 +5,13 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Provider as JotaiProvider, createStore } from 'jotai';
 import { ThemeProvider } from 'next-themes';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 30 * 1000
+    }
+  }
+});
 const store = createStore();
 
 export default function Providers({ children }: { children: React.ReactNode }) {
