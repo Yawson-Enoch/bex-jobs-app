@@ -2,15 +2,15 @@
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Provider as JotaiProvider, createStore } from 'jotai';
+import { createStore, Provider as JotaiProvider } from 'jotai';
 import { ThemeProvider } from 'next-themes';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 30 * 1000
-    }
-  }
+      staleTime: 30 * 1000,
+    },
+  },
 });
 const store = createStore();
 
