@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 
 import { demoAppAtom } from '~/atoms/demo-app';
@@ -51,12 +51,9 @@ export default function DemoApp() {
                 loginMutation.mutate({
                   email: 'test@user.com',
                   password: 'top-secret',
-                },{
-                  onSuccess: () => {
-                    setIsDemoApp(false);
-                    router.push('/dashboard');
-                  }
                 });
+                setIsDemoApp(false);
+                redirect('/dashboard');
               }}
             >
               {loginMutation.isLoading ? (

@@ -4,7 +4,9 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { motion, Variants } from 'framer-motion';
+import { useAtomValue } from 'jotai';
 
+import { demoAppAtom } from '~/atoms/demo-app';
 import useAuth from '~/hooks/useAuth';
 import useIsMounted from '~/hooks/useIsMounted';
 import { Button } from '~/components/ui/button';
@@ -77,6 +79,7 @@ export default function IndexPageClient() {
   const { isLoggedIn } = useAuth();
 
   const { isMounted } = useIsMounted();
+  const isDemoApp = useAtomValue(demoAppAtom);
 
   if (!isMounted) {
     return <Preloader />;
@@ -131,7 +134,7 @@ export default function IndexPageClient() {
           </MotionLink>
         </Button>
       </motion.div>
-      <DemoApp />
+      {isDemoApp && <DemoApp />}
     </>
   );
 }
