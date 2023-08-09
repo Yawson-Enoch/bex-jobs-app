@@ -1,15 +1,41 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
+import { siteInfo } from '~/config/site';
+import {
+  openGraphImages,
+  openGraphLocale,
+  openGraphName,
+  openGraphType,
+  twitterCard,
+  twitterCreator,
+  twitterImages,
+} from '~/lib/shared-metadata';
 import { Button } from '~/components/ui/button';
 
-function DecorativePattern() {
-  return (
-    <div
-      aria-hidden="true"
-      className="pattern-zigzag-3d fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-20 pattern-size-8 dark:pattern-gray-800"
-    ></div>
-  );
-}
+const title = 'Page Not Found';
+const description = 'Oops! The page you are looking for cannot be found';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteInfo.URL),
+  title,
+  description,
+  openGraph: {
+    ...openGraphName,
+    ...openGraphImages,
+    ...openGraphLocale,
+    ...openGraphType,
+    title,
+    description,
+  },
+  twitter: {
+    ...twitterCard,
+    ...twitterCreator,
+    ...twitterImages,
+    title,
+    description,
+  },
+};
 
 export default function NotFound() {
   return (
@@ -32,5 +58,14 @@ export default function NotFound() {
       </main>
       <DecorativePattern />
     </div>
+  );
+}
+
+function DecorativePattern() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pattern-zigzag-3d fixed inset-0 -z-10 flex overflow-hidden pattern-bg-transparent pattern-gray-400 pattern-opacity-20 pattern-size-8 dark:pattern-gray-800"
+    ></div>
   );
 }
