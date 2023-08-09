@@ -15,6 +15,6 @@ export const siteInfo = {
     github: 'https://github.com/Yawson-Enoch',
     linkedin: 'https://www.linkedin.com/in/enock-yawson-696b71222',
     codepen: 'https://codepen.io/gybex_enock',
-    portfolio: 'https://enock-yawson.netlify.app',
+    portfolio: 'https://gybex.dev',
   },
 };
