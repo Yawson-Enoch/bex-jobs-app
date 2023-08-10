@@ -38,6 +38,8 @@ import {
 } from '~/components/ui/tooltip';
 import GradientLogo from '~/components/common/gradient-logo';
 
+import logo from '../../../../public/assets/logo.png';
+
 const sidebarRoutes = [
   {
     title: 'Stats',
@@ -88,16 +90,13 @@ export default function Sidebar() {
             <GradientLogo />
           </Link>
         ) : (
-          <Link
-            href="/dashboard"
-            className="relative inline-block aspect-square w-10"
-          >
+          <Link href="/dashboard">
             <Image
-              src="/assets/logo.png"
+              src={logo}
               alt="Logo"
-              fill
-              priority
-              sizes="(max-width: 768px) 80vw, (max-width: 1200px) 35vw, 20vw"
+              width={40}
+              height={40}
+              placeholder="blur"
             />
           </Link>
         )}
