@@ -37,8 +37,7 @@ import {
   TooltipTrigger,
 } from '~/components/ui/tooltip';
 import GradientLogo from '~/components/common/gradient-logo';
-
-import logo from '../../../../public/assets/logo.png';
+import logo from '~/public/assets/logo.png';
 
 const sidebarRoutes = [
   {
