@@ -18,8 +18,8 @@ import useQueryParams from '../useQueryParams';
 
 const jobsQueryKey = 'jobs';
 /* queries */
-const getJobs = async (token: TToken, queryParams: string) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${queryParams}`, {
+const getJobs = async (token: TToken, queryString: string) => {
+  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${queryString}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -39,13 +39,12 @@ const getJobs = async (token: TToken, queryParams: string) => {
 export function useGetJobs() {
   const token = useAtomValue(accessTokenAtom);
 
-  const { combinedQueryParams } = useQueryParams();
-  const queryParams = combinedQueryParams();
+  const { queryString } = useQueryParams();
 
   return useQuery({
-    queryKey: [jobsQueryKey, queryParams],
-    queryFn: () => getJobs(token, queryParams),
-    enabled: !!token && !!queryParams,
+    queryKey: [jobsQueryKey, queryString],
+    queryFn: () => getJobs(token, queryString),
+    enabled: !!token && !!queryString,
     keepPreviousData: true,
   });
 }

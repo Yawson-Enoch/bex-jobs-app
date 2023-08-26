@@ -126,7 +126,6 @@ export default function Sidebar() {
                 href={
                   sidebarRoute.path === '/dashboard/all-jobs'
                     ? sidebarRoute.path +
-                      '?' +
                       createQueryParam({
                         status: 'all',
                         type: 'all',

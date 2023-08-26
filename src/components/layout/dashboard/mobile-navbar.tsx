@@ -132,7 +132,6 @@ export default function MobileNavbar() {
                     router.push(
                       navLink.path === '/dashboard/all-jobs'
                         ? navLink.path +
-                            '?' +
                             createQueryParam({
                               status: 'all',
                               type: 'all',

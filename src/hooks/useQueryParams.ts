@@ -1,18 +1,21 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export default function useQueryParams<T = {}>() {
+export default function useQueryParams<T>() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const queryParams = Object.fromEntries(searchParams.entries()) as Partial<T>;
   const urlSearchParams = new URLSearchParams(searchParams.toString());
+
+  const queryParams = Object.fromEntries(searchParams.entries()) as Partial<T>;
+
+  const queryString = `?${searchParams.toString()}`;
 
   const createQueryParam = (params: Partial<T>) => {
     Object.entries(params).forEach(([key, value]) => {
       urlSearchParams.set(key, String(value));
     });
 
-    return urlSearchParams.toString();
+    return `?${urlSearchParams.toString()}`;
   };
 
   const setQueryParams = (params: Partial<T>) => {
@@ -35,18 +38,11 @@ export default function useQueryParams<T = {}>() {
     router.push(`${pathname}${query}`);
   };
 
-  const combinedQueryParams = () => {
-    const search = urlSearchParams.toString();
-    const query = search ? `?${search}` : '';
-
-    return query;
-  };
-
   return {
     queryParams,
+    queryString,
+    createQueryParam,
     setQueryParams,
     deleteQueryParam,
-    createQueryParam,
-    combinedQueryParams,
   };
 }
