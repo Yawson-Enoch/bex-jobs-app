@@ -8,7 +8,7 @@ import GradientLogo from '~/components/common/gradient-logo';
 export default function Header() {
   return (
     <header className="container sticky top-4 z-10 h-16 lg:top-0">
-      <div className="flex h-full items-center justify-between gap-3 rounded-full border bg-background/70 px-3 backdrop-blur-sm sm:px-6 lg:gap-6 lg:rounded-none lg:rounded-b-full lg:border-0 lg:border-x lg:border-b lg:px-12">
+      <div className="flex h-full items-center justify-between gap-3 rounded-full border bg-background/30 px-3 backdrop-blur-3xl sm:px-6 lg:gap-6 lg:rounded-none lg:rounded-b-full lg:border-0 lg:border-x lg:border-b lg:px-12">
         <Link href="/">
           <GradientLogo />
         </Link>

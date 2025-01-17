@@ -40,10 +40,7 @@ export default function AuthActions() {
       <AlertDialog>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="secondary"
-              className="aspect-square w-9 rounded-full p-0"
-            >
+            <Button className="aspect-square w-9 rounded-full p-0">
               <UserIcon aria-hidden="true" />
               <span className="sr-only">Profile menu</span>
             </Button>
@@ -55,11 +52,11 @@ export default function AuthActions() {
             {!isLoggedIn ? (
               <>
                 <DropdownMenuItem onClick={() => router.push('/login')}>
-                  <LogInIcon aria-hidden="true" className="mr-2 h-4 w-4" />
+                  <LogInIcon aria-hidden="true" className="mr-2 size-4" />
                   <span>Login</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => router.push('/signup')}>
-                  <UserPlusIcon aria-hidden="true" className="mr-2 h-4 w-4" />
+                  <UserPlusIcon aria-hidden="true" className="mr-2 size-4" />
                   <span>Sign Up</span>
                 </DropdownMenuItem>
               </>
@@ -68,13 +65,13 @@ export default function AuthActions() {
                 <DropdownMenuItem
                   onClick={() => router.push('/dashboard/profile')}
                 >
-                  <UserCircleIcon aria-hidden="true" className="mr-2 h-4 w-4" />
+                  <UserCircleIcon aria-hidden="true" className="mr-2 size-4" />
                   <span>View Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild className="w-full">
                   <AlertDialogTrigger>
-                    <LogOutIcon aria-hidden="true" className="mr-2 h-4 w-4" />
+                    <LogOutIcon aria-hidden="true" className="mr-2 size-4" />
                     <span>Logout</span>
                   </AlertDialogTrigger>
                 </DropdownMenuItem>
@@ -94,9 +91,7 @@ export default function AuthActions() {
           </AlertDialogHeader>
           <AlertDialogFooter className="w-full sm:w-auto">
             <AlertDialogCancel>No</AlertDialogCancel>
-            <AlertDialogAction onClick={() => logOut()}>
-              Yes, Log out
-            </AlertDialogAction>
+            <AlertDialogAction onClick={logOut}>Yes, Log out</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

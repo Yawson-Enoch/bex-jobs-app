@@ -17,7 +17,6 @@ import { twMerge } from 'tailwind-merge';
 
 import { isSidebarExpandedAtom } from '~/atoms/sidebar';
 import useAuth from '~/hooks/useAuth';
-import useQueryParams from '~/hooks/useQueryParams';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,7 +40,7 @@ import logo from '~/public/assets/logo.png';
 
 const sidebarRoutes = [
   {
-    title: 'Stats',
+    title: 'Dashboard',
     path: '/dashboard',
     icon: <BarChart3Icon />,
   },
@@ -66,7 +65,6 @@ export default function Sidebar() {
   const isSidebarExpanded = useAtomValue(isSidebarExpandedAtom);
 
   const { logOut } = useAuth();
-  const { createQueryParam } = useQueryParams();
 
   const pathname = usePathname();
 
@@ -74,7 +72,7 @@ export default function Sidebar() {
     <aside
       id="dashboard-sidebar"
       className={twMerge(
-        'dashboard-sidebar max-h-dm sticky top-0 hidden overflow-y-auto overscroll-y-contain border-r bg-background/70 pt-3 md:flex md:flex-col md:gap-12',
+        'dashboard-sidebar sticky top-0 hidden max-h-dvh overflow-y-auto overscroll-y-contain border-r pt-3 transition-[width] md:flex md:flex-col md:gap-12',
         isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20',
       )}
     >
@@ -100,7 +98,7 @@ export default function Sidebar() {
           </Link>
         )}
       </div>
-      <ul className="flex flex-col gap-4 p-4 font-medium">
+      <ul className="flex h-full flex-col gap-4 p-4 font-medium">
         {sidebarRoutes.map((sidebarRoute) => {
           return (
             <li
@@ -123,17 +121,7 @@ export default function Sidebar() {
                 />
               )}
               <Link
-                href={
-                  sidebarRoute.path === '/dashboard/all-jobs'
-                    ? sidebarRoute.path +
-                      createQueryParam({
-                        status: 'all',
-                        type: 'all',
-                        sort: 'latest',
-                        page: 1,
-                      })
-                    : sidebarRoute.path
-                }
+                href={sidebarRoute.path}
                 className="group relative z-10 flex items-center gap-3 rounded-md p-2"
               >
                 <span
@@ -149,19 +137,18 @@ export default function Sidebar() {
             </li>
           );
         })}
-        <li className="space-y-4">
+        <li className="mt-auto space-y-4">
           <Separator />
           {isSidebarExpanded ? (
             <AlertDialog>
-              <Button
-                variant="ghost"
-                className={twMerge(
-                  'group flex items-center justify-start gap-3 p-2',
-                  isSidebarExpanded ? 'w-full' : 'w-fit',
-                )}
-                asChild
-              >
-                <AlertDialogTrigger>
+              <AlertDialogTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className={twMerge(
+                    'group flex items-center justify-start gap-3 p-2',
+                    isSidebarExpanded ? 'w-full' : 'w-fit',
+                  )}
+                >
                   <LogOutIcon
                     aria-hidden="true"
                     className="transition-transform duration-300 ease-linear group-hover:rotate-12"
@@ -169,8 +156,8 @@ export default function Sidebar() {
                   <span className={twMerge(!isSidebarExpanded && 'hidden')}>
                     Logout
                   </span>
-                </AlertDialogTrigger>
-              </Button>
+                </Button>
+              </AlertDialogTrigger>
               <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] rounded-lg">
                 <AlertDialogHeader>
                   <AlertDialogTitle className="text-center">
@@ -193,16 +180,15 @@ export default function Sidebar() {
             <AlertDialog>
               <TooltipProvider delayDuration={100}>
                 <Tooltip>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className={twMerge(
-                      'group flex items-center justify-start gap-3 p-2',
-                      isSidebarExpanded ? 'w-full' : 'w-fit',
-                    )}
-                  >
-                    <AlertDialogTrigger>
-                      <TooltipTrigger>
+                  <AlertDialogTrigger asChild>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className={twMerge(
+                          'group flex items-center justify-start gap-3 p-2',
+                          isSidebarExpanded ? 'w-full' : 'w-fit',
+                        )}
+                      >
                         <LogOutIcon
                           aria-hidden="true"
                           className="transition-transform duration-300 ease-linear group-hover:rotate-12"
@@ -212,13 +198,13 @@ export default function Sidebar() {
                         >
                           Logout
                         </span>
-                      </TooltipTrigger>
-                    </AlertDialogTrigger>
-                  </Button>
+                      </Button>
+                    </TooltipTrigger>
+                  </AlertDialogTrigger>
                   <TooltipContent
                     side="right"
-                    align="start"
-                    alignOffset={-17.5}
+                    align="center"
+                    className="relative -top-3.5"
                   >
                     <span>Log out</span>
                   </TooltipContent>
@@ -236,7 +222,7 @@ export default function Sidebar() {
                 </AlertDialogHeader>
                 <AlertDialogFooter className="w-full sm:w-auto">
                   <AlertDialogCancel>No</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => logOut()}>
+                  <AlertDialogAction onClick={logOut}>
                     Yes, Log out
                   </AlertDialogAction>
                 </AlertDialogFooter>

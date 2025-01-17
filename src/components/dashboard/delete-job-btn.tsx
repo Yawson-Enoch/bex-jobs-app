@@ -24,14 +24,15 @@ export default function DeleteJobBtn({ id }: { id: string }) {
 
   return (
     <AlertDialog>
-      <Button
-        asChild
-        variant="destructive"
-        className="w-full"
-        onClick={() => setJobId(id)}
-      >
-        <AlertDialogTrigger>Delete</AlertDialogTrigger>
-      </Button>
+      <AlertDialogTrigger asChild>
+        <Button
+          variant="destructive"
+          className="w-full"
+          onClick={() => setJobId(id)}
+        >
+          Delete
+        </Button>
+      </AlertDialogTrigger>
       <AlertDialogContent className="grid w-[min(calc(100%_-_1rem),_400px)] justify-items-center rounded-lg">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-center">
@@ -44,7 +45,7 @@ export default function DeleteJobBtn({ id }: { id: string }) {
         <AlertDialogFooter className="w-full sm:w-auto">
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction onClick={() => deleteJobMutation.mutate()}>
-            {deleteJobMutation.isLoading ? (
+            {deleteJobMutation.isPending ? (
               <LoadingIndicator msg="Deleting job" />
             ) : (
               'Yes, Delete'

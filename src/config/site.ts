@@ -1,6 +1,6 @@
 const deployedSiteURL = process.env.NEXT_PUBLIC_VERCEL_URL;
 
-export const siteInfo = {
+export const siteConfig = {
   name: 'BexJobs',
   description: `Job search management tool designed to help you keep 
   track of all your job applications in one place`,

@@ -1,13 +1,8 @@
-import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { ChevronLeftIcon } from 'lucide-react';
 
 import { Button } from '~/components/ui/button';
-
-const TabsThemeToggler = dynamic(
-  () => import('~/components/common/tabs-theme-toggler'),
-  { ssr: false },
-);
+import TabsThemeToggler from '~/components/common/tabs-theme-toggler';
 
 export default function Header() {
   return (

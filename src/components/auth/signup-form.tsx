@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { signupSchema, TSignup } from '~/schemas/auth';
+import { Signup } from '~/schemas/auth';
 import { useSignup } from '~/hooks/api/useSignup';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -21,8 +21,8 @@ const DevTool: React.ElementType = dynamic(
 export default function SignupForm() {
   const id = useId();
 
-  const form = useForm<TSignup>({
-    resolver: zodResolver(signupSchema),
+  const form = useForm<Signup>({
+    resolver: zodResolver(Signup),
     mode: 'onSubmit',
   });
   const { register, handleSubmit, formState, control } = form;
@@ -30,7 +30,7 @@ export default function SignupForm() {
 
   const signupMutation = useSignup();
 
-  const onSubmit: SubmitHandler<TSignup> = (data) => {
+  const onSubmit: SubmitHandler<Signup> = (data) => {
     signupMutation.mutate(data);
   };
 
@@ -50,7 +50,7 @@ export default function SignupForm() {
               autoComplete="name"
               autoCorrect="off"
               autoFocus
-              disabled={signupMutation.isLoading}
+              disabled={signupMutation.isPending}
             />
             {errors.firstName && (
               <small className="text-error-form-foreground">
@@ -69,7 +69,7 @@ export default function SignupForm() {
               placeholder="enter last name"
               autoComplete="name"
               autoCorrect="off"
-              disabled={signupMutation.isLoading}
+              disabled={signupMutation.isPending}
             />
             {errors.lastName && (
               <small className="text-error-form-foreground">
@@ -89,7 +89,7 @@ export default function SignupForm() {
             placeholder="name@example.com"
             autoComplete="email"
             autoCorrect="off"
-            disabled={signupMutation.isLoading}
+            disabled={signupMutation.isPending}
           />
           {errors.email && (
             <small className="text-error-form-foreground">
@@ -108,7 +108,7 @@ export default function SignupForm() {
             placeholder="enter password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={signupMutation.isLoading}
+            disabled={signupMutation.isPending}
           />
           {errors.password && (
             <small className="text-error-form-foreground">
@@ -127,7 +127,7 @@ export default function SignupForm() {
             placeholder="confirm password"
             autoComplete="new-password"
             autoCorrect="off"
-            disabled={signupMutation.isLoading}
+            disabled={signupMutation.isPending}
           />
           {errors.passwordConfirm && (
             <small className="text-error-form-foreground">
@@ -135,8 +135,8 @@ export default function SignupForm() {
             </small>
           )}
         </div>
-        <Button type="submit" disabled={signupMutation.isLoading}>
-          {signupMutation.isLoading ? (
+        <Button type="submit" disabled={signupMutation.isPending}>
+          {signupMutation.isPending ? (
             <LoadingIndicator msg="Signing up..." />
           ) : (
             'Sign up'

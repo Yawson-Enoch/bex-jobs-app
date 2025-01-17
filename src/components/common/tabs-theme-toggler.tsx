@@ -4,26 +4,31 @@ import { motion } from 'framer-motion';
 import { LaptopIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
+import useIsMounted from '~/hooks/useIsMounted';
+
 const themes = [
   {
     theme: 'light',
-    icon: <SunIcon className="h-5 w-5" />,
+    icon: <SunIcon className="size-5" />,
   },
   {
     theme: 'dark',
-    icon: <MoonIcon className="h-5 w-5" />,
+    icon: <MoonIcon className="size-5" />,
   },
   {
     theme: 'system',
-    icon: <LaptopIcon className="h-5 w-5" />,
+    icon: <LaptopIcon className="size-5" />,
   },
 ];
 
 export default function TabsThemeToggler() {
   const { theme, setTheme } = useTheme();
+  const { isMounted } = useIsMounted();
+
+  if (!isMounted) return null;
 
   return (
-    <div className="flex h-9 items-center gap-1 rounded-full border p-1">
+    <div className="flex h-9 items-center gap-1 rounded-full border bg-background p-1">
       {themes.map((userTheme) => {
         return (
           <button

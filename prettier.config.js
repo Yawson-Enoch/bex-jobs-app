@@ -3,6 +3,9 @@
 /** @type {import("@ianvs/prettier-plugin-sort-imports").PrettierConfig} */
 module.exports = {
   singleQuote: true,
+  semi: true,
+
+  plugins: ['@ianvs/prettier-plugin-sort-imports'],
   importOrder: [
     '^(react/(.*)$)|^(react$)',
     '^(next/(.*)$)|^(next$)',
@@ -26,5 +29,4 @@ module.exports = {
     '',
     '^[.]',
   ],
-  plugins: ['@ianvs/prettier-plugin-sort-imports'],
 };

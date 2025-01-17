@@ -10,7 +10,7 @@ import ReactPaginate from 'react-paginate';
 import { twMerge } from 'tailwind-merge';
 
 import { useGetJobs } from '~/hooks/api/useJob';
-import useQueryParams from '~/hooks/useQueryParams';
+import { useFilter } from '~/hooks/useQueryParams';
 
 const paginationVariants: Variants = {
   initial: {
@@ -28,18 +28,12 @@ const paginationVariants: Variants = {
 };
 
 export default function PaginationButtons() {
-  const { queryParams, setQueryParams } = useQueryParams<{
-    page: number;
-  }>();
+  const [_, setFilter] = useFilter();
 
   const { data: jobs } = useGetJobs();
 
-  const page = queryParams?.page ?? 1;
-
-  const initialPage = page - 1;
-
   const handlePageClick = ({ selected }: { selected: number }) => {
-    setQueryParams({ page: selected + 1 });
+    setFilter({ page: selected + 1 });
   };
 
   return (
@@ -49,7 +43,6 @@ export default function PaginationButtons() {
       animate="animate"
     >
       <ReactPaginate
-        key={initialPage}
         breakClassName="hidden lg:flex lg:items-center"
         breakLabel={
           <MoreHorizontalIcon size={15} className="text-muted-foreground" />
@@ -62,7 +55,7 @@ export default function PaginationButtons() {
         }
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
-        pageCount={jobs?.paginatedData.totalNumberOfPages || 0}
+        pageCount={jobs?.pagination.totalPages || 0}
         previousLabel={
           <>
             <ChevronLeftIcon />
@@ -71,7 +64,7 @@ export default function PaginationButtons() {
         }
         containerClassName={twMerge(
           'flex items-center justify-center gap-3',
-          jobs?.paginatedData.totalNumberOfPages === 1 && 'hidden',
+          jobs?.pagination.totalPages === 1 && 'hidden',
         )}
         pageClassName="hidden lg:block"
         pageLinkClassName="w-10 aspect-square lg:flex items-center justify-center rounded-full border hover:bg-accent"
@@ -80,7 +73,6 @@ export default function PaginationButtons() {
         previousLinkClassName="flex items-center gap-2"
         nextLinkClassName="flex items-center gap-2"
         renderOnZeroPageCount={null}
-        initialPage={initialPage}
       />
     </motion.div>
   );

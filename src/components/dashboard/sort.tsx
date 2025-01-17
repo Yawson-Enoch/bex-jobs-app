@@ -2,7 +2,8 @@
 
 import { useId } from 'react';
 
-import useQueryParams from '~/hooks/useQueryParams';
+import { SORT_OPTIONS } from '~/lib/utils';
+import { useFilter } from '~/hooks/useQueryParams';
 
 import { Label } from '../ui/label';
 import {
@@ -14,22 +15,19 @@ import {
   SelectValue,
 } from '../ui/select';
 
-const SORT_OPTIONS = ['latest', 'oldest', 'a-z', 'z-a'] as const;
 type TSortOption = (typeof SORT_OPTIONS)[number];
 
 export default function Sort() {
   const id = useId();
 
-  const { setQueryParams, queryParams } = useQueryParams<{
-    sort: TSortOption;
-  }>();
+  const [filter, setFilter] = useFilter();
 
   return (
     <form className="flex items-center gap-2">
       <Label htmlFor={id + '-sort'}>SORT</Label>
       <Select
-        value={queryParams?.sort ?? 'latest'}
-        onValueChange={(value: TSortOption) => setQueryParams({ sort: value })}
+        value={filter.sort}
+        onValueChange={(value: TSortOption) => setFilter({ sort: value })}
       >
         <SelectTrigger id={id + '-sort'} className="flex items-center gap-1">
           <SelectValue placeholder="Sort option" />

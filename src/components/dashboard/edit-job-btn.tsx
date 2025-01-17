@@ -19,13 +19,14 @@ export default function EditJobBtn({ id }: { id: string }) {
 
   return (
     <Dialog>
-      <Button
-        asChild
-        className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90"
-        onClick={() => setJobId(id)}
-      >
-        <DialogTrigger>Edit</DialogTrigger>
-      </Button>
+      <DialogTrigger asChild>
+        <Button
+          className="bg-yellow-500 text-[rgb(248,_250,_252)] hover:bg-yellow-500/90 dark:bg-yellow-700 dark:hover:bg-yellow-700/90"
+          onClick={() => setJobId(id)}
+        >
+          Edit
+        </Button>
+      </DialogTrigger>
       <DialogContent className="left-1/2 w-[min(calc(100%_-_1rem),_500px)] -translate-x-1/2 md:top-1/2 md:-translate-y-1/2">
         <div className="my-6 space-y-3 rounded-lg border bg-background p-3 md:my-0 md:space-y-6 md:p-6">
           <DialogHeader className="flex flex-row items-start justify-between text-left">

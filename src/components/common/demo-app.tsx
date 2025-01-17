@@ -1,4 +1,6 @@
-import { redirect, useRouter } from 'next/navigation';
+'use client';
+
+import { useRouter } from 'next/navigation';
 import { useAtom } from 'jotai';
 
 import { demoAppAtom } from '~/atoms/demo-app';
@@ -46,20 +48,20 @@ export default function DemoApp() {
               type="button"
               variant="outline"
               size="lg"
-              disabled={loginMutation.isLoading}
+              disabled={loginMutation.isPending}
               onClick={() => {
                 loginMutation.mutate({
                   email: 'test@user.com',
                   password: 'top-secret',
                 });
                 setIsDemoApp(false);
-                redirect('/dashboard');
+                router.replace('/dashboard');
               }}
             >
-              {loginMutation.isLoading ? (
+              {loginMutation.isPending ? (
                 <LoadingIndicator msg="Logging in..." />
               ) : (
-                'Here for a test'
+                'Test App'
               )}
             </Button>
             <Button

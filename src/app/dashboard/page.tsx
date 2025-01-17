@@ -1,45 +1,33 @@
-import type { Metadata } from 'next';
+'use client';
 
-import {
-  openGraphImages,
-  openGraphLocale,
-  openGraphName,
-  openGraphType,
-  twitterCard,
-  twitterCreator,
-  twitterImages,
-} from '~/lib/shared-metadata';
+import Link from 'next/link';
 
-import StatsPageClient from './page.client';
+import { useGetJobsStats } from '~/hooks/api/useJob';
+import ChartsContainer from '~/components/dashboard/charts-container';
+import StatsSummary from '~/components/dashboard/stats-summary';
 
-const title = 'Stats';
-const description = 'View your jobs statistics';
-const url = '/dashboard';
+export default function StatsPageClient() {
+  const { isSuccess, data: stats } = useGetJobsStats();
 
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    ...openGraphName,
-    ...openGraphImages,
-    ...openGraphLocale,
-    ...openGraphType,
-    title,
-    description,
-    url,
-  },
-  twitter: {
-    ...twitterCard,
-    ...twitterCreator,
-    ...twitterImages,
-    title,
-    description,
-  },
-  alternates: {
-    canonical: url,
-  },
-};
+  if (isSuccess && stats.data.monthlyApplications.length === 0) {
+    return (
+      <p>
+        You have no jobs available,
+        <Link
+          href="/dashboard/add-job"
+          className="font-medium text-foreground underline underline-offset-4"
+        >
+          add a job
+        </Link>
+      </p>
+    );
+  }
 
-export default function StatsPage() {
-  return <StatsPageClient />;
+  return (
+    <div className="space-y-6 md:space-y-12">
+      <title>Dashboard</title>
+      <StatsSummary />
+      <ChartsContainer />
+    </div>
+  );
 }

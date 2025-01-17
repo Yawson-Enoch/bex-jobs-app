@@ -1,10 +1,10 @@
 import { MetadataRoute } from 'next';
 
-import { siteInfo } from '~/config/site';
+import { siteConfig } from '~/config/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ['', '/login', '/signup'].map((route) => ({
-    url: siteInfo.URL + route,
+    url: siteConfig.URL + route,
     lastModified: new Date(),
   }));
 

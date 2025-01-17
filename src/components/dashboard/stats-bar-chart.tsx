@@ -20,9 +20,9 @@ export default function StatsBarChart() {
   return (
     <ResponsiveContainer width="100%" height={300}>
       {isLoading || isError ? (
-        <Skeleton className="h-full w-full" />
+        <Skeleton className="size-full" />
       ) : (
-        <BarChart data={stats?.monthlyApplications} maxBarSize={70}>
+        <BarChart data={stats?.data.monthlyApplications} maxBarSize={70}>
           <CartesianGrid
             stroke="rgb(var(--primary))"
             strokeOpacity={0.3}

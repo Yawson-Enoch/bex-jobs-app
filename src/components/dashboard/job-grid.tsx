@@ -1,8 +1,8 @@
-import format from 'date-fns/format';
+import { format } from 'date-fns';
 import { BriefcaseIcon, CalendarDaysIcon, MapPinIcon } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
-import { TJobAPI } from '~/schemas/job';
+import { ApiJob } from '~/schemas/job';
 
 import DeleteJobBtn from './delete-job-btn';
 import EditJobBtn from './edit-job-btn';
@@ -13,7 +13,7 @@ const jobStatusColors = {
   declined: 'bg-red-500/20 text-red-500 dark:bg-red-500/10',
 };
 
-export default function JobGrid({ job }: { job: TJobAPI }) {
+export default function JobGrid({ job }: { job: ApiJob }) {
   const date = new Date(job.createdAt);
   const formattedDate = format(date, 'do MMMM, yyyy');
 

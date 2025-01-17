@@ -1,44 +1,15 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import {
-  openGraphImages,
-  openGraphLocale,
-  openGraphName,
-  openGraphType,
-  twitterCard,
-  twitterCreator,
-  twitterImages,
-} from '~/lib/shared-metadata';
 import SignupForm from '~/components/auth/signup-form';
 import AnimatedCharacters from '~/components/common/animated-characters';
 
 const title = 'Create An Account';
 const description = 'Create an account to start managing your job applications';
-const url = '/signup';
 
 export const metadata: Metadata = {
   title,
   description,
-  openGraph: {
-    ...openGraphName,
-    ...openGraphImages,
-    ...openGraphLocale,
-    ...openGraphType,
-    title,
-    description,
-    url,
-  },
-  twitter: {
-    ...twitterCard,
-    ...twitterCreator,
-    ...twitterImages,
-    title,
-    description,
-  },
-  alternates: {
-    canonical: url,
-  },
 };
 
 export default function SignupPage() {

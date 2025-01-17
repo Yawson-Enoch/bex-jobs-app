@@ -1,15 +1,8 @@
 import { z } from 'zod';
 
-/* job validations */
-export const JOB_STATUS = ['pending', 'interview', 'declined'] as const;
-export const JOB_TYPE = [
-  'full-time',
-  'part-time',
-  'remote',
-  'internship',
-] as const;
+import { JOB_STATUS, JOB_TYPE } from '~/lib/utils';
 
-export const jobSchema = z.object({
+export const Job = z.object({
   jobPosition: z
     .string({
       required_error: 'Position is required',
@@ -42,54 +35,49 @@ export const jobSchema = z.object({
     errorMap: () => ({ message: 'Please select job type' }),
   }),
 });
-export type TJob = z.infer<typeof jobSchema>;
-export type TJobStatus = z.infer<typeof jobSchema.shape.jobStatus>;
-export type TJobType = z.infer<typeof jobSchema.shape.jobType>;
+export type Job = z.infer<typeof Job>;
+export type JobStatus = z.infer<typeof Job.shape.jobStatus>;
+export type JobType = z.infer<typeof Job.shape.jobType>;
 
 /* jobs api response */
-export const mutationResponseSchema = z.object({
+export const ApiMessage = z.object({
   msg: z.string(),
 });
 
-export const jobAPISchema = z.object({
-  msg: z.string(),
-  job: jobSchema.extend({
+export const ApiJob = ApiMessage.extend({
+  data: Job.extend({
     _id: z.string(),
     createdBy: z.string(),
     createdAt: z.string().datetime(),
     updatedAt: z.string().datetime(),
   }),
 });
-export type TJobAPI = z.infer<typeof jobAPISchema.shape.job>;
+export type ApiJob = z.infer<typeof ApiJob.shape.data>;
 
-const paginatedDataSchema = z.object({
-  totalNumberOfJobs: z.number(),
-  currentPageJobs: z.array(jobAPISchema.shape.job),
-  totalNumberOfJobsOnCurrPage: z.number(),
-  resultsPerPage: z.number(),
-  totalNumberOfPages: z.number(),
-  currentPageNumber: z.number(),
-  prevPageNumber: z.number().nullable(),
-  nextPageNumber: z.number().nullable(),
-});
-export const jobsAPISchema = z.object({
-  msg: z.string(),
-  paginatedData: paginatedDataSchema,
-});
-
-const statusSchema = z.object({
-  pending: z.number().catch(0),
-  interview: z.number().catch(0),
-  declined: z.number().catch(0),
-});
-const monthlyApplicationsSchema = z.array(
-  z.object({
-    date: z.string(),
-    count: z.number(),
+export const ApiJobs = ApiMessage.extend({
+  data: z.array(ApiJob.shape.data),
+  pagination: z.object({
+    totalJobs: z.number(),
+    totalPages: z.number(),
+    perPage: z.number(),
+    currentPage: z.number(),
+    nextPage: z.number().nullable(),
+    prevPage: z.number().nullable(),
   }),
-);
-export const jobsStatsAPISchema = z.object({
-  msg: z.string(),
-  statusStats: statusSchema,
-  monthlyApplications: monthlyApplicationsSchema,
+});
+
+export const ApiJobsStats = ApiMessage.extend({
+  data: z.object({
+    jobStatusStats: z.object({
+      pending: z.number().catch(0),
+      interview: z.number().catch(0),
+      declined: z.number().catch(0),
+    }),
+    monthlyApplications: z.array(
+      z.object({
+        date: z.string(),
+        count: z.number(),
+      }),
+    ),
+  }),
 });

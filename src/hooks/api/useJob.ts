@@ -1,25 +1,25 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { useAtomValue } from 'jotai';
-
-import { siteInfo } from '~/config/site';
 import {
-  jobAPISchema,
-  jobsAPISchema,
-  jobsStatsAPISchema,
-  mutationResponseSchema,
-  TJob,
-} from '~/schemas/job';
-import { TToken } from '~/lib/types';
+  keepPreviousData,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
+import { useAtomValue } from 'jotai';
+import queryString from 'query-string';
+
+import { siteConfig } from '~/config/site';
+import { ApiJob, ApiJobs, ApiJobsStats, ApiMessage, Job } from '~/schemas/job';
+import { Token } from '~/lib/types';
 import { jobIdAtom } from '~/atoms/job-id';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
-import useQueryParams from '../useQueryParams';
+import { useFilter } from '../useQueryParams';
 
 const jobsQueryKey = 'jobs';
 /* queries */
-const getJobs = async (token: TToken, queryString: string) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${queryString}`, {
+const getJobs = async (token: Token, queryString: string) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${queryString}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -29,7 +29,7 @@ const getJobs = async (token: TToken, queryString: string) => {
     throw new Error(data.msg || 'Failed to fetch jobs');
   }
 
-  const result = jobsAPISchema.safeParse(data);
+  const result = ApiJobs.safeParse(data);
   if (!result.success) {
     throw new Error('Failed to parse data');
   }
@@ -39,18 +39,20 @@ const getJobs = async (token: TToken, queryString: string) => {
 export function useGetJobs() {
   const token = useAtomValue(accessTokenAtom);
 
-  const { queryString } = useQueryParams();
+  const [filter] = useFilter();
+
+  const qs = `?${queryString.stringify(filter)}`;
 
   return useQuery({
-    queryKey: [jobsQueryKey, queryString],
-    queryFn: () => getJobs(token, queryString),
-    enabled: !!token && !!queryString,
-    keepPreviousData: true,
+    queryKey: [jobsQueryKey, qs],
+    queryFn: () => getJobs(token, qs),
+    enabled: !!token,
+    placeholderData: keepPreviousData,
   });
 }
 
-const getJob = async (token: TToken, jobId: string) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
+const getJob = async (token: Token, jobId: string) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -60,7 +62,7 @@ const getJob = async (token: TToken, jobId: string) => {
     throw new Error(data.msg || 'Failed to fetch job');
   }
 
-  const result = jobAPISchema.safeParse(data);
+  const result = ApiJob.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -79,8 +81,8 @@ export function useGetJob() {
   });
 }
 
-const getJobsStats = async (token: TToken) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/stats`, {
+const getJobsStats = async (token: Token) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/stats`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -90,7 +92,7 @@ const getJobsStats = async (token: TToken) => {
     throw new Error(data.msg || 'Failed to fetch jobs stats');
   }
 
-  const result = jobsStatsAPISchema.safeParse(data);
+  const result = ApiJobsStats.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -109,8 +111,8 @@ export function useGetJobsStats() {
 }
 
 /* mutations */
-const addJob = async (token: TToken, payload: TJob) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs`, {
+const addJob = async (token: Token, payload: Job) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -125,7 +127,7 @@ const addJob = async (token: TToken, payload: TJob) => {
     throw new Error(data.msg || 'Failed to add job');
   }
 
-  const result = mutationResponseSchema.safeParse(data);
+  const result = ApiMessage.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -143,7 +145,7 @@ export function useAddJob() {
     - mutation fn only takes one param
     - auto passes the payload as arg to fetcher when the fetcher has a single param(the payload)
     */
-    mutationFn: (payload: TJob) => addJob(token, payload),
+    mutationFn: (payload: Job) => addJob(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [jobsQueryKey],
@@ -152,7 +154,7 @@ export function useAddJob() {
         description: data.msg,
       });
     },
-    onError: (error: Error) => {
+    onError: (error) => {
       toast({
         description: error.message,
       });
@@ -160,8 +162,8 @@ export function useAddJob() {
   });
 }
 
-const editJob = async (token: TToken, jobId: string, payload: TJob) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
+const editJob = async (token: Token, jobId: string, payload: Job) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -176,7 +178,7 @@ const editJob = async (token: TToken, jobId: string, payload: TJob) => {
     throw new Error(data.msg || 'Failed to edit job');
   }
 
-  const result = mutationResponseSchema.safeParse(data);
+  const result = ApiMessage.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -191,7 +193,7 @@ export function useEditJob() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: TJob) => editJob(token, jobId, payload),
+    mutationFn: (payload: Job) => editJob(token, jobId, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [jobsQueryKey],
@@ -200,7 +202,7 @@ export function useEditJob() {
         description: data.msg,
       });
     },
-    onError: (error: Error) => {
+    onError: (error) => {
       toast({
         description: error.message,
       });
@@ -208,8 +210,8 @@ export function useEditJob() {
   });
 }
 
-const deleteJob = async (token: TToken, jobId: string) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/jobs/${jobId}`, {
+const deleteJob = async (token: Token, jobId: string) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
     method: 'DELETE',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -222,7 +224,7 @@ const deleteJob = async (token: TToken, jobId: string) => {
     throw new Error(data.msg || 'Failed to delete job');
   }
 
-  const result = mutationResponseSchema.safeParse(data);
+  const result = ApiMessage.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -246,7 +248,7 @@ export function useDeleteJob() {
         description: data.msg,
       });
     },
-    onError: (error: Error) => {
+    onError: (error) => {
       toast({
         description: error.message,
       });

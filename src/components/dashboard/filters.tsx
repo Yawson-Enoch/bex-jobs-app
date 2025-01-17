@@ -2,9 +2,10 @@
 
 import { useId, useState } from 'react';
 import { FilterIcon } from 'lucide-react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 
-import useQueryParams from '~/hooks/useQueryParams';
+import { STATUS_OPTIONS, TYPE_OPTIONS } from '~/lib/utils';
+import { useFilter } from '~/hooks/useQueryParams';
 
 import { Button } from '../ui/button';
 import { Label } from '../ui/label';
@@ -18,37 +19,38 @@ import {
   SelectValue,
 } from '../ui/select';
 
-const STATUS_OPTIONS = ['all', 'pending', 'interview', 'declined'];
-const JOB_TYPES = ['all', 'full-time', 'part-time', 'remote', 'internship'];
-
 type Job = {
-  jobStatus: string;
-  jobType: string;
+  jobStatus: (typeof STATUS_OPTIONS)[number];
+  jobType: (typeof TYPE_OPTIONS)[number];
 };
 
 export default function Filters() {
+  const [filter, setFilter] = useFilter();
+
   const [open, setOpen] = useState(false);
-  const [resetSelectKey, setResetSelectKey] = useState(Date.now());
+  const [resetSelectKey, setResetSelectKey] = useState(
+    filter.status + filter.type,
+  );
 
   const id = useId();
 
-  const { setQueryParams, queryParams } = useQueryParams<{
-    type: string;
-    status: string;
-    page: number;
-  }>();
-
   const form = useForm({
     defaultValues: {
-      jobStatus: queryParams?.status ?? 'all',
-      jobType: queryParams?.type ?? 'all',
+      jobStatus: filter.status || 'all',
+      jobType: filter.type || 'all',
     },
     mode: 'onChange',
   });
-  const { handleSubmit, control, reset, formState } = form;
+
+  const [status, type] = useWatch({
+    control: form.control,
+    name: ['jobStatus', 'jobType'],
+  });
 
   const onSubmit: SubmitHandler<Job> = (data) => {
-    setQueryParams({ status: data.jobStatus, type: data.jobType, page: 1 });
+    setFilter({ status: data.jobStatus, type: data.jobType, page: null });
+    form.reset({ jobStatus: status, jobType: type });
+    setResetSelectKey(status + type);
     setOpen(false);
   };
 
@@ -64,13 +66,13 @@ export default function Filters() {
         align="start"
         className="w-fit bg-background dark:bg-background/90 dark:backdrop-blur-sm"
       >
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate onSubmit={form.handleSubmit(onSubmit)}>
           <div className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor={id + '-jobStatus'}>Job Status</Label>
               <Controller
                 name="jobStatus"
-                control={control}
+                control={form.control}
                 render={({ field }) => (
                   <Select
                     onValueChange={field.onChange}
@@ -97,7 +99,7 @@ export default function Filters() {
               <Label htmlFor={id + '-jobType'}>Job Type</Label>
               <Controller
                 name="jobType"
-                control={control}
+                control={form.control}
                 render={({ field }) => (
                   <Select
                     onValueChange={field.onChange}
@@ -109,7 +111,7 @@ export default function Filters() {
                     </SelectTrigger>
                     <SelectContent className="bg-background/90 backdrop-blur-sm">
                       <SelectGroup>
-                        {JOB_TYPES.map((type) => (
+                        {TYPE_OPTIONS.map((type) => (
                           <SelectItem key={type} value={type}>
                             {type}
                           </SelectItem>
@@ -125,20 +127,16 @@ export default function Filters() {
                 type="button"
                 variant="outline"
                 onClick={() => {
-                  reset({
-                    jobStatus: 'all',
-                    jobType: 'all',
-                  });
-                  setResetSelectKey(Date.now());
-                  setQueryParams({ status: 'all', type: 'all' });
+                  setFilter({ status: null, type: null, page: null });
+                  form.reset({ jobStatus: 'all', jobType: 'all' });
+                  setResetSelectKey(status + type);
+                  setOpen(false);
                 }}
-                disabled={
-                  queryParams.status === 'all' && queryParams.type === 'all'
-                }
+                disabled={status === 'all' && type === 'all'}
               >
                 Reset
               </Button>
-              <Button type="submit" disabled={!formState.isDirty}>
+              <Button type="submit" disabled={!form.formState.isDirty}>
                 Apply
               </Button>
             </div>

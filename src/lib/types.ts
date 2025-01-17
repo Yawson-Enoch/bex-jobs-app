@@ -1,3 +1,1 @@
-export type TViewType = 'grid' | 'list';
-
-export type TToken = string | null;
+export type Token = string | null;

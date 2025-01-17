@@ -6,14 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
-import {
-  JOB_STATUS,
-  JOB_TYPE,
-  jobSchema,
-  TJob,
-  TJobStatus,
-  TJobType,
-} from '~/schemas/job';
+import { Job, JobStatus, JobType } from '~/schemas/job';
+import { JOB_STATUS, JOB_TYPE } from '~/lib/utils';
 import { useAddJob, useEditJob, useGetJob } from '~/hooks/api/useJob';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -47,18 +41,18 @@ export default function JobForm({
 
   const id = useId();
 
-  const { data } = useGetJob();
+  const { data: job } = useGetJob();
 
-  const form = useForm<TJob>({
-    resolver: zodResolver(jobSchema),
+  const form = useForm<Job>({
+    resolver: zodResolver(Job),
     mode: isJobEdit ? 'onChange' : 'onSubmit',
     /* 
     - must set default values for controller inputs 
     - so the reset(re-rendering) picks the default value 
     */
     defaultValues: {
-      jobStatus: data?.job.jobStatus ?? 'pending',
-      jobType: data?.job.jobType ?? 'remote',
+      jobStatus: job?.data.jobStatus ?? 'pending',
+      jobType: job?.data.jobType ?? 'remote',
     },
   });
   const { register, handleSubmit, formState, control, reset } = form;
@@ -72,17 +66,17 @@ export default function JobForm({
   const addJobMutation = useAddJob();
   const editJobMutation = useEditJob();
 
-  const onSubmit: SubmitHandler<TJob> = (data) => {
+  const onSubmit: SubmitHandler<Job> = (data) => {
     isJobEdit ? editJobMutation.mutate(data) : addJobMutation.mutate(data);
   };
 
   useEffect(() => {
-    if (isJobEdit && data) {
-      const newData = jobSchema.parse(data.job);
+    if (isJobEdit && job) {
+      const newData = Job.parse(job.data);
       reset(newData);
       setResetSelectKey(Date.now());
     }
-  }, [data, isJobEdit, reset]);
+  }, [job, isJobEdit, reset]);
 
   return (
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -101,7 +95,7 @@ export default function JobForm({
               {...register('jobPosition')}
               autoFocus
               disabled={
-                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+                isJobEdit ? editJobMutation.isPending : addJobMutation.isPending
               }
             />
           </div>
@@ -119,7 +113,7 @@ export default function JobForm({
               id={id + '-company'}
               {...register('company')}
               disabled={
-                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+                isJobEdit ? editJobMutation.isPending : addJobMutation.isPending
               }
             />
           </div>
@@ -137,7 +131,7 @@ export default function JobForm({
               id={id + '-jobLocation'}
               {...register('jobLocation')}
               disabled={
-                isJobEdit ? editJobMutation.isLoading : addJobMutation.isLoading
+                isJobEdit ? editJobMutation.isPending : addJobMutation.isPending
               }
             />
           </div>
@@ -155,7 +149,7 @@ export default function JobForm({
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={field.onChange as (value: TJobStatus) => void}
+                  onValueChange={field.onChange as (value: JobStatus) => void}
                   defaultValue={field.value}
                   key={resetSelectKey}
                 >
@@ -189,7 +183,7 @@ export default function JobForm({
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={field.onChange as (value: TJobType) => void}
+                  onValueChange={field.onChange as (value: JobType) => void}
                   defaultValue={field.value}
                   key={resetSelectKey}
                 >
@@ -222,16 +216,16 @@ export default function JobForm({
               <Button
                 type="button"
                 variant="outline"
-                disabled={editJobMutation.isLoading || !isDirty}
+                disabled={editJobMutation.isPending || !isDirty}
                 onClick={resetAllFormFields}
               >
                 Clear
               </Button>
               <Button
                 type="submit"
-                disabled={editJobMutation.isLoading || !isValid || !isDirty}
+                disabled={editJobMutation.isPending || !isValid || !isDirty}
               >
-                {editJobMutation.isLoading ? (
+                {editJobMutation.isPending ? (
                   <LoadingIndicator msg={'Editing job...'} />
                 ) : (
                   'Edit Job'
@@ -243,13 +237,13 @@ export default function JobForm({
               <Button
                 type="button"
                 variant="outline"
-                disabled={addJobMutation.isLoading || !isDirty}
+                disabled={addJobMutation.isPending || !isDirty}
                 onClick={resetAllFormFields}
               >
                 Clear
               </Button>
-              <Button type="submit" disabled={addJobMutation.isLoading}>
-                {addJobMutation.isLoading ? (
+              <Button type="submit" disabled={addJobMutation.isPending}>
+                {addJobMutation.isPending ? (
                   <LoadingIndicator msg={'Adding job...'} />
                 ) : (
                   'Add Job'

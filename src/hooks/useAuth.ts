@@ -1,5 +1,7 @@
+'use client';
+
 import { useCallback, useEffect } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { RESET } from 'jotai/utils';
 
@@ -15,11 +17,13 @@ export default function useAuth() {
   const persistLogin = useAtomValue(persistLoginAtom);
   const isLoggedIn = useAtomValue(isAuthenticatedAtom);
 
+  const router = useRouter();
+
   const logOut = useCallback(() => {
+    router.replace('/login');
     setAccessToken(RESET);
     setSessionTimeout(RESET);
-    redirect('/login');
-  }, [setAccessToken, setSessionTimeout]);
+  }, [router, setAccessToken, setSessionTimeout]);
 
   useEffect(() => {
     let interval: NodeJS.Timeout;

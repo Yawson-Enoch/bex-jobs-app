@@ -1,21 +1,17 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useAtomValue } from 'jotai';
 
-import { siteInfo } from '~/config/site';
-import {
-  mutationResponseSchema,
-  profileAPISchema,
-  TProfile,
-} from '~/schemas/auth';
-import { TToken } from '~/lib/types';
+import { siteConfig } from '~/config/site';
+import { ApiMessage, ApiProfile, Profile } from '~/schemas/auth';
+import { Token } from '~/lib/types';
 import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
 const userQueryKey = 'user';
 
 /* queries */
-const getUser = async (token: TToken) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/auth/get-user`, {
+const getUser = async (token: Token) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/auth/get-user`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -25,7 +21,7 @@ const getUser = async (token: TToken) => {
     throw new Error(data.msg || 'Failed to fetch user info');
   }
 
-  const result = profileAPISchema.safeParse(data);
+  const result = ApiProfile.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -44,8 +40,8 @@ export function useGetUser() {
 }
 
 /* mutations */
-const updateUserProfile = async (token: TToken, payload: TProfile) => {
-  const response = await fetch(`${siteInfo.APIBaseURL}/auth/update-user`, {
+const updateUserProfile = async (token: Token, payload: Profile) => {
+  const response = await fetch(`${siteConfig.APIBaseURL}/auth/update-user`, {
     method: 'PATCH',
     headers: {
       Authorization: `Bearer ${token}`,
@@ -60,7 +56,7 @@ const updateUserProfile = async (token: TToken, payload: TProfile) => {
     throw new Error(data.msg || 'Failed to add job');
   }
 
-  const result = mutationResponseSchema.safeParse(data);
+  const result = ApiMessage.safeParse(data);
 
   if (!result.success) {
     throw new Error('Failed to parse data');
@@ -74,7 +70,7 @@ export function useUpdateUserProfile() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: TProfile) => updateUserProfile(token, payload),
+    mutationFn: (payload: Profile) => updateUserProfile(token, payload),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [userQueryKey] });
       toast({

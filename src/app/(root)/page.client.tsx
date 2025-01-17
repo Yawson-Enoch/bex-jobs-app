@@ -2,27 +2,23 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { motion, Variants } from 'framer-motion';
 import { useAtomValue } from 'jotai';
 
 import { demoAppAtom } from '~/atoms/demo-app';
-import useAuth from '~/hooks/useAuth';
-import useIsMounted from '~/hooks/useIsMounted';
 import { Button } from '~/components/ui/button';
 import { Separator } from '~/components/ui/separator';
-import Preloader from '~/components/common/preloader';
 
 const DemoApp = dynamic(() => import('~/components/common/demo-app'), {
   ssr: false,
 });
 
-const MotionLink = motion(Link);
+const MotionLink = motion.create(Link);
 
 const mainContainer: Variants = {
   animate: {
     transition: {
-      staggerChildren: 1.85,
+      staggerChildren: 1.5,
     },
   },
 };
@@ -35,7 +31,7 @@ const mainLink: Variants = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
+    transition: { duration: 0.5, ease: 'easeOut' },
   },
 };
 
@@ -47,7 +43,7 @@ const headingContainer: Variants = {
     scaleX: 1,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.65,
+      staggerChildren: 0.7,
     },
   },
 };
@@ -59,7 +55,7 @@ const headingTitle: Variants = {
   animate: {
     opacity: 1,
     rotateX: [0, 45, 0, -45, 0],
-    transition: { duration: 1 },
+    transition: { duration: 0.5 },
   },
 };
 
@@ -71,23 +67,12 @@ const headingDescription: Variants = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: 'easeInOut' },
+    transition: { duration: 0.5, ease: 'easeInOut' },
   },
 };
 
 export default function IndexPageClient() {
-  const { isLoggedIn } = useAuth();
-
-  const { isMounted } = useIsMounted();
   const isDemoApp = useAtomValue(demoAppAtom);
-
-  if (!isMounted) {
-    return <Preloader />;
-  }
-
-  if (isLoggedIn) {
-    redirect('/dashboard');
-  }
 
   return (
     <>
@@ -129,7 +114,7 @@ export default function IndexPageClient() {
           size="lg"
           className="mx-auto bg-gradient-to-r from-primary to-secondary font-bold md:text-lg"
         >
-          <MotionLink href="/login" variants={mainLink}>
+          <MotionLink href="/dashboard" variants={mainLink}>
             Start Managing Your Jobs
           </MotionLink>
         </Button>

@@ -1,11 +1,10 @@
 'use client';
 
 import { useId, useMemo } from 'react';
-import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { profileSchema, TProfile } from '~/schemas/auth';
+import { Profile } from '~/schemas/auth';
 import { useGetUser, useUpdateUserProfile } from '~/hooks/api/useUser';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -13,27 +12,22 @@ import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
-const DevTool: React.ElementType = dynamic(
-  () => import('@hookform/devtools').then((module) => module.DevTool),
-  { ssr: false },
-);
-
 export default function ProfileUpdateForm() {
   const id = useId();
 
-  const { data } = useGetUser();
+  const { data: user } = useGetUser();
 
-  const form = useForm<TProfile>({
-    resolver: zodResolver(profileSchema),
+  const form = useForm<Profile>({
+    resolver: zodResolver(Profile),
     mode: 'onChange',
-    values: useMemo(() => data?.user, [data]),
+    values: useMemo(() => user?.data, [user]),
   });
-  const { register, handleSubmit, formState, control } = form;
+  const { register, handleSubmit, formState } = form;
   const { errors, isDirty, isValid } = formState;
 
   const updateUserProfileMutation = useUpdateUserProfile();
 
-  const onSubmit: SubmitHandler<TProfile> = (data) => {
+  const onSubmit: SubmitHandler<Profile> = (data) => {
     updateUserProfileMutation.mutate(data);
   };
 
@@ -50,7 +44,7 @@ export default function ProfileUpdateForm() {
               autoComplete="name"
               autoCorrect="off"
               autoFocus
-              disabled={updateUserProfileMutation.isLoading}
+              disabled={updateUserProfileMutation.isPending}
             />
           </div>
           {errors.firstName && (
@@ -68,7 +62,7 @@ export default function ProfileUpdateForm() {
               {...register('lastName')}
               autoComplete="name"
               autoCorrect="off"
-              disabled={updateUserProfileMutation.isLoading}
+              disabled={updateUserProfileMutation.isPending}
             />
           </div>
           {errors.lastName && (
@@ -86,7 +80,7 @@ export default function ProfileUpdateForm() {
               {...register('email')}
               autoComplete="email"
               autoCorrect="off"
-              disabled={updateUserProfileMutation.isLoading}
+              disabled={updateUserProfileMutation.isPending}
             />
           </div>
           {errors.email && (
@@ -100,11 +94,11 @@ export default function ProfileUpdateForm() {
           <Button
             type="submit"
             disabled={
-              updateUserProfileMutation.isLoading || !isValid || !isDirty
+              updateUserProfileMutation.isPending || !isValid || !isDirty
             }
             className="flex w-full"
           >
-            {updateUserProfileMutation.isLoading ? (
+            {updateUserProfileMutation.isPending ? (
               <LoadingIndicator msg="Updating profile..." />
             ) : (
               'Update Profile'
@@ -112,7 +106,6 @@ export default function ProfileUpdateForm() {
           </Button>
         </div>
       </div>
-      <DevTool control={control} />
     </form>
   );
 }

@@ -14,7 +14,7 @@
     --input: var(--border);
 
     --primary: 59, 130, 246;
-    --primary-foreground: var(--foreground);
+    --primary-foreground: 0, 0, 0;
 
     --secondary: 234, 179, 8;
     --secondary-foreground: var(--foreground);
@@ -60,7 +60,7 @@
     --input: var(--border);
 
     --primary: 59, 130, 246;
-    --primary-foreground: var(--foreground);
+    --primary-foreground: 0, 0, 0;
 
     --secondary: 234, 179, 8;
     --secondary-foreground: var(--foreground);
@@ -110,7 +110,9 @@
   body {
     background-color: theme('colors.background');
     color: theme('colors.foreground');
-    font-feature-settings: 'rlig' 1, 'calt' 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 
   :where(h1, h2, h3, h4) {
@@ -207,16 +209,5 @@
     -webkit-background-clip: text;
     -webkit-text-stroke-color: transparent;
     -webkit-text-stroke-width: 15px;
-  }
-}
-
-@layer utilities {
-  .min-h-dm {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-  .max-h-dm {
-    max-height: 100vh;
-    max-height: 100dvh;
   }
 }

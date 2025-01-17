@@ -1,6 +1,6 @@
 import { MetadataRoute } from 'next';
 
-import { siteInfo } from '~/config/site';
+import { siteConfig } from '~/config/site';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/dashboard/',
     },
-    host: siteInfo.URL,
-    sitemap: `${siteInfo.URL}/sitemap.xml`,
+    host: siteConfig.URL,
+    sitemap: `${siteConfig.URL}/sitemap.xml`,
   };
 }

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const authSchema = z.object({
+const Auth = z.object({
   firstName: z
     .string({
       required_error: 'First name is required',
@@ -37,40 +37,44 @@ const authSchema = z.object({
     .trim(),
 });
 
-export const mutationResponseSchema = z.object({
-  msg: z.string(),
-});
-
-export const signupSchema = authSchema.refine(
+/* form schema */
+export const Signup = Auth.refine(
   (data) => data.password === data.passwordConfirm,
   {
     message: 'Passwords do not match',
     path: ['passwordConfirm'],
   },
 );
-export type TSignup = z.infer<typeof signupSchema>;
+export type Signup = z.infer<typeof Signup>;
 
-export const loginSchema = authSchema.omit({
+export const Login = Auth.omit({
   firstName: true,
   lastName: true,
   passwordConfirm: true,
 });
-export const loginMutationResponseSchema = mutationResponseSchema.extend({
-  token: z.string(),
-});
-export type TLogin = z.infer<typeof loginSchema>;
+export type Login = z.infer<typeof Login>;
 
-export const profileSchema = authSchema.omit({
+export const Profile = Auth.omit({
   password: true,
   passwordConfirm: true,
 });
-export type TProfile = z.infer<typeof profileSchema>;
+export type Profile = z.infer<typeof Profile>;
 
-export const profileAPISchema = z.object({
+/* api response schema */
+export const ApiMessage = z.object({
   msg: z.string(),
-  user: z.object({
-    firstName: z.string(),
-    lastName: z.string(),
-    email: z.string(),
+});
+
+export const ApiLogin = ApiMessage.extend({
+  data: z.object({
+    token: z.string(),
+  }),
+});
+
+export const ApiProfile = ApiMessage.extend({
+  data: Auth.pick({
+    firstName: true,
+    lastName: true,
+    email: true,
   }),
 });

@@ -17,7 +17,7 @@ export default function StatsSummary() {
             <Skeleton className="aspect-video w-16" />
           ) : (
             <p className="text-4xl text-blue-800 dark:text-blue-900 md:text-6xl">
-              {stats?.statusStats.interview}
+              {stats?.data.jobStatusStats.interview}
             </p>
           )}
           <CalendarCheckIcon
@@ -36,7 +36,7 @@ export default function StatsSummary() {
             <Skeleton className="aspect-video w-16" />
           ) : (
             <p className="text-4xl text-yellow-800 dark:text-yellow-900 md:text-6xl">
-              {stats?.statusStats.pending}
+              {stats?.data.jobStatusStats.pending}
             </p>
           )}
           <ClockIcon
@@ -55,7 +55,7 @@ export default function StatsSummary() {
             <Skeleton className="aspect-video w-16" />
           ) : (
             <p className="text-4xl text-red-800 dark:text-red-900 md:text-6xl">
-              {stats?.statusStats.declined}
+              {stats?.data.jobStatusStats.declined}
             </p>
           )}
           <CalendarOffIcon

@@ -7,7 +7,7 @@ import { useAtom } from 'jotai';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { loginSchema, TLogin } from '~/schemas/auth';
+import { Login } from '~/schemas/auth';
 import { persistLoginAtom } from '~/atoms/persist';
 import { useLogin } from '~/hooks/api/useLogin';
 
@@ -29,8 +29,8 @@ export default function LoginForm() {
 
   const id = useId();
 
-  const form = useForm<TLogin>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<Login>({
+    resolver: zodResolver(Login),
     mode: 'onSubmit',
   });
   const { register, handleSubmit, formState, control } = form;
@@ -38,7 +38,7 @@ export default function LoginForm() {
 
   const loginMutation = useLogin();
 
-  const onSubmit: SubmitHandler<TLogin> = (data) => {
+  const onSubmit: SubmitHandler<Login> = (data) => {
     loginMutation.mutate(data);
   };
 
@@ -57,7 +57,7 @@ export default function LoginForm() {
             autoComplete="email"
             autoCorrect="off"
             autoFocus
-            disabled={loginMutation.isLoading}
+            disabled={loginMutation.isPending}
           />
           {errors.email && (
             <small className="text-error-form-foreground">
@@ -77,7 +77,7 @@ export default function LoginForm() {
               placeholder="enter password"
               autoComplete="current-password"
               autoCorrect="off"
-              disabled={loginMutation.isLoading}
+              disabled={loginMutation.isPending}
               className="grow rounded-r-none border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
             />
             <Button
@@ -109,7 +109,7 @@ export default function LoginForm() {
               id={id + '-persist-login'}
               checked={persistLogin}
               onCheckedChange={() => setPersistLogin(!persistLogin)}
-              disabled={loginMutation.isLoading}
+              disabled={loginMutation.isPending}
             />
             <Label
               htmlFor={id + '-persist-login'}
@@ -127,9 +127,9 @@ export default function LoginForm() {
         <Button
           type="submit"
           className="w-full"
-          disabled={loginMutation.isLoading}
+          disabled={loginMutation.isPending}
         >
-          {loginMutation.isLoading ? (
+          {loginMutation.isPending ? (
             <LoadingIndicator msg="Logging in..." />
           ) : (
             'Log in'

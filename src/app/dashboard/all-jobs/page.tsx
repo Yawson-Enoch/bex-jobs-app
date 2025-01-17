@@ -1,45 +1,64 @@
-import type { Metadata } from 'next';
+'use client';
 
-import {
-  openGraphImages,
-  openGraphLocale,
-  openGraphName,
-  openGraphType,
-  twitterCard,
-  twitterCreator,
-  twitterImages,
-} from '~/lib/shared-metadata';
+import { InfoIcon } from 'lucide-react';
 
-import AllJobsPageClient from './page.client';
+import { useGetJobs } from '~/hooks/api/useJob';
+import Skeleton from '~/components/ui/skeleton';
+import Filters from '~/components/dashboard/filters';
+import Jobs from '~/components/dashboard/jobs';
+import PaginationButtons from '~/components/dashboard/pagination-buttons';
+import Search from '~/components/dashboard/search';
+import Sort from '~/components/dashboard/sort';
+import ViewTypes from '~/components/dashboard/view-types';
 
-const title = 'All Jobs';
-const description = 'Manage your jobs - View, edit and delete your jobs';
-const url = '/dashboard/all-jobs';
+export default function AllJobsPageClient() {
+  const { isLoading, isError, isSuccess, data: jobs } = useGetJobs();
 
-export const metadata: Metadata = {
-  title,
-  description,
-  openGraph: {
-    ...openGraphName,
-    ...openGraphImages,
-    ...openGraphLocale,
-    ...openGraphType,
-    title,
-    description,
-    url,
-  },
-  twitter: {
-    ...twitterCard,
-    ...twitterCreator,
-    ...twitterImages,
-    title,
-    description,
-  },
-  alternates: {
-    canonical: url,
-  },
-};
+  function Content() {
+    if (isSuccess && jobs.data.length === 0) {
+      return (
+        <div className="flex h-full flex-col items-center justify-center text-center">
+          <InfoIcon className="mx-auto size-14" />
+          <p className="mt-3 text-center font-sans text-xl font-medium text-foreground md:text-2xl">
+            Oops! No matches.
+          </p>
+          <p>Adjust your filter or modify your search query.</p>
+        </div>
+      );
+    }
+    return <Jobs />;
+  }
 
-export default function AllJobsPage() {
-  return <AllJobsPageClient />;
+  return (
+    <div className="flex h-full flex-col space-y-6 md:space-y-12">
+      <title>All Jobs</title>
+      {isLoading || isError ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Skeleton className="h-9" />
+          <div className="flex items-center gap-3">
+            <Skeleton className="h-9 grow" />
+            <Skeleton className="h-9 grow" />
+          </div>
+          <Skeleton className="h-9" />
+        </div>
+      ) : (
+        <div className="flex flex-wrap items-center justify-between gap-3 md:gap-6 [&>*]:grow [&>*]:lg:grow-0">
+          <Search />
+          <div className="flex items-center gap-3 font-medium">
+            <Filters />
+            <Sort />
+          </div>
+          <ViewTypes />
+        </div>
+      )}
+
+      <Content />
+
+      {isLoading || isError ? (
+        <Skeleton className="h-9 w-full" />
+      ) : (
+        <PaginationButtons />
+      )}
+    </div>
+  );
 }
