@@ -2,7 +2,7 @@
 
 import { useId } from 'react';
 
-import { SORT_OPTIONS } from '~/lib/utils';
+import { SORT_OPTIONS } from '~/lib/contants';
 import { useFilter } from '~/hooks/useQueryParams';
 
 import { Label } from '../ui/label';

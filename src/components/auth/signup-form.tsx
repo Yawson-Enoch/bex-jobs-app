@@ -1,8 +1,9 @@
 'use client';
 
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Signup } from '~/schemas/auth';
@@ -19,6 +20,8 @@ const DevTool: React.ElementType = dynamic(
 );
 
 export default function SignupForm() {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const id = useId();
 
   const form = useForm<Signup>({
@@ -101,15 +104,34 @@ export default function SignupForm() {
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
-          <Input
-            type="password"
-            id={id + '-password'}
-            {...register('password')}
-            placeholder="enter password"
-            autoComplete="new-password"
-            autoCorrect="off"
-            disabled={signupMutation.isPending}
-          />
+
+          <div className="flex h-9 items-center justify-between gap-2 rounded-md border border-input pr-2 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+            <Input
+              type={passwordVisible ? 'text' : 'password'}
+              id={id + '-password'}
+              {...register('password')}
+              placeholder="enter password"
+              autoComplete="new-password"
+              autoCorrect="off"
+              disabled={signupMutation.isPending}
+              className="grow rounded-r-none border-0 placeholder:truncate focus-visible:ring-0 focus-visible:ring-offset-0"
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={() => setPasswordVisible(!passwordVisible)}
+              className="h-fit self-center rounded-full p-1"
+            >
+              <span className="sr-only">
+                {passwordVisible ? 'Hide password' : 'Show password'}
+              </span>
+              {passwordVisible ? (
+                <EyeOffIcon aria-hidden="true" size={17} />
+              ) : (
+                <EyeIcon aria-hidden="true" size={17} />
+              )}
+            </Button>
+          </div>
           {errors.password && (
             <small className="text-error-form-foreground">
               {errors.password.message}
@@ -121,7 +143,7 @@ export default function SignupForm() {
             Confirm Password
           </Label>
           <Input
-            type="password"
+            type={passwordVisible ? 'text' : 'password'}
             id={id + '-confirm-password'}
             {...register('passwordConfirm')}
             placeholder="confirm password"

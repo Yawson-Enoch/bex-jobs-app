@@ -12,7 +12,7 @@ import {
   STATUS_OPTIONS,
   TYPE_OPTIONS,
   VIEW_OPTIONS,
-} from '~/lib/utils';
+} from '~/lib/contants';
 
 const queryOptions: Options = {
   history: 'replace', // keep url history clean __ pushing to the history stack is not needed for this feature

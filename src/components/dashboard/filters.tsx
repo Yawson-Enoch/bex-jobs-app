@@ -4,7 +4,7 @@ import { useId, useState } from 'react';
 import { FilterIcon } from 'lucide-react';
 import { Controller, SubmitHandler, useForm, useWatch } from 'react-hook-form';
 
-import { STATUS_OPTIONS, TYPE_OPTIONS } from '~/lib/utils';
+import { STATUS_OPTIONS, TYPE_OPTIONS } from '~/lib/contants';
 import { useFilter } from '~/hooks/useQueryParams';
 
 import { Button } from '../ui/button';

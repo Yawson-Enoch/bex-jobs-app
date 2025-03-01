@@ -67,8 +67,8 @@ export default function JobList({ job }: { job: ApiJob }) {
       </div>
 
       <div className="grid grid-cols-2 gap-3 md:my-auto md:h-fit md:grid-cols-1">
-        <EditJobBtn id={job._id} />
-        <DeleteJobBtn id={job._id} />
+        <EditJobBtn id={job.id} />
+        <DeleteJobBtn id={job.id} />
       </div>
     </li>
   );

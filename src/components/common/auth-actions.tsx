@@ -33,7 +33,7 @@ import { Button } from '../ui/button';
 
 export default function AuthActions() {
   const router = useRouter();
-  const { logOut, isLoggedIn } = useAuth();
+  const { logout, isLoggedIn } = useAuth();
 
   return (
     <section>
@@ -91,7 +91,7 @@ export default function AuthActions() {
           </AlertDialogHeader>
           <AlertDialogFooter className="w-full sm:w-auto">
             <AlertDialogCancel>No</AlertDialogCancel>
-            <AlertDialogAction onClick={logOut}>Yes, Log out</AlertDialogAction>
+            <AlertDialogAction onClick={logout}>Yes, Log out</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

@@ -40,7 +40,7 @@
     --error: 254, 242, 242;
     --error-border: 252, 165, 165;
     --error-foreground: 153, 27, 27;
-    --error-form-foreground: 239, 68, 68;
+    --error-form-foreground: 203, 42, 47;
 
     --ring: 148, 163, 184;
 
@@ -86,7 +86,7 @@
     --error: var(--state-bg-dark);
     --error-border: 153, 27, 27;
     --error-foreground: 248, 113, 113;
-    --error-form-foreground: 185, 28, 28;
+    --error-form-foreground: 255, 97, 102;
 
     --ring: 29, 40, 58;
 

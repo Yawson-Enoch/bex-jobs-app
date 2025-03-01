@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { JOB_STATUS, JOB_TYPE } from '~/lib/utils';
+import { JOB_STATUS, JOB_TYPE } from '~/lib/contants';
 
 export const Job = z.object({
   jobPosition: z
@@ -31,9 +31,7 @@ export const Job = z.object({
       message: 'Location name cannot be more than 200 characters long',
     }),
   jobStatus: z.enum(JOB_STATUS).default('pending'),
-  jobType: z.enum(JOB_TYPE, {
-    errorMap: () => ({ message: 'Please select job type' }),
-  }),
+  jobType: z.enum(JOB_TYPE).default('remote'),
 });
 export type Job = z.infer<typeof Job>;
 export type JobStatus = z.infer<typeof Job.shape.jobStatus>;
@@ -46,7 +44,7 @@ export const ApiMessage = z.object({
 
 export const ApiJob = ApiMessage.extend({
   data: Job.extend({
-    _id: z.string(),
+    id: z.string(),
     createdBy: z.string(),
     createdAt: z.string().datetime(),
     updatedAt: z.string().datetime(),

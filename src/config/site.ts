@@ -7,7 +7,7 @@ export const siteConfig = {
   URL: deployedSiteURL
     ? `https://${deployedSiteURL}`
     : `http://localhost:${process.env.PORT || 3000}`,
-  APIBaseURL: deployedSiteURL
+  apiBaseUrl: deployedSiteURL
     ? 'https://bex-jobs-api.onrender.com/api/v1'
     : 'http://localhost:5000/api/v1',
   links: {

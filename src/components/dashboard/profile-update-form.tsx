@@ -32,7 +32,11 @@ export default function ProfileUpdateForm() {
   };
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
+    <form
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col gap-y-6"
+    >
       <div className="grid items-start gap-3 md:grid-cols-2 md:gap-6">
         <div className="space-y-1">
           <div className="space-y-2">
@@ -71,41 +75,18 @@ export default function ProfileUpdateForm() {
             </small>
           )}
         </div>
-        <div className="space-y-1">
-          <div className="space-y-2">
-            <Label htmlFor={id + '-email'}>Email</Label>
-            <Input
-              type="text"
-              id={id + '-email'}
-              {...register('email')}
-              autoComplete="email"
-              autoCorrect="off"
-              disabled={updateUserProfileMutation.isPending}
-            />
-          </div>
-          {errors.email && (
-            <small className="text-error-form-foreground">
-              {errors.email.message}
-            </small>
-          )}
-        </div>
-        <div className="space-y-2">
-          <Label>Action</Label>
-          <Button
-            type="submit"
-            disabled={
-              updateUserProfileMutation.isPending || !isValid || !isDirty
-            }
-            className="flex w-full"
-          >
-            {updateUserProfileMutation.isPending ? (
-              <LoadingIndicator msg="Updating profile..." />
-            ) : (
-              'Update Profile'
-            )}
-          </Button>
-        </div>
       </div>
+      <Button
+        type="submit"
+        disabled={updateUserProfileMutation.isPending || !isValid || !isDirty}
+        className="flex w-full md:ml-auto md:w-fit"
+      >
+        {updateUserProfileMutation.isPending ? (
+          <LoadingIndicator msg="Updating profile..." />
+        ) : (
+          'Update Profile'
+        )}
+      </Button>
     </form>
   );
 }

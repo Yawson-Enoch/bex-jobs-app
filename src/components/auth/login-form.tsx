@@ -3,19 +3,16 @@
 import { useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAtom } from 'jotai';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 import { Login } from '~/schemas/auth';
-import { persistLoginAtom } from '~/atoms/persist';
 import { useLogin } from '~/hooks/api/useLogin';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { Switch } from '../ui/switch';
 
 const DevTool: React.ElementType = dynamic(
   () => import('@hookform/devtools').then((module) => module.DevTool),
@@ -24,8 +21,6 @@ const DevTool: React.ElementType = dynamic(
 
 export default function LoginForm() {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const [persistLogin, setPersistLogin] = useAtom(persistLoginAtom);
 
   const id = useId();
 
@@ -69,7 +64,7 @@ export default function LoginForm() {
           <Label className="sr-only" htmlFor={id + '-password'}>
             Password
           </Label>
-          <div className="flex h-9 items-center justify-between gap-2 rounded-md border border-input pr-3 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
+          <div className="flex h-9 items-center justify-between gap-2 rounded-md border border-input pr-2 ring-offset-background focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
             <Input
               type={passwordVisible ? 'text' : 'password'}
               id={id + '-password'}
@@ -101,27 +96,6 @@ export default function LoginForm() {
             <small className="text-error-form-foreground">
               {errors.password.message}
             </small>
-          )}
-        </div>
-        <div className="space-y-2">
-          <div className="flex items-center gap-2">
-            <Switch
-              id={id + '-persist-login'}
-              checked={persistLogin}
-              onCheckedChange={() => setPersistLogin(!persistLogin)}
-              disabled={loginMutation.isPending}
-            />
-            <Label
-              htmlFor={id + '-persist-login'}
-              className="cursor-pointer text-sm"
-            >
-              Stay logged in for 30 days
-            </Label>
-          </div>
-          {!persistLogin && (
-            <p className="rounded-md border border-warning-border bg-warning px-3 py-2 text-xs text-warning-foreground">
-              You will be logged out after 30 minutes of inactivity.
-            </p>
           )}
         </div>
         <Button

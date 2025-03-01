@@ -3,11 +3,13 @@
 import { useEffect, useId, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAtomValue } from 'jotai';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
 import { Job, JobStatus, JobType } from '~/schemas/job';
-import { JOB_STATUS, JOB_TYPE } from '~/lib/utils';
+import { JOB_STATUS, JOB_TYPE } from '~/lib/contants';
+import { jobIdAtom } from '~/atoms/job-id';
 import { useAddJob, useEditJob, useGetJob } from '~/hooks/api/useJob';
 
 import LoadingIndicator from '../common/loading-indicator';
@@ -46,10 +48,6 @@ export default function JobForm({
   const form = useForm<Job>({
     resolver: zodResolver(Job),
     mode: isJobEdit ? 'onChange' : 'onSubmit',
-    /* 
-    - must set default values for controller inputs 
-    - so the reset(re-rendering) picks the default value 
-    */
     defaultValues: {
       jobStatus: job?.data.jobStatus ?? 'pending',
       jobType: job?.data.jobType ?? 'remote',
@@ -65,9 +63,16 @@ export default function JobForm({
 
   const addJobMutation = useAddJob();
   const editJobMutation = useEditJob();
+  const jobId = useAtomValue(jobIdAtom);
 
   const onSubmit: SubmitHandler<Job> = (data) => {
-    isJobEdit ? editJobMutation.mutate(data) : addJobMutation.mutate(data);
+    isJobEdit
+      ? editJobMutation.mutate({ jobId, data })
+      : addJobMutation.mutate(data, {
+          onSuccess() {
+            resetAllFormFields();
+          },
+        });
   };
 
   useEffect(() => {

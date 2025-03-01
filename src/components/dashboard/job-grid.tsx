@@ -65,8 +65,8 @@ export default function JobGrid({ job }: { job: ApiJob }) {
       </div>
 
       <div className="grid gap-3 md:grid-cols-2">
-        <EditJobBtn id={job._id} />
-        <DeleteJobBtn id={job._id} />
+        <EditJobBtn id={job.id} />
+        <DeleteJobBtn id={job.id} />
       </div>
     </li>
   );

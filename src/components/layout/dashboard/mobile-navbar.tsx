@@ -60,12 +60,12 @@ export default function MobileNavbar() {
     isMobileNavbarOpenAtom,
   );
 
-  const { logOut } = useAuth();
-
   const { isLoading, isError, data: user } = useGetUser();
 
   const pathname = usePathname();
   const router = useRouter();
+
+  const { logout } = useAuth();
 
   useLockBodyScroll();
 
@@ -165,7 +165,7 @@ export default function MobileNavbar() {
                   <AlertDialogAction
                     onClick={() => {
                       setIsMobileNavbarOpen(false);
-                      logOut();
+                      logout();
                     }}
                   >
                     Yes, Log out

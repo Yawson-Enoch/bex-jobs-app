@@ -35,7 +35,7 @@ export default function Jobs() {
         ) : (
           <ul className="grid grid-cols-2 gap-3 md:gap-6 lg:grid-cols-3">
             {jobs?.data.map((job) => {
-              return <JobGrid key={job._id} job={job} />;
+              return <JobGrid key={job.id} job={job} />;
             })}
           </ul>
         )
@@ -50,7 +50,7 @@ export default function Jobs() {
       ) : (
         <ul className="space-y-3 md:space-y-6">
           {jobs?.data.map((job) => {
-            return <JobList key={job._id} job={job} />;
+            return <JobList key={job.id} job={job} />;
           })}
         </ul>
       )}

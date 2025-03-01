@@ -64,7 +64,7 @@ const sidebarRoutes = [
 export default function Sidebar() {
   const isSidebarExpanded = useAtomValue(isSidebarExpandedAtom);
 
-  const { logOut } = useAuth();
+  const { logout } = useAuth();
 
   const pathname = usePathname();
 
@@ -72,13 +72,13 @@ export default function Sidebar() {
     <aside
       id="dashboard-sidebar"
       className={twMerge(
-        'dashboard-sidebar sticky top-0 hidden max-h-dvh overflow-y-auto overscroll-y-contain border-r pt-3 transition-[width] md:flex md:flex-col md:gap-12',
+        'dashboard-sidebar sticky top-0 hidden max-h-dvh overflow-y-auto overscroll-y-contain border-r transition-[width] md:flex md:flex-col md:gap-12',
         isSidebarExpanded ? 'w-52 lg:w-60' : 'w-20',
       )}
     >
       <div
         className={twMerge(
-          'flex items-center pl-4',
+          'flex h-16 items-center py-4 pl-4',
           !isSidebarExpanded && 'justify-center px-4',
         )}
       >
@@ -91,8 +91,8 @@ export default function Sidebar() {
             <Image
               src={logo}
               alt="Logo"
-              width={40}
-              height={40}
+              width={50}
+              height={50}
               placeholder="blur"
             />
           </Link>
@@ -170,7 +170,7 @@ export default function Sidebar() {
                 </AlertDialogHeader>
                 <AlertDialogFooter className="w-full sm:w-auto">
                   <AlertDialogCancel>No</AlertDialogCancel>
-                  <AlertDialogAction onClick={() => logOut()}>
+                  <AlertDialogAction onClick={logout}>
                     Yes, Log out
                   </AlertDialogAction>
                 </AlertDialogFooter>
@@ -222,7 +222,7 @@ export default function Sidebar() {
                 </AlertDialogHeader>
                 <AlertDialogFooter className="w-full sm:w-auto">
                   <AlertDialogCancel>No</AlertDialogCancel>
-                  <AlertDialogAction onClick={logOut}>
+                  <AlertDialogAction onClick={logout}>
                     Yes, Log out
                   </AlertDialogAction>
                 </AlertDialogFooter>

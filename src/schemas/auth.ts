@@ -57,6 +57,7 @@ export type Login = z.infer<typeof Login>;
 export const Profile = Auth.omit({
   password: true,
   passwordConfirm: true,
+  email: true,
 });
 export type Profile = z.infer<typeof Profile>;
 
@@ -75,6 +76,5 @@ export const ApiProfile = ApiMessage.extend({
   data: Auth.pick({
     firstName: true,
     lastName: true,
-    email: true,
   }),
 });

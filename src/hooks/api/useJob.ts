@@ -9,25 +9,18 @@ import queryString from 'query-string';
 
 import { siteConfig } from '~/config/site';
 import { ApiJob, ApiJobs, ApiJobsStats, ApiMessage, Job } from '~/schemas/job';
-import { Token } from '~/lib/types';
+import { apiClient } from '~/lib/axios-instance';
 import { jobIdAtom } from '~/atoms/job-id';
-import { accessTokenAtom } from '~/atoms/token';
 import { toast } from '~/components/ui/use-toast';
 
 import { useFilter } from '../useQueryParams';
 
 const jobsQueryKey = 'jobs';
 /* queries */
-const getJobs = async (token: Token, queryString: string) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${queryString}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to fetch jobs');
-  }
+const getJobs = async (queryString: string) => {
+  const { data } = await apiClient.get(
+    `${siteConfig.apiBaseUrl}/jobs/${queryString}`,
+  );
 
   const result = ApiJobs.safeParse(data);
   if (!result.success) {
@@ -37,30 +30,21 @@ const getJobs = async (token: Token, queryString: string) => {
   return result.data;
 };
 export function useGetJobs() {
-  const token = useAtomValue(accessTokenAtom);
-
   const [filter] = useFilter();
 
   const qs = `?${queryString.stringify(filter)}`;
 
   return useQuery({
     queryKey: [jobsQueryKey, qs],
-    queryFn: () => getJobs(token, qs),
-    enabled: !!token,
+    queryFn: () => getJobs(qs),
     placeholderData: keepPreviousData,
   });
 }
 
-const getJob = async (token: Token, jobId: string) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to fetch job');
-  }
+const getJob = async (jobId: string) => {
+  const { data } = await apiClient.get(
+    `${siteConfig.apiBaseUrl}/jobs/${jobId}`,
+  );
 
   const result = ApiJob.safeParse(data);
 
@@ -71,26 +55,17 @@ const getJob = async (token: Token, jobId: string) => {
   return result.data;
 };
 export function useGetJob() {
-  const token = useAtomValue(accessTokenAtom);
   const jobId = useAtomValue(jobIdAtom);
 
   return useQuery({
     queryKey: [jobsQueryKey, jobId],
-    queryFn: () => getJob(token, jobId),
-    enabled: !!token && !!jobId,
+    queryFn: () => getJob(jobId),
+    enabled: !!jobId,
   });
 }
 
-const getJobsStats = async (token: Token) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/stats`, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to fetch jobs stats');
-  }
+const getJobsStats = async () => {
+  const { data } = await apiClient.get(`${siteConfig.apiBaseUrl}/jobs/stats`);
 
   const result = ApiJobsStats.safeParse(data);
 
@@ -101,31 +76,18 @@ const getJobsStats = async (token: Token) => {
   return result.data;
 };
 export function useGetJobsStats() {
-  const token = useAtomValue(accessTokenAtom);
-
   return useQuery({
     queryKey: [jobsQueryKey, 'stats'],
-    queryFn: () => getJobsStats(token),
-    enabled: !!token,
+    queryFn: getJobsStats,
   });
 }
 
 /* mutations */
-const addJob = async (token: Token, payload: Job) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to add job');
-  }
+const addJob = async (payload: Job) => {
+  const { data } = await apiClient.post(
+    `${siteConfig.apiBaseUrl}/jobs`,
+    payload,
+  );
 
   const result = ApiMessage.safeParse(data);
 
@@ -136,8 +98,6 @@ const addJob = async (token: Token, payload: Job) => {
   return result.data;
 };
 export function useAddJob() {
-  const token = useAtomValue(accessTokenAtom);
-
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -145,7 +105,7 @@ export function useAddJob() {
     - mutation fn only takes one param
     - auto passes the payload as arg to fetcher when the fetcher has a single param(the payload)
     */
-    mutationFn: (payload: Job) => addJob(token, payload),
+    mutationFn: addJob,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [jobsQueryKey],
@@ -162,21 +122,11 @@ export function useAddJob() {
   });
 }
 
-const editJob = async (token: Token, jobId: string, payload: Job) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
-    method: 'PATCH',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to edit job');
-  }
+const editJob = async (payload: { jobId: string; data: Job }) => {
+  const { data } = await apiClient.patch(
+    `${siteConfig.apiBaseUrl}/jobs/${payload.jobId}`,
+    payload.data,
+  );
 
   const result = ApiMessage.safeParse(data);
 
@@ -187,13 +137,10 @@ const editJob = async (token: Token, jobId: string, payload: Job) => {
   return result.data;
 };
 export function useEditJob() {
-  const token = useAtomValue(accessTokenAtom);
-  const jobId = useAtomValue(jobIdAtom);
-
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: Job) => editJob(token, jobId, payload),
+    mutationFn: editJob,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [jobsQueryKey],
@@ -210,19 +157,10 @@ export function useEditJob() {
   });
 }
 
-const deleteJob = async (token: Token, jobId: string) => {
-  const response = await fetch(`${siteConfig.APIBaseURL}/jobs/${jobId}`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.msg || 'Failed to delete job');
-  }
+const deleteJob = async (jobId: string) => {
+  const { data } = await apiClient.delete(
+    `${siteConfig.apiBaseUrl}/jobs/${jobId}`,
+  );
 
   const result = ApiMessage.safeParse(data);
 
@@ -233,13 +171,12 @@ const deleteJob = async (token: Token, jobId: string) => {
   return result.data;
 };
 export function useDeleteJob() {
-  const token = useAtomValue(accessTokenAtom);
   const jobId = useAtomValue(jobIdAtom);
 
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => deleteJob(token, jobId),
+    mutationFn: () => deleteJob(jobId),
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [jobsQueryKey],
