@@ -9,7 +9,7 @@ import {
 import ReactPaginate from 'react-paginate';
 import { twMerge } from 'tailwind-merge';
 
-import { useGetJobs } from '~/hooks/api/useJob';
+import { useGetJobs } from '~/hooks/api/useJobs';
 import { useFilter } from '~/hooks/useQueryParams';
 
 const paginationVariants: Variants = {

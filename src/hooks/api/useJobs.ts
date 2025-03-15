@@ -7,7 +7,6 @@ import {
 import { useAtomValue } from 'jotai';
 import queryString from 'query-string';
 
-import { siteConfig } from '~/config/site';
 import { ApiJob, ApiJobs, ApiJobsStats, ApiMessage, Job } from '~/schemas/job';
 import { apiClient } from '~/lib/axios-instance';
 import { jobIdAtom } from '~/atoms/job-id';
@@ -18,16 +17,9 @@ import { useFilter } from '../useQueryParams';
 const jobsQueryKey = 'jobs';
 /* queries */
 const getJobs = async (queryString: string) => {
-  const { data } = await apiClient.get(
-    `${siteConfig.apiBaseUrl}/jobs/${queryString}`,
-  );
+  const response = await apiClient.get(`/jobs/${queryString}`);
 
-  const result = ApiJobs.safeParse(data);
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiJobs.parse(response.data);
 };
 export function useGetJobs() {
   const [filter] = useFilter();
@@ -42,17 +34,9 @@ export function useGetJobs() {
 }
 
 const getJob = async (jobId: string) => {
-  const { data } = await apiClient.get(
-    `${siteConfig.apiBaseUrl}/jobs/${jobId}`,
-  );
+  const response = await apiClient.get(`/jobs/${jobId}`);
 
-  const result = ApiJob.safeParse(data);
-
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiJob.parse(response.data);
 };
 export function useGetJob() {
   const jobId = useAtomValue(jobIdAtom);
@@ -65,15 +49,9 @@ export function useGetJob() {
 }
 
 const getJobsStats = async () => {
-  const { data } = await apiClient.get(`${siteConfig.apiBaseUrl}/jobs/stats`);
+  const response = await apiClient.get(`/jobs/stats`);
 
-  const result = ApiJobsStats.safeParse(data);
-
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiJobsStats.parse(response.data);
 };
 export function useGetJobsStats() {
   return useQuery({
@@ -84,27 +62,15 @@ export function useGetJobsStats() {
 
 /* mutations */
 const addJob = async (payload: Job) => {
-  const { data } = await apiClient.post(
-    `${siteConfig.apiBaseUrl}/jobs`,
-    payload,
-  );
+  const response = await apiClient.post(`/jobs`, payload);
 
-  const result = ApiMessage.safeParse(data);
-
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiMessage.parse(response.data);
 };
 export function useAddJob() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    /* 
-    - mutation fn only takes one param
-    - auto passes the payload as arg to fetcher when the fetcher has a single param(the payload)
-    */
+    /* mutation fn only takes one param: (params, queryInfo) */
     mutationFn: addJob,
     onSuccess: (data) => {
       queryClient.invalidateQueries({
@@ -114,27 +80,16 @@ export function useAddJob() {
         description: data.msg,
       });
     },
-    onError: (error) => {
-      toast({
-        description: error.message,
-      });
-    },
   });
 }
 
 const editJob = async (payload: { jobId: string; data: Job }) => {
-  const { data } = await apiClient.patch(
-    `${siteConfig.apiBaseUrl}/jobs/${payload.jobId}`,
+  const response = await apiClient.patch(
+    `/jobs/${payload.jobId}`,
     payload.data,
   );
 
-  const result = ApiMessage.safeParse(data);
-
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiMessage.parse(response.data);
 };
 export function useEditJob() {
   const queryClient = useQueryClient();
@@ -149,26 +104,13 @@ export function useEditJob() {
         description: data.msg,
       });
     },
-    onError: (error) => {
-      toast({
-        description: error.message,
-      });
-    },
   });
 }
 
 const deleteJob = async (jobId: string) => {
-  const { data } = await apiClient.delete(
-    `${siteConfig.apiBaseUrl}/jobs/${jobId}`,
-  );
+  const response = await apiClient.delete(`/jobs/${jobId}`);
 
-  const result = ApiMessage.safeParse(data);
-
-  if (!result.success) {
-    throw new Error('Failed to parse data');
-  }
-
-  return result.data;
+  return ApiMessage.parse(response.data);
 };
 export function useDeleteJob() {
   const jobId = useAtomValue(jobIdAtom);
@@ -183,11 +125,6 @@ export function useDeleteJob() {
       });
       toast({
         description: data.msg,
-      });
-    },
-    onError: (error) => {
-      toast({
-        description: error.message,
       });
     },
   });

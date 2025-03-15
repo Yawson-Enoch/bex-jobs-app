@@ -26,13 +26,35 @@ apiClient.interceptors.request.use(
   (error: Error) => Promise.reject(error),
 );
 
-/* response interceptor to handle token expiration */
+/* response interceptor 
+- add custom error message accessor
+- redirect to login on 401
+*/
 apiClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    return response;
+  },
   (error) => {
-    if (error.response?.status === 401 && typeof window !== undefined) {
-      store.set(accessTokenAtom, RESET);
-      Router.replace('/login');
+    if (!error.response) {
+      /* network error */
+      error.message = 'Network Error!';
+    } else {
+      /* server error */
+      /* logout if server returns a 401 */
+      const accessToken = store.get(accessTokenAtom);
+      if (
+        error.response?.status === 401 &&
+        accessToken &&
+        typeof window !== undefined
+      ) {
+        store.set(accessTokenAtom, RESET);
+        Router.replace('/login');
+        return;
+      }
+      /* add status code to custom error object */
+      error.status = error.response.status;
+      /* set error message from response data and set fallback */
+      error.message = error.response.data.msg || 'Something went wrong!';
     }
     return Promise.reject(error);
   },

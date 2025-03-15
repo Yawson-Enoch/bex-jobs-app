@@ -1,14 +1,13 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { redirect, usePathname } from 'next/navigation';
 import { useAtomValue } from 'jotai';
-import { InfoIcon, LoaderIcon } from 'lucide-react';
+import { LoaderIcon } from 'lucide-react';
 
 import { isMobileNavbarOpenAtom } from '~/atoms/mobile-nav';
 import useAuth from '~/hooks/useAuth';
 import useIsMounted from '~/hooks/useIsMounted';
 import useMediaQuery from '~/hooks/useMediaQuery';
-import { Button } from '~/components/ui/button';
 import AddJobFloatingBtn from '~/components/dashboard/add-job-floating-btn';
 import Header from '~/components/layout/dashboard/header';
 import MobileNavbar from '~/components/layout/dashboard/mobile-navbar';
@@ -25,9 +24,12 @@ export default function DashboardLayout({
   const { isLoggedIn } = useAuth();
 
   const pathname = usePathname();
-  const router = useRouter();
 
   const { isMounted } = useIsMounted();
+
+  if (isMounted && !isLoggedIn) {
+    redirect('/login');
+  }
 
   let content;
 
@@ -38,7 +40,7 @@ export default function DashboardLayout({
       </main>
     );
   } else {
-    content = isLoggedIn ? (
+    content = (
       <div className="dashboard-grid-container relative min-h-dvh">
         <Header />
         <Sidebar />
@@ -49,20 +51,6 @@ export default function DashboardLayout({
         {isLoggedIn && pathname !== '/dashboard/add-job' && (
           <AddJobFloatingBtn />
         )}
-      </div>
-    ) : (
-      <div className="grid min-h-dvh place-content-center text-center">
-        <InfoIcon className="mx-auto size-14" />
-        <p className="mt-3 text-center font-sans text-xl font-medium text-foreground md:text-2xl">
-          Not Authorized!
-        </p>
-        <p>Log in to access dashboard</p>
-        <Button
-          className="mx-auto mt-6 w-fit"
-          onClick={() => router.push('/login')}
-        >
-          Log In
-        </Button>
       </div>
     );
   }

@@ -10,7 +10,7 @@ import {
   YAxis,
 } from 'recharts';
 
-import { useGetJobsStats } from '~/hooks/api/useJob';
+import { useGetJobsStats } from '~/hooks/api/useJobs';
 
 import Skeleton from '../ui/skeleton';
 

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { useGetJobsStats } from '~/hooks/api/useJob';
+import { useGetJobsStats } from '~/hooks/api/useJobs';
 import ChartsContainer from '~/components/dashboard/charts-container';
 import StatsSummary from '~/components/dashboard/stats-summary';
 

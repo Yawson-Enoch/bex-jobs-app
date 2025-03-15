@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetJobs } from '~/hooks/api/useJob';
+import { useGetJobs } from '~/hooks/api/useJobs';
 import { useView } from '~/hooks/useQueryParams';
 
 import Skeleton from '../ui/skeleton';

@@ -1,6 +1,10 @@
 'use client';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  MutationCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { isAxiosError } from 'axios';
 import { createStore, Provider as JotaiProvider } from 'jotai';
@@ -8,6 +12,8 @@ import { ThemeProvider } from 'next-themes';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import { store } from '~/lib/store';
+
+import { toast } from '../ui/use-toast';
 
 const MAX_RETRIES = 2;
 
@@ -34,6 +40,16 @@ export const queryClient = new QueryClient({
       staleTime: 30 * 1000,
     },
   },
+  /* globally handle mutation errors */
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      if (isAxiosError(error)) {
+        toast({
+          description: error.message,
+        });
+      }
+    },
+  }),
 });
 
 export default function Providers({ children }: { children: React.ReactNode }) {

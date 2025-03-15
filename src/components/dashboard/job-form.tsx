@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge';
 import { Job, JobStatus, JobType } from '~/schemas/job';
 import { JOB_STATUS, JOB_TYPE } from '~/lib/contants';
 import { jobIdAtom } from '~/atoms/job-id';
-import { useAddJob, useEditJob, useGetJob } from '~/hooks/api/useJob';
+import { useAddJob, useEditJob, useGetJob } from '~/hooks/api/useJobs';
 
 import LoadingIndicator from '../common/loading-indicator';
 import { Button } from '../ui/button';

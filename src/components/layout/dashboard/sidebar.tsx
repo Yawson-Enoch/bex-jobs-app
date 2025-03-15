@@ -130,7 +130,12 @@ export default function Sidebar() {
                 >
                   {sidebarRoute.icon}
                 </span>
-                <span className={twMerge(!isSidebarExpanded && 'hidden')}>
+                <span
+                  className={twMerge(
+                    'truncate',
+                    !isSidebarExpanded && 'hidden',
+                  )}
+                >
                   {sidebarRoute.title}
                 </span>
               </Link>
@@ -153,7 +158,12 @@ export default function Sidebar() {
                     aria-hidden="true"
                     className="transition-transform duration-300 ease-linear group-hover:rotate-12"
                   />
-                  <span className={twMerge(!isSidebarExpanded && 'hidden')}>
+                  <span
+                    className={twMerge(
+                      'truncate',
+                      !isSidebarExpanded && 'hidden',
+                    )}
+                  >
                     Logout
                   </span>
                 </Button>
@@ -194,7 +204,10 @@ export default function Sidebar() {
                           className="transition-transform duration-300 ease-linear group-hover:rotate-12"
                         />
                         <span
-                          className={twMerge(!isSidebarExpanded && 'hidden')}
+                          className={twMerge(
+                            'truncate',
+                            !isSidebarExpanded && 'hidden',
+                          )}
                         >
                           Logout
                         </span>

@@ -2,7 +2,7 @@
 
 import { CalendarCheckIcon, CalendarOffIcon, ClockIcon } from 'lucide-react';
 
-import { useGetJobsStats } from '~/hooks/api/useJob';
+import { useGetJobsStats } from '~/hooks/api/useJobs';
 
 import Skeleton from '../ui/skeleton';
 

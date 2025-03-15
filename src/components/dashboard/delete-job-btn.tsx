@@ -1,7 +1,7 @@
 import { useSetAtom } from 'jotai';
 
 import { jobIdAtom } from '~/atoms/job-id';
-import { useDeleteJob } from '~/hooks/api/useJob';
+import { useDeleteJob } from '~/hooks/api/useJobs';
 import {
   AlertDialog,
   AlertDialogAction,

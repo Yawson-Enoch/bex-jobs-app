@@ -2,7 +2,7 @@
 
 import { InfoIcon } from 'lucide-react';
 
-import { useGetJobs } from '~/hooks/api/useJob';
+import { useGetJobs } from '~/hooks/api/useJobs';
 import Skeleton from '~/components/ui/skeleton';
 import Filters from '~/components/dashboard/filters';
 import Jobs from '~/components/dashboard/jobs';
