@@ -24,7 +24,7 @@ export function useLogin() {
       toast({
         description: data.msg,
       });
-      router.push('/dashboard');
+      router.replace('/dashboard');
     },
   });
 }
