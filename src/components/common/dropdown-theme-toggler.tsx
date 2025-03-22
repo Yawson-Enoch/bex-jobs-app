@@ -20,11 +20,11 @@ export default function DropdownThemeToggler() {
         <Button variant="ghost" className="w-9 px-0">
           <SunIcon
             aria-hidden="true"
-            className="size-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 sm:size-6"
+            className="size-5 rotate-0 scale-100 transition-all sm:size-6 dark:-rotate-90 dark:scale-0"
           />
           <MoonIcon
             aria-hidden="true"
-            className="absolute size-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 sm:size-6"
+            className="absolute size-5 rotate-90 scale-0 transition-all sm:size-6 dark:rotate-0 dark:scale-100"
           />
           <span className="sr-only">Toggle theme</span>
         </Button>

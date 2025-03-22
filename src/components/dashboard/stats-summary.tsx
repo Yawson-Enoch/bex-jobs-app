@@ -16,7 +16,7 @@ export default function StatsSummary() {
           {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
           ) : (
-            <p className="text-4xl text-blue-800 dark:text-blue-900 md:text-6xl">
+            <p className="text-4xl text-blue-800 md:text-6xl dark:text-blue-900">
               {stats?.data.jobStatusStats.interview}
             </p>
           )}
@@ -35,7 +35,7 @@ export default function StatsSummary() {
           {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
           ) : (
-            <p className="text-4xl text-yellow-800 dark:text-yellow-900 md:text-6xl">
+            <p className="text-4xl text-yellow-800 md:text-6xl dark:text-yellow-900">
               {stats?.data.jobStatusStats.pending}
             </p>
           )}
@@ -54,7 +54,7 @@ export default function StatsSummary() {
           {isLoading || isError ? (
             <Skeleton className="aspect-video w-16" />
           ) : (
-            <p className="text-4xl text-red-800 dark:text-red-900 md:text-6xl">
+            <p className="text-4xl text-red-800 md:text-6xl dark:text-red-900">
               {stats?.data.jobStatusStats.declined}
             </p>
           )}
