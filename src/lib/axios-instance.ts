@@ -37,7 +37,10 @@ apiClient.interceptors.response.use(
   (error) => {
     if (!error.response) {
       /* network error */
-      error.message = 'Network Error!';
+      error.message =
+        typeof window !== undefined && window.navigator.onLine
+          ? 'Failed to connect'
+          : 'Please check your internet';
     } else {
       /* server error */
       /* logout if server returns a 401 */
@@ -54,7 +57,7 @@ apiClient.interceptors.response.use(
       /* add status code to custom error object */
       error.status = error.response.status;
       /* set error message from response data and set fallback */
-      error.message = error.response.data.msg || 'Something went wrong!';
+      error.message = error.response.data.msg || 'Something went wrong';
     }
     return Promise.reject(error);
   },
